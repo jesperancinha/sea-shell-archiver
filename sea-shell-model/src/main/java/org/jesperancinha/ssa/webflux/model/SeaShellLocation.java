@@ -1,4 +1,4 @@
-package org.jesperancinha.ssa.webflux;
+package org.jesperancinha.ssa.webflux.model;
 
 import java.math.BigDecimal;
 import lombok.Builder;

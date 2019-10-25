@@ -1,5 +1,7 @@
-package org.jesperancinha.ssa.webflux;
+package org.jesperancinha.ssa.webflux.rest;
 
+import org.jesperancinha.ssa.webflux.model.SeaShell;
+import org.jesperancinha.ssa.webflux.repo.ShellRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

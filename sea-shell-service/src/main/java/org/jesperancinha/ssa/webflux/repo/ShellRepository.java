@@ -1,12 +1,13 @@
-package org.jesperancinha.ssa.webflux;
+package org.jesperancinha.ssa.webflux.repo;
 
-import static org.jesperancinha.ssa.webflux.ShellState.Optimal;
-import static org.jesperancinha.ssa.webflux.ShellType.Bivalvia;
+import static org.jesperancinha.ssa.webflux.model.ShellState.Optimal;
+import static org.jesperancinha.ssa.webflux.model.ShellType.Bivalvia;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import org.jesperancinha.ssa.webflux.model.SeaShell;
+import org.jesperancinha.ssa.webflux.model.SeaShellLocation;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

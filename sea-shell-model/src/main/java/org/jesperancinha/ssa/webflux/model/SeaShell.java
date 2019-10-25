@@ -1,8 +1,10 @@
-package org.jesperancinha.ssa.webflux;
+package org.jesperancinha.ssa.webflux.model;
 
 
 import java.math.BigDecimal;
 import java.util.List;
+import org.jesperancinha.ssa.webflux.model.ShellState;
+import org.jesperancinha.ssa.webflux.model.ShellType;
 import lombok.Builder;
 import lombok.Getter;
 
