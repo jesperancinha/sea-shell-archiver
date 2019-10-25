@@ -8,6 +8,9 @@
         <spring-boot-starter-webflux.version>2.1.6.RELEASE</spring-boot-starter-webflux.version>
         <lombok-maven-plugin.version>1.18.8.1</lombok-maven-plugin.version>
         <lombok.version>1.18.10</lombok.version>
+        <maven-compiler-plugin.source>11</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>11</maven-compiler-plugin.target>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
