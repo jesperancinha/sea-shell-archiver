@@ -1,0 +1,13 @@
+# Intellij
+.idea
+*.iml
+
+# Eclipse
+.classpath
+.project
+
+# Build
+target
+bin
+build
+dist
