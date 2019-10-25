@@ -20,6 +20,8 @@ Essentially this is a fun exercise to help me and you understand al the mechanis
 
 -   [ITNext How to make legacy code reactive](https://itnext.io/how-to-make-legacy-code-reactive-2debcb3d0a40)
 
+-   [Spring 5 Reactive Security Example](https://github.com/eugenp/tutorials/tree/master/spring-5-reactive-security)
+
 ## License
 
 ```text
