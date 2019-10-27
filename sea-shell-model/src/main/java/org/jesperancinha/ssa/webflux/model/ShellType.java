@@ -1,7 +1,6 @@
 package org.jesperancinha.ssa.webflux.model;
 
-public enum ShellType
-{
+public enum ShellType {
     Gastropoda,
     Bivalvia,
     Polyplacophora,

@@ -1,13 +1,13 @@
 package org.jesperancinha.ssa.webflux.model;
 
-import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.math.BigDecimal;
+
 @Builder
 @Getter
-public class SeaShellLocation
-{
+public class SeaShellLocation {
 
     private final Long id;
 

@@ -1,15 +1,14 @@
 package org.jesperancinha.ssa.webflux.client;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jesperancinha.ssa.webflux.model.SeaShell;
 import org.springframework.web.reactive.function.client.WebClient;
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
-public class SeaShellWebClient
-{
-    WebClient client = WebClient.create("http://localhost:8080");
+public class SeaShellWebClient {
+    final WebClient client = WebClient.builder().baseUrl("http://localhost:8080").build();
 
     public void consume() {
 
@@ -18,7 +17,9 @@ public class SeaShellWebClient
                 .retrieve()
                 .bodyToMono(SeaShell.class);
 
-        seaShellMono.subscribe(System.out::println);
+        seaShellMono.subscribe(x -> {
+            log.info(x.toString());
+        });
 
         Flux<SeaShell> seaShellFlux = client.get()
                 .uri("/seashells")

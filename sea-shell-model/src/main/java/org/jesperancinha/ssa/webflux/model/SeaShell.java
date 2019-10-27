@@ -1,12 +1,14 @@
 package org.jesperancinha.ssa.webflux.model;
 
 
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
+import java.beans.ConstructorProperties;
 import java.math.BigDecimal;
 import java.util.List;
-import org.jesperancinha.ssa.webflux.model.ShellState;
-import org.jesperancinha.ssa.webflux.model.ShellType;
-import lombok.Builder;
-import lombok.Getter;
 
 
 /**
@@ -15,8 +17,9 @@ import lombok.Getter;
  */
 @Builder
 @Getter
-public class SeaShell
-{
+@EqualsAndHashCode
+@ToString
+public class SeaShell {
     private final Long id;
 
     private final String commonName;
@@ -32,4 +35,23 @@ public class SeaShell
     private final ShellType shellType;
 
     private final List<Long> seaShellLocationListIds;
+
+    @ConstructorProperties({"id", "commonName", "scientificName", "currency", "value", "shellState", "shellType", "seaShellLocationListIds"})
+    public SeaShell(Long id,
+                    String commonName,
+                    String scientificName,
+                    String currency,
+                    BigDecimal value,
+                    ShellState shellState,
+                    ShellType shellType,
+                    List<Long> seaShellLocationListIds) {
+        this.id = id;
+        this.commonName = commonName;
+        this.scientificName = scientificName;
+        this.currency = currency;
+        this.value = value;
+        this.shellState = shellState;
+        this.shellType = shellType;
+        this.seaShellLocationListIds = seaShellLocationListIds;
+    }
 }

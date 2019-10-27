@@ -13,8 +13,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/seashells")
-public class SeaShellController
-{
+public class SeaShellController {
     private ShellRepository shellRepository;
 
     public SeaShellController(ShellRepository shellRepository) {
