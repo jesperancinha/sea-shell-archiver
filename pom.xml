@@ -17,9 +17,13 @@
         <spring-boot-starter-webflux.version>2.2.0.RELEASE</spring-boot-starter-webflux.version>
         <lombok-maven-plugin.version>1.18.8.1</lombok-maven-plugin.version>
         <lombok.version>1.18.10</lombok.version>
+        <netty-all.version>4.1.42.Final</netty-all.version>
+        <blockhound.version>1.0.1.RELEASE</blockhound.version>
+        <!-- Plugins -->
         <maven-compiler-plugin.source>11</maven-compiler-plugin.source>
         <maven-compiler-plugin.target>11</maven-compiler-plugin.target>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <!-- Test -->
         <junit-jupiter.version>5.5.1</junit-jupiter.version>
     </properties>
 
@@ -50,11 +54,22 @@
                 <version>${spring-boot-starter-webflux.version}</version>
             </dependency>
             <dependency>
+                <groupId>io.projectreactor.tools</groupId>
+                <artifactId>blockhound</artifactId>
+                <version>${blockhound.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty-all.version}</version>
+            </dependency>
+            <!-- Test Dependencies -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>

@@ -18,15 +18,26 @@ public class SeaShellWebClient {
                 .retrieve()
                 .bodyToMono(SeaShell.class);
 
-        seaShellMono.subscribe(x -> {
-            log.info(x.toString());
-        });
+        seaShellMono.subscribe(x -> log.info(x.toString()));
 
         Flux<SeaShell> seaShellFlux = client.get()
                 .uri("/seashells")
                 .retrieve()
                 .bodyToFlux(SeaShell.class);
+        seaShellFlux.subscribe(x -> log.info(x.toString()));
+    }
 
-        seaShellFlux.subscribe(System.out::println);
+    public Mono<SeaShell> getSeaShellById(Long id) {
+        return client.get()
+                .uri("/seashells/{id}", id)
+                .retrieve()
+                .bodyToMono(SeaShell.class);
+    }
+
+    public Flux<SeaShell> getAllSeaShells() {
+        return client.get()
+                .uri("/seashells")
+                .retrieve()
+                .bodyToFlux(SeaShell.class);
     }
 }
