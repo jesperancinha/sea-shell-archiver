@@ -10,5 +10,7 @@ public class SeaShellWebClientTest {
     public void consume() throws InterruptedException {
         final SeaShellWebClient seaShellWebClient = new SeaShellWebClient();
         assertAll(seaShellWebClient::consume);
+
+        Thread.sleep(10000);
     }
 }
