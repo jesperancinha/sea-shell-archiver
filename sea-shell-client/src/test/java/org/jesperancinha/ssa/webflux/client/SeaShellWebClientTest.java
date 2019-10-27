@@ -2,14 +2,13 @@ package org.jesperancinha.ssa.webflux.client;
 
 import org.junit.jupiter.api.Test;
 
-class SeaShellWebClientTest {
+import static org.junit.jupiter.api.Assertions.assertAll;
+
+public class SeaShellWebClientTest {
 
     @Test
-    void consume() throws InterruptedException {
+    public void consume() throws InterruptedException {
         final SeaShellWebClient seaShellWebClient = new SeaShellWebClient();
-
-        seaShellWebClient.consume();
-
-        Thread.sleep(10000);
+        assertAll(seaShellWebClient::consume);
     }
 }

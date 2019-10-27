@@ -8,7 +8,8 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 public class SeaShellWebClient {
-    final WebClient client = WebClient.builder().baseUrl("http://localhost:8080").build();
+
+    private final WebClient client = WebClient.builder().baseUrl("http://localhost:8080").build();
 
     public void consume() {
 
