@@ -39,6 +39,8 @@ Essentially this is a fun exercise to help me and you understand al the mechanis
 
 -   [Block Hound](https://github.com/reactor/BlockHound)
 
+-   [Lombok Tips And Tricks](https://github.com/piczmar/lombok-tips-and-tricks)
+
 ## License
 
 ```text
