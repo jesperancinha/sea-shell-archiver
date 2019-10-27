@@ -5,7 +5,6 @@
 [![codebeat badge](https://codebeat.co/badges/c71192de-5569-4741-aaa9-503217514483)](https://codebeat.co/projects/github-com-jesperancinha-sea-shell-archiver-master)
 [![CircleCI](https://circleci.com/gh/jesperancinha/sea-shell-archiver.svg?style=svg)](https://circleci.com/gh/jesperancinha/sea-shell-archiver)
 [![Build Status](https://travis-ci.org/jesperancinha/sea-shell-archiver.svg?branch=master)](https://travis-ci.org/jesperancinha/sea-shell-archiver)
-[![Build Status](https://travis-ci.org/jesperancinha/sea-shell-archiver.svg?branch=master)](https://travis-ci.org/jesperancinha/sea-shell-archiver)
 [![BCH compliance](https://bettercodehub.com/edge/badge/jesperancinha/sea-shell-archiver?branch=master)](https://bettercodehub.com/)
 [![Build status](https://ci.appveyor.com/api/projects/status/eka55ffpbjkxq55p?svg=true)](https://ci.appveyor.com/project/jesperancinha/sea-shell-archiver)
 [![Known Vulnerabilities](https://snyk.io/test/github/jesperancinha/sea-shell-archiver/badge.svg)](https://snyk.io/test/github/jesperancinha/sea-shell-archiver)
