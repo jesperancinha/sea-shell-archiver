@@ -21,18 +21,23 @@ public class SeaShellController {
     }
 
     @GetMapping("/{id}")
-    private Mono<SeaShell> getEmployeeById(@PathVariable Long id) {
+    private Mono<SeaShell> getShellById(@PathVariable Long id) {
         return shellRepository.findSeaShellById(id);
     }
 
     @GetMapping
-    private Flux<SeaShell> getAllEmployees() {
+    private Flux<SeaShell> getAllShells() {
         return shellRepository.findAllSeaShells();
     }
 
+    @GetMapping
+    private Flux<SeaShell> getAllCompleteShells() {
+        return shellRepository.findAllCompleteSeaShells();
+    }
+
     @PostMapping("/update")
-    private Mono<SeaShell> updateEmployee(@RequestBody SeaShell seaShell) {
-        return shellRepository.updateEmployee(seaShell);
+    private Mono<SeaShell> updateShell(@RequestBody SeaShell seaShell) {
+        return shellRepository.updateSeaShell(seaShell);
     }
 
 }

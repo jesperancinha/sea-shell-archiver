@@ -44,9 +44,13 @@ public class ShellRepository {
         return Flux.fromIterable(seaShellMap.values());
     }
 
-    public Mono<SeaShell> updateEmployee(SeaShell seaShell) {
+    public Mono<SeaShell> updateSeaShell(SeaShell seaShell) {
         final Long id = seaShell.getId();
         seaShellMap.put(id, seaShell);
         return Mono.just(seaShellMap.get(id));
+    }
+
+    public Flux<SeaShell> findAllCompleteSeaShells() {
+        return Flux.fromIterable(seaShellMap.values());
     }
 }
