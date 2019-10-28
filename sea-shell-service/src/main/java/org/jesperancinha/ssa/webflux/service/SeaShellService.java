@@ -9,7 +9,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static java.util.List.of;
 import static org.jesperancinha.ssa.webflux.repo.ShellRepository.SEA_SHELL_MAP;
 
 @Service

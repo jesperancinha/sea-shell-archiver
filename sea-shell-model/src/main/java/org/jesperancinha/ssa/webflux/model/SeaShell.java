@@ -40,7 +40,7 @@ public class SeaShell {
 
     private List<SeaShellLocation> seaShellLocations;
 
-    @ConstructorProperties({"id", "commonName", "scientificName", "currency", "value", "shellState", "shellType", "seaShellLocationListIds","seaShellLocations"})
+    @ConstructorProperties({"id", "commonName", "scientificName", "currency", "value", "shellState", "shellType", "seaShellLocationListIds", "seaShellLocations"})
     public SeaShell(Long id,
                     String commonName,
                     String scientificName,
