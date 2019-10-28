@@ -8,8 +8,11 @@ import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import static java.util.List.of;
 import static org.jesperancinha.ssa.webflux.model.ShellState.Optimal;
 import static org.jesperancinha.ssa.webflux.model.ShellType.Bivalvia;
 
@@ -20,37 +23,37 @@ import static org.jesperancinha.ssa.webflux.model.ShellType.Bivalvia;
  */
 @Repository
 public class ShellRepository {
-    private static Map<Long, SeaShell> seaShellMap = new HashMap<>();
-    private static Map<Long, SeaShellLocation> seaShellLocationMap = new HashMap<>();
+    public static Map<Long, SeaShell> SEA_SHELL_MAP = new HashMap<>();
+    public static Map<Long, SeaShellLocation> SEA_SHELL_LOCATION = new HashMap<>();
 
     static {
-        seaShellLocationMap.put(1L,
+        SEA_SHELL_LOCATION.put(1L,
                 SeaShellLocation.builder().designation("Eisbrecher bar").lan(BigDecimal.valueOf(111111)).lon(BigDecimal.valueOf(22222)).build());
-        seaShellLocationMap.put(2L,
+        SEA_SHELL_LOCATION.put(2L,
                 SeaShellLocation.builder().designation("Vergissmeinnicht bar").lan(BigDecimal.valueOf(333333)).lon(BigDecimal.valueOf(444444)).build());
 
 
-        seaShellMap.put(1L,
-                SeaShell.builder().commonName("ugabuga").scientificName("ugalibis").currency("EUR").value(BigDecimal.valueOf(100)).shellState(Optimal).shellType(Bivalvia).build());
-        seaShellMap.put(2L,
-                SeaShell.builder().commonName("bagabuga").scientificName("bugalibis").currency("EUR").value(BigDecimal.valueOf(100)).shellState(Optimal).shellType(Bivalvia).build());
+        SEA_SHELL_MAP.put(1L,
+                SeaShell.builder().id(1L).commonName("ugabuga").scientificName("ugalibis").currency("EUR").value(BigDecimal.valueOf(100)).shellState(Optimal).shellType(Bivalvia).seaShellLocationListIds(of(1L)).build());
+        SEA_SHELL_MAP.put(2L,
+                SeaShell.builder().id(2L).commonName("bagabuga").scientificName("bugalibis").currency("EUR").value(BigDecimal.valueOf(100)).shellState(Optimal).shellType(Bivalvia).seaShellLocationListIds(of(2L)).build());
     }
 
     public Mono<SeaShell> findSeaShellById(final Long id) {
-        return Mono.just(seaShellMap.get(id));
+        return Mono.just(SEA_SHELL_MAP.get(id));
     }
 
     public Flux<SeaShell> findAllSeaShells() {
-        return Flux.fromIterable(seaShellMap.values());
+        return Flux.fromIterable(SEA_SHELL_MAP.values());
     }
 
     public Mono<SeaShell> updateSeaShell(SeaShell seaShell) {
         final Long id = seaShell.getId();
-        seaShellMap.put(id, seaShell);
-        return Mono.just(seaShellMap.get(id));
+        SEA_SHELL_MAP.put(id, seaShell);
+        return Mono.just(SEA_SHELL_MAP.get(id));
     }
 
-    public Flux<SeaShell> findAllCompleteSeaShells() {
-        return Flux.fromIterable(seaShellMap.values());
+    public List<SeaShellLocation> findAllLocations(List<Long> seaShellLocationListIds) {
+        return seaShellLocationListIds.stream().map(id -> SEA_SHELL_LOCATION.get(id)).collect(Collectors.toList());
     }
 }

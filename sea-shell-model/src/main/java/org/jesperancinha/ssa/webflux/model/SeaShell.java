@@ -4,6 +4,7 @@ package org.jesperancinha.ssa.webflux.model;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.beans.ConstructorProperties;
@@ -19,6 +20,7 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @ToString
+@Setter
 public class SeaShell {
     private final Long id;
 
@@ -36,7 +38,9 @@ public class SeaShell {
 
     private final List<Long> seaShellLocationListIds;
 
-    @ConstructorProperties({"id", "commonName", "scientificName", "currency", "value", "shellState", "shellType", "seaShellLocationListIds"})
+    private List<SeaShellLocation> seaShellLocations;
+
+    @ConstructorProperties({"id", "commonName", "scientificName", "currency", "value", "shellState", "shellType", "seaShellLocationListIds","seaShellLocations"})
     public SeaShell(Long id,
                     String commonName,
                     String scientificName,
@@ -44,7 +48,8 @@ public class SeaShell {
                     BigDecimal value,
                     ShellState shellState,
                     ShellType shellType,
-                    List<Long> seaShellLocationListIds) {
+                    List<Long> seaShellLocationListIds,
+                    List<SeaShellLocation> seaShellLocations) {
         this.id = id;
         this.commonName = commonName;
         this.scientificName = scientificName;
@@ -53,5 +58,6 @@ public class SeaShell {
         this.shellState = shellState;
         this.shellType = shellType;
         this.seaShellLocationListIds = seaShellLocationListIds;
+        this.seaShellLocations = seaShellLocations;
     }
 }

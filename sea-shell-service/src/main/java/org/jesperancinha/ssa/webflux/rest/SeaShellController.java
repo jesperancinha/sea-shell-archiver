@@ -1,7 +1,7 @@
 package org.jesperancinha.ssa.webflux.rest;
 
 import org.jesperancinha.ssa.webflux.model.SeaShell;
-import org.jesperancinha.ssa.webflux.repo.ShellRepository;
+import org.jesperancinha.ssa.webflux.service.SeaShellService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,30 +14,30 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/seashells")
 public class SeaShellController {
-    private ShellRepository shellRepository;
+    private SeaShellService seaShellService;
 
-    public SeaShellController(ShellRepository shellRepository) {
-        this.shellRepository = shellRepository;
+    public SeaShellController(SeaShellService seaShellService) {
+        this.seaShellService = seaShellService;
     }
 
     @GetMapping("/{id}")
     private Mono<SeaShell> getShellById(@PathVariable Long id) {
-        return shellRepository.findSeaShellById(id);
+        return seaShellService.findSeaShellById(id);
     }
 
     @GetMapping
     private Flux<SeaShell> getAllShells() {
-        return shellRepository.findAllSeaShells();
+        return seaShellService.findAllSeaShells();
     }
 
-    @GetMapping
+    @GetMapping("/completed")
     private Flux<SeaShell> getAllCompleteShells() {
-        return shellRepository.findAllCompleteSeaShells();
+        return seaShellService.findAllCompleteSeaShells();
     }
 
     @PostMapping("/update")
     private Mono<SeaShell> updateShell(@RequestBody SeaShell seaShell) {
-        return shellRepository.updateSeaShell(seaShell);
+        return seaShellService.updateSeaShell(seaShell);
     }
 
 }
