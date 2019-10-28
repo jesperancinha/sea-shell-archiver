@@ -9,19 +9,25 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class SeaShellWebClient {
 
-    private final WebClient client = WebClient.builder().baseUrl("http://localhost:8080").build();
+    private String uri;
+
+    public SeaShellWebClient(final String uri) {
+        this.uri = uri;
+    }
+
+    private final WebClient client = WebClient.builder().baseUrl(uri).build();
 
     public void consume() {
 
         Mono<SeaShell> seaShellMono = client.get()
-                .uri("/seashells/{id}", "1")
+                .uri(uri + "/seashells/{id}/", "1")
                 .retrieve()
                 .bodyToMono(SeaShell.class);
 
         seaShellMono.subscribe(x -> log.info(x.toString()));
 
         Flux<SeaShell> seaShellFlux = client.get()
-                .uri("/seashells")
+                .uri(uri + "/seashells")
                 .retrieve()
                 .bodyToFlux(SeaShell.class);
         seaShellFlux.subscribe(x -> log.info(x.toString()));
