@@ -21,9 +21,8 @@ limitations under the License.
 ## About me
 
 -   [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=joaofilipesabinoesperancinha.nl&color=informational)](http://joaofilipesabinoesperancinha.nl)
-<a href="https://dev.to/jofisaes">
-  <img src="https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg" alt="João Esperancinha's DEV Profile" height="30" width="30">
-</a>
+
+-   [![Generic badge](https://img.shields.io/static/v1.svg?label=DEV&message=Profile&color=informational)](https://dev.to/jofisaes)
 
 -   [![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=jesperancinha&style=social)](https://github.com/jesperancinha)
 

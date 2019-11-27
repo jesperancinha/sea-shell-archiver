@@ -20,6 +20,8 @@ This project is a Sea Shell archiver. This is just an archive web application to
 
 Essentially this is a fun exercise to help me and you understand al the mechanisms behind all the concepts described in the [Reactive Manifesto](https://www.reactivemanifesto.org/) and other concepts of other architectures like [WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html), [Flux](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html) and [Mono](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html).
 
+As an addition to this, I will also make use of Redis cache and see how for example it deals with [cache eviction algorithms](https://www.ehcache.org/documentation/2.8/apis/cache-eviction-algorithms.html) such as Least Recently Used ([LRU](https://www.youtube.com/watch?v=S6IfqDXWa10)).
+
 ## References
 
 -   [Reactive Manifesto](https://www.reactivemanifesto.org/)
@@ -63,9 +65,8 @@ limitations under the License.
 ## About me
 
 -   [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=joaofilipesabinoesperancinha.nl&color=informational)](http://joaofilipesabinoesperancinha.nl)
-<a href="https://dev.to/jofisaes">
-  <img src="https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg" alt="João Esperancinha's DEV Profile" height="30" width="30">
-</a>
+
+-   [![Generic badge](https://img.shields.io/static/v1.svg?label=DEV&message=Profile&color=informational)](https://dev.to/jofisaes)
 
 -   [![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=jesperancinha&style=social)](https://github.com/jesperancinha)
 
