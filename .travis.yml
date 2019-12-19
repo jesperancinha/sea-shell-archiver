@@ -1,4 +1,4 @@
 os: osx
 language: java
 jdk:
-  - openjdk11
+  - openjdk13
