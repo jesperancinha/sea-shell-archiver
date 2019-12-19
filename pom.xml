@@ -8,6 +8,7 @@
         <module>sea-shell-soap-wiremock</module>
         <module>sea-shell-servide-rx-java-2</module>
         <module>sea-shell-service-spring-web-flux</module>
+        <module>sea-shell-data</module>
     </modules>
     <packaging>pom</packaging>
 
