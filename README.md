@@ -16,7 +16,19 @@
 
 ## Description
 
+This project is a Sea Shell archiver for an imaginary world.
+
+This is the description of that world
+Imagine a world were beings live in gigantic sea shells. Sea shells are their home. Inside you can find one or more people. You can also find one or more costumes with different configuration. The value of the shell is evaluated by the sum of the values of all the individual costumes.
+This application is very old. Its design still is base on the paradigms of the time. It's implemented in SOAP. Furthermore, every single entity has a dedicated read service associated with it. As a result, every time you need to get the data from a particular sea shell, you have to make multiple requests.
+This situation warrants a solution. Times have changed and applications need to move faster and be scalable, but due to business restrictions I cannot change my SOAP services.
+A solution could be using Reactive Streams in the context of a Reactive architecture.
+This is what this application is about.
+
+Essentially this is a fun exercise to help understand all the mechanisms behind the concepts described in the [Reactive Manifesto](https://www.reactivemanifesto.org/).
+
 Topics discussed:
+
 -   [WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html)
     -   [Flux](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html)
     -   [Mono](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html)
@@ -26,25 +38,27 @@ Topics discussed:
 
 ## References
 
+### Technical
+
+-   [Wiremock Running as a Standalone Process](http://wiremock.org/docs/running-standalone/)
+-   [Move your apps to the cloud in weeks](https://pivotal.io/application-modernization)
+-   [The Twelve Factors](https://12factor.net/)
+-   [DDD and Microservices: Like Peanut Butter and Jelly - Matt Stine](https://content.pivotal.io/slides/ddd-and-microservices-like-peanut-butter-and-jelly-matt-stine)
 -   [Reactive Manifesto](https://www.reactivemanifesto.org/)
-
 -   [NLJUG Reactive Programming](https://nljug.org/java-magazine/reactive-programming/)
-
 -   [How todo in Java Spring Web Flux](https://howtodoinjava.com/spring-webflux/spring-webflux-tutorial/)
-
 -   [Baeldung Spring WebFlux](https://www.baeldung.com/spring-webflux)
-
 -   [Hands on Reactive Programming in Spring](https://www.bol.com/nl/p/hands-on-reactive-programming-in-spring-5/9200000084600333/?bltgh=pCsqVROC1Zv4I9xR0JRJfw.1.4.ProductTitle)
-
 -   [QPI Architecture](https://en.wikipedia.org/wiki/Intel_QuickPath_Interconnect)
-
 -   [ITNext How to make legacy code reactive](https://itnext.io/how-to-make-legacy-code-reactive-2debcb3d0a40)
-
 -   [Spring 5 Reactive Security Example](https://github.com/eugenp/tutorials/tree/master/spring-5-reactive-security)
-
 -   [Block Hound](https://github.com/reactor/BlockHound)
-
 -   [Lombok Tips And Tricks](https://github.com/piczmar/lombok-tips-and-tricks)
+
+
+### Domain knowledge
+
+-   [British seashell guide: how to identify and where to find](https://www.countryfile.com/wildlife/marine-life/british-seashell-guide-how-to-identify-and-where-to-find/)
 
 ## About me
 

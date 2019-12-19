@@ -1,0 +1,9 @@
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xsi:schemaLocation="http://schemas.xmlsoap.org/soap/envelope/ http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+    </soap:Header>
+    <soap:Body>
+        <CostumeId>1</CostumeId>
+    </soap:Body>
+</soap:Envelope>

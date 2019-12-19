@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>sea-shell-archiver-root</artifactId>
-        <groupId>org.jesperancinha.ssa</groupId>
+        <groupId>org.jesperancinha.shell</groupId>
         <version>0.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -16,7 +16,7 @@
     <dependencies>
         <!-- Internal Dependencies -->
         <dependency>
-            <groupId>org.jesperancinha.ssa</groupId>
+            <groupId>org.jesperancinha.shell</groupId>
             <artifactId>sea-shell-model</artifactId>
         </dependency>
 
@@ -41,7 +41,7 @@
 
         <!-- Test Dependencies -->
         <dependency>
-            <groupId>org.jesperancinha.ssa</groupId>
+            <groupId>org.jesperancinha.shell</groupId>
             <artifactId>sea-shell-service</artifactId>
             <scope>test</scope>
         </dependency>

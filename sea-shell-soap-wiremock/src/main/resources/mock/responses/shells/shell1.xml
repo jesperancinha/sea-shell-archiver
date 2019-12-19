@@ -1,0 +1,11 @@
+<Shell>
+    <Id>1</Id>
+    <Name>Blunt gaper</Name>
+    <ScientificName>Mya truncata</ScientificName>
+    <Persons>
+        <PersonId>1</PersonId>
+    </Persons>
+    <Costumes>
+        <CostumeId>1</CostumeId>
+    </Costumes>
+</Shell>

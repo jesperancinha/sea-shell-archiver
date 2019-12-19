@@ -1,0 +1,13 @@
+<Shell>
+    <Id>2</Id>
+    <Name>Baltic tellin</Name>
+    <ScientificName>Macoma balthica</ScientificName>
+    <Persons>
+        <PersonId>2</PersonId>
+        <PersonId>3</PersonId>
+    </Persons>
+    <Costumes>
+        <CostumeId>2</CostumeId>
+        <CostumeId>3</CostumeId>
+    </Costumes>
+</Shell>
