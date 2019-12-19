@@ -16,11 +16,13 @@
 
 ## Description
 
-This project is a Sea Shell archiver. This is just an archive web application to manage your collection of sea shells.
-
-Essentially this is a fun exercise to help me and you understand al the mechanisms behind all the concepts described in the [Reactive Manifesto](https://www.reactivemanifesto.org/) and other concepts of other architectures like [WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html), [Flux](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html) and [Mono](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html).
-
-As an addition to this, I will also make use of Redis cache and see how for example it deals with [cache eviction algorithms](https://www.ehcache.org/documentation/2.8/apis/cache-eviction-algorithms.html) such as Least Recently Used ([LRU](https://www.youtube.com/watch?v=S6IfqDXWa10)).
+Topics discussed:
+-   [WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html)
+    -   [Flux](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html)
+    -   [Mono](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html)
+-   [RxJava2](https://github.com/ReactiveX/RxJava)
+    -   [Observable](http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html)
+    -   [Flowable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/Flowable.html)
 
 ## References
 
