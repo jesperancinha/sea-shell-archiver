@@ -1,7 +1,10 @@
 package org.jesperancinha.shell;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.http.ContentTypeHeader;
 import com.google.common.io.CharStreams;
+import com.sun.xml.ws.encoding.ContentTypeImpl;
+import org.apache.http.entity.ContentType;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,9 +23,9 @@ public class SeaShellWiremockSoapLauncher {
         final WireMockServer wireMockServer = new WireMockServer();
         wireMockServer.start();
         configureFor("localhost", 8080);
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person1.xml", "/mock/responses/persons/person1.xml");
         stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell1.xml", "/mock/responses/shells/shell1.xml");
         stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell2.xml", "/mock/responses/shells/shell2.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person1.xml", "/mock/responses/persons/person1.xml");
         stubRequestToResponse("/seashells/costumes", "/mock/requests/costumes/costume1.xml", "/mock/responses/costumes/costume1.xml");
         stubRequestToResponse("/seashells/lowers", "/mock/requests/lowers/lower1.xml", "/mock/responses/lowers/lower1.xml");
         stubRequestToResponse("/seashells/lowers", "/mock/requests/lowers/lower2.xml", "/mock/responses/lowers/lower2.xml");
@@ -34,7 +37,8 @@ public class SeaShellWiremockSoapLauncher {
     private static void stubRequestToResponse(String urlPath, String requestResource, String responseResource) throws IOException {
         stubFor(post(urlEqualTo(urlPath))
                 .withRequestBody(equalToXml(CharStreams.toString(getStringFromResource(requestResource))))
-                .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))));
+                .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
+                .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
     }
 
     private static InputStreamReader getStringFromResource(String resourceName) {

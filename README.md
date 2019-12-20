@@ -54,11 +54,18 @@ Topics discussed:
 -   [Spring 5 Reactive Security Example](https://github.com/eugenp/tutorials/tree/master/spring-5-reactive-security)
 -   [Block Hound](https://github.com/reactor/BlockHound)
 -   [Lombok Tips And Tricks](https://github.com/piczmar/lombok-tips-and-tricks)
-
+    
 
 ### Domain knowledge
 
 -   [British seashell guide: how to identify and where to find](https://www.countryfile.com/wildlife/marine-life/british-seashell-guide-how-to-identify-and-where-to-find/)
+
+### Legacy
+
+-   [Exception occurred during code generation for the WSDL : java.lang.NoClassDefFoundError:](https://stackoverflow.com/questions/35797731/exception-occurred-during-code-generation-for-the-wsdl-java-lang-noclassdeffou)
+-   [Apache Axis2 1.6.4 Release Note](https://axis.apache.org/axis2/java/core/release-notes/1.6.4.html)
+-   [Index of /dist/axis/axis2/java/core/1.6.4](https://archive.apache.org/dist/axis/axis2/java/core/1.6.4/)
+-   [AXIS2 JAVA.LANG.NOCLASSDEFFOUNDERROR: ORG/APACHE/WS/COMMONS/SCHEMA/UTILS/NAMESPACEPREFIXLIST](https://yiingw.wordpress.com/2018/02/12/axis2-java-lang-noclassdeffounderror-org-apache-ws-commons-schema-utils-namespaceprefixlist/)
 
 ## About me
 
