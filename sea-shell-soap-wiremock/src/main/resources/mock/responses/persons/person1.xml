@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:personsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLFile/">
+        <ns2:personsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLPersons/">
             <Person>
                 <Name>Annie Von Fear</Name>
                 <Activity>DRAG_ACT</Activity>

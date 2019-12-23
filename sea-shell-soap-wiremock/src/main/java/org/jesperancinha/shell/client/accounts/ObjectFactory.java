@@ -1,5 +1,5 @@
 
-package org.jesperancinha.shell.client.persons;
+package org.jesperancinha.shell.client.accounts;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the org.jesperancinha.shell.client.persons package.
+ * generated in the org.jesperancinha.shell.client.accounts package.
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,26 +23,26 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jesperancinha.shell.client.persons
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jesperancinha.shell.client.accounts
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link PersonRequest }
+     * Create an instance of {@link AccountRequest }
      * 
      */
-    public PersonRequest createPersons() {
-        return new PersonRequest();
+    public AccountRequest createAccounts() {
+        return new AccountRequest();
     }
 
     /**
-     * Create an instance of {@link PersonResponse }
+     * Create an instance of {@link AccountResponse }
      * 
      */
-    public PersonResponse createPersonsResponse() {
-        return new PersonResponse();
+    public AccountResponse createAccountsResponse() {
+        return new AccountResponse();
     }
 
 }

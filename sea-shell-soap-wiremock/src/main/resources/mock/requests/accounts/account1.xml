@@ -1,9 +1,8 @@
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-               xsi:schemaLocation="http://schemas.xmlsoap.org/soap/envelope/ http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Header>
-    </soap:Header>
-    <soap:Body>
-        <AccountId>1</AccountId>
-    </soap:Body>
-</soap:Envelope>
+<?xml version="1.0" ?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:accounts xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLAccounts/">
+            <accountId>1</accountId>
+        </ns2:accounts>
+    </S:Body>
+</S:Envelope>

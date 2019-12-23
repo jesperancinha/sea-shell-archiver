@@ -14,13 +14,13 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 3.3.4
  *
  */
-@WebService(targetNamespace = "http://accountor/SeaShellsWSDLFile/", name = "SeaShellsWSDLFile")
+@WebService(targetNamespace = "http://accountor/SeaShellsWSDLPersons/", name = "SeaShellsWSDLPersons")
 @XmlSeeAlso({ObjectFactory.class})
-public interface SeaShellsWSDLFile {
+public interface SeaShellsWSDLPersons {
 
-    @WebMethod(action = "http://org.jesperancinha.shells/SeaShellsWSDLFile/persons")
-    @RequestWrapper(localName = "persons", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLFile/", className = "org.example.seashellswsdlfile.Persons")
-    @ResponseWrapper(localName = "personsResponse", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLFile/", className = "org.example.seashellswsdlfile.PersonsResponse")
+    @WebMethod(action = "http://org.jesperancinha.shells/SeaShellsWSDLPersons/persons")
+    @RequestWrapper(localName = "persons", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLPersons/", className = "org.jesperancinha.shell.client.persons.Persons")
+    @ResponseWrapper(localName = "personsResponse", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLPersons/", className = "org.jesperancinha.shell.client.persons.PersonsResponse")
     @WebResult(name = "Person", targetNamespace = "")
     public Person persons(
 
