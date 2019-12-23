@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sea-shell-soap-wiremock</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>sea-shell-soap-service</module>
+    </modules>
 
     <dependencies>
         <dependency>

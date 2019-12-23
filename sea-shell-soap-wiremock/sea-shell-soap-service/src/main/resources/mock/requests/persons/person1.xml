@@ -3,6 +3,6 @@
     <S:Body>
         <ns2:persons xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLPersons/">
             <personId>1</personId>
-        </ns2:persons>å
+        </ns2:persons>
     </S:Body>
 </S:Envelope>
