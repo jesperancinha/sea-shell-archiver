@@ -3,7 +3,6 @@ package org.jesperancinha.shell;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.http.ContentTypeHeader;
 import com.google.common.io.CharStreams;
-import com.sun.xml.ws.encoding.ContentTypeImpl;
 import org.apache.http.entity.ContentType;
 
 import java.io.IOException;
@@ -38,7 +37,7 @@ public class SeaShellWiremockSoapLauncher {
         stubFor(post(urlEqualTo(urlPath))
                 .withRequestBody(equalToXml(CharStreams.toString(getStringFromResource(requestResource))))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
-                .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
     }
 
     private static InputStreamReader getStringFromResource(String resourceName) {
