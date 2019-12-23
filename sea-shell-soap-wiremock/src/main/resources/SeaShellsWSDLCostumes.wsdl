@@ -2,7 +2,7 @@
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SeaShellsWSDLCostumes" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/">
-      <xsd:element name="persons">
+      <xsd:element name="costumes">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="costumeId" type="xsd:int"/>

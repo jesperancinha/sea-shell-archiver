@@ -2,7 +2,7 @@
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://org.jesperancinha.shells/SeaShellsWSDLAccounts/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SeaShellsWSDLAccounts" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLAccounts/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLAccounts/">
-      <xsd:element name="persons">
+      <xsd:element name="accounts">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="accountId" type="xsd:int"/>

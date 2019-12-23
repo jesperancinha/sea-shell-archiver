@@ -22,7 +22,7 @@
         <spring-boot-starter-webflux.version>2.2.0.RELEASE</spring-boot-starter-webflux.version>
         <lombok-maven-plugin.version>1.18.8.1</lombok-maven-plugin.version>
         <lombok.version>1.18.10</lombok.version>
-        <netty-all.version>4.1.42</netty-all.version>
+        <netty-all.version>4.1.44.Final</netty-all.version>
         <blockhound.version>1.0.1.RELEASE</blockhound.version>
         <!-- Plugins -->
         <maven-compiler-plugin.source>13</maven-compiler-plugin.source>

@@ -1,6 +1,12 @@
-<Lower>
-    <Id>2</Id>
-    <type>SKIRTS</type>
-    <Color>228B22</Color>
-    <Size>L</Size>
-</Lower>
+<?xml version="1.0" ?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:lowersResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLLowers/">
+            <Lower>
+                <type>SKIRTS</type>
+                <Color>228B22</Color>
+                <Size>L</Size>
+            </Lower>
+        </ns2:lowersResponse>
+    </S:Body>
+</S:Envelope>

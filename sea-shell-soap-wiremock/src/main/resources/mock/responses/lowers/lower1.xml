@@ -1,6 +1,12 @@
-<Lower>
-    <Id>1</Id>
-    <type>PANTS</type>
-    <Color>#EEDDAA</Color>
-    <Size>M</Size>
-</Lower>
+<?xml version="1.0" ?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:lowersResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLLowers/">
+            <Lower>
+                <Type>PANTS</Type>
+                <Color>#EEDDAA</Color>
+                <Size>M</Size>
+            </Lower>,
+        </ns2:lowersResponse>
+    </S:Body>
+</S:Envelope>
