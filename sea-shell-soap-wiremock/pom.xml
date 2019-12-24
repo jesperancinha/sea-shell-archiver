@@ -13,6 +13,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>sea-shell-soap-service</module>
+        <module>sea-shell-cli-accounts</module>
+        <module>sea-shell-cli-costumes</module>
+        <module>sea-shell-cli-lowers</module>
+        <module>sea-shell-cli-persons</module>
+        <module>sea-shell-cli-shells</module>
+        <module>sea-shell-cli-tops</module>
     </modules>
 
     <dependencies>
