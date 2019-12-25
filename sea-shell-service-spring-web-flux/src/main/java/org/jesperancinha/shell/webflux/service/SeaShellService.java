@@ -9,8 +9,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static org.jesperancinha.shell.webflux.repo.ShellRepository.SEA_SHELL_MAP;
-
 @Service
 public class SeaShellService {
 
@@ -21,7 +19,7 @@ public class SeaShellService {
     }
 
     public Flux<SeaShell> findAllCompleteSeaShells() {
-        return Flux.fromStream(SEA_SHELL_MAP.values().parallelStream()).doOnNext(seaShell -> seaShell.setSeaShellLocations(getSeaShellLocations(seaShell.getSeaShellLocationListIds())));
+        return null;
     }
 
     private List<SeaShellLocation> getSeaShellLocations(List<Long> seaShellLocationListIds) {

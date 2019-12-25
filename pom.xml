@@ -56,6 +56,36 @@
                 <artifactId>sea-shell-service</artifactId>
                 <version>${sea-shell-service.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-accounts</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-costumes</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-lowers</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-tops</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-persons</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-shells</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
             <!-- External Dependencies -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

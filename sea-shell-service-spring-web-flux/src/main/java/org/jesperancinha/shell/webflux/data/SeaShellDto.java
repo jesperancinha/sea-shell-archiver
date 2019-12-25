@@ -1,9 +1,11 @@
 package org.jesperancinha.shell.webflux.data;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.jesperancinha.shell.webflux.model.SeaShellLocation;
@@ -19,41 +21,12 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class SeaShellDto {
-
-    private final Long id;
-
-    private final String commonName;
-
-    private final String scientificName;
-
-    private final String currency;
-
-    private final BigDecimal value;
-
-    private final ShellState shellState;
-
-    private final ShellType shellType;
-
-    private final List<SeaShellLocation> seaShellLocations;
-
-    @ConstructorProperties({"id", "commonName", "scientificName", "currency", "value", "shellState", "shellType", "seaShellLocations"})
-    public SeaShellDto(Long id,
-                       String commonName,
-                       String scientificName,
-                       String currency,
-                       BigDecimal value,
-                       ShellState shellState,
-                       ShellType shellType,
-                       List<SeaShellLocation> seaShellLocations) {
-        this.id = id;
-        this.commonName = commonName;
-        this.scientificName = scientificName;
-        this.currency = currency;
-        this.value = value;
-        this.shellState = shellState;
-        this.shellType = shellType;
-        this.seaShellLocations = seaShellLocations;
-    }
+    private String name;
+    private String scientificName;
+    private List<SeaShellPersonDto> persons;
+    private List<SeaShellCostumeDto> costumes;
 }
 
