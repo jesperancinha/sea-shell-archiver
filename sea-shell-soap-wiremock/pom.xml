@@ -19,6 +19,7 @@
         <module>sea-shell-cli-persons</module>
         <module>sea-shell-cli-shells</module>
         <module>sea-shell-cli-tops</module>
+        <module>sea-shell-cli-common</module>
     </modules>
 
     <dependencies>

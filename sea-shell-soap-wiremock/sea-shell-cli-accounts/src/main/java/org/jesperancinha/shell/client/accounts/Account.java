@@ -1,5 +1,7 @@
 package org.jesperancinha.shell.client.accounts;
 
+import lombok.ToString;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -9,6 +11,7 @@ import java.math.BigDecimal;
 @XmlType(name = "", propOrder = {
         "value", "currency"
 })
+@ToString
 public class Account {
 
     private BigDecimal value;
