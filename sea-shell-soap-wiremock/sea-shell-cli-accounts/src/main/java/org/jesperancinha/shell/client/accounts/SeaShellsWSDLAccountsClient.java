@@ -9,7 +9,6 @@ package org.jesperancinha.shell.client.accounts;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.xml.namespace.QName;
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -21,7 +20,7 @@ import java.util.Optional;
  * Generated source version: 3.3.4
  */
 @Slf4j
-public final class SeaShellsWSDLAccountsClient implements SeaShellsWSDLInterface<Account> {
+public final class SeaShellsWSDLAccountsClient extends SeaShellsWSDLAccountsAbstract {
 
     private static final QName SERVICE_NAME = new QName("http://org.jesperancinha.shells/SeaShellsWSDLAccounts/", "SeaShellsWSDLAccounts");
     private final URL url;
@@ -36,41 +35,18 @@ public final class SeaShellsWSDLAccountsClient implements SeaShellsWSDLInterface
     }
 
     @Override
-    public Account getItem(int _accounts_accountId) {
+    public Account getItem(int accountId) {
         final SeaShellsWSDLAccountsService ss = new SeaShellsWSDLAccountsService(this.url, SERVICE_NAME);
         final SeaShellsWSDLAccounts port = ss.getSeaShellsWSDLAccountsSOAP();
         log.trace("Invoking accounts...");
-        Account accounts = port.accounts(_accounts_accountId);
+        Account accounts = port.accounts(accountId);
         log.trace("accounts.result=" + accounts.toString());
         return accounts;
-    }
-
-    private URL getUrlFromCommandLine(String[] args) throws MalformedURLException, URISyntaxException {
-        if (args.length > 0) {
-            return Optional.ofNullable(getUrl(args[0])).orElse(getLocalWsdlLocation());
-        }
-        return getLocalWsdlLocation();
     }
 
     @Override
     public URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException {
         return SeaShellsWSDLAccountsClient.class.getResource("/SeaShellsWSDLAccounts.wsdl").toURI().toURL();
-    }
-
-    private URL getUrl(String commandLineUrl) {
-        if (commandLineUrl != null && !"".equals(commandLineUrl)) {
-            File wsdlFile = new File(commandLineUrl);
-            try {
-                if (wsdlFile.exists()) {
-                    return wsdlFile.toURI().toURL();
-                } else {
-                    return new URL(commandLineUrl);
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
     }
 
 }
