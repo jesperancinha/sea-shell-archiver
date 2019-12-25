@@ -8,12 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.jesperancinha.shell.webflux.model.SeaShellLocation;
-import org.jesperancinha.shell.webflux.model.ShellState;
-import org.jesperancinha.shell.webflux.model.ShellType;
 
-import java.beans.ConstructorProperties;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Builder

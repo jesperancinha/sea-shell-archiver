@@ -1,33 +1,37 @@
 package org.jesperancinha.shell.webflux.repo;
 
-import org.jesperancinha.shell.webflux.model.SeaShell;
-import org.jesperancinha.shell.webflux.model.SeaShellLocation;
+import org.jesperancinha.shell.client.shells.SeaShellsWSDLShellsClient;
+import org.jesperancinha.shell.client.shells.Shell;
+import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 
 @Repository
 public class ShellRepository {
 
-    public Mono<SeaShell> findSeaShellById(final Long id) {
+    private final SeaShellsWSDLShellsClient seaShellsWSDLShellsClient;
+
+    public ShellRepository(SeaShellsWSDLShellsClient seaShellsWSDLShellsClient) {
+        this.seaShellsWSDLShellsClient = seaShellsWSDLShellsClient;
+    }
+
+    public Mono<Shell> findSeaShellById(final Long id) {
+        return Mono.just(seaShellsWSDLShellsClient.getItem(id));
+    }
+
+    public Flux<SeaShellDto> findAllSeaShells() {
         return null;
     }
 
-    public Flux<SeaShell> findAllSeaShells() {
+    public Mono<SeaShellDto> updateSeaShell(SeaShellDto seaShell) {
         return null;
     }
 
-    public Mono<SeaShell> updateSeaShell(SeaShell seaShell) {
-       return null;
-    }
-
-    public List<SeaShellLocation> findAllLocations(List<Long> seaShellLocationListIds) {
+    public List<SeaShellDto> findAllLocations(List<Long> seaShellLocationListIds) {
         return null;
     }
 }

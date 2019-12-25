@@ -44,7 +44,7 @@
   </wsdl:binding>
   <wsdl:service name="SeaShellsWSDLTops">
     <wsdl:port binding="tns:SeaShellsWSDLTopsSOAP" name="SeaShellsWSDLTopsSOAP">
-      <soap:address location="http://localhost:8080/seashells/tops"/>
+      <soap:address location="http://localhost:8090/seashells/tops"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

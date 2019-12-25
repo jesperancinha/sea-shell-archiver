@@ -18,7 +18,11 @@
         <!-- Internal Dependencies -->
         <dependency>
             <groupId>org.jesperancinha.shell</groupId>
-            <artifactId>sea-shell-model</artifactId>
+            <artifactId>sea-shell-data</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jesperancinha.shell</groupId>
+            <artifactId>sea-shell-cli-shells</artifactId>
         </dependency>
         <!-- External Dependencies -->
         <dependency>

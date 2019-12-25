@@ -53,6 +53,11 @@
             </dependency>
             <dependency>
                 <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-data</artifactId>
+                <version>${sea-shell-model.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
                 <artifactId>sea-shell-service</artifactId>
                 <version>${sea-shell-service.version}</version>
             </dependency>

@@ -25,6 +25,6 @@ public interface SeaShellsWSDLAccounts {
     public Account accounts(
 
             @WebParam(name = "accountId", targetNamespace = "")
-                    int accountId
+                    long accountId
     );
 }

@@ -35,7 +35,7 @@ public final class SeaShellsWSDLAccountsClient extends SeaShellsWSDLAccountsAbst
     }
 
     @Override
-    public Account getItem(int accountId) {
+    public Account getItem(long accountId) {
         final SeaShellsWSDLAccountsService ss = new SeaShellsWSDLAccountsService(this.url, SERVICE_NAME);
         final SeaShellsWSDLAccounts port = ss.getSeaShellsWSDLAccountsSOAP();
         log.trace("Invoking accounts...");

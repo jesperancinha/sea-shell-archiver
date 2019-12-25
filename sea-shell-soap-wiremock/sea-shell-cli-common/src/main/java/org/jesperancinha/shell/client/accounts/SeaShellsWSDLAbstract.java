@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public abstract class SeaShellsWSDLAbstract<T> {
 
-    public abstract T getItem(int _accounts_accountId);
+    public abstract T getItem(long itemId);
 
     public abstract URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException;
 
