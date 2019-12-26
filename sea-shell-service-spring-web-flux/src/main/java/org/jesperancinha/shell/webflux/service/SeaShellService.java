@@ -26,6 +26,7 @@ public class SeaShellService {
         return shellRepository.findSeaShellById(id).map(shell -> SeaShellDto.builder()
                 .name(shell.getName())
                 .scientificName(shell.getScientificName())
+                .slogan(shell.getSlogan())
                 .build());
     }
 

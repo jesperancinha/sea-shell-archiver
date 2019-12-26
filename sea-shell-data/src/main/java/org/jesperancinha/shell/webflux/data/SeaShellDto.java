@@ -21,6 +21,7 @@ import java.util.List;
 public class SeaShellDto {
     private String name;
     private String scientificName;
+    private String slogan;
     private List<SeaShellPersonDto> persons;
     private List<SeaShellCostumeDto> costumes;
 }

@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SeaShellsWSDLCostumes" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/">
-  <wsdl:types>
-    <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/">
-      <xsd:element name="costumes">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="costumeId" type="xsd:int"/>
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="costumesResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="out" type="xsd:string"/>
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-    </xsd:schema>
-  </wsdl:types>
-  <wsdl:message name="costumesRequest">
-    <wsdl:part element="tns:costumes" name="parameters"/>
-  </wsdl:message>
-  <wsdl:message name="costumesResponse">
-    <wsdl:part element="tns:costumesResponse" name="parameters"/>
-  </wsdl:message>
-  <wsdl:portType name="SeaShellsWSDLCostumes">
-    <wsdl:operation name="costumes">
-      <wsdl:input message="tns:costumesRequest"/>
-      <wsdl:output message="tns:costumesResponse"/>
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="SeaShellsWSDLCostumesSOAP" type="tns:SeaShellsWSDLCostumes">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="costumes">
-      <soap:operation soapAction="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/costumes"/>
-      <wsdl:input>
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="SeaShellsWSDLCostumes">
-    <wsdl:port binding="tns:SeaShellsWSDLCostumesSOAP" name="SeaShellsWSDLCostumesSOAP">
-      <soap:address location="http://localhost:8090/seashells/costumes"/>
-    </wsdl:port>
-  </wsdl:service>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  name="SeaShellsWSDLCostumes" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/">
+            <xsd:element name="costumes">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="costumeId" type="xsd:long"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="costumesResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="out" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="costumesRequest">
+        <wsdl:part element="tns:costumes" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="costumesResponse">
+        <wsdl:part element="tns:costumesResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:portType name="SeaShellsWSDLCostumes">
+        <wsdl:operation name="costumes">
+            <wsdl:input message="tns:costumesRequest"/>
+            <wsdl:output message="tns:costumesResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SeaShellsWSDLCostumesSOAP" type="tns:SeaShellsWSDLCostumes">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="costumes">
+            <soap:operation soapAction="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/costumes"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SeaShellsWSDLCostumes">
+        <wsdl:port binding="tns:SeaShellsWSDLCostumesSOAP" name="SeaShellsWSDLCostumesSOAP">
+            <soap:address location="http://localhost:8090/seashells/costumes"/>
+        </wsdl:port>
+    </wsdl:service>
 </wsdl:definitions>

@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.EnableWebFlux;
 
-import java.net.URI;
 import java.net.URL;
 
 @Configuration
@@ -17,7 +16,7 @@ public class WebFluxConfig {
     private URL seaShellsWSDLShellsClientLocation;
 
     @Bean
-    public SeaShellsWSDLShellsClient seaShellsWSDLShellsClient(){
+    public SeaShellsWSDLShellsClient seaShellsWSDLShellsClient() {
         return new SeaShellsWSDLShellsClient(seaShellsWSDLShellsClientLocation);
     }
 }

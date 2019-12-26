@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://org.jesperancinha.shells/SeaShellsWSDLTops/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SeaShellsWSDLTops" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
-  <wsdl:types>
-    <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
-      <xsd:element name="tops">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="topId" type="xsd:int"/>
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="topsResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element name="out" type="xsd:string"/>
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-    </xsd:schema>
-  </wsdl:types>
-  <wsdl:message name="topsRequest">
-    <wsdl:part element="tns:tops" name="parameters"/>
-  </wsdl:message>
-  <wsdl:message name="topsResponse">
-    <wsdl:part element="tns:topsResponse" name="parameters"/>
-  </wsdl:message>
-  <wsdl:portType name="SeaShellsWSDLTops">
-    <wsdl:operation name="tops">
-      <wsdl:input message="tns:topsRequest"/>
-      <wsdl:output message="tns:topsResponse"/>
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="SeaShellsWSDLTopsSOAP" type="tns:SeaShellsWSDLTops">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="tops">
-      <soap:operation soapAction="http://org.jesperancinha.shells/SeaShellsWSDLTops/tops"/>
-      <wsdl:input>
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="SeaShellsWSDLTops">
-    <wsdl:port binding="tns:SeaShellsWSDLTopsSOAP" name="SeaShellsWSDLTopsSOAP">
-      <soap:address location="http://localhost:8090/seashells/tops"/>
-    </wsdl:port>
-  </wsdl:service>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://org.jesperancinha.shells/SeaShellsWSDLTops/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  name="SeaShellsWSDLTops" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
+            <xsd:element name="tops">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="topId" type="xsd:long"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="topsResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="out" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="topsRequest">
+        <wsdl:part element="tns:tops" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="topsResponse">
+        <wsdl:part element="tns:topsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:portType name="SeaShellsWSDLTops">
+        <wsdl:operation name="tops">
+            <wsdl:input message="tns:topsRequest"/>
+            <wsdl:output message="tns:topsResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SeaShellsWSDLTopsSOAP" type="tns:SeaShellsWSDLTops">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="tops">
+            <soap:operation soapAction="http://org.jesperancinha.shells/SeaShellsWSDLTops/tops"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SeaShellsWSDLTops">
+        <wsdl:port binding="tns:SeaShellsWSDLTopsSOAP" name="SeaShellsWSDLTopsSOAP">
+            <soap:address location="http://localhost:8090/seashells/tops"/>
+        </wsdl:port>
+    </wsdl:service>
 </wsdl:definitions>

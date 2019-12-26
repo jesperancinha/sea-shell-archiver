@@ -21,8 +21,8 @@ public class Account {
         return value;
     }
 
-   @XmlElement(name = "Value")
-   public void setValue(BigDecimal value) {
+    @XmlElement(name = "Value")
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 

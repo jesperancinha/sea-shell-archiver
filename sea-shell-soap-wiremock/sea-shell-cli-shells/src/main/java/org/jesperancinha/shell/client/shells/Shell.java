@@ -8,12 +8,13 @@ import java.util.List;
 
 @XmlRootElement(name = "Shell")
 @XmlType(name = "", propOrder = {
-        "name", "scientificName", "persons","costumes"
+        "name", "scientificName", "slogan", "persons", "costumes"
 })
 public class Shell {
 
     private String name;
     private String scientificName;
+    private String slogan;
     private List<Long> persons;
     private List<Long> costumes;
 
@@ -33,6 +34,15 @@ public class Shell {
     @XmlElement(name = "ScientificName")
     public void setScientificName(String scientificName) {
         this.scientificName = scientificName;
+    }
+
+    public String getSlogan() {
+        return slogan;
+    }
+
+    @XmlElement(name = "Slogan")
+    public void setSlogan(String slogan) {
+        this.slogan = slogan;
     }
 
     public List<Long> getPersons() {

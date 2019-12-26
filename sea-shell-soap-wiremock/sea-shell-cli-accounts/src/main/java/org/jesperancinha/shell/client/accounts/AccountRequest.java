@@ -1,4 +1,3 @@
-
 package org.jesperancinha.shell.client.accounts;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "accountId"
+        "accountId"
 })
 @XmlRootElement(name = "accounts")
 public class AccountRequest {
@@ -37,7 +34,6 @@ public class AccountRequest {
 
     /**
      * Gets the value of the accountId property.
-     * 
      */
     public int getAccountId() {
         return accountId;
@@ -45,7 +41,6 @@ public class AccountRequest {
 
     /**
      * Sets the value of the accountId property.
-     * 
      */
     public void setAccountId(int value) {
         this.accountId = value;

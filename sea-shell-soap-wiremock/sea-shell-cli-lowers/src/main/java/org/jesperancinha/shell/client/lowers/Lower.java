@@ -3,7 +3,6 @@ package org.jesperancinha.shell.client.lowers;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.math.BigDecimal;
 
 @XmlRootElement(name = "Lower")
 @XmlType(name = "", propOrder = {
@@ -41,7 +40,6 @@ public class Lower {
     public void setSize(String size) {
         this.size = size;
     }
-
 
 
 }

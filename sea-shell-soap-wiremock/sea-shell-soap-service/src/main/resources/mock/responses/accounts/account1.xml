@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
-<S:Body>
-    <ns2:accountsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLAccounts/">
-        <Account>
-            <Value>120000000</Value>
-            <Currency>EUR</Currency>
-        </Account>
-    </ns2:accountsResponse>
-</S:Body>
+    <S:Body>
+        <ns2:accountsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLAccounts/">
+            <Account>
+                <Value>120000000</Value>
+                <Currency>EUR</Currency>
+            </Account>
+        </ns2:accountsResponse>
+    </S:Body>
 </S:Envelope>
 

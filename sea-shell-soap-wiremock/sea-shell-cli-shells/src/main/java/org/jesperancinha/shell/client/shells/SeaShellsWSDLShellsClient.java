@@ -1,4 +1,3 @@
-
 package org.jesperancinha.shell.client.shells;
 
 /**
@@ -34,13 +33,26 @@ public final class SeaShellsWSDLShellsClient extends SeaShellsWSDLShellsAbstract
         this.url = url;
     }
 
+    public static void main(String[] args) throws MalformedURLException, URISyntaxException {
+
+        SeaShellsWSDLShellsClient seaShellsWSDLShellsClient = new SeaShellsWSDLShellsClient(args);
+        SeaShellsWSDLShellsService ss = new SeaShellsWSDLShellsService(seaShellsWSDLShellsClient.url, SERVICE_NAME);
+        SeaShellsWSDLShells port = ss.getSeaShellsWSDLShellsSOAP();
+        System.out.println("Invoking shells...");
+        int shellsShellId = 1;
+        Shell shellsReturn = port.shells(1);
+        System.out.println("shells.result=" + shellsReturn);
+
+
+    }
+
     @Override
     public Shell getItem(long itemId) {
         SeaShellsWSDLShellsService ss = new SeaShellsWSDLShellsService(url, SERVICE_NAME);
         SeaShellsWSDLShells port = ss.getSeaShellsWSDLShellsSOAP();
         System.out.println("Invoking shells...");
-        int _shells_shellId = 1;
-        Shell shellsReturn = port.shells(_shells_shellId);
+        int shellsShellId = 1;
+        Shell shellsReturn = port.shells(shellsShellId);
         System.out.println("shells.result=" + shellsReturn);
         return shellsReturn;
     }

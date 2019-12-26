@@ -6,7 +6,8 @@
                 <Type>PANTS</Type>
                 <Color>#EEDDAA</Color>
                 <Size>M</Size>
-            </Lower>,
+            </Lower>
+            ,
         </ns2:lowersResponse>
     </S:Body>
 </S:Envelope>

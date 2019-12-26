@@ -1,4 +1,3 @@
-
 package org.jesperancinha.shell.client.costumes;
 
 /**
