@@ -5,9 +5,11 @@ package org.jesperancinha.shell.client.persons;
  * This class is not complete
  */
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.xml.namespace.QName;
-import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -15,41 +17,31 @@ import java.net.URL;
  * 2019-12-20T11:26:09.141+01:00
  * Generated source version: 3.3.4
  */
-public final class SeaShellsWSDLPersonsClient {
+@Slf4j
+public final class SeaShellsWSDLPersonsClient extends SeaShellsWSDLPersonsAbstract {
 
     private static final QName SERVICE_NAME = new QName("http://org.jesperancinha.shells/SeaShellsWSDLPersons/", "SeaShellsWSDLPersons");
 
-    private SeaShellsWSDLPersonsClient() {
+    public SeaShellsWSDLPersonsClient(String[] args) throws MalformedURLException, URISyntaxException {
+        super(args);
     }
 
-    public static void main(String[] args) throws Exception {
-        URL wsdlURL = SeaShellsWSDLPersonsClient.class.getResource("/SeaShellsWSDLPersons.wsdl").toURI().toURL();
-        if (args.length > 0 && args[0] != null && !"".equals(args[0])) {
-            File wsdlFile = new File(args[0]);
-            try {
-                if (wsdlFile.exists()) {
-                    wsdlURL = wsdlFile.toURI().toURL();
-                } else {
-                    wsdlURL = new URL(args[0]);
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        }
+    public SeaShellsWSDLPersonsClient(URL url) {
+        super(url);
+    }
 
-        SeaShellsWSDLPersonsService ss = new SeaShellsWSDLPersonsService(wsdlURL, SERVICE_NAME);
+    @Override
+    public Person getItem(long itemId) {
+        SeaShellsWSDLPersonsService ss = new SeaShellsWSDLPersonsService(url, SERVICE_NAME);
         SeaShellsWSDLPersons port = ss.getSeaShellsWSDLPersonsSOAP();
-
-        {
-            System.out.println("Invoking persons...");
-            int _persons_personId = 1;
-            Person _persons__return = port.persons(_persons_personId);
-            System.out.println("persons.result=" + _persons__return);
-
-
-        }
-
-        System.exit(0);
+        log.trace("Invoking persons...");
+        Person person = port.persons(itemId);
+        log.trace("persons.result=" + person);
+        return person;
     }
 
+    @Override
+    public URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException {
+        return SeaShellsWSDLPersonsClient.class.getResource("/SeaShellsWSDLPersons.wsdl").toURI().toURL();
+    }
 }

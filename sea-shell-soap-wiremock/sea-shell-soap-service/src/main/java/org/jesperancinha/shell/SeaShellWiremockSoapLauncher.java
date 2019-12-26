@@ -24,6 +24,8 @@ public class SeaShellWiremockSoapLauncher {
         wireMockServer.start();
         configureFor("localhost", 8090);
         stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person1.xml", "/mock/responses/persons/person1.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person2.xml", "/mock/responses/persons/person2.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person3.xml", "/mock/responses/persons/person3.xml");
         stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell1.xml", "/mock/responses/shells/shell1.xml");
         stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell2.xml", "/mock/responses/shells/shell2.xml");
         stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell3.xml", "/mock/responses/shells/shell3.xml");

@@ -21,9 +21,9 @@ public interface SeaShellsWSDLPersons {
     @RequestWrapper(localName = "persons", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLPersons/", className = "org.jesperancinha.shell.client.persons.Persons")
     @ResponseWrapper(localName = "personsResponse", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLPersons/", className = "org.jesperancinha.shell.client.persons.PersonsResponse")
     @WebResult(name = "Person", targetNamespace = "")
-    public Person persons(
+    Person persons(
 
             @WebParam(name = "personId", targetNamespace = "")
-                    int personId
+                    long personId
     );
 }

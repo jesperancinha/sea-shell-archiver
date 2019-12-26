@@ -20,8 +20,13 @@ This project is a Sea Shell archiver for an imaginary world.
 
 This is the description of that world
 Imagine a world were beings live in gigantic sea shells. Sea shells are their home. Inside you can find one or more people. You can also find one or more costumes with different configuration. The value of the shell is evaluated by the sum of the values of all the individual costumes.
+Every shell has a slogan. 
+
+For the purposes of this example I decided to use Cardi B's rap solo during "Girls like you" by Maroon 5.
+
 This application is very old. Its design still is base on the paradigms of the time. It's implemented in SOAP. Furthermore, every single entity has a dedicated read service associated with it. As a result, every time you need to get the data from a particular sea shell, you have to make multiple requests.
-This situation warrants a solution. Times have changed and applications need to move faster and be scalable, but due to business restrictions I cannot change my SOAP services.
+This situation warrants a solution. 
+Times have changed and applications need to move faster and be scalable, but due to business restrictions I cannot change my SOAP services.
 A solution could be using Reactive Streams in the context of a Reactive architecture.
 This is what this application is about.
 
@@ -56,10 +61,10 @@ Topics discussed:
 -   [Spring 5 Reactive Security Example](https://github.com/eugenp/tutorials/tree/master/spring-5-reactive-security)
 -   [Block Hound](https://github.com/reactor/BlockHound)
 -   [Lombok Tips And Tricks](https://github.com/piczmar/lombok-tips-and-tricks)
-    
 
 ### Domain knowledge
 
+-   [Girls like you by Maroon 5 featuring Cardi B Lyrics](https://songteksten.net/lyric/2881/100824/maroon-5/girls-like-you-ft-cardi-b.html)
 -   [British seashell guide: how to identify and where to find](https://www.countryfile.com/wildlife/marine-life/british-seashell-guide-how-to-identify-and-where-to-find/)
 
 ### Legacy

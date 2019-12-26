@@ -4,6 +4,8 @@ import org.jesperancinha.shell.client.accounts.SeaShellsWSDLAccountsAbstract;
 import org.jesperancinha.shell.client.accounts.SeaShellsWSDLAccountsClient;
 import org.jesperancinha.shell.client.costumes.SeaShellsWSDLCostumesAbstract;
 import org.jesperancinha.shell.client.costumes.SeaShellsWSDLCostumesClient;
+import org.jesperancinha.shell.client.persons.SeaShellsWSDLPersonsAbstract;
+import org.jesperancinha.shell.client.persons.SeaShellsWSDLPersonsClient;
 import org.jesperancinha.shell.client.shells.SeaShellsWSDLShellsAbstract;
 import org.jesperancinha.shell.client.shells.SeaShellsWSDLShellsClient;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +28,9 @@ public class WebFluxConfig {
     @Value("${sea.shell.cli.soap.costumes}")
     private URL seaShellsWSDLCostumesClientLocation;
 
+    @Value("${sea.shell.cli.soap.persons}")
+    private URL seaShellsWSDLPersonsClientLocation;
+
     @Bean
     public SeaShellsWSDLShellsAbstract seaShellsWSDLShellsClient() {
         return new SeaShellsWSDLShellsClient(seaShellsWSDLShellsClientLocation);
@@ -39,5 +44,10 @@ public class WebFluxConfig {
     @Bean
     public SeaShellsWSDLCostumesAbstract seaShellsWSDLCostumesClient() {
         return new SeaShellsWSDLCostumesClient(seaShellsWSDLCostumesClientLocation);
+    }
+
+    @Bean
+    public SeaShellsWSDLPersonsAbstract seaShellsWSDLPersonsClient() {
+        return new SeaShellsWSDLPersonsClient(seaShellsWSDLPersonsClientLocation);
     }
 }

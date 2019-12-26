@@ -8,6 +8,16 @@ import java.util.Optional;
 
 public abstract class SeaShellsWSDLAbstract<T> {
 
+    protected final URL url;
+
+    public SeaShellsWSDLAbstract(String[] args) throws MalformedURLException, URISyntaxException {
+        this.url = getUrlFromCommandLine(args);
+    }
+
+    public SeaShellsWSDLAbstract(URL url) {
+        this.url = url;
+    }
+
     public abstract T getItem(long itemId);
 
     public abstract URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException;

@@ -23,15 +23,12 @@ public final class SeaShellsWSDLShellsClient extends SeaShellsWSDLShellsAbstract
 
     private static final QName SERVICE_NAME = new QName("http://org.jesperancinha.shells/SeaShellsWSDLShells/", "SeaShellsWSDLShells");
 
-    private final URL url;
-
     public SeaShellsWSDLShellsClient(String[] args) throws MalformedURLException, URISyntaxException {
-
-        this.url = getUrlFromCommandLine(args);
+        super(args);
     }
 
     public SeaShellsWSDLShellsClient(URL url) {
-        this.url = url;
+        super(url);
     }
 
     @Override
@@ -39,9 +36,13 @@ public final class SeaShellsWSDLShellsClient extends SeaShellsWSDLShellsAbstract
         SeaShellsWSDLShellsService ss = new SeaShellsWSDLShellsService(url, SERVICE_NAME);
         SeaShellsWSDLShells port = ss.getSeaShellsWSDLShellsSOAP();
         log.trace("Invoking shells...");
-        Shell shellsReturn = port.shells(itemId);
-        log.trace("shells.result=" + shellsReturn);
-        return shellsReturn;
+        try {
+            Shell shellsReturn = port.shells(itemId);
+            log.trace("shells.result=" + shellsReturn);
+            return shellsReturn;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

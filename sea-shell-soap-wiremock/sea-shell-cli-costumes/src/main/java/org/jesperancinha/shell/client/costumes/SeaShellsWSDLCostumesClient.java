@@ -22,15 +22,12 @@ public final class SeaShellsWSDLCostumesClient extends SeaShellsWSDLCostumesAbst
 
     private static final QName SERVICE_NAME = new QName("http://org.jesperancinha.shells/SeaShellsWSDLCostumes/", "SeaShellsWSDLCostumes");
 
-    private final URL url;
-
     public SeaShellsWSDLCostumesClient(String[] args) throws MalformedURLException, URISyntaxException {
-
-        this.url = getUrlFromCommandLine(args);
+        super(args);
     }
 
     public SeaShellsWSDLCostumesClient(URL url) {
-        this.url = url;
+        super(url);
     }
 
     @Override

@@ -1,12 +1,16 @@
 package org.jesperancinha.shell.webflux.service;
 
 import org.jesperancinha.shell.client.costumes.Costume;
+import org.jesperancinha.shell.client.persons.Person;
 import org.jesperancinha.shell.client.shells.Shell;
+import org.jesperancinha.shell.webflux.data.SeaShellAccountDto;
 import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto;
 import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.data.SeaShellLowerDto;
+import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
 import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
 import org.jesperancinha.shell.webflux.repo.ShellCostumeRepository;
+import org.jesperancinha.shell.webflux.repo.ShellPersonRepository;
 import org.jesperancinha.shell.webflux.repo.ShellRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -21,9 +25,14 @@ public class SeaShellService {
 
     private final ShellCostumeRepository costumeRepository;
 
-    public SeaShellService(ShellRepository shellRepository, ShellCostumeRepository costumeRepository) {
+    private final ShellPersonRepository personRepository;
+
+    public SeaShellService(ShellRepository shellRepository,
+                           ShellCostumeRepository costumeRepository,
+                           ShellPersonRepository personRepository) {
         this.shellRepository = shellRepository;
         this.costumeRepository = costumeRepository;
+        this.personRepository = personRepository;
     }
 
 //    public Flux<SeaShell> findAllCompleteSeaShells() {
@@ -46,7 +55,20 @@ public class SeaShellService {
                         .findCostumes(seaShellDto.getCostumeIds())
                         .subscribe(costume -> seaShellDto
                                 .getCostumes()
-                                .add(toShellCostumeDto(costume))));
+                                .add(toShellCostumeDto(costume))))
+                .doOnNext(seaShellDto -> personRepository
+                        .findPersons(seaShellDto.getPersonIds())
+                        .subscribe(person -> seaShellDto
+                                .getPersons()
+                                .add(toShellPersonDto(person))));
+    }
+
+    private SeaShellPersonDto toShellPersonDto(Person person) {
+        return SeaShellPersonDto.builder()
+                .name(person.getName())
+                .accountDto(new SeaShellAccountDto())
+                .activity(person.getActivity())
+                .build();
     }
 
     private SeaShellCostumeDto toShellCostumeDto(Costume costume) {

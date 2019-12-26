@@ -21,15 +21,13 @@ import java.net.URL;
 public final class SeaShellsWSDLAccountsClient extends SeaShellsWSDLAccountsAbstract {
 
     private static final QName SERVICE_NAME = new QName("http://org.jesperancinha.shells/SeaShellsWSDLAccounts/", "SeaShellsWSDLAccounts");
-    private final URL url;
 
     public SeaShellsWSDLAccountsClient(String[] args) throws MalformedURLException, URISyntaxException {
-
-        this.url = getUrlFromCommandLine(args);
+        super(args);
     }
 
     public SeaShellsWSDLAccountsClient(URL url) {
-        this.url = url;
+        super(url);
     }
 
     @Override
