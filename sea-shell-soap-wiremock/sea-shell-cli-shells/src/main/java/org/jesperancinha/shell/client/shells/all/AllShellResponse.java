@@ -1,10 +1,14 @@
-package org.jesperancinha.shell.client.shells;
+package org.jesperancinha.shell.client.shells.all;
+
+import org.jesperancinha.shell.client.shells.Shell;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 
 /**
@@ -25,21 +29,18 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Shell", propOrder = {
-        "shell"
-})
-@XmlRootElement(name = "shellsResponse")
-public class ShellResponse {
+@XmlType(name = "AllShells", propOrder = {"allShell"})
+@XmlRootElement(name = "allShellsResponse")
+public class AllShellResponse {
 
     @XmlElement(required = true)
-    protected Shell shell;
+    protected Shell allShell;
 
-
-    public Shell getShell() {
-        return shell;
+    public Shell getAllShell() {
+        return allShell;
     }
 
-    public void setShell(Shell shell) {
-        this.shell = shell;
+    public void setAllShell(Shell allShell) {
+        this.allShell = allShell;
     }
 }

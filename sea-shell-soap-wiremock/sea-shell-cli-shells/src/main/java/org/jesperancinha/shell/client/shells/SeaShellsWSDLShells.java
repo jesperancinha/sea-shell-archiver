@@ -19,11 +19,17 @@ public interface SeaShellsWSDLShells {
 
     @WebMethod(action = "http://org.jesperancinha.shells/SeaShellsWSDLShells/shells")
     @RequestWrapper(localName = "shells", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLShells/", className = "org.jesperancinha.shell.client.shells.Shells")
-    @ResponseWrapper(localName = "shellsResponse", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLShells/", className = "org.jesperancinha.shell.client.shells.ShellsResponse")
+    @ResponseWrapper(localName = "shellsResponse", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLShells/", className = "org.jesperancinha.shell.client.shells.one.ShellsResponse")
     @WebResult(name = "Shell", targetNamespace = "")
-    public Shell shells(
+    Shell shells(
 
             @WebParam(name = "shellId", targetNamespace = "")
-                    int shellId
+                    long shellId
     );
+
+    @WebMethod(action = "http://org.jesperancinha.shells/SeaShellsWSDLShells/allShells")
+    @RequestWrapper(localName = "allShells", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLShells/", className = "org.jesperancinha.shell.client.shells.AllShells")
+    @ResponseWrapper(localName = "allShellsResponse", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLShells/", className = "org.jesperancinha.shell.client.shells.all.AllShellsResponse")
+    @WebResult(name = "AllShells", targetNamespace = "")
+    AllShell allShells();
 }

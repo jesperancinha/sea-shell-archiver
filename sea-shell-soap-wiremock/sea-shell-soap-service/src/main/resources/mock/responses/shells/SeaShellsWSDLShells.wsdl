@@ -15,7 +15,14 @@
             <xsd:element name="shellsResponse">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="out" type="xsd:string"/>
+                        <xsd:element name="shell" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="allShellsResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="shellIds" type="xsd:string"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
@@ -27,15 +34,32 @@
     <wsdl:message name="shellsResponse">
         <wsdl:part element="tns:shellsResponse" name="parameters"/>
     </wsdl:message>
+    <wsdl:message name="allShellsRequest"/>
+    <wsdl:message name="allShellsResponse">
+        <wsdl:part element="tns:shellsResponse" name="parameters"/>
+    </wsdl:message>
     <wsdl:portType name="SeaShellsWSDLShells">
         <wsdl:operation name="shells">
             <wsdl:input message="tns:shellsRequest"/>
             <wsdl:output message="tns:shellsResponse"/>
         </wsdl:operation>
+        <wsdl:operation name="allShells">
+            <wsdl:input message="tns:allShellsRequest"/>
+            <wsdl:output message="tns:allShellsResponse"/>
+        </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="SeaShellsWSDLShellsSOAP" type="tns:SeaShellsWSDLShells">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="shells">
+            <soap:operation soapAction="http://org.jesperancinha.shells/SeaShellsWSDLShells/shells"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="allShells">
             <soap:operation soapAction="http://org.jesperancinha.shells/SeaShellsWSDLShells/shells"/>
             <wsdl:input>
                 <soap:body use="literal"/>

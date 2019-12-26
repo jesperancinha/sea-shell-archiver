@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:allShellsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
+            <AllShells>
+                <Shells>
+                    <ShellId>1</ShellId>
+                    <ShellId>2</ShellId>
+                    <ShellId>3</ShellId>
+                    <ShellId>4</ShellId>
+                    <ShellId>5</ShellId>
+                    <ShellId>6</ShellId>
+                    <ShellId>7</ShellId>
+                    <ShellId>8</ShellId>
+                    <ShellId>9</ShellId>
+                    <ShellId>10</ShellId>
+                    <ShellId>11</ShellId>
+                    <ShellId>12</ShellId>
+                    <ShellId>13</ShellId>
+                    <ShellId>14</ShellId>
+                    <ShellId>15</ShellId>
+                    <ShellId>16</ShellId>
+                </Shells>
+            </AllShells>
+        </ns2:allShellsResponse>
+    </S:Body>
+</S:Envelope>

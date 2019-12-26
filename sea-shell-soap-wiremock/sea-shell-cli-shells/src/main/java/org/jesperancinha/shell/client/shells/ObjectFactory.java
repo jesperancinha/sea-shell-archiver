@@ -1,5 +1,10 @@
 package org.jesperancinha.shell.client.shells;
 
+import org.jesperancinha.shell.client.shells.all.AllShellRequest;
+import org.jesperancinha.shell.client.shells.all.AllShellResponse;
+import org.jesperancinha.shell.client.shells.one.ShellRequest;
+import org.jesperancinha.shell.client.shells.one.ShellResponse;
+
 import javax.xml.bind.annotation.XmlRegistry;
 
 
@@ -38,6 +43,20 @@ public class ObjectFactory {
      */
     public ShellResponse createShellsResponse() {
         return new ShellResponse();
+    }
+
+    /**
+     * Create an instance of {@link ShellRequest }
+     */
+    public AllShellRequest createAllShells() {
+        return new AllShellRequest();
+    }
+
+    /**
+     * Create an instance of {@link ShellResponse }
+     */
+    public AllShellResponse createAllShellsResponse() {
+        return new AllShellResponse();
     }
 
 }

@@ -3,6 +3,7 @@ package org.jesperancinha.shell.webflux.service;
 import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.repo.ShellRepository;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -30,9 +31,13 @@ public class SeaShellService {
                 .build());
     }
 
-//    public Flux<SeaShell> findAllSeaShells() {
-//        return shellRepository.findAllSeaShells();
-//    }
+    public Flux<SeaShellDto> findAllSeaShells() {
+        return shellRepository.findAllSeaShells().map(shell -> SeaShellDto.builder()
+                .name(shell.getName())
+                .scientificName(shell.getScientificName())
+                .slogan(shell.getSlogan())
+                .build());
+    }
 //
 //    public Mono<SeaShell> updateSeaShell(SeaShell seaShell) {
 //        return shellRepository.updateSeaShell(seaShell);
