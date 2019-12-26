@@ -2,7 +2,7 @@
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
 <S:Body>
     <ns2:costumes xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/">
-        <costumeId>1</costumeId>
+        <costumeId>3</costumeId>
     </ns2:costumes>
 </S:Body>
 </S:Envelope>

@@ -40,6 +40,7 @@ Topics discussed:
 
 ### Technical
 
+-   [JsonView Chrome Plugin](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc)
 -   [Spring WebFlux Tutorial](https://howtodoinjava.com/spring-webflux/spring-webflux-tutorial/)
 -   [Wiremock Running as a Standalone Process](http://wiremock.org/docs/running-standalone/)
 -   [Move your apps to the cloud in weeks](https://pivotal.io/application-modernization)

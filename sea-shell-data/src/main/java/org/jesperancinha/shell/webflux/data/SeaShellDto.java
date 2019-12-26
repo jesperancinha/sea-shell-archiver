@@ -24,5 +24,7 @@ public class SeaShellDto {
     private String slogan;
     private List<SeaShellPersonDto> persons;
     private List<SeaShellCostumeDto> costumes;
+    private List<Long> personIds;
+    private List<Long> costumeIds;
 }
 

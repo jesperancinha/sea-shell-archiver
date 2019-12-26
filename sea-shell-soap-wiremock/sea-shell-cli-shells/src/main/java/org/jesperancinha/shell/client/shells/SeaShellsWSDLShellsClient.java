@@ -41,11 +41,6 @@ public final class SeaShellsWSDLShellsClient extends SeaShellsWSDLShellsAbstract
         log.trace("Invoking shells...");
         Shell shellsReturn = port.shells(itemId);
         log.trace("shells.result=" + shellsReturn);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return shellsReturn;
     }
 

@@ -38,8 +38,7 @@ public final class SeaShellsWSDLCostumesClient extends SeaShellsWSDLCostumesAbst
         SeaShellsWSDLCostumesService ss = new SeaShellsWSDLCostumesService(url, SERVICE_NAME);
         SeaShellsWSDLCostumes port = ss.getSeaShellsWSDLCostumesSOAP();
         log.trace("Invoking costumes...");
-        int _costumes_costumeId = 1;
-        Costume costumesReturn = port.costumes(_costumes_costumeId);
+        Costume costumesReturn = port.costumes(costumeId);
         log.trace("costumes.result=" + costumesReturn);
         return costumesReturn;
     }

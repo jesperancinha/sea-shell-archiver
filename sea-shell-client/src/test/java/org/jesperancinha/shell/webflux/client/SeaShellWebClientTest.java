@@ -29,7 +29,6 @@ public class SeaShellWebClientTest {
         SeaShellWebClient seaShellWebClient = new SeaShellWebClient(uri);
 
         assertAll(seaShellWebClient::consume);
-        Thread.sleep(5000);
     }
 
     @Test

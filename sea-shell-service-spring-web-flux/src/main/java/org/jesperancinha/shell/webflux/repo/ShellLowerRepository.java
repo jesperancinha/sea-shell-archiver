@@ -12,14 +12,14 @@ import reactor.core.scheduler.Schedulers;
 
 
 @Repository
-public class ShellRepository {
+public class ShellLowerRepository {
 
     private final SeaShellsWSDLShellsAbstract seaShellsWSDLShellsClient;
 
     @Value("${sea.shell.parallelism:20}")
     private Integer parallelism;
 
-    public ShellRepository(SeaShellsWSDLShellsAbstract seaShellsWSDLShellsClient) {
+    public ShellLowerRepository(SeaShellsWSDLShellsAbstract seaShellsWSDLShellsClient) {
         this.seaShellsWSDLShellsClient = seaShellsWSDLShellsClient;
     }
 

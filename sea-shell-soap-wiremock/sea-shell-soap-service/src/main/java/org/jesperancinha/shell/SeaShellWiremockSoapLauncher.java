@@ -42,6 +42,8 @@ public class SeaShellWiremockSoapLauncher {
         stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell16.xml", "/mock/responses/shells/shell16.xml");
         stubRequestToResponse("/seashells/shells", "/mock/requests/shells/allShells.xml", "/mock/responses/shells/allShells.xml");
         stubRequestToResponse("/seashells/costumes", "/mock/requests/costumes/costume1.xml", "/mock/responses/costumes/costume1.xml");
+        stubRequestToResponse("/seashells/costumes", "/mock/requests/costumes/costume2.xml", "/mock/responses/costumes/costume2.xml");
+        stubRequestToResponse("/seashells/costumes", "/mock/requests/costumes/costume3.xml", "/mock/responses/costumes/costume3.xml");
         stubRequestToResponse("/seashells/lowers", "/mock/requests/lowers/lower1.xml", "/mock/responses/lowers/lower1.xml");
         stubRequestToResponse("/seashells/lowers", "/mock/requests/lowers/lower2.xml", "/mock/responses/lowers/lower2.xml");
         stubRequestToResponse("/seashells/tops", "/mock/requests/tops/top1.xml", "/mock/responses/tops/top1.xml");
