@@ -40,6 +40,7 @@ Topics discussed:
 
 ### Technical
 
+-   [Spring WebFlux Tutorial](https://howtodoinjava.com/spring-webflux/spring-webflux-tutorial/)
 -   [Wiremock Running as a Standalone Process](http://wiremock.org/docs/running-standalone/)
 -   [Move your apps to the cloud in weeks](https://pivotal.io/application-modernization)
 -   [The Twelve Factors](https://12factor.net/)
