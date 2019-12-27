@@ -30,19 +30,19 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "accounts")
 public class AccountRequest {
 
-    protected int accountId;
+    protected String accountId;
 
     /**
      * Gets the value of the accountId property.
      */
-    public int getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
     /**
      * Sets the value of the accountId property.
      */
-    public void setAccountId(int value) {
+    public void setAccountId(String value) {
         this.accountId = value;
     }
 

@@ -31,7 +31,7 @@ public final class SeaShellsWSDLPersonsClient extends SeaShellsWSDLPersonsAbstra
     }
 
     @Override
-    public Person getItem(long itemId) {
+    public Person getItem(Long itemId) {
         SeaShellsWSDLPersonsService ss = new SeaShellsWSDLPersonsService(url, SERVICE_NAME);
         SeaShellsWSDLPersons port = ss.getSeaShellsWSDLPersonsSOAP();
         log.trace("Invoking persons...");

@@ -5,9 +5,11 @@ package org.jesperancinha.shell.client.lowers;
  * This class is not complete
  */
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.xml.namespace.QName;
-import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -15,41 +17,31 @@ import java.net.URL;
  * 2019-12-20T11:26:09.141+01:00
  * Generated source version: 3.3.4
  */
-public final class SeaShellsWSDLLowersClient {
+@Slf4j
+public final class SeaShellsWSDLLowersClient extends SeaShellsWSDLLowersAbstract {
 
     private static final QName SERVICE_NAME = new QName("http://org.jesperancinha.shells/SeaShellsWSDLLowers/", "SeaShellsWSDLLowers");
 
-    private SeaShellsWSDLLowersClient() {
+    public SeaShellsWSDLLowersClient(final String[] args) throws MalformedURLException, URISyntaxException {
+        super(args);
     }
 
-    public static void main(String[] args) throws Exception {
-        URL wsdlURL = SeaShellsWSDLLowersClient.class.getResource("/SeaShellsWSDLLowers.wsdl").toURI().toURL();
-        if (args.length > 0 && args[0] != null && !"".equals(args[0])) {
-            File wsdlFile = new File(args[0]);
-            try {
-                if (wsdlFile.exists()) {
-                    wsdlURL = wsdlFile.toURI().toURL();
-                } else {
-                    wsdlURL = new URL(args[0]);
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        SeaShellsWSDLLowersService ss = new SeaShellsWSDLLowersService(wsdlURL, SERVICE_NAME);
-        SeaShellsWSDLLowers port = ss.getSeaShellsWSDLLowersSOAP();
-
-        {
-            System.out.println("Invoking lowers...");
-            int _lowers_lowerId = 1;
-            Lower _lowers__return = port.lowers(_lowers_lowerId);
-            System.out.println("lowers.result=" + _lowers__return);
-
-
-        }
-
-        System.exit(0);
+    public SeaShellsWSDLLowersClient(final URL url) {
+        super(url);
     }
 
+    @Override
+    public Lower getItem(final Long itemId) {
+        final SeaShellsWSDLLowersService ss = new SeaShellsWSDLLowersService(this.url, SERVICE_NAME);
+        final SeaShellsWSDLLowers port = ss.getSeaShellsWSDLLowersSOAP();
+        log.trace("Invoking lowers...");
+        final Lower lowersReturn = port.lowers(itemId);
+        log.trace("lowers.result=" + lowersReturn);
+        return lowersReturn;
+    }
+
+    @Override
+    public URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException {
+        return SeaShellsWSDLLowersClient.class.getResource("/SeaShellsWSDLLowers.wsdl").toURI().toURL();
+    }
 }

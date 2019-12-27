@@ -21,9 +21,5 @@ public interface SeaShellsWSDLTops {
     @RequestWrapper(localName = "tops", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLTops/", className = "org.jesperancinha.shell.client.tops.Tops")
     @ResponseWrapper(localName = "topsResponse", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLTops/", className = "org.jesperancinha.shell.client.tops.TopsResponse")
     @WebResult(name = "Top", targetNamespace = "")
-    public Top tops(
-
-            @WebParam(name = "topId", targetNamespace = "")
-                    int topId
-    );
+    Top tops(@WebParam(name = "topId", targetNamespace = "") long topId);
 }

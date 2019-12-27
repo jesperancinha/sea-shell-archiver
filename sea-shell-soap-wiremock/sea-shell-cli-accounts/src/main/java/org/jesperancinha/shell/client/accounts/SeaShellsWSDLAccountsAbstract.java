@@ -4,7 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public abstract class SeaShellsWSDLAccountsAbstract extends SeaShellsWSDLAbstract<Account> {
+public abstract class SeaShellsWSDLAccountsAbstract extends SeaShellsWSDLAbstract<String, Account> {
 
     public SeaShellsWSDLAccountsAbstract(String[] args) throws MalformedURLException, URISyntaxException {
         super(args);

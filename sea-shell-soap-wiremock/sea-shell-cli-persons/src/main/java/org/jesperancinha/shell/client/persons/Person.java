@@ -12,9 +12,9 @@ public class Person {
 
     private String name;
     private String activity;
-    private Integer costumeId;
+    private Long costumeId;
     private String accountId;
-    private Integer shellId;
+    private Long shellId;
 
     public String getName() {
         return name;
@@ -34,12 +34,12 @@ public class Person {
         this.activity = activity;
     }
 
-    public Integer getCostumeId() {
+    public Long getCostumeId() {
         return costumeId;
     }
 
     @XmlElement(name = "CostumeId")
-    public void setCostumeId(Integer costumeId) {
+    public void setCostumeId(Long costumeId) {
         this.costumeId = costumeId;
     }
 
@@ -52,12 +52,12 @@ public class Person {
         this.accountId = accountId;
     }
 
-    public Integer getShellId() {
+    public Long getShellId() {
         return shellId;
     }
 
     @XmlElement(name = "ShellId")
-    public void setShellId(Integer shellId) {
+    public void setShellId(Long shellId) {
         this.shellId = shellId;
     }
 }

@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Optional;
 
-public abstract class SeaShellsWSDLAbstract<T> {
+public abstract class SeaShellsWSDLAbstract<KEY, VALUE> {
 
     protected final URL url;
 
@@ -18,7 +18,7 @@ public abstract class SeaShellsWSDLAbstract<T> {
         this.url = url;
     }
 
-    public abstract T getItem(long itemId);
+    public abstract VALUE getItem(KEY itemId);
 
     public abstract URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException;
 

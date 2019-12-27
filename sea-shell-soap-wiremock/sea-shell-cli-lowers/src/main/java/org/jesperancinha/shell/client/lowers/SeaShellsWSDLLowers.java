@@ -24,6 +24,6 @@ public interface SeaShellsWSDLLowers {
     public Lower lowers(
 
             @WebParam(name = "lowerId", targetNamespace = "")
-                    int lowerId
+                    long lowerId
     );
 }

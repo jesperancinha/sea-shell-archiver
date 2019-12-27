@@ -11,5 +11,14 @@
 
     <artifactId>sea-shell-cli-lowers</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jesperancinha.shell</groupId>
+            <artifactId>sea-shell-cli-common</artifactId>
+        </dependency>
+    </dependencies>
 </project>

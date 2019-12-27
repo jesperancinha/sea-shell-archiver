@@ -5,9 +5,11 @@ package org.jesperancinha.shell.client.tops;
  * This class is not complete
  */
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.xml.namespace.QName;
-import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -15,41 +17,31 @@ import java.net.URL;
  * 2019-12-20T11:26:09.141+01:00
  * Generated source version: 3.3.4
  */
-public final class SeaShellsWSDLTopsClient {
+@Slf4j
+public final class SeaShellsWSDLTopsClient extends SeaShellsWSDLTopAbstract {
 
     private static final QName SERVICE_NAME = new QName("http://org.jesperancinha.shells/SeaShellsWSDLTops/", "SeaShellsWSDLTops");
 
-    private SeaShellsWSDLTopsClient() {
+    public SeaShellsWSDLTopsClient(final String[] args) throws MalformedURLException, URISyntaxException {
+        super(args);
     }
 
-    public static void main(String[] args) throws Exception {
-        URL wsdlURL = SeaShellsWSDLTopsClient.class.getResource("/SeaShellsWSDLTops.wsdl").toURI().toURL();
-        if (args.length > 0 && args[0] != null && !"".equals(args[0])) {
-            File wsdlFile = new File(args[0]);
-            try {
-                if (wsdlFile.exists()) {
-                    wsdlURL = wsdlFile.toURI().toURL();
-                } else {
-                    wsdlURL = new URL(args[0]);
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        SeaShellsWSDLTopsService ss = new SeaShellsWSDLTopsService(wsdlURL, SERVICE_NAME);
-        SeaShellsWSDLTops port = ss.getSeaShellsWSDLTopsSOAP();
-
-        {
-            System.out.println("Invoking tops...");
-            int _tops_topId = 1;
-            Top _tops__return = port.tops(_tops_topId);
-            System.out.println("tops.result=" + _tops__return);
-
-
-        }
-
-        System.exit(0);
+    public SeaShellsWSDLTopsClient(final URL url) {
+        super(url);
     }
 
+    @Override
+    public Top getItem(Long itemId) {
+        final SeaShellsWSDLTopsService ss = new SeaShellsWSDLTopsService(this.url, SERVICE_NAME);
+        final SeaShellsWSDLTops port = ss.getSeaShellsWSDLTopsSOAP();
+        log.trace("Invoking tops...");
+        final Top topsReturn = port.tops(itemId);
+        log.trace("tops.result=" + topsReturn);
+        return topsReturn;
+    }
+
+    @Override
+    public URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException {
+        return SeaShellsWSDLTopsClient.class.getResource("/SeaShellsWSDLTops.wsdl").toURI().toURL();
+    }
 }

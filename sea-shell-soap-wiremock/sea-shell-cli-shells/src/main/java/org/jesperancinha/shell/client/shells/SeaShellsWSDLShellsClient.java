@@ -32,7 +32,7 @@ public final class SeaShellsWSDLShellsClient extends SeaShellsWSDLShellsAbstract
     }
 
     @Override
-    public Shell getItem(long itemId) {
+    public Shell getItem(Long itemId) {
         SeaShellsWSDLShellsService ss = new SeaShellsWSDLShellsService(url, SERVICE_NAME);
         SeaShellsWSDLShells port = ss.getSeaShellsWSDLShellsSOAP();
         log.trace("Invoking shells...");

@@ -31,7 +31,7 @@ public final class SeaShellsWSDLCostumesClient extends SeaShellsWSDLCostumesAbst
     }
 
     @Override
-    public Costume getItem(long costumeId) {
+    public Costume getItem(Long costumeId) {
         SeaShellsWSDLCostumesService ss = new SeaShellsWSDLCostumesService(url, SERVICE_NAME);
         SeaShellsWSDLCostumes port = ss.getSeaShellsWSDLCostumesSOAP();
         log.trace("Invoking costumes...");

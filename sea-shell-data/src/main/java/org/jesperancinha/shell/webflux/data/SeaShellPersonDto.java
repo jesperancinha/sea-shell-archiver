@@ -20,4 +20,6 @@ public class SeaShellPersonDto {
     private String activity;
     private SeaShellCostumeDto costumeDto;
     private SeaShellAccountDto accountDto;
+    private Long costumeId;
+    private String accountId;
 }

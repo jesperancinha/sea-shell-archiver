@@ -6,12 +6,12 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public abstract class SeaShellsWSDLPersonsAbstract extends SeaShellsWSDLAbstract<Person> {
-    public SeaShellsWSDLPersonsAbstract(String[] args) throws MalformedURLException, URISyntaxException {
+public abstract class SeaShellsWSDLTopAbstract extends SeaShellsWSDLAbstract<Long, Top> {
+    public SeaShellsWSDLTopAbstract(String[] args) throws MalformedURLException, URISyntaxException {
         super(args);
     }
 
-    public SeaShellsWSDLPersonsAbstract(URL url) {
+    public SeaShellsWSDLTopAbstract(URL url) {
         super(url);
     }
 }

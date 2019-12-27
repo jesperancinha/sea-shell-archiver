@@ -8,7 +8,7 @@
             <xsd:element name="accounts">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="accountId" type="xsd:long"/>
+                        <xsd:element name="accountId" type="xsd:string"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
