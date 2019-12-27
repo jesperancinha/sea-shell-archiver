@@ -18,4 +18,6 @@ import lombok.ToString;
 public class SeaShellCostumeDto {
     private SeaShellTopDto topDto;
     private SeaShellLowerDto lowerDto;
+    private Long topId;
+    private Long lowerId;
 }

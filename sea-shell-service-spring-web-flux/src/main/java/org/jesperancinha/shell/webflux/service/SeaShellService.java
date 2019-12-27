@@ -2,8 +2,10 @@ package org.jesperancinha.shell.webflux.service;
 
 import org.jesperancinha.shell.client.accounts.Account;
 import org.jesperancinha.shell.client.costumes.Costume;
+import org.jesperancinha.shell.client.lowers.Lower;
 import org.jesperancinha.shell.client.persons.Person;
 import org.jesperancinha.shell.client.shells.Shell;
+import org.jesperancinha.shell.client.tops.Top;
 import org.jesperancinha.shell.webflux.data.SeaShellAccountDto;
 import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto;
 import org.jesperancinha.shell.webflux.data.SeaShellDto;
@@ -12,13 +14,16 @@ import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
 import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
 import org.jesperancinha.shell.webflux.repo.ShellAccountRepository;
 import org.jesperancinha.shell.webflux.repo.ShellCostumeRepository;
+import org.jesperancinha.shell.webflux.repo.ShellLowerRepository;
 import org.jesperancinha.shell.webflux.repo.ShellPersonRepository;
 import org.jesperancinha.shell.webflux.repo.ShellRepository;
+import org.jesperancinha.shell.webflux.repo.ShellTopRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.ParallelFlux;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 @Service
 public class SeaShellService {
@@ -31,14 +36,22 @@ public class SeaShellService {
 
     private final ShellAccountRepository accountRepository;
 
+    private final ShellTopRepository topRepository;
+
+    private final ShellLowerRepository lowerRepository;
+
     public SeaShellService(ShellRepository shellRepository,
                            ShellCostumeRepository costumeRepository,
                            ShellPersonRepository personRepository,
-                           ShellAccountRepository accountRepository) {
+                           ShellAccountRepository accountRepository,
+                           ShellTopRepository topRepository,
+                           ShellLowerRepository lowerRepository) {
         this.shellRepository = shellRepository;
         this.costumeRepository = costumeRepository;
         this.personRepository = personRepository;
         this.accountRepository = accountRepository;
+        this.topRepository = topRepository;
+        this.lowerRepository = lowerRepository;
     }
 
 //    public Flux<SeaShell> findAllCompleteSeaShells() {
@@ -57,19 +70,61 @@ public class SeaShellService {
         return shellRepository
                 .findAllSeaShells()
                 .map(this::toShellDto)
-                .doOnNext(seaShellDto -> costumeRepository
-                        .findCostumes(seaShellDto.getCostumeIds())
-                        .subscribe(costume -> seaShellDto
-                                .getCostumes()
-                                .add(toShellCostumeDto(costume))))
-                .doOnNext(seaShellDto -> personRepository
-                        .findPersons(seaShellDto.getPersonIds())
-                        .subscribe(person -> seaShellDto
-                                .getPersons()
-                                .add(toShellPersonDto(person))))
-                .doOnNext(seaShellDto -> seaShellDto.getPersons().forEach(seaShellPersonDto -> {
-                    accountRepository.findAccountById(seaShellPersonDto.getAccountId()).subscribe(account -> seaShellPersonDto.setAccountDto(toAccountDto(account)));
-                }));
+                .doOnNext(consumerCostume())
+                .doOnNext(consumerPerson())
+                .doOnNext(consumerAccount())
+                .doOnNext(consumerCostumeContents());
+    }
+
+    private Consumer<SeaShellDto> consumerCostumeContents() {
+        return seaShellDto -> seaShellDto.getCostumes().forEach(
+                seaShellCostumeDto -> {
+                    topRepository.findTopById(seaShellCostumeDto.getTopId())
+                            .subscribe(top -> seaShellCostumeDto.setTopDto(toTopDto(top)));
+                    lowerRepository.findLowerById(seaShellCostumeDto.getLowerId())
+                            .subscribe(lower -> seaShellCostumeDto.setLowerDto(toLowerDto(lower)));
+                }
+        );
+    }
+
+    private Consumer<SeaShellDto> consumerAccount() {
+        return seaShellDto -> seaShellDto.getPersons().forEach(
+                seaShellPersonDto -> {
+                    accountRepository.findAccountById(seaShellPersonDto.getAccountId())
+                            .subscribe(account -> seaShellPersonDto.setAccountDto(toAccountDto(account)));
+                });
+    }
+
+    private Consumer<SeaShellDto> consumerPerson() {
+        return seaShellDto -> personRepository
+                .findPersons(seaShellDto.getPersonIds())
+                .subscribe(person -> seaShellDto
+                        .getPersons()
+                        .add(toShellPersonDto(person)));
+    }
+
+    private Consumer<SeaShellDto> consumerCostume() {
+        return seaShellDto -> costumeRepository
+                .findCostumes(seaShellDto.getCostumeIds())
+                .subscribe(costume -> seaShellDto
+                        .getCostumes()
+                        .add(toShellCostumeDto(costume)));
+    }
+
+    private SeaShellLowerDto toLowerDto(Lower lower) {
+        return SeaShellLowerDto.builder()
+                .color(lower.getColor())
+                .size(lower.getSize())
+                .type(lower.getType())
+                .build();
+    }
+
+    private SeaShellTopDto toTopDto(Top top) {
+        return SeaShellTopDto.builder()
+                .color(top.getColor())
+                .size(top.getSize())
+                .type(top.getType())
+                .build();
     }
 
     private SeaShellAccountDto toAccountDto(Account accountById) {
@@ -93,6 +148,8 @@ public class SeaShellService {
         return SeaShellCostumeDto.builder()
                 .topDto(new SeaShellTopDto())
                 .lowerDto(new SeaShellLowerDto())
+                .topId(costume.getTopId())
+                .lowerId(costume.getLowerId())
                 .build();
     }
 
