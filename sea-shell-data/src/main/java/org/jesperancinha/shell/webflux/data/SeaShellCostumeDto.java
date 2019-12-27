@@ -1,23 +1,28 @@
 package org.jesperancinha.shell.webflux.data;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Builder
-@Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class SeaShellCostumeDto {
+    @Getter
     private SeaShellTopDto topDto;
+    @Getter
     private SeaShellLowerDto lowerDto;
-    private Long topId;
-    private Long lowerId;
+    private transient Long topId;
+    private transient Long lowerId;
+
+    public Long topId() {
+        return this.topId;
+    }
+
+    public Long lowerId() {
+        return this.lowerId;
+    }
 }

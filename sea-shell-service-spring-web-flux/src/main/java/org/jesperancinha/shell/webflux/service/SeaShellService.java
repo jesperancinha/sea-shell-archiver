@@ -54,14 +54,6 @@ public class SeaShellService {
         this.lowerRepository = lowerRepository;
     }
 
-//    public Flux<SeaShell> findAllCompleteSeaShells() {
-//        return null;
-//    }
-//
-//    private List<SeaShellLocation> getSeaShellLocations(List<Long> seaShellLocationListIds) {
-//        return shellRepository.findAllLocations(seaShellLocationListIds);
-//    }
-
     public Mono<SeaShellDto> findSeaShellById(Long id) {
         return shellRepository.findSeaShellById(id).map(this::toShellDto);
     }
@@ -79,9 +71,9 @@ public class SeaShellService {
     private Consumer<SeaShellDto> consumerCostumeContents() {
         return seaShellDto -> seaShellDto.getCostumes().forEach(
                 seaShellCostumeDto -> {
-                    topRepository.findTopById(seaShellCostumeDto.getTopId())
+                    topRepository.findTopById(seaShellCostumeDto.topId())
                             .subscribe(top -> seaShellCostumeDto.setTopDto(toTopDto(top)));
-                    lowerRepository.findLowerById(seaShellCostumeDto.getLowerId())
+                    lowerRepository.findLowerById(seaShellCostumeDto.lowerId())
                             .subscribe(lower -> seaShellCostumeDto.setLowerDto(toLowerDto(lower)));
                 }
         );
@@ -90,14 +82,14 @@ public class SeaShellService {
     private Consumer<SeaShellDto> consumerAccount() {
         return seaShellDto -> seaShellDto.getPersons().forEach(
                 seaShellPersonDto -> {
-                    accountRepository.findAccountById(seaShellPersonDto.getAccountId())
+                    accountRepository.findAccountById(seaShellPersonDto.accountId())
                             .subscribe(account -> seaShellPersonDto.setAccountDto(toAccountDto(account)));
                 });
     }
 
     private Consumer<SeaShellDto> consumerPerson() {
         return seaShellDto -> personRepository
-                .findPersons(seaShellDto.getPersonIds())
+                .findPersons(seaShellDto.personIds())
                 .subscribe(person -> seaShellDto
                         .getPersons()
                         .add(toShellPersonDto(person)));
@@ -105,7 +97,7 @@ public class SeaShellService {
 
     private Consumer<SeaShellDto> consumerCostume() {
         return seaShellDto -> costumeRepository
-                .findCostumes(seaShellDto.getCostumeIds())
+                .findCostumes(seaShellDto.costumeIds())
                 .subscribe(costume -> seaShellDto
                         .getCostumes()
                         .add(toShellCostumeDto(costume)));

@@ -1,30 +1,38 @@
 package org.jesperancinha.shell.webflux.data;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
 
 @Builder
-@Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class SeaShellDto {
+    @Getter
     private String name;
+    @Getter
     private String scientificName;
+    @Getter
     private String slogan;
+    @Getter
     private List<SeaShellPersonDto> persons;
+    @Getter
     private List<SeaShellCostumeDto> costumes;
-    private List<Long> personIds;
-    private List<Long> costumeIds;
+    private transient List<Long> personIds;
+    private transient List<Long> costumeIds;
+
+    public List<Long> personIds(){
+        return this.personIds;
+    }
+
+    public List<Long> costumeIds(){
+        return this.costumeIds;
+    }
 }
 

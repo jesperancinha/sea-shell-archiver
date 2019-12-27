@@ -2,6 +2,7 @@ package org.jesperancinha.shell.webflux.rest;
 
 import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.service.SeaShellService;
+import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +28,11 @@ public class SeaShellController {
     private ParallelFlux<SeaShellDto> getAllShells() {
         return seaShellService.findAllSeaShells();
     }
-//
-//    @GetMapping("/completed")
-//    private Flux<SeaShell> getAllCompleteShells() {
-//        return seaShellService.findAllCompleteSeaShells();
-//    }
+
+    @GetMapping("/slogans")
+    private ParallelFlux<Pair<String, String>> getAllCompleteShells() {
+        return seaShellService.findAllSeaShells().map(seaShellDto -> Pair.of(seaShellDto.getName(), seaShellDto.getSlogan()));
+    }
 //
 //    @PostMapping("/update")
 //    private Mono<SeaShell> updateShell(@RequestBody SeaShell seaShell) {
