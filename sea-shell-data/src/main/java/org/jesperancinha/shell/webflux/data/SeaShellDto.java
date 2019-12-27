@@ -27,11 +27,11 @@ public class SeaShellDto {
     private transient List<Long> personIds;
     private transient List<Long> costumeIds;
 
-    public List<Long> personIds(){
+    public List<Long> personIds() {
         return this.personIds;
     }
 
-    public List<Long> costumeIds(){
+    public List<Long> costumeIds() {
         return this.costumeIds;
     }
 }

@@ -1,7 +1,7 @@
 package org.jesperancinha.shell.webflux.rest;
 
 import org.jesperancinha.shell.webflux.data.SeaShellDto;
-import org.jesperancinha.shell.webflux.service.SeaShellService;
+import org.jesperancinha.shell.webflux.service.SeaShellServiceSeaShell;
 import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +13,9 @@ import reactor.core.publisher.ParallelFlux;
 @RestController
 @RequestMapping("/seashells")
 public class SeaShellController {
-    private SeaShellService seaShellService;
+    private SeaShellServiceSeaShell seaShellService;
 
-    public SeaShellController(SeaShellService seaShellService) {
+    public SeaShellController(SeaShellServiceSeaShell seaShellService) {
         this.seaShellService = seaShellService;
     }
 

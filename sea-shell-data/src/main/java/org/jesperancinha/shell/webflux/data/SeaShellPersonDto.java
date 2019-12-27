@@ -26,11 +26,11 @@ public class SeaShellPersonDto {
     private transient Long costumeId;
     private transient String accountId;
 
-    public Long costumeId(){
+    public Long costumeId() {
         return this.costumeId;
     }
 
-    public String accountId(){
+    public String accountId() {
         return this.accountId;
     }
 }

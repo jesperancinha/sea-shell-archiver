@@ -60,10 +60,12 @@ public class WebFluxConfig {
     public SeaShellsWSDLPersonsAbstract seaShellsWSDLPersonsClient() {
         return new SeaShellsWSDLPersonsClient(seaShellsWSDLPersonsClientLocation);
     }
+
     @Bean
     public SeaShellsWSDLLowersAbstract seaShellsWSDLLowersClient() {
         return new SeaShellsWSDLLowersClient(seaShellsWSDLPersonsClientLocation);
     }
+
     @Bean
     public SeaShellsWSDLTopAbstract seaShellsWSDLTopClient() {
         return new SeaShellsWSDLTopsClient(seaShellsWSDLPersonsClientLocation);
