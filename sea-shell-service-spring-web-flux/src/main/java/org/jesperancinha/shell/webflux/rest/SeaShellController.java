@@ -33,10 +33,5 @@ public class SeaShellController {
     private ParallelFlux<Pair<String, String>> getAllCompleteShells() {
         return seaShellService.findAllSeaShells().map(seaShellDto -> Pair.of(seaShellDto.getName(), seaShellDto.getSlogan()));
     }
-//
-//    @PostMapping("/update")
-//    private Mono<SeaShell> updateShell(@RequestBody SeaShell seaShell) {
-//        return seaShellService.updateSeaShell(seaShell);
-//    }
 
 }
