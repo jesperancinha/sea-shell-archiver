@@ -21,9 +21,5 @@ public interface SeaShellsWSDLCostumes {
     @RequestWrapper(localName = "costumes", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLCostumes/", className = "org.jesperancinha.shell.client.costumes.Costumes")
     @ResponseWrapper(localName = "costumesResponse", targetNamespace = "http://org.jesperancinha.shells/SeaShellsWSDLCostumes/", className = "org.jesperancinha.shell.client.costumes.CostumesResponse")
     @WebResult(name = "Costume", targetNamespace = "")
-    Costume costumes(
-
-            @WebParam(name = "costumeId", targetNamespace = "")
-                    long costumeId
-    );
+    Costume costumes(@WebParam(name = "costumeId", targetNamespace = "") long costumeId);
 }

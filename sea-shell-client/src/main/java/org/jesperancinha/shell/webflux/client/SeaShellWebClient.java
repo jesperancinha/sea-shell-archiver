@@ -9,6 +9,11 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class SeaShellWebClient {
 
+    public static void main(String[] args) {
+        SeaShellWebClient seaShellWebClient = new SeaShellWebClient("http://localhost:8080");
+        seaShellWebClient.consume();
+    }
+
     private String uri;
 
     public SeaShellWebClient(final String uri) {
@@ -19,18 +24,28 @@ public class SeaShellWebClient {
 
     public void consume() {
 
-        Mono<SeaShell> seaShellMono = client.get()
-                .uri(uri + "/seashells/{id}/", "1")
+        SeaShell block = client.get()
+                .uri(uri + "/seashells/{id}/", "16")
                 .retrieve()
-                .bodyToMono(SeaShell.class);
+                .bodyToMono(SeaShell.class)
+                .block();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        seaShellMono.subscribe(x -> log.info(x.toString()));
-
-        Flux<SeaShell> seaShellFlux = client.get()
-                .uri(uri + "/seashells")
-                .retrieve()
-                .bodyToFlux(SeaShell.class);
-        seaShellFlux.subscribe(x -> log.info(x.toString()));
+//        client.get()
+//                .uri(uri + "/seashells")
+//                .retrieve()
+//                .bodyToFlux(SeaShell.class)
+//                .subscribe(x -> log.info(x.toString()));
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public Mono<SeaShell> getSeaShellById(Long id) {

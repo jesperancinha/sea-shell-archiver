@@ -22,22 +22,34 @@ public final class SeaShellsWSDLCostumesClient extends SeaShellsWSDLCostumesAbst
 
     private static final QName SERVICE_NAME = new QName("http://org.jesperancinha.shells/SeaShellsWSDLCostumes/", "SeaShellsWSDLCostumes");
 
+    private final SeaShellsWSDLCostumes port;
+
     public SeaShellsWSDLCostumesClient(String[] args) throws MalformedURLException, URISyntaxException {
         super(args);
+        this.port = getSeaShellsWSDLCostumes();
     }
 
     public SeaShellsWSDLCostumesClient(URL url) {
         super(url);
+        this.port = getSeaShellsWSDLCostumes();
     }
 
     @Override
     public Costume getItem(Long costumeId) {
+        try {
+            log.trace("Invoking costumes...");
+            Costume costumesReturn = port.costumes(costumeId);
+            log.trace("costumes.result=" + costumesReturn);
+            return costumesReturn;
+        } catch (Exception e) {
+            log.error("", e);
+        }
+        return null;
+    }
+
+    private SeaShellsWSDLCostumes getSeaShellsWSDLCostumes() {
         SeaShellsWSDLCostumesService ss = new SeaShellsWSDLCostumesService(url, SERVICE_NAME);
-        SeaShellsWSDLCostumes port = ss.getSeaShellsWSDLCostumesSOAP();
-        log.trace("Invoking costumes...");
-        Costume costumesReturn = port.costumes(costumeId);
-        log.trace("costumes.result=" + costumesReturn);
-        return costumesReturn;
+        return ss.getSeaShellsWSDLCostumesSOAP();
     }
 
     @Override

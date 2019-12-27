@@ -7,22 +7,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Builder
+@Getter
 @Setter
 @EqualsAndHashCode
 @ToString
 public class SeaShellCostumeDto {
-    @Getter
     private SeaShellTopDto topDto;
-    @Getter
     private SeaShellLowerDto lowerDto;
-    private transient Long topId;
-    private transient Long lowerId;
-
-    public Long topId() {
-        return this.topId;
-    }
-
-    public Long lowerId() {
-        return this.lowerId;
-    }
+    private Long topId;
+    private Long lowerId;
 }

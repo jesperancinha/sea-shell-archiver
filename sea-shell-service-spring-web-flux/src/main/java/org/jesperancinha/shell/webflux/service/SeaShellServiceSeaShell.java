@@ -33,19 +33,15 @@ public class SeaShellServiceSeaShell extends SeaShellConsumerService {
     public Mono<SeaShellDto> findSeaShellById(Long id) {
         return shellRepository.findSeaShellById(id)
                 .map(SeaShellConverter::toShellDto)
-                .doOnNext(consumerCostume())
-                .doOnNext(consumerPerson())
-                .doOnNext(consumerAccount())
-                .doOnNext(consumerCostumeContents());
+                .doOnNext(consumerPersons())
+                .doOnNext(consumerCostumes());
     }
 
     public ParallelFlux<SeaShellDto> findAllSeaShells() {
         return shellRepository
                 .findAllSeaShells()
                 .map(SeaShellConverter::toShellDto)
-                .doOnNext(consumerCostume())
-                .doOnNext(consumerPerson())
-                .doOnNext(consumerAccount())
-                .doOnNext(consumerCostumeContents());
+                .doOnNext(consumerPersons())
+                .doOnNext(consumerCostumes());
     }
 }

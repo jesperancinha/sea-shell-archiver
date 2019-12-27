@@ -3,7 +3,7 @@
     <S:Body>
         <ns2:lowersResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLLowers/">
             <Lower>
-                <type>SKIRTS</type>
+                <Type>SKIRTS</Type>
                 <Color>228B22</Color>
                 <Size>L</Size>
             </Lower>

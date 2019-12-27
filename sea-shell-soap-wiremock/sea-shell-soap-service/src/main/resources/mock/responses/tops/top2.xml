@@ -3,7 +3,7 @@
     <S:Body>
         <ns2:topsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
             <Top>
-                <type>SHIRT</type>
+                <Type>SHIRT</Type>
                 <Color>FCA6A6</Color>
                 <Size>M</Size>
             </Top>

@@ -1,25 +1,23 @@
-package org.jesperancinha.shell.webflux.data;
+package org.jesperancinha.shell.webflux.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Builder
-@Getter
 @Setter
 @EqualsAndHashCode
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeaShellPersonDto {
+@ToString
+public class SeaShellPerson {
     private String name;
     private String activity;
-    private SeaShellCostumeDto costumeDto;
-    private SeaShellAccountDto accountDto;
-    private transient Long costumeId;
-    private transient String accountId;
+    private SeaShellCostume costumeDto;
+    private SeaShellAccount accountDto;
 }
+
+

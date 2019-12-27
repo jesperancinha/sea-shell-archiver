@@ -1,6 +1,5 @@
 package org.jesperancinha.shell.webflux.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -9,20 +8,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Builder
+@Getter
 @Setter
 @EqualsAndHashCode
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class SeaShell {
-    private String name;
-    private String scientificName;
-    private String slogan;
-    private List<SeaShellPerson> persons;
-    private List<SeaShellCostume> costumes;
+public class SeaShellAccount {
+    private BigDecimal value;
+    private String currency;
 }
-

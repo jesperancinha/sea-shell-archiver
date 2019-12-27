@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
+            <artifactId>netty-common</artifactId>
         </dependency>
         <dependency>
             <groupId>io.projectreactor.tools</groupId>
