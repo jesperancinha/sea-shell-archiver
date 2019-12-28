@@ -34,7 +34,7 @@ Essentially this is a fun exercise to help understand all the mechanisms behind 
 
 NOTES:
 
--   Unfortunatelly Blockhond doesn't seem to work with Java 13. This is why I had to switch back to 12
+-   Unfortunately [Blockhound](https://github.com/reactor/BlockHound) doesn't seem to work well with Java 13. This is why I had to switch back to 12
 
 Topics discussed:
 
