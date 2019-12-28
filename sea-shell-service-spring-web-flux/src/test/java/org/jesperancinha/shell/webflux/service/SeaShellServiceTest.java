@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.blockhound.BlockHound;
-import reactor.core.publisher.Mono;
 
 import javax.xml.ws.WebServiceException;
 import java.time.Duration;
@@ -28,24 +27,31 @@ public class SeaShellServiceTest {
     }
 
     @Test
-    public void findAllCompleteSeaShells() {
-        Mono.delay(Duration.ofSeconds(1))
+    public void findAllCompleteSeaShells_onCall_thenNonBlocking() {
+        delay(Duration.ofSeconds(1))
                 .doOnNext(it -> seaShellService.findAllSeaShells())
                 .block();
     }
 
     @Test
-    public void findAllCompleteSeaShellsReactiveBlock() {
-        Mono.delay(Duration.ofSeconds(1))
+    public void findAllCompleteSeaShellsBlock_onCall_thenBlocking() {
+        assertThrows(WebServiceException.class, () -> delay(Duration.ofSeconds(1))
+                .doOnNext(it -> seaShellService.findAllSeaShellsNaifBlock())
+                .block());
+    }
+
+    @Test
+    public void findAllCompleteSeaShellsReactiveBlock_onCall_thenNonBlocking() {
+        delay(Duration.ofSeconds(1))
                 .doOnNext(it -> seaShellService.findAllSeaShellsReactiveBlock())
                 .block();
     }
 
     @Test
-    public void findAllCompleteSeaShellsBlock() {
-        assertThrows(WebServiceException.class, () -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellService.findAllSeaShellsNaifBlock())
-                .block());
+    public void findAllCompleteSeaShellsReactiveWithDelay_onCall_thenNonBlocking() {
+        delay(Duration.ofSeconds(1))
+                .doOnNext(it -> seaShellService.findAllSeaShellsReactiveWithDelay())
+                .block();
     }
 
 }

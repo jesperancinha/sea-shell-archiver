@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.ParallelFlux;
+import reactor.core.scheduler.Schedulers;
 
+import java.time.Duration;
 import java.util.List;
 
 @RestController
@@ -31,6 +34,11 @@ public class SeaShellController {
         return seaShellService.findAllSeaShells();
     }
 
+    /**
+     * Just the slogans
+     *
+     * @return
+     */
     @GetMapping("/slogans")
     private ParallelFlux<Pair<String, String>> getAllCompleteShells() {
         return seaShellService.findAllSeaShells().map(seaShellDto -> Pair.of(seaShellDto.getName(), seaShellDto.getSlogan()));
@@ -38,6 +46,7 @@ public class SeaShellController {
 
     /**
      * Blocking solution
+     *
      * @return
      */
     @GetMapping("/block")
@@ -46,11 +55,22 @@ public class SeaShellController {
     }
 
     /**
-     * Blocking solution
+     * Reactive Block solution
+     *
      * @return
      */
     @GetMapping("/reactiveblock")
     private ParallelFlux<SeaShellDto> getAllShellsReactiveBlock() {
         return seaShellService.findAllSeaShellsReactiveBlock();
     }
+
+    /**
+     * Reactive with delay
+     * @return
+     */
+    @GetMapping("/reactiveWithDelay")
+    private Flux<SeaShellDto> getAllShellsReactiveWithDelay() {
+        return seaShellService.findAllSeaShellsReactiveWithDelay();
+    }
+
 }

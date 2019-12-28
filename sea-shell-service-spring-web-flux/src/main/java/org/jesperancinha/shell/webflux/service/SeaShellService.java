@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 import reactor.core.publisher.ParallelFlux;
 import reactor.core.scheduler.Schedulers;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,9 @@ public class SeaShellService extends SeaShellConsumerService {
 
     @Value("${sea.shell.parallelism:20}")
     private Integer parallelism;
+
+    @Value("${sea.shell.delay.ms:100}")
+    private Integer delay;
 
     private final ShellRepository shellRepository;
 
@@ -69,5 +73,12 @@ public class SeaShellService extends SeaShellConsumerService {
                 .flux().flatMap(Flux::fromIterable)
                 .parallel(parallelism)
                 .runOn(Schedulers.boundedElastic());
+    }
+
+    public Flux<SeaShellDto> findAllSeaShellsReactiveWithDelay() {
+        return findAllSeaShells()
+                .sequential()
+                .delayElements(Duration.ofMillis(delay))
+                .subscribeOn(Schedulers.boundedElastic());
     }
 }
