@@ -10,6 +10,7 @@ import reactor.core.publisher.ParallelFlux;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Repository
@@ -25,13 +26,26 @@ public class ShellCostumeRepository {
     }
 
     public Mono<Costume> findCostumeById(final Long id) {
-        return Mono.just(seaShellsWSDLCostumesAbstract.getItem(id));
+        return Mono.fromCallable(() -> seaShellsWSDLCostumesAbstract.getItem(id)).subscribeOn(Schedulers.boundedElastic());
     }
 
     public ParallelFlux<Costume> findCostumes(List<Long> costumeIds) {
-        return Flux.fromIterable(costumeIds)
+        return Mono
+                .fromCallable(() -> costumeIds.parallelStream()
+                        .map(seaShellsWSDLCostumesAbstract::getItem)
+                        .collect(Collectors.toList()))
+                .flux().flatMap(Flux::fromIterable)
                 .parallel(parallelism)
-                .runOn(Schedulers.elastic())
-                .map(seaShellsWSDLCostumesAbstract::getItem);
+                .runOn(Schedulers.boundedElastic());
+    }
+
+    public List<Costume> findCostumesBlock(List<Long> costumeIds) {
+        return costumeIds.parallelStream()
+                        .map(seaShellsWSDLCostumesAbstract::getItem)
+                        .collect(Collectors.toList());
+    }
+
+    public Costume findCostumeByIdBlock(Long costumeId) {
+        return seaShellsWSDLCostumesAbstract.getItem(costumeId);
     }
 }

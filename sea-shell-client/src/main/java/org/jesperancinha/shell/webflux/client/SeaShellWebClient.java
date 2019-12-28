@@ -24,11 +24,11 @@ public class SeaShellWebClient {
 
     public void consume() {
 
-        SeaShell block = client.get()
+        client.get()
                 .uri(uri + "/seashells/{id}/", "16")
                 .retrieve()
                 .bodyToMono(SeaShell.class)
-                .block();
+                .subscribe(x -> log.info(x.toString()));
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {

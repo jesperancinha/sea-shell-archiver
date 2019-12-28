@@ -32,6 +32,10 @@ This is what this application is about.
 
 Essentially this is a fun exercise to help understand all the mechanisms behind the concepts described in the [Reactive Manifesto](https://www.reactivemanifesto.org/).
 
+NOTES:
+
+-   Unfortunatelly Blockhond doesn't seem to work with Java 13. This is why I had to switch back to 12
+
 Topics discussed:
 
 -   [WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html)
@@ -45,6 +49,9 @@ Topics discussed:
 
 ### Technical
 
+-   [Don't be Homer Simpson with your reactor by Sergei Egorov](https://www.slideshare.net/Pivotal/dont-be-homer-simpson-with-your-reactor)
+-   [Avoid Reactor Meltdown by Phil Clay on YouTube](https://www.youtube.com/watch?v=xCu73WVg8Ps)
+-   [Avoiding Reactor Meltdown by Phil Clay](https://github.com/philsttr/avoiding-reactor-meltdown)
 -   [JsonView Chrome Plugin](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc)
 -   [Spring WebFlux Tutorial](https://howtodoinjava.com/spring-webflux/spring-webflux-tutorial/)
 -   [Wiremock Running as a Standalone Process](http://wiremock.org/docs/running-standalone/)

@@ -19,21 +19,24 @@
         <sea-shell-model.version>0.0.0-SNAPSHOT</sea-shell-model.version>
         <sea-shell-service.version>0.0.0-SNAPSHOT</sea-shell-service.version>
         <!-- External -->
-        <spring-boot-starter-webflux.version>2.2.0.RELEASE</spring-boot-starter-webflux.version>
+        <spring-core.version>5.2.2.RELEASE</spring-core.version>
+        <spring-boot-starter-webflux.version>2.2.2.RELEASE</spring-boot-starter-webflux.version>
+        <spring-data-commons.version>2.2.3.RELEASE</spring-data-commons.version>
         <lombok-maven-plugin.version>1.18.8.1</lombok-maven-plugin.version>
         <lombok.version>1.18.10</lombok.version>
         <netty-all.version>4.1.44.Final</netty-all.version>
         <blockhound.version>1.0.1.RELEASE</blockhound.version>
         <!-- Plugins -->
-        <maven-compiler-plugin.source>13</maven-compiler-plugin.source>
-        <maven-compiler-plugin.target>13</maven-compiler-plugin.target>
+        <maven-compiler-plugin.source>12</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>12</maven-compiler-plugin.target>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <!-- Test -->
         <junit-jupiter.version>5.5.1</junit-jupiter.version>
         <spring-boot-starter-test.version>2.1.8.RELEASE</spring-boot-starter-test.version>
-        <spring-core.version>5.2.0.RELEASE</spring-core.version>
         <wiremock-jre8.version>2.25.1</wiremock-jre8.version>
         <wiremock-junit5.version>1.3.1</wiremock-junit5.version>
+        <junit.version>4.12</junit.version>
+        <jackson.version>2.10.1</jackson.version>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
@@ -103,6 +106,11 @@
                 <version>${spring-boot-starter-webflux.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-commons</artifactId>
+                <version>${spring-data-commons.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>io.projectreactor.tools</groupId>
                 <artifactId>blockhound</artifactId>
                 <version>${blockhound.version}</version>
@@ -136,6 +144,24 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring-boot-starter-test.version}</version>
@@ -151,6 +177,27 @@
                 <groupId>ru.lanwen.wiremock</groupId>
                 <artifactId>wiremock-junit5</artifactId>
                 <version>${wiremock-junit5.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor.tools</groupId>
+                <artifactId>blockhound-junit-platform</artifactId>
+                <version>${blockhound.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

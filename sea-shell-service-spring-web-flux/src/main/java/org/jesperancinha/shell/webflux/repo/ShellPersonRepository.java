@@ -10,6 +10,7 @@ import reactor.core.publisher.ParallelFlux;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Repository
@@ -24,14 +25,23 @@ public class ShellPersonRepository {
         this.seaShellsWSDLPersonsClient = seaShellsWSDLPersonsClient;
     }
 
-    public Mono<Person> findSeaShellById(final Long id) {
-        return Mono.just(seaShellsWSDLPersonsClient.getItem(id));
+    public Mono<Person> findPersonById(final Long id) {
+        return Mono.fromCallable(() -> seaShellsWSDLPersonsClient.getItem(id)).subscribeOn(Schedulers.boundedElastic());
     }
 
     public ParallelFlux<Person> findPersons(List<Long> costumeIds) {
-        return Flux.fromIterable(costumeIds)
+        return Mono
+                .fromCallable(() -> costumeIds.parallelStream()
+                        .map(seaShellsWSDLPersonsClient::getItem)
+                        .collect(Collectors.toList()))
+                .flux().flatMap(Flux::fromIterable)
                 .parallel(parallelism)
-                .runOn(Schedulers.elastic())
-                .map(seaShellsWSDLPersonsClient::getItem);
+                .runOn(Schedulers.boundedElastic());
+    }
+
+    public List<Person> findPersonsBlock(List<Long> costumeIds) {
+        return costumeIds.parallelStream()
+                        .map(seaShellsWSDLPersonsClient::getItem)
+                        .collect(Collectors.toList());
     }
 }

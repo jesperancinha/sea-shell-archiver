@@ -1,5 +1,6 @@
 package org.jesperancinha.shell.webflux.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.repo.ShellAccountRepository;
 import org.jesperancinha.shell.webflux.repo.ShellCostumeRepository;
@@ -11,17 +12,21 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.ParallelFlux;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
-public class SeaShellServiceSeaShell extends SeaShellConsumerService {
+@Slf4j
+public class SeaShellService extends SeaShellConsumerService {
 
     private final ShellRepository shellRepository;
 
-    public SeaShellServiceSeaShell(ShellRepository shellRepository,
-                                   ShellCostumeRepository costumeRepository,
-                                   ShellPersonRepository personRepository,
-                                   ShellAccountRepository accountRepository,
-                                   ShellTopRepository topRepository,
-                                   ShellLowerRepository lowerRepository) {
+    public SeaShellService(ShellRepository shellRepository,
+                           ShellCostumeRepository costumeRepository,
+                           ShellPersonRepository personRepository,
+                           ShellAccountRepository accountRepository,
+                           ShellTopRepository topRepository,
+                           ShellLowerRepository lowerRepository) {
         super(costumeRepository,
                 personRepository,
                 accountRepository,
@@ -32,9 +37,9 @@ public class SeaShellServiceSeaShell extends SeaShellConsumerService {
 
     public Mono<SeaShellDto> findSeaShellById(Long id) {
         return shellRepository.findSeaShellById(id)
-                .map(SeaShellConverter::toShellDto)
-                .doOnNext(consumerPersons())
-                .doOnNext(consumerCostumes());
+                .map(SeaShellConverter::toShellDto);
+//                .doOnNext(consumerPersons())
+//                .doOnNext(consumerCostumes());
     }
 
     public ParallelFlux<SeaShellDto> findAllSeaShells() {
@@ -43,5 +48,13 @@ public class SeaShellServiceSeaShell extends SeaShellConsumerService {
                 .map(SeaShellConverter::toShellDto)
                 .doOnNext(consumerPersons())
                 .doOnNext(consumerCostumes());
+    }
+
+    public List<SeaShellDto> findAllSeaShellsBlock() {
+        return shellRepository.findAllSeaShellsBlock()
+                .parallelStream()
+                .map(SeaShellConverter::toShellDto)
+                .peek(this::setMainRootElements)
+                .collect(Collectors.toList());
     }
 }

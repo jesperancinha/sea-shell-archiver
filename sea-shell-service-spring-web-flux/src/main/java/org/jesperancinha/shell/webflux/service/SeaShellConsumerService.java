@@ -1,8 +1,8 @@
 package org.jesperancinha.shell.webflux.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto;
 import org.jesperancinha.shell.webflux.data.SeaShellDto;
-import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
 import org.jesperancinha.shell.webflux.repo.ShellAccountRepository;
 import org.jesperancinha.shell.webflux.repo.ShellCostumeRepository;
 import org.jesperancinha.shell.webflux.repo.ShellLowerRepository;
@@ -10,7 +10,9 @@ import org.jesperancinha.shell.webflux.repo.ShellPersonRepository;
 import org.jesperancinha.shell.webflux.repo.ShellTopRepository;
 
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
+@Slf4j
 public class SeaShellConsumerService {
 
     private final ShellCostumeRepository costumeRepository;
@@ -42,13 +44,21 @@ public class SeaShellConsumerService {
                 .doOnNext(personDto -> seaShellDto
                         .getPersons()
                         .add(personDto))
-                .doOnNext(seaShellPersonDto -> costumeRepository.findCostumeById(seaShellPersonDto.getCostumeId())
-                        .subscribe(costume -> seaShellPersonDto.setCostumeDto(SeaShellConverter.toShellCostumeDto(costume))))
-                .doOnNext(seaShellPersonDto -> accountRepository.findAccountById(seaShellPersonDto.getAccountId())
-                        .subscribe(account -> seaShellPersonDto.setAccountDto(SeaShellConverter.toAccountDto(account))))
-                .map(SeaShellPersonDto::getCostumeDto)
-                .subscribe(consumerCostume());
+                .subscribe(seaShellPersonDto -> {
+                    costumeRepository.findCostumeById(seaShellPersonDto.getCostumeId())
+                            .subscribe(costume -> {
+                                seaShellPersonDto.setCostumeDto(SeaShellConverter.toShellCostumeDto(costume));
+                                final SeaShellCostumeDto costumeDto = seaShellPersonDto.getCostumeDto();
+                                consumerCostume().accept(costumeDto);
+                                log.info("Complete costume before calling sub top/lower threads ->" + costumeDto);
+                            });
+                    accountRepository.findAccountById(seaShellPersonDto.getAccountId())
+                            .subscribe(account -> {
+                                seaShellPersonDto.setAccountDto(SeaShellConverter.toAccountDto(account));
+                                log.info("Complete account after calling account thread ->" + seaShellPersonDto.getAccountDto());
+                            });
 
+                });
     }
 
     protected Consumer<SeaShellDto> consumerCostumes() {
@@ -65,10 +75,41 @@ public class SeaShellConsumerService {
     private Consumer<SeaShellCostumeDto> consumerCostume() {
         return seaShellCostumeDto -> {
             topRepository.findTopById(seaShellCostumeDto.getTopId())
-                    .subscribe(top -> seaShellCostumeDto.setTopDto(SeaShellConverter.toTopDto(top)));
+                    .subscribe(top -> {
+                        seaShellCostumeDto.setTopDto(SeaShellConverter.toTopDto(top));
+                        log.info("Complete costume after calling sub top thread ->" + seaShellCostumeDto);
+                    });
             lowerRepository.findLowerById(seaShellCostumeDto.getLowerId())
-                    .subscribe(lower -> seaShellCostumeDto.setLowerDto(SeaShellConverter.toLowerDto(lower)));
+                    .subscribe(lower -> {
+                        seaShellCostumeDto.setLowerDto(SeaShellConverter.toLowerDto(lower));
+                        log.info("Complete costume after calling sub top thread ->" + seaShellCostumeDto);
+                    });
         };
     }
 
+    protected void setMainRootElements(SeaShellDto seaShellDto) {
+        seaShellDto.setCostumes(costumeRepository
+                .findCostumesBlock(seaShellDto.getCostumeIds())
+                .parallelStream()
+                .map(SeaShellConverter::toShellCostumeDto)
+                .peek(this::setCostumeRootElements)
+                .collect(Collectors.toList()));
+        seaShellDto.setPersons(personRepository
+                .findPersonsBlock(seaShellDto.getPersonIds())
+                .parallelStream()
+                .map(SeaShellConverter::toShellPersonDto)
+                .peek(seaShellPersonDto -> seaShellPersonDto
+                        .setAccountDto(SeaShellConverter
+                                .toAccountDto(accountRepository.findAccountByIdBlock(seaShellPersonDto.getAccountId()))))
+                .peek(seaShellPersonDto -> seaShellPersonDto
+                        .setCostumeDto(SeaShellConverter
+                                .toShellCostumeDto(costumeRepository.findCostumeByIdBlock(seaShellPersonDto.getCostumeId()))))
+                .peek(seaShellPersonDto -> setCostumeRootElements(seaShellPersonDto.getCostumeDto()))
+                .collect(Collectors.toList()));
+    }
+
+    private void setCostumeRootElements(SeaShellCostumeDto seaShellCostumeDto) {
+        seaShellCostumeDto.setTopDto(SeaShellConverter.toTopDto(topRepository.findTopByIdBlock(seaShellCostumeDto.getTopId())));
+        seaShellCostumeDto.setLowerDto(SeaShellConverter.toLowerDto(lowerRepository.findLowerByIdBlock(seaShellCostumeDto.getLowerId())));
+    }
 }

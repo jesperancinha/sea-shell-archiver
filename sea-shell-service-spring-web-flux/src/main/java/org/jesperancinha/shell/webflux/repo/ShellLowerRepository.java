@@ -5,6 +5,7 @@ import org.jesperancinha.shell.client.lowers.SeaShellsWSDLLowersAbstract;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 
 @Repository
@@ -12,15 +13,16 @@ public class ShellLowerRepository {
 
     private final SeaShellsWSDLLowersAbstract seaShellsWSDLLowersClient;
 
-    @Value("${sea.shell.parallelism:20}")
-    private Integer parallelism;
-
     public ShellLowerRepository(SeaShellsWSDLLowersAbstract seaShellsWSDLLowersClient) {
         this.seaShellsWSDLLowersClient = seaShellsWSDLLowersClient;
     }
 
     public Mono<Lower> findLowerById(final Long id) {
-        return Mono.just(seaShellsWSDLLowersClient.getItem(id));
+        return Mono.fromCallable(() -> seaShellsWSDLLowersClient.getItem(id))
+                .subscribeOn(Schedulers.boundedElastic());
     }
 
+    public Lower findLowerByIdBlock(Long lowerId) {
+        return seaShellsWSDLLowersClient.getItem(lowerId);
+    }
 }
