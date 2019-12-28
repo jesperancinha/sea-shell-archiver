@@ -35,9 +35,16 @@ public class SeaShellServiceTest {
     }
 
     @Test
+    public void findAllCompleteSeaShellsReactiveBlock() {
+        Mono.delay(Duration.ofSeconds(1))
+                .doOnNext(it -> seaShellService.findAllSeaShellsReactiveBlock())
+                .block();
+    }
+
+    @Test
     public void findAllCompleteSeaShellsBlock() {
         assertThrows(WebServiceException.class, () -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellService.findAllSeaShellsBlock())
+                .doOnNext(it -> seaShellService.findAllSeaShellsNaifBlock())
                 .block());
     }
 

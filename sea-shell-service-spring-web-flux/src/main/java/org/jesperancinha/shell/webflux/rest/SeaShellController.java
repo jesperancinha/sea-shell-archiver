@@ -36,9 +36,21 @@ public class SeaShellController {
         return seaShellService.findAllSeaShells().map(seaShellDto -> Pair.of(seaShellDto.getName(), seaShellDto.getSlogan()));
     }
 
+    /**
+     * Blocking solution
+     * @return
+     */
     @GetMapping("/block")
     private List<SeaShellDto> getAllShellsBlock() {
-        return seaShellService.findAllSeaShellsBlock();
+        return seaShellService.findAllSeaShellsNaifBlock();
     }
 
+    /**
+     * Blocking solution
+     * @return
+     */
+    @GetMapping("/reactiveblock")
+    private ParallelFlux<SeaShellDto> getAllShellsReactiveBlock() {
+        return seaShellService.findAllSeaShellsReactiveBlock();
+    }
 }
