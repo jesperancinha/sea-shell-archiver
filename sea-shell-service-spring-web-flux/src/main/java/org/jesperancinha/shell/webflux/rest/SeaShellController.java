@@ -28,7 +28,7 @@ public class SeaShellController {
     }
 
     @GetMapping
-    private ParallelFlux<SeaShellDto> getAllShells() {
+    public ParallelFlux<SeaShellDto> getAllShells() {
         return seaShellService.findAllSeaShells();
     }
 
@@ -38,7 +38,7 @@ public class SeaShellController {
      * @return
      */
     @GetMapping("/slogans")
-    private ParallelFlux<Pair<String, String>> getAllCompleteShells() {
+    public ParallelFlux<Pair<String, String>> getAllCompleteShells() {
         return seaShellService.findAllSeaShells().map(seaShellDto -> Pair.of(seaShellDto.getName(), seaShellDto.getSlogan()));
     }
 
@@ -48,8 +48,18 @@ public class SeaShellController {
      * @return
      */
     @GetMapping("/block")
-    private List<SeaShellDto> getAllShellsBlock() {
+    public List<SeaShellDto> getAllShellsBlock() {
         return seaShellService.findAllSeaShellsNaifBlock();
+    }
+
+    /**
+     * Blocking solution
+     * @param id
+     * @return
+     */
+    @GetMapping("/block/{id}")
+    public SeaShellDto getShellBlockById(@PathVariable Long id) {
+        return seaShellService.findAllSeaShellsNaifBlock(id);
     }
 
     /**
@@ -58,7 +68,7 @@ public class SeaShellController {
      * @return
      */
     @GetMapping("/reactiveblock")
-    private ParallelFlux<SeaShellDto> getAllShellsReactiveBlock() {
+    public ParallelFlux<SeaShellDto> getAllShellsReactiveBlock() {
         return seaShellService.findAllSeaShellsReactiveBlock();
     }
 
@@ -68,7 +78,7 @@ public class SeaShellController {
      * @return
      */
     @GetMapping("/reactiveWithDelay")
-    private Flux<SeaShellDto> getAllShellsReactiveWithDelay() {
+    public Flux<SeaShellDto> getAllShellsReactiveWithDelay() {
         return seaShellService.findAllSeaShellsReactiveWithDelay();
     }
 }

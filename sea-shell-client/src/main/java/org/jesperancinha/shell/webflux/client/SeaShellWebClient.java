@@ -1,6 +1,7 @@
 package org.jesperancinha.shell.webflux.client;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.model.SeaShell;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -9,43 +10,42 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class SeaShellWebClient {
 
-    public static void main(String[] args) {
+    private final WebClient client;
+
+    public static void main(String[] args) throws InterruptedException {
         SeaShellWebClient seaShellWebClient = new SeaShellWebClient("http://localhost:8080");
         seaShellWebClient.consume();
     }
 
-    private String uri;
-
     public SeaShellWebClient(final String uri) {
-        this.uri = uri;
+        this.client = WebClient.builder().baseUrl(uri).build();
     }
 
-    private final WebClient client = WebClient.builder().baseUrl(uri).build();
+    public void consume() throws InterruptedException {
+        getSeaShellById(1L).subscribe(x -> log.info("ONE->" + x.toString()));
+        getAllSeaShells().subscribe(x -> log.info("ALL->" + x.toString()));
+        getAllSeaShellsBlock().subscribe(x -> log.info("BLOCK->" + x.toString()));
+        final SeaShellDto seaShellDtoById = getSeaShellDtoById(1L);
+        final SeaShellDto seaShellDtoNaifById = getSeaShellDtoNaifById(1L);
+        log.info("REACTIVE DTO->" + seaShellDtoById.toString());
+        log.info("NAIF DTO->" + seaShellDtoNaifById.toString());
+        Thread.sleep(1000);
+    }
 
-    public void consume() {
-
-        client.get()
-                .uri(uri + "/seashells/{id}/", "16")
+    public SeaShellDto getSeaShellDtoById(Long id) {
+        return client.get()
+                .uri("/seashells/{id}", id)
                 .retrieve()
-                .bodyToMono(SeaShell.class)
-                .subscribe(x -> log.info(x.toString()));
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+                .bodyToMono(SeaShellDto.class)
+                .block();
+    }
 
-//        client.get()
-//                .uri(uri + "/seashells")
-//                .retrieve()
-//                .bodyToFlux(SeaShell.class)
-//                .subscribe(x -> log.info(x.toString()));
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+    public SeaShellDto getSeaShellDtoNaifById(Long id) {
+        return client.get()
+                .uri("/seashells/block/{id}", id)
+                .retrieve()
+                .bodyToMono(SeaShellDto.class)
+                .block();
     }
 
     public Mono<SeaShell> getSeaShellById(Long id) {
@@ -58,6 +58,13 @@ public class SeaShellWebClient {
     public Flux<SeaShell> getAllSeaShells() {
         return client.get()
                 .uri("/seashells")
+                .retrieve()
+                .bodyToFlux(SeaShell.class);
+    }
+
+    public Flux<SeaShell> getAllSeaShellsBlock() {
+        return client.get()
+                .uri("/seashells/block")
                 .retrieve()
                 .bodyToFlux(SeaShell.class);
     }

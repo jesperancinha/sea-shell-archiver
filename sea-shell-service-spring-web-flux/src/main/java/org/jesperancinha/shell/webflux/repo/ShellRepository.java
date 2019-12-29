@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 import reactor.core.publisher.ParallelFlux;
 import reactor.core.scheduler.Schedulers;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,5 +41,9 @@ public class ShellRepository {
 
     public List<Shell> findAllSeaShellsBlock() {
         return seaShellsWSDLShellsClient.getAllShellIds().parallelStream().map(seaShellsWSDLShellsClient::getItem).collect(Collectors.toList());
+    }
+
+    public Shell findSeaShellBlockById(Long id) {
+        return seaShellsWSDLShellsClient.getItem(id);
     }
 }

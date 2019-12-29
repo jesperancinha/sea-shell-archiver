@@ -69,12 +69,10 @@ public class SeaShellService extends SeaShellConsumerService {
                 .collect(Collectors.toList());
     }
 
-    public List<SeaShellDto> findAllSeaShellsForkJoinsBlock() {
-        return shellRepository.findAllSeaShellsBlock()
-                .parallelStream()
-                .map(SeaShellConverter::toShellDto)
-                .peek(this::setMainRootElements)
-                .collect(Collectors.toList());
+    public SeaShellDto findAllSeaShellsNaifBlock(Long id) {
+        final SeaShellDto seaShellDto = SeaShellConverter.toShellDto(shellRepository.findSeaShellBlockById(id));
+        setMainRootElements(seaShellDto);
+        return seaShellDto;
     }
 
     public ParallelFlux<SeaShellDto> findAllSeaShellsReactiveBlock() {
