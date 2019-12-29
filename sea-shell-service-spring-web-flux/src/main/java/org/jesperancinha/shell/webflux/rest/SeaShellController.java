@@ -72,5 +72,4 @@ public class SeaShellController {
     private Flux<SeaShellDto> getAllShellsReactiveWithDelay() {
         return seaShellService.findAllSeaShellsReactiveWithDelay();
     }
-
 }

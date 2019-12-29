@@ -19,8 +19,9 @@ import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+
 @Slf4j
+@Service
 public class SeaShellService extends SeaShellConsumerService {
 
     @Value("${sea.shell.parallelism:20}")
@@ -61,6 +62,14 @@ public class SeaShellService extends SeaShellConsumerService {
     }
 
     public List<SeaShellDto> findAllSeaShellsNaifBlock() {
+        return shellRepository.findAllSeaShellsBlock()
+                .parallelStream()
+                .map(SeaShellConverter::toShellDto)
+                .peek(this::setMainRootElements)
+                .collect(Collectors.toList());
+    }
+
+    public List<SeaShellDto> findAllSeaShellsForkJoinsBlock() {
         return shellRepository.findAllSeaShellsBlock()
                 .parallelStream()
                 .map(SeaShellConverter::toShellDto)
