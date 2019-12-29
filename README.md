@@ -18,16 +18,20 @@
 
 This project is a Sea Shell archiver for an imaginary world.
 
-This is the description of that world
-Imagine a world were beings live in gigantic sea shells. Sea shells are their home. Inside you can find one or more people. You can also find one or more costumes with different configuration. The value of the shell is evaluated by the sum of the values of all the individual costumes.
-Every shell has a slogan. 
+This is the description of that world:
 
-For the purposes of this example I decided to use Cardi B's rap solo during "Girls like you" by Maroon 5.
+>Imagine a world were beings live in gigantic sea shells. Sea shells are their home. Inside you can find one or more people. You can also find one or more costumes with different configuration. The value of the shell is evaluated by the sum of the values of all the individual costumes.
+>Every shell has a slogan. 
+>
+>For the purposes of this example I decided to use [Cardi B](https://www.cardibofficial.com/)'s [rap solo](https://songteksten.net/lyric/2881/100824/maroon-5/girls-like-you-ft-cardi-b.html) in "Girls like you" by [Maroon 5](https://www.maroon5.com/) to establish slogans.
+>As persons living inside shells I chose [Game of Thrones](https://www.hbo.com/game-of-thrones) charachters.
+>For the rest, just my vivid imagination :).
+>
+>This application is very old. Its design still is base on the paradigms of the time. It's implemented in SOAP. Furthermore, every single entity has a dedicated read service associated with it. As a result, every time you need to get the data from a particular sea shell, you have to make multiple requests.
+>This situation warrants a solution. 
+>Times have changed and applications need to move faster and be scalable, but due to business restrictions I cannot change my SOAP services.
+>A solution could be using Reactive Streams in the context of a Reactive architecture.
 
-This application is very old. Its design still is base on the paradigms of the time. It's implemented in SOAP. Furthermore, every single entity has a dedicated read service associated with it. As a result, every time you need to get the data from a particular sea shell, you have to make multiple requests.
-This situation warrants a solution. 
-Times have changed and applications need to move faster and be scalable, but due to business restrictions I cannot change my SOAP services.
-A solution could be using Reactive Streams in the context of a Reactive architecture.
 This is what this application is about.
 
 Essentially this is a fun exercise to help understand all the mechanisms behind the concepts described in the [Reactive Manifesto](https://www.reactivemanifesto.org/).

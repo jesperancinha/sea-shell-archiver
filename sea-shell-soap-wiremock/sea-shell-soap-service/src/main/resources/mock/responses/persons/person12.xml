@@ -3,8 +3,8 @@
     <S:Body>
         <ns2:personsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLPersons/">
             <Person>
-                <Name>Gregor Clegane</Name>
-                <Activity>THE_MOUNTAIN</Activity>
+                <Name>Petyr Baelish</Name>
+                <Activity>LORD_PROTECTOR_OF_THE_EYRIE</Activity>
                 <CostumeId>1</CostumeId>
                 <AccountId>AKDMOJOEJHMDF</AccountId>
                 <ShellId>1</ShellId>

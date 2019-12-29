@@ -2,7 +2,6 @@ package org.jesperancinha.shell.webflux.repo;
 
 import org.jesperancinha.shell.client.shells.SeaShellsWSDLShellsAbstract;
 import org.jesperancinha.shell.client.shells.Shell;
-import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;

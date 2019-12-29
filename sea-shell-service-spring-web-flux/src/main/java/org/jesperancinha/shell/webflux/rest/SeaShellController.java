@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.ParallelFlux;
-import reactor.core.scheduler.Schedulers;
 
-import java.time.Duration;
 import java.util.List;
 
 @RestController
@@ -66,6 +64,7 @@ public class SeaShellController {
 
     /**
      * Reactive with delay
+     *
      * @return
      */
     @GetMapping("/reactiveWithDelay")

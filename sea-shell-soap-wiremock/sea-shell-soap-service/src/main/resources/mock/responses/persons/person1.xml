@@ -3,8 +3,8 @@
     <S:Body>
         <ns2:personsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLPersons/">
             <Person>
-                <Name>Annie Von Fear1</Name>
-                <Activity>DRAG_ACT</Activity>
+                <Name>Daenerys Targaryen</Name>
+                <Activity>QUEEN_OF_DRAGONS</Activity>
                 <CostumeId>1</CostumeId>
                 <AccountId>AKDMOJOEJHMDF</AccountId>
                 <ShellId>1</ShellId>

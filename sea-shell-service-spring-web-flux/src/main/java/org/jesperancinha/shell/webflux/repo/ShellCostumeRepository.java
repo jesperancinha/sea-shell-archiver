@@ -41,8 +41,8 @@ public class ShellCostumeRepository {
 
     public List<Costume> findCostumesBlock(List<Long> costumeIds) {
         return costumeIds.parallelStream()
-                        .map(seaShellsWSDLCostumesAbstract::getItem)
-                        .collect(Collectors.toList());
+                .map(seaShellsWSDLCostumesAbstract::getItem)
+                .collect(Collectors.toList());
     }
 
     public Costume findCostumeByIdBlock(Long costumeId) {

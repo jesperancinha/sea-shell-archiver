@@ -23,25 +23,8 @@ public class SeaShellWiremockSoapLauncher {
         final WireMockServer wireMockServer = new WireMockServer(8090);
         wireMockServer.start();
         configureFor("localhost", 8090);
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person1.xml", "/mock/responses/persons/person1.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person2.xml", "/mock/responses/persons/person2.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person3.xml", "/mock/responses/persons/person3.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell1.xml", "/mock/responses/shells/shell1.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell2.xml", "/mock/responses/shells/shell2.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell3.xml", "/mock/responses/shells/shell3.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell4.xml", "/mock/responses/shells/shell4.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell5.xml", "/mock/responses/shells/shell5.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell6.xml", "/mock/responses/shells/shell6.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell7.xml", "/mock/responses/shells/shell7.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell8.xml", "/mock/responses/shells/shell8.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell9.xml", "/mock/responses/shells/shell9.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell10.xml", "/mock/responses/shells/shell10.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell11.xml", "/mock/responses/shells/shell11.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell12.xml", "/mock/responses/shells/shell12.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell13.xml", "/mock/responses/shells/shell13.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell14.xml", "/mock/responses/shells/shell14.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell15.xml", "/mock/responses/shells/shell15.xml");
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell16.xml", "/mock/responses/shells/shell16.xml");
+        stubPersons();
+        stubShells();
         stubRequestToResponse("/seashells/shells", "/mock/requests/shells/allShells.xml", "/mock/responses/shells/allShells.xml");
         stubRequestToResponse("/seashells/costumes", "/mock/requests/costumes/costume1.xml", "/mock/responses/costumes/costume1.xml");
         stubRequestToResponse("/seashells/costumes", "/mock/requests/costumes/costume2.xml", "/mock/responses/costumes/costume2.xml");
@@ -58,6 +41,44 @@ public class SeaShellWiremockSoapLauncher {
         stupRequestToWSDL("/seashells/shells?wsdl", "/mock/responses/shells/SeaShellsWSDLShells.wsdl");
         stupRequestToWSDL("/seashells/tops?wsdl", "/mock/responses/tops/SeaShellsWSDLTops.wsdl");
 
+    }
+
+    private static void stubShells() throws IOException {
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell1.xml", "/mock/responses/shells/shell1.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell2.xml", "/mock/responses/shells/shell2.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell3.xml", "/mock/responses/shells/shell3.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell4.xml", "/mock/responses/shells/shell4.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell5.xml", "/mock/responses/shells/shell5.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell6.xml", "/mock/responses/shells/shell6.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell7.xml", "/mock/responses/shells/shell7.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell8.xml", "/mock/responses/shells/shell8.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell9.xml", "/mock/responses/shells/shell9.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell10.xml", "/mock/responses/shells/shell10.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell11.xml", "/mock/responses/shells/shell11.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell12.xml", "/mock/responses/shells/shell12.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell13.xml", "/mock/responses/shells/shell13.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell14.xml", "/mock/responses/shells/shell14.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell15.xml", "/mock/responses/shells/shell15.xml");
+        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/shell16.xml", "/mock/responses/shells/shell16.xml");
+    }
+
+    private static void stubPersons() throws IOException {
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person1.xml", "/mock/responses/persons/person1.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person2.xml", "/mock/responses/persons/person2.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person3.xml", "/mock/responses/persons/person3.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person4.xml", "/mock/responses/persons/person4.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person5.xml", "/mock/responses/persons/person5.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person6.xml", "/mock/responses/persons/person6.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person7.xml", "/mock/responses/persons/person7.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person8.xml", "/mock/responses/persons/person8.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person9.xml", "/mock/responses/persons/person9.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person10.xml", "/mock/responses/persons/person10.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person11.xml", "/mock/responses/persons/person11.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person12.xml", "/mock/responses/persons/person12.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person13.xml", "/mock/responses/persons/person13.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person14.xml", "/mock/responses/persons/person14.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person15.xml", "/mock/responses/persons/person15.xml");
+        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person16.xml", "/mock/responses/persons/person16.xml");
     }
 
     private static void stupRequestToWSDL(String urlString, String fileLocation) throws IOException {

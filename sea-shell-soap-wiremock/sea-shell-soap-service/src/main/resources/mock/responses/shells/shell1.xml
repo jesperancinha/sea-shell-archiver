@@ -8,6 +8,7 @@
                 <Slogan>Not too long ago, I was dancing for dollars (eeoow)</Slogan>
                 <Persons>
                     <PersonId>1</PersonId>
+                    <PersonId>2</PersonId>
                 </Persons>
                 <Costumes>
                     <CostumeId>1</CostumeId>

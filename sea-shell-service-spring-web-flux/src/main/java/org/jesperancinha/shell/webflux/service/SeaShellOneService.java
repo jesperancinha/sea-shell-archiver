@@ -78,6 +78,7 @@ public class SeaShellOneService {
                 .map(SeaShellConverter::toTopDto);
 
     }
+
     public Mono<SeaShellLowerDto> findLowerById(Long id) {
         return this.shellLowerRepository.findLowerById(id)
                 .map(SeaShellConverter::toLowerDto);

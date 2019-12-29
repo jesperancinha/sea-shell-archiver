@@ -21,7 +21,7 @@ public class ShellAccountRepository {
     }
 
     public Mono<Account> findAccountById(String id) {
-        return Mono.fromCallable(()-> seaShellsWSDLAccountsClient.getItem(id))
+        return Mono.fromCallable(() -> seaShellsWSDLAccountsClient.getItem(id))
                 .subscribeOn(Schedulers.boundedElastic());
     }
 

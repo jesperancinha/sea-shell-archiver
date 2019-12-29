@@ -41,7 +41,7 @@ public class ShellPersonRepository {
 
     public List<Person> findPersonsBlock(List<Long> costumeIds) {
         return costumeIds.parallelStream()
-                        .map(seaShellsWSDLPersonsClient::getItem)
-                        .collect(Collectors.toList());
+                .map(seaShellsWSDLPersonsClient::getItem)
+                .collect(Collectors.toList());
     }
 }
