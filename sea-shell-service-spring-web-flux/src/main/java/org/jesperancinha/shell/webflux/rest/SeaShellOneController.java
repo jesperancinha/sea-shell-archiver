@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -39,14 +40,6 @@ public class SeaShellOneController {
         return seaShellOneService.findCostumeById(id);
     }
 
-
-    @GetMapping("/rootShell/{idPerson}/{idCostume}")
-    private Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> getRootShell(
-            @PathVariable Long idPerson, @PathVariable Long idCostume) {
-        return seaShellOneService.findPersonById(idPerson)
-                .zipWith(seaShellOneService.findCostumeById(idCostume), Pair::of);
-    }
-
     @GetMapping("/account/{id}")
     private Mono<SeaShellAccountDto> getAccountById(@PathVariable String id) {
         return seaShellOneService.findAccountById(id);
@@ -67,6 +60,12 @@ public class SeaShellOneController {
             @PathVariable Long idTop, @PathVariable Long idLower) {
         return seaShellOneService.findTopById(idTop)
                 .zipWith(seaShellOneService.findLowerById(idLower), Pair::of);
+    }
 
+    @GetMapping("/rootShell/{idPerson}/{idCostume}")
+    private Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> getRootShell(
+            @PathVariable Long idPerson, @PathVariable Long idCostume) {
+        return seaShellOneService.findPersonById(idPerson)
+                .zipWith(seaShellOneService.findCostumeById(idCostume), Pair::of);
     }
 }
