@@ -12,6 +12,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,7 +37,7 @@ public class SeaShellWebClient {
 
     public void consume() throws InterruptedException, ExecutionException {
         getSeaShellById(1L).subscribe(x -> log.info("REACTIVE ONE->" + x.toString()));
-        getAllSeaShells().subscribe(x -> log.info("REATCIVE ALL->" + x.toString()));
+        getAllSeaShells().subscribe(x -> log.info("REACTIVE ALL->" + x.toString()));
         getAllSeaShellsBlock().subscribe(x -> log.info("BLOCK->" + x.toString()));
         final SeaShellDto seaShellDtoById = getSeaShellDtoById(1L);
         final SeaShellDto seaShellDtoNaifById = getSeaShellDtoNaifById(1L);
@@ -42,9 +45,24 @@ public class SeaShellWebClient {
         log.info("NAIF DTO->" + seaShellDtoNaifById.toString());
 
         log.info("REACTIVE WAY ONE->" + getMultipleRequestClientSideOneShell(1L).toString());
-        log.info("REACTIVE WAY ALL->" + getMultipleRequestClientSideOneShell(1L).toString());
+        log.info("REACTIVE WAY ALL->" + getMultipleRequestClientSideOneShell().toString());
 
         Thread.sleep(1000);
+    }
+
+    public List<SeaShellDto> getMultipleRequestClientSideOneShell() throws ExecutionException, InterruptedException {
+        final ExecutorService executorService = Executors.newCachedThreadPool();
+        final List<SeaShellDto> seaShellDtoList = new ArrayList<>();
+        final Future<?> shells = executorService.submit(() -> Arrays.stream(getSeaShellOneAll()).parallel().forEach(seaShellId -> {
+            try {
+                seaShellDtoList.add(getMultipleRequestClientSideOneShell(seaShellId));
+            } catch (ExecutionException | InterruptedException e) {
+                log.error("Error!", e);
+            }
+        }));
+        shells.get();
+        executorService.shutdown();
+        return seaShellDtoList;
     }
 
     public SeaShellDto getMultipleRequestClientSideOneShell(Long id) throws ExecutionException, InterruptedException {
@@ -79,6 +97,15 @@ public class SeaShellWebClient {
 
     private Runnable costumesRunnable(SeaShellDto seaShellOneDtoById) {
         return () -> seaShellOneDtoById.setCostumes(seaShellOneDtoById.getCostumeIds().parallelStream().map(this::getCostumeDto).collect(Collectors.toList()));
+    }
+
+    public Long[] getSeaShellOneAll() {
+        final List<Long> list = new ArrayList<>();
+        return client.get()
+                .uri("/seashells/one")
+                .retrieve()
+                .bodyToMono(Long[].class)
+                .block();
     }
 
     private SeaShellCostumeDto getCostumeDto(Long id) {

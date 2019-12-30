@@ -24,12 +24,12 @@ public class SeaShellController {
 
     @GetMapping("/{id}")
     private Mono<SeaShellDto> getShellById(@PathVariable Long id) {
-        return seaShellService.findSeaShellById(id);
+        return seaShellService.getSeaShellById(id);
     }
 
     @GetMapping
     public ParallelFlux<SeaShellDto> getAllShells() {
-        return seaShellService.findAllSeaShells();
+        return seaShellService.getAllSeaShells();
     }
 
     /**
@@ -39,7 +39,7 @@ public class SeaShellController {
      */
     @GetMapping("/slogans")
     public ParallelFlux<Pair<String, String>> getAllCompleteShells() {
-        return seaShellService.findAllSeaShells().map(seaShellDto -> Pair.of(seaShellDto.getName(), seaShellDto.getSlogan()));
+        return seaShellService.getAllSeaShells().map(seaShellDto -> Pair.of(seaShellDto.getName(), seaShellDto.getSlogan()));
     }
 
     /**
@@ -49,7 +49,7 @@ public class SeaShellController {
      */
     @GetMapping("/block")
     public List<SeaShellDto> getAllShellsBlock() {
-        return seaShellService.findAllSeaShellsNaifBlock();
+        return seaShellService.getAllSeaShellsNaifBlock();
     }
 
     /**
@@ -59,7 +59,7 @@ public class SeaShellController {
      */
     @GetMapping("/block/{id}")
     public SeaShellDto getShellBlockById(@PathVariable Long id) {
-        return seaShellService.findAllSeaShellsNaifBlock(id);
+        return seaShellService.getAllSeaShellsNaifBlock(id);
     }
 
     /**
@@ -69,7 +69,7 @@ public class SeaShellController {
      */
     @GetMapping("/reactiveblock")
     public ParallelFlux<SeaShellDto> getAllShellsReactiveBlock() {
-        return seaShellService.findAllSeaShellsReactiveBlock();
+        return seaShellService.getAllSeaShellsReactiveBlock();
     }
 
     /**
@@ -79,6 +79,6 @@ public class SeaShellController {
      */
     @GetMapping("/reactiveWithDelay")
     public Flux<SeaShellDto> getAllShellsReactiveWithDelay() {
-        return seaShellService.findAllSeaShellsReactiveWithDelay();
+        return seaShellService.getAllSeaShellsReactiveWithDelay();
     }
 }

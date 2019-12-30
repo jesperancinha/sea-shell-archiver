@@ -46,14 +46,14 @@ public class SeaShellService extends SeaShellConsumerService {
         this.shellRepository = shellRepository;
     }
 
-    public Mono<SeaShellDto> findSeaShellById(Long id) {
+    public Mono<SeaShellDto> getSeaShellById(Long id) {
         return shellRepository.findSeaShellById(id)
                 .map(SeaShellConverter::toShellDto)
                 .doOnNext(consumerPersons())
                 .doOnNext(consumerCostumes());
     }
 
-    public ParallelFlux<SeaShellDto> findAllSeaShells() {
+    public ParallelFlux<SeaShellDto> getAllSeaShells() {
         return shellRepository
                 .findAllSeaShells()
                 .map(SeaShellConverter::toShellDto)
@@ -61,7 +61,7 @@ public class SeaShellService extends SeaShellConsumerService {
                 .doOnNext(consumerCostumes());
     }
 
-    public List<SeaShellDto> findAllSeaShellsNaifBlock() {
+    public List<SeaShellDto> getAllSeaShellsNaifBlock() {
         return shellRepository.findAllSeaShellsBlock()
                 .parallelStream()
                 .map(SeaShellConverter::toShellDto)
@@ -69,21 +69,21 @@ public class SeaShellService extends SeaShellConsumerService {
                 .collect(Collectors.toList());
     }
 
-    public SeaShellDto findAllSeaShellsNaifBlock(Long id) {
+    public SeaShellDto getAllSeaShellsNaifBlock(Long id) {
         final SeaShellDto seaShellDto = SeaShellConverter.toShellDto(shellRepository.findSeaShellBlockById(id));
         setMainRootElements(seaShellDto);
         return seaShellDto;
     }
 
-    public ParallelFlux<SeaShellDto> findAllSeaShellsReactiveBlock() {
-        return Mono.fromCallable(this::findAllSeaShellsNaifBlock)
+    public ParallelFlux<SeaShellDto> getAllSeaShellsReactiveBlock() {
+        return Mono.fromCallable(this::getAllSeaShellsNaifBlock)
                 .flux().flatMap(Flux::fromIterable)
                 .parallel(parallelism)
                 .runOn(Schedulers.boundedElastic());
     }
 
-    public Flux<SeaShellDto> findAllSeaShellsReactiveWithDelay() {
-        return findAllSeaShells()
+    public Flux<SeaShellDto> getAllSeaShellsReactiveWithDelay() {
+        return getAllSeaShells()
                 .sequential()
                 .delayElements(Duration.ofMillis(delay))
                 .subscribeOn(Schedulers.boundedElastic());

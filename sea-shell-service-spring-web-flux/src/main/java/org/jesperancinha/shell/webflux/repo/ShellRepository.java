@@ -9,7 +9,6 @@ import reactor.core.publisher.Mono;
 import reactor.core.publisher.ParallelFlux;
 import reactor.core.scheduler.Schedulers;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,12 +30,16 @@ public class ShellRepository {
     }
 
     public ParallelFlux<Shell> findAllSeaShells() {
-        return Mono.fromCallable(seaShellsWSDLShellsClient::getAllShellIds)
-                .flux().flatMap(Flux::fromIterable)
+        return findAllShellIds()
                 .parallel(parallelism)
                 .runOn(Schedulers.boundedElastic())
                 .map(seaShellsWSDLShellsClient::getItem)
                 .runOn(Schedulers.boundedElastic());
+    }
+
+    public Flux<Long> findAllShellIds() {
+        return Mono.fromCallable(seaShellsWSDLShellsClient::getAllShellIds)
+                .flux().flatMap(Flux::fromIterable);
     }
 
     public List<Shell> findAllSeaShellsBlock() {

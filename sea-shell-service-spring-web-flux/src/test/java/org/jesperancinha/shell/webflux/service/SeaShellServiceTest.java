@@ -29,28 +29,28 @@ public class SeaShellServiceTest {
     @Test
     public void findAllCompleteSeaShells_onCall_thenNonBlocking() {
         delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellService.findAllSeaShells())
+                .doOnNext(it -> seaShellService.getAllSeaShells())
                 .block();
     }
 
     @Test
     public void findAllCompleteSeaShellsBlock_onCall_thenBlocking() {
         assertThrows(WebServiceException.class, () -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellService.findAllSeaShellsNaifBlock())
+                .doOnNext(it -> seaShellService.getAllSeaShellsNaifBlock())
                 .block());
     }
 
     @Test
     public void findAllCompleteSeaShellsReactiveBlock_onCall_thenNonBlocking() {
         delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellService.findAllSeaShellsReactiveBlock())
+                .doOnNext(it -> seaShellService.getAllSeaShellsReactiveBlock())
                 .block();
     }
 
     @Test
     public void findAllCompleteSeaShellsReactiveWithDelay_onCall_thenNonBlocking() {
         delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellService.findAllSeaShellsReactiveWithDelay())
+                .doOnNext(it -> seaShellService.getAllSeaShellsReactiveWithDelay())
                 .block();
     }
 

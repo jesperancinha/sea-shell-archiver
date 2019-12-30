@@ -25,47 +25,52 @@ public class SeaShellOneController {
         this.seaShellOneService = seaShellOneService;
     }
 
+    @GetMapping
+    private Flux<Long> getAllShells() {
+        return seaShellOneService.findAllIds();
+    }
+
     @GetMapping("/{id}")
     private Mono<SeaShellDto> getShellById(@PathVariable Long id) {
-        return seaShellOneService.findSeaShellById(id);
+        return seaShellOneService.getSeaShellById(id);
     }
 
     @GetMapping("/person/{id}")
     private Mono<SeaShellPersonDto> getPersonById(@PathVariable Long id) {
-        return seaShellOneService.findPersonById(id);
+        return seaShellOneService.getPersonById(id);
     }
 
     @GetMapping("/costume/{id}")
     private Mono<SeaShellCostumeDto> getCostumeById(@PathVariable Long id) {
-        return seaShellOneService.findCostumeById(id);
+        return seaShellOneService.getCostumeById(id);
     }
 
     @GetMapping("/account/{id}")
     private Mono<SeaShellAccountDto> getAccountById(@PathVariable String id) {
-        return seaShellOneService.findAccountById(id);
+        return seaShellOneService.getAccountById(id);
     }
 
     @GetMapping("/top/{id}")
     private Mono<SeaShellTopDto> getTopById(@PathVariable Long id) {
-        return seaShellOneService.findTopById(id);
+        return seaShellOneService.getTopById(id);
     }
 
     @GetMapping("/lower/{id}")
     private Mono<SeaShellLowerDto> getLowerById(@PathVariable Long id) {
-        return seaShellOneService.findLowerById(id);
+        return seaShellOneService.getLowerById(id);
     }
 
     @GetMapping("/rootCostume/{idTop}/{idLower}")
     private Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> getRootCostume(
             @PathVariable Long idTop, @PathVariable Long idLower) {
-        return seaShellOneService.findTopById(idTop)
-                .zipWith(seaShellOneService.findLowerById(idLower), Pair::of);
+        return seaShellOneService.getTopById(idTop)
+                .zipWith(seaShellOneService.getLowerById(idLower), Pair::of);
     }
 
     @GetMapping("/rootShell/{idPerson}/{idCostume}")
     private Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> getRootShell(
             @PathVariable Long idPerson, @PathVariable Long idCostume) {
-        return seaShellOneService.findPersonById(idPerson)
-                .zipWith(seaShellOneService.findCostumeById(idCostume), Pair::of);
+        return seaShellOneService.getPersonById(idPerson)
+                .zipWith(seaShellOneService.getCostumeById(idCostume), Pair::of);
     }
 }

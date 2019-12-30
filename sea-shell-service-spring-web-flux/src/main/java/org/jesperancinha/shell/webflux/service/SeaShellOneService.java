@@ -15,6 +15,7 @@ import org.jesperancinha.shell.webflux.repo.ShellRepository;
 import org.jesperancinha.shell.webflux.repo.ShellTopRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -53,33 +54,36 @@ public class SeaShellOneService {
         this.shellLowerRepository = shellLowerRepository;
     }
 
-    public Mono<SeaShellDto> findSeaShellById(Long id) {
+    public Flux<Long> findAllIds() {
+        return this.shellRepository.findAllShellIds();
+    }
+
+    public Mono<SeaShellDto> getSeaShellById(Long id) {
         return this.shellRepository.findSeaShellById(id)
                 .map(SeaShellConverter::toShellDto);
     }
 
-    public Mono<SeaShellPersonDto> findPersonById(Long id) {
+    public Mono<SeaShellPersonDto> getPersonById(Long id) {
         return this.shellPersonRepository.findPersonById(id)
                 .map(SeaShellConverter::toShellPersonDto);
     }
 
-    public Mono<SeaShellCostumeDto> findCostumeById(Long id) {
+    public Mono<SeaShellCostumeDto> getCostumeById(Long id) {
         return this.shellCostumeRepository.findCostumeById(id)
                 .map(SeaShellConverter::toShellCostumeDto);
     }
 
-    public Mono<SeaShellAccountDto> findAccountById(String id) {
+    public Mono<SeaShellAccountDto> getAccountById(String id) {
         return this.shellAccountRepository.findAccountById(id)
                 .map(SeaShellConverter::toAccountDto);
     }
 
-    public Mono<SeaShellTopDto> findTopById(Long id) {
+    public Mono<SeaShellTopDto> getTopById(Long id) {
         return this.shellTopRepository.findTopById(id)
                 .map(SeaShellConverter::toTopDto);
 
     }
-
-    public Mono<SeaShellLowerDto> findLowerById(Long id) {
+    public Mono<SeaShellLowerDto> getLowerById(Long id) {
         return this.shellLowerRepository.findLowerById(id)
                 .map(SeaShellConverter::toLowerDto);
 
