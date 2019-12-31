@@ -30,7 +30,6 @@ public final class SeaShellsWSDLPersonsClient extends SeaShellsWSDLPersonsAbstra
         super(url);
     }
 
-    @Override
     public Person getItem(Long itemId) {
         SeaShellsWSDLPersonsService ss = new SeaShellsWSDLPersonsService(url, SERVICE_NAME);
         SeaShellsWSDLPersons port = ss.getSeaShellsWSDLPersonsSOAP();
@@ -40,7 +39,6 @@ public final class SeaShellsWSDLPersonsClient extends SeaShellsWSDLPersonsAbstra
         return person;
     }
 
-    @Override
     public URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException {
         return SeaShellsWSDLPersonsClient.class.getResource("/SeaShellsWSDLPersons.wsdl").toURI().toURL();
     }

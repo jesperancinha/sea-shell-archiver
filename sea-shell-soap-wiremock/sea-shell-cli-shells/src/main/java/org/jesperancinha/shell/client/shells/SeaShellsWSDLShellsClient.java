@@ -31,7 +31,6 @@ public final class SeaShellsWSDLShellsClient extends SeaShellsWSDLShellsAbstract
         super(url);
     }
 
-    @Override
     public Shell getItem(Long itemId) {
         SeaShellsWSDLShellsService ss = new SeaShellsWSDLShellsService(url, SERVICE_NAME);
         SeaShellsWSDLShells port = ss.getSeaShellsWSDLShellsSOAP();
@@ -45,12 +44,10 @@ public final class SeaShellsWSDLShellsClient extends SeaShellsWSDLShellsAbstract
         }
     }
 
-    @Override
     public URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException {
         return SeaShellsWSDLShellsClient.class.getResource("/SeaShellsWSDLShells.wsdl").toURI().toURL();
     }
 
-    @Override
     public List<Long> getAllShellIds() {
         SeaShellsWSDLShellsService ss = new SeaShellsWSDLShellsService(url, SERVICE_NAME);
         SeaShellsWSDLShells port = ss.getSeaShellsWSDLShellsSOAP();

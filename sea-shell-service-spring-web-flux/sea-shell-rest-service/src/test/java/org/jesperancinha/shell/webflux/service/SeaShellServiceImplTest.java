@@ -1,0 +1,57 @@
+package org.jesperancinha.shell.webflux.service;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import reactor.blockhound.BlockHound;
+
+import javax.xml.ws.WebServiceException;
+import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static reactor.core.publisher.Mono.delay;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+public class SeaShellServiceImplTest {
+
+    @Autowired
+    private SeaShellServiceImpl seaShellServiceImpl;
+
+    @BeforeAll
+    public static void setUpAll() {
+        BlockHound.install();
+    }
+
+    @Test
+    public void findAllCompleteSeaShells_onCall_thenNonBlocking() {
+        delay(Duration.ofSeconds(1))
+                .doOnNext(it -> seaShellServiceImpl.getAllSeaShells())
+                .block();
+    }
+
+    @Test
+    public void findAllCompleteSeaShellsBlock_onCall_thenBlocking() {
+        assertThrows(WebServiceException.class, () -> delay(Duration.ofSeconds(1))
+                .doOnNext(it -> seaShellServiceImpl.getAllSeaShellsNaifBlock())
+                .block());
+    }
+
+    @Test
+    public void findAllCompleteSeaShellsReactiveBlock_onCall_thenNonBlocking() {
+        delay(Duration.ofSeconds(1))
+                .doOnNext(it -> seaShellServiceImpl.getAllSeaShellsReactiveBlock())
+                .block();
+    }
+
+    @Test
+    public void findAllCompleteSeaShellsReactiveWithDelay_onCall_thenNonBlocking() {
+        delay(Duration.ofSeconds(1))
+                .doOnNext(it -> seaShellServiceImpl.getAllSeaShellsReactiveWithDelay())
+                .block();
+    }
+
+}

@@ -30,7 +30,6 @@ public final class SeaShellsWSDLAccountsClient extends SeaShellsWSDLAccountsAbst
         super(url);
     }
 
-    @Override
     public Account getItem(String accountId) {
         final SeaShellsWSDLAccountsService ss = new SeaShellsWSDLAccountsService(this.url, SERVICE_NAME);
         final SeaShellsWSDLAccounts port = ss.getSeaShellsWSDLAccountsSOAP();
@@ -40,7 +39,6 @@ public final class SeaShellsWSDLAccountsClient extends SeaShellsWSDLAccountsAbst
         return accounts;
     }
 
-    @Override
     public URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException {
         return SeaShellsWSDLAccountsClient.class.getResource("/SeaShellsWSDLAccounts.wsdl").toURI().toURL();
     }

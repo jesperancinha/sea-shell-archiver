@@ -30,7 +30,6 @@ public final class SeaShellsWSDLLowersClient extends SeaShellsWSDLLowersAbstract
         super(url);
     }
 
-    @Override
     public Lower getItem(final Long itemId) {
         final SeaShellsWSDLLowersService ss = new SeaShellsWSDLLowersService(this.url, SERVICE_NAME);
         final SeaShellsWSDLLowers port = ss.getSeaShellsWSDLLowersSOAP();
@@ -40,7 +39,6 @@ public final class SeaShellsWSDLLowersClient extends SeaShellsWSDLLowersAbstract
         return lowersReturn;
     }
 
-    @Override
     public URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException {
         return SeaShellsWSDLLowersClient.class.getResource("/SeaShellsWSDLLowers.wsdl").toURI().toURL();
     }

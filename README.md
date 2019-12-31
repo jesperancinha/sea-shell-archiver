@@ -53,6 +53,9 @@ Topics discussed:
 
 ### Technical
 
+-   [Flight of the Flux 1 - Assembly vs Subscription](https://spring.io/blog/2019/03/06/flight-of-the-flux-1-assembly-vs-subscription)
+-   [Hanselminutes Podcast 198 - Reactive Extensions for .NET (Rx) with Erik Meijer](https://www.hanselman.com/blog/HanselminutesPodcast198ReactiveExtensionsForNETRxWithErikMeijer.aspx)
+-   [Reactive Extensions](https://docs.microsoft.com/en-us/previous-versions/dotnet/reactive-extensions/hh242985(v=vs.103)?redirectedfrom=MSDN)
 -   [Reactive Programming by Venkat Subramaniam](https://www.youtube.com/watch?v=weWSYIUdX6c)
 -   [The Essence of Reactive Programming - TU Delft Repositories](https://repository.tudelft.nl/islandora/object/uuid:bd900036-40f4-432d-bfab-425cdebc466e/datastream/OBJ/download)
 -   [Notes on Reactive Programming Part I: The Reactive Landscape by Dave Syer](https://dzone.com/articles/notes-on-reactive-programming-part-i-the-reactive)
@@ -66,9 +69,9 @@ Topics discussed:
 -   [Move your apps to the cloud in weeks](https://pivotal.io/application-modernization)
 -   [The Twelve Factors](https://12factor.net/)
 -   [DDD and Microservices: Like Peanut Butter and Jelly - Matt Stine](https://content.pivotal.io/slides/ddd-and-microservices-like-peanut-butter-and-jelly-matt-stine)
+-   [Reactive Streams](http://www.reactive-streams.org/)
 -   [Reactive Manifesto](https://www.reactivemanifesto.org/)
 -   [NLJUG Reactive Programming](https://nljug.org/java-magazine/reactive-programming/)
--   [How todo in Java Spring Web Flux](https://howtodoinjava.com/spring-webflux/spring-webflux-tutorial/)
 -   [Baeldung Spring WebFlux](https://www.baeldung.com/spring-webflux)
 -   [Hands on Reactive Programming in Spring](https://www.bol.com/nl/p/hands-on-reactive-programming-in-spring-5/9200000084600333/?bltgh=pCsqVROC1Zv4I9xR0JRJfw.1.4.ProductTitle)
 -   [QPI Architecture](https://en.wikipedia.org/wiki/Intel_QuickPath_Interconnect)
@@ -78,6 +81,7 @@ Topics discussed:
 -   [Lombok Tips And Tricks](https://github.com/piczmar/lombok-tips-and-tricks)
 -   [In spring boot webflux based microservice, who is the subscriber?](https://stackoverflow.com/questions/48181801/in-spring-boot-webflux-based-microservice-who-is-the-subscriber)
 -   [How REST endpoints are auto subscribed while calling from Browser/REST Client?](https://stackoverflow.com/questions/50795071/how-rest-endpoints-are-auto-subscribed-while-calling-from-browser-rest-client)
+-   [Reactive Programming with Node.js](https://www.amazon.com/Reactive-Programming-Node-js-Fernando-Doglio/dp/1484221516)
 
 ### Domain knowledge
 

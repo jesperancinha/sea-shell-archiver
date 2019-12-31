@@ -30,7 +30,6 @@ public final class SeaShellsWSDLTopsClient extends SeaShellsWSDLTopAbstract {
         super(url);
     }
 
-    @Override
     public Top getItem(Long itemId) {
         final SeaShellsWSDLTopsService ss = new SeaShellsWSDLTopsService(this.url, SERVICE_NAME);
         final SeaShellsWSDLTops port = ss.getSeaShellsWSDLTopsSOAP();
@@ -40,7 +39,6 @@ public final class SeaShellsWSDLTopsClient extends SeaShellsWSDLTopAbstract {
         return topsReturn;
     }
 
-    @Override
     public URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException {
         return SeaShellsWSDLTopsClient.class.getResource("/SeaShellsWSDLTops.wsdl").toURI().toURL();
     }

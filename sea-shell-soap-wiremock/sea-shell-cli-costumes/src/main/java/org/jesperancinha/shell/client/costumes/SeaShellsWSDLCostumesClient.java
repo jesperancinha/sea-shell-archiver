@@ -34,7 +34,6 @@ public final class SeaShellsWSDLCostumesClient extends SeaShellsWSDLCostumesAbst
         this.port = getSeaShellsWSDLCostumes();
     }
 
-    @Override
     public Costume getItem(Long costumeId) {
         try {
             log.trace("Invoking costumes...");
@@ -52,10 +51,8 @@ public final class SeaShellsWSDLCostumesClient extends SeaShellsWSDLCostumesAbst
         return ss.getSeaShellsWSDLCostumesSOAP();
     }
 
-    @Override
     public URL getLocalWsdlLocation() throws MalformedURLException, URISyntaxException {
         return SeaShellsWSDLCostumesClient.class.getResource("/SeaShellsWSDLCostumes.wsdl").toURI().toURL();
     }
-
 
 }
