@@ -82,6 +82,7 @@ Topics discussed:
 -   [In spring boot webflux based microservice, who is the subscriber?](https://stackoverflow.com/questions/48181801/in-spring-boot-webflux-based-microservice-who-is-the-subscriber)
 -   [How REST endpoints are auto subscribed while calling from Browser/REST Client?](https://stackoverflow.com/questions/50795071/how-rest-endpoints-are-auto-subscribed-while-calling-from-browser-rest-client)
 -   [Reactive Programming with Node.js](https://www.amazon.com/Reactive-Programming-Node-js-Fernando-Doglio/dp/1484221516)
+-   [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
 
 ### Domain knowledge
 
@@ -99,6 +100,7 @@ Topics discussed:
 ### Tools
 
 -   [Syntax Highlight Code In Word Documents](http://www.planetb.ca/syntax-highlight-word)
+
 ## About me
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/joaofse?label=João%20Esperancinha&style=social)](https://twitter.com/joaofse)
