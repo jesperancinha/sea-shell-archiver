@@ -19,7 +19,7 @@ import static reactor.core.publisher.Mono.delay;
 public class SeaShellServiceImplTest {
 
     @Autowired
-    private SeaShellServiceImpl seaShellServiceImpl;
+    private SeaShellService seaShellService;
 
     @BeforeAll
     public static void setUpAll() {
@@ -29,28 +29,28 @@ public class SeaShellServiceImplTest {
     @Test
     public void findAllCompleteSeaShells_onCall_thenNonBlocking() {
         delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellServiceImpl.getAllSeaShells())
+                .doOnNext(it -> seaShellService.getAllSeaShells())
                 .block();
     }
 
     @Test
     public void findAllCompleteSeaShellsBlock_onCall_thenBlocking() {
         assertThrows(WebServiceException.class, () -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellServiceImpl.getAllSeaShellsNaifBlock())
+                .doOnNext(it -> seaShellService.getAllSeaShellsNaifBlock())
                 .block());
     }
 
     @Test
     public void findAllCompleteSeaShellsReactiveBlock_onCall_thenNonBlocking() {
         delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellServiceImpl.getAllSeaShellsReactiveBlock())
+                .doOnNext(it -> seaShellService.getAllSeaShellsReactiveBlock())
                 .block();
     }
 
     @Test
     public void findAllCompleteSeaShellsReactiveWithDelay_onCall_thenNonBlocking() {
         delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellServiceImpl.getAllSeaShellsReactiveWithDelay())
+                .doOnNext(it -> seaShellService.getAllSeaShellsReactiveWithDelay())
                 .block();
     }
 
