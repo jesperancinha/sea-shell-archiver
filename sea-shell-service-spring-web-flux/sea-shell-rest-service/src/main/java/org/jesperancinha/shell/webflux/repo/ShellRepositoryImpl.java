@@ -12,6 +12,9 @@ import reactor.core.scheduler.Schedulers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static reactor.core.scheduler.Schedulers.boundedElastic;
+import static reactor.core.scheduler.Schedulers.single;
+
 
 @Repository
 public class ShellRepositoryImpl implements ShellRepository {
@@ -26,15 +29,15 @@ public class ShellRepositoryImpl implements ShellRepository {
     }
 
     public Mono<Shell> findSeaShellById(final Long id) {
-        return Mono.fromCallable(() -> seaShellsWSDLShellsClient.getItem(id)).subscribeOn(Schedulers.boundedElastic());
+        return Mono.fromCallable(() -> seaShellsWSDLShellsClient.getItem(id)).subscribeOn(boundedElastic());
     }
 
     public ParallelFlux<Shell> findAllSeaShells() {
         return findAllShellIds()
                 .parallel(parallelism)
-                .runOn(Schedulers.boundedElastic())
+                .runOn(boundedElastic())
                 .map(seaShellsWSDLShellsClient::getItem)
-                .runOn(Schedulers.boundedElastic());
+                .runOn(single());
     }
 
     public Flux<Long> findAllShellIds() {

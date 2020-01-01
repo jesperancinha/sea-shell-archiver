@@ -59,11 +59,6 @@
             </dependency>
             <dependency>
                 <groupId>org.jesperancinha.shell</groupId>
-                <artifactId>sea-shell-service</artifactId>
-                <version>${sea-shell-service.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jesperancinha.shell</groupId>
                 <artifactId>sea-shell-cli-accounts</artifactId>
                 <version>${sea-shell-service.version}</version>
             </dependency>
