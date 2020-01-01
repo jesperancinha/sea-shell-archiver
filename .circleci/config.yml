@@ -30,6 +30,8 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
+      - run: apt-get update
+      - run: apt-get install maven
       - run: mvn clean install
 
       - save_cache:
