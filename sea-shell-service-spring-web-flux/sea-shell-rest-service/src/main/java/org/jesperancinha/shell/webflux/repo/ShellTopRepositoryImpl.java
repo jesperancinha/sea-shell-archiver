@@ -4,7 +4,8 @@ import org.jesperancinha.shell.client.tops.SeaShellsWSDLTopAbstract;
 import org.jesperancinha.shell.client.tops.Top;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
+
+import static reactor.core.scheduler.Schedulers.single;
 
 
 @Repository
@@ -18,7 +19,7 @@ public class ShellTopRepositoryImpl implements ShellTopRepository {
 
     public Mono<Top> findTopById(final Long id) {
         return Mono.fromCallable(() -> seaShellsWSDLTopClient.getItem(id))
-                .subscribeOn(Schedulers.boundedElastic());
+                .subscribeOn(single());
     }
 
     public Top findTopByIdBlock(final Long id) {

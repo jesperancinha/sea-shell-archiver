@@ -26,7 +26,7 @@ public class ShellCostumeRepositoryImpl implements ShellCostumeRepository {
     }
 
     public Mono<Costume> findCostumeById(final Long id) {
-        return Mono.fromCallable(() -> seaShellsWSDLCostumesAbstract.getItem(id)).subscribeOn(Schedulers.boundedElastic());
+        return Mono.fromCallable(() -> seaShellsWSDLCostumesAbstract.getItem(id)).subscribeOn(Schedulers.elastic());
     }
 
     public ParallelFlux<Costume> findCostumes(List<Long> costumeIds) {
@@ -36,7 +36,7 @@ public class ShellCostumeRepositoryImpl implements ShellCostumeRepository {
                         .collect(Collectors.toList()))
                 .flux().flatMap(Flux::fromIterable)
                 .parallel(parallelism)
-                .runOn(Schedulers.boundedElastic());
+                .runOn(Schedulers.elastic());
     }
 
     public List<Costume> findCostumesBlock(List<Long> costumeIds) {

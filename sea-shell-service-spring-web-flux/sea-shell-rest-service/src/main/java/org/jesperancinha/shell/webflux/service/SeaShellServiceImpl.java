@@ -79,13 +79,13 @@ public class SeaShellServiceImpl extends SeaShellConsumerAdapter implements SeaS
         return Mono.fromCallable(this::getAllSeaShellsNaifBlock)
                 .flux().flatMap(Flux::fromIterable)
                 .parallel(parallelism)
-                .runOn(Schedulers.boundedElastic());
+                .runOn(Schedulers.elastic());
     }
 
     public Flux<SeaShellDto> getAllSeaShellsReactiveWithDelay() {
         return getAllSeaShells()
                 .sequential()
                 .delayElements(Duration.ofMillis(delay))
-                .subscribeOn(Schedulers.boundedElastic());
+                .subscribeOn(Schedulers.elastic());
     }
 }
