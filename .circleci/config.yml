@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: openjdk:12-jdk
+      - image: openjdk:12-jdk-oracle
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -30,8 +30,6 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: apt-get update
-      - run: apt-get install maven
       - run: mvn clean install
 
       - save_cache:
