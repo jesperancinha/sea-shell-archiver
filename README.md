@@ -38,7 +38,8 @@ Essentially this is a fun exercise to help understand all the mechanisms behind 
 
 NOTES:
 
--   Unfortunately [Blockhound](https://github.com/reactor/BlockHound) doesn't seem to work well with Java 13. This is why I had to switch back to 12
+-   Unfortunately [Blockhound](https://github.com/reactor/BlockHound) doesn't seem to work well with Java 13. This is why I had to switch back to 12.
+-   To run circleCI I had to use an external [Docker image](https://hub.docker.com/r/codeaches/openjdk) from [codecaches](https://hub.docker.com/u/codeaches).
 
 Topics discussed:
 
@@ -96,6 +97,7 @@ Topics discussed:
 -   [Apache Axis2 1.6.4 Release Note](https://axis.apache.org/axis2/java/core/release-notes/1.6.4.html)
 -   [Index of /dist/axis/axis2/java/core/1.6.4](https://archive.apache.org/dist/axis/axis2/java/core/1.6.4/)
 -   [AXIS2 JAVA.LANG.NOCLASSDEFFOUNDERROR: ORG/APACHE/WS/COMMONS/SCHEMA/UTILS/NAMESPACEPREFIXLIST](https://yiingw.wordpress.com/2018/02/12/axis2-java-lang-noclassdeffounderror-org-apache-ws-commons-schema-utils-namespaceprefixlist/)
+-   [Upgrade to JDK12?](https://discuss.circleci.com/t/upgrade-to-jdk12/29566/7)
 
 ### Tools
 
