@@ -11,3 +11,6 @@ target
 bin
 build
 dist
+
+# OS
+.DS_Store
