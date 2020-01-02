@@ -35,7 +35,7 @@ public class SeaShellControllerImpl implements SeaShellController {
      *
      * @return
      */
-    public ParallelFlux<Pair<String, String>> getAllCompleteShells() {
+    public ParallelFlux<Pair<String, String>> getShellSlogans() {
         return seaShellService.getAllSeaShells().map(seaShellDto -> Pair.of(seaShellDto.getName(), seaShellDto.getSlogan()));
     }
 

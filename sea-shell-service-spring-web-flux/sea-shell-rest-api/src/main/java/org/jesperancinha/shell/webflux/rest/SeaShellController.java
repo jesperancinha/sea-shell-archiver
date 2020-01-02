@@ -19,7 +19,7 @@ public interface SeaShellController {
     ParallelFlux<SeaShellDto> getAllShells();
 
     @GetMapping("/slogans")
-    ParallelFlux<Pair<String, String>> getAllCompleteShells();
+    ParallelFlux<Pair<String, String>> getShellSlogans();
 
     @GetMapping("/block")
     List<SeaShellDto> getAllShellsBlock();
