@@ -13,11 +13,12 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.ParallelFlux;
-import reactor.core.scheduler.Schedulers;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.time.Duration.ofMillis;
+import static reactor.core.scheduler.Schedulers.elastic;
 
 
 @Slf4j
@@ -69,8 +70,10 @@ public class SeaShellServiceImpl extends SeaShellConsumerAdapter implements SeaS
                 .collect(Collectors.toList());
     }
 
-    public SeaShellDto getAllSeaShellsNaifBlock(Long id) {
-        final SeaShellDto seaShellDto = SeaShellConverter.toShellDto(shellRepository.findSeaShellBlockById(id));
+    public SeaShellDto getSeaShellNaifBlock(Long id) {
+        final SeaShellDto seaShellDto = SeaShellConverter
+                .toShellDto(shellRepository
+                        .findSeaShellBlockById(id));
         setMainRootElements(seaShellDto);
         return seaShellDto;
     }
@@ -79,13 +82,13 @@ public class SeaShellServiceImpl extends SeaShellConsumerAdapter implements SeaS
         return Mono.fromCallable(this::getAllSeaShellsNaifBlock)
                 .flux().flatMap(Flux::fromIterable)
                 .parallel(parallelism)
-                .runOn(Schedulers.elastic());
+                .runOn(elastic());
     }
 
     public Flux<SeaShellDto> getAllSeaShellsReactiveWithDelay() {
         return getAllSeaShells()
                 .sequential()
-                .delayElements(Duration.ofMillis(delay))
-                .subscribeOn(Schedulers.elastic());
+                .delayElements(ofMillis(delay))
+                .subscribeOn(elastic());
     }
 }

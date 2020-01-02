@@ -14,7 +14,7 @@ public interface SeaShellService {
 
     List<SeaShellDto> getAllSeaShellsNaifBlock();
 
-    SeaShellDto getAllSeaShellsNaifBlock(Long id);
+    SeaShellDto getSeaShellNaifBlock(Long id);
 
     ParallelFlux<SeaShellDto> getAllSeaShellsReactiveBlock();
 

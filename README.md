@@ -46,9 +46,6 @@ Topics discussed:
 -   [WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html)
     -   [Flux](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html)
     -   [Mono](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html)
--   [RxJava2](https://github.com/ReactiveX/RxJava)
-    -   [Observable](http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html)
-    -   [Flowable](http://reactivex.io/RxJava/2.x/javadoc/io/reactivex/Flowable.html)
 
 ## References
 

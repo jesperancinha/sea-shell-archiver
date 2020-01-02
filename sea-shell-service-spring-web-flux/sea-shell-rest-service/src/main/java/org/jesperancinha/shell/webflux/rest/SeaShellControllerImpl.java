@@ -55,7 +55,7 @@ public class SeaShellControllerImpl implements SeaShellController {
      * @return
      */
     public SeaShellDto getShellBlockById(@PathVariable Long id) {
-        return seaShellService.getAllSeaShellsNaifBlock(id);
+        return seaShellService.getSeaShellNaifBlock(id);
     }
 
     /**

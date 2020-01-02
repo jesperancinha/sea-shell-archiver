@@ -74,7 +74,6 @@ public class SeaShellOneServiceImpl implements SeaShellOneService {
     public Mono<SeaShellTopDto> getTopById(Long id) {
         return this.shellTopRepository.findTopById(id)
                 .map(SeaShellConverter::toTopDto);
-
     }
 
     public Mono<SeaShellLowerDto> getLowerById(Long id) {
