@@ -20,6 +20,7 @@
         <spring-core.version>5.2.2.RELEASE</spring-core.version>
         <spring-boot-starter-webflux.version>2.2.2.RELEASE</spring-boot-starter-webflux.version>
         <spring-data-commons.version>2.2.3.RELEASE</spring-data-commons.version>
+        <spring-boot-maven-plugin.version>2.2.2.RELEASE</spring-boot-maven-plugin.version>
         <lombok-maven-plugin.version>1.18.8.1</lombok-maven-plugin.version>
         <lombok.version>1.18.10</lombok.version>
         <netty-all.version>4.1.44.Final</netty-all.version>
@@ -90,6 +91,11 @@
             <dependency>
                 <groupId>org.jesperancinha.shell</groupId>
                 <artifactId>sea-shell-cli-common</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-service-api</artifactId>
                 <version>${sea-shell-service.version}</version>
             </dependency>
             <!-- External Dependencies -->

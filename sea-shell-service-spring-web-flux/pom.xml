@@ -29,11 +29,7 @@
                 <artifactId>sea-shell-rest-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.jesperancinha.shell</groupId>
-                <artifactId>sea-shell-service-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>
