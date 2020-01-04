@@ -19,19 +19,8 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Service
-public class SeaShellOneServiceImpl implements SeaShellOneService {
+public class SeaShellOneServiceImpl extends SeaShellOneAdapter implements SeaShellOneService {
 
-    private final ShellRepository shellRepository;
-
-    private final ShellPersonRepository shellPersonRepository;
-
-    private final ShellCostumeRepository shellCostumeRepository;
-
-    private final ShellAccountRepository shellAccountRepository;
-
-    private final ShellTopRepository shellTopRepository;
-
-    private final ShellLowerRepository shellLowerRepository;
 
     public SeaShellOneServiceImpl(ShellRepository shellRepository,
                                   ShellPersonRepository shellPersonRepository,
@@ -39,12 +28,13 @@ public class SeaShellOneServiceImpl implements SeaShellOneService {
                                   ShellAccountRepository shellAccountRepository,
                                   ShellTopRepository shellTopRepository,
                                   ShellLowerRepository shellLowerRepository) {
-        this.shellRepository = shellRepository;
-        this.shellPersonRepository = shellPersonRepository;
-        this.shellCostumeRepository = shellCostumeRepository;
-        this.shellAccountRepository = shellAccountRepository;
-        this.shellTopRepository = shellTopRepository;
-        this.shellLowerRepository = shellLowerRepository;
+        super(
+                shellRepository,
+                shellPersonRepository,
+                shellCostumeRepository,
+                shellAccountRepository,
+                shellTopRepository,
+                shellLowerRepository);
     }
 
     public Flux<Long> findAllIds() {

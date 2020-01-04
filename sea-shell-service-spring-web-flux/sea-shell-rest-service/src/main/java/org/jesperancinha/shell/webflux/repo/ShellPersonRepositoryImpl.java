@@ -7,10 +7,12 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.ParallelFlux;
+import reactor.core.scheduler.Schedulers;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static reactor.core.publisher.Mono.fromCallable;
 import static reactor.core.scheduler.Schedulers.elastic;
 
 
@@ -27,21 +29,20 @@ public class ShellPersonRepositoryImpl implements ShellPersonRepository {
     }
 
     public Mono<Person> findPersonById(final Long id) {
-        return Mono.fromCallable(() -> seaShellsWSDLPersonsClient.getItem(id)).subscribeOn(elastic());
+        return fromCallable(() -> seaShellsWSDLPersonsClient.getItem(id)).subscribeOn(elastic());
     }
 
-    public ParallelFlux<Person> findPersons(List<Long> costumeIds) {
-        return Mono
-                .fromCallable(() -> costumeIds.parallelStream()
-                        .map(seaShellsWSDLPersonsClient::getItem)
-                        .collect(Collectors.toList()))
-                .flux().flatMap(Flux::fromIterable)
+    public ParallelFlux<Person> findPersons(List<Long> personIds) {
+        return Flux.fromIterable(personIds)
                 .parallel(parallelism)
-                .runOn(elastic());
+                .runOn(Schedulers.parallel())
+                .map(personId -> fromCallable(() -> seaShellsWSDLPersonsClient.getItem(personId)))
+                .flatMap(ParallelFlux::from);
+
     }
 
-    public List<Person> findPersonsBlock(List<Long> costumeIds) {
-        return costumeIds.parallelStream()
+    public List<Person> findPersonsBlock(List<Long> personIds) {
+        return personIds.parallelStream()
                 .map(seaShellsWSDLPersonsClient::getItem)
                 .collect(Collectors.toList());
     }

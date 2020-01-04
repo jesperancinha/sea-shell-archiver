@@ -9,7 +9,7 @@ import java.util.List;
 public interface ShellPersonRepository {
     Mono<Person> findPersonById(Long id);
 
-    ParallelFlux<Person> findPersons(List<Long> costumeIds);
+    ParallelFlux<Person> findPersons(List<Long> personIds);
 
-    List<Person> findPersonsBlock(List<Long> costumeIds);
+    List<Person> findPersonsBlock(List<Long> personIds);
 }

@@ -7,6 +7,9 @@ import org.jesperancinha.shell.webflux.data.SeaShellLowerDto;
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
 import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
 import org.springframework.data.util.Pair;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import reactor.core.publisher.Flux;
@@ -33,12 +36,4 @@ public interface SeaShellOneController {
 
     @GetMapping("/lower/{id}")
     Mono<SeaShellLowerDto> getLowerById(@PathVariable Long id);
-
-    @GetMapping("/rootCostume/{idTop}/{idLower}")
-    Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> getRootCostume(
-            @PathVariable Long idTop, @PathVariable Long idLower);
-
-    @GetMapping("/rootShell/{idPerson}/{idCostume}")
-    Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> getRootShell(
-            @PathVariable Long idPerson, @PathVariable Long idCostume);
 }

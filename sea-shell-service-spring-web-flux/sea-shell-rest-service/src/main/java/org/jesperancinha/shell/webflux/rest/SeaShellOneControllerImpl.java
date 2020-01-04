@@ -7,7 +7,6 @@ import org.jesperancinha.shell.webflux.data.SeaShellLowerDto;
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
 import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
 import org.jesperancinha.shell.webflux.service.SeaShellOneService;
-import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,17 +49,5 @@ public class SeaShellOneControllerImpl implements SeaShellOneController {
 
     public Mono<SeaShellLowerDto> getLowerById(@PathVariable Long id) {
         return seaShellOneService.getLowerById(id);
-    }
-
-    public Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> getRootCostume(
-            @PathVariable Long idTop, @PathVariable Long idLower) {
-        return seaShellOneService.getTopById(idTop)
-                .zipWith(seaShellOneService.getLowerById(idLower), Pair::of);
-    }
-
-    public Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> getRootShell(
-            @PathVariable Long idPerson, @PathVariable Long idCostume) {
-        return seaShellOneService.getPersonById(idPerson)
-                .zipWith(seaShellOneService.getCostumeById(idCostume), Pair::of);
     }
 }
