@@ -69,14 +69,26 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
                     return seaShellDto;
                 })
                 .subscribeOn(Schedulers.parallel())
-                .map(seaShellDto -> seaShellDto.getCostumes().parallelStream().map(seaShellCostumeDto -> {
-                    seaShellCostumeDto.setTopDto(SeaShellConverter.toTopDto(shellTopRepository.findTopByIdBlock(seaShellCostumeDto.getTopId())));
+                .map(seaShellDto ->
+                        seaShellDto.getCostumes().parallelStream().map(seaShellCostumeDto -> {
+                            seaShellCostumeDto.setTopDto(SeaShellConverter.toTopDto(shellTopRepository.findTopByIdBlock(seaShellCostumeDto.getTopId())));
+                            return seaShellDto;
+                        }).findFirst().orElse(SeaShellDto.builder().build()))
+                .subscribeOn(Schedulers.parallel())
+                .map(seaShellDto ->
+                        seaShellDto.getCostumes().parallelStream().map(seaShellCostumeDto -> {
+                            seaShellCostumeDto.setLowerDto(SeaShellConverter.toLowerDto(shellLowerRepository.findLowerByIdBlock(seaShellCostumeDto.getLowerId())));
+                            return seaShellDto;
+                        }).findFirst().orElse(SeaShellDto.builder().build()))
+                .map(seaShellDto -> {
+                    seaShellDto.getPersons().parallelStream()
+                            .forEach(seaShellPersonDto ->
+                                    seaShellPersonDto
+                                            .setAccountDto(
+                                                    SeaShellConverter
+                                                            .toAccountDto(shellAccountRepository.findAccountByIdBlock(seaShellPersonDto.getAccountId()))));
                     return seaShellDto;
-                }).findFirst().orElse(SeaShellDto.builder().build()))
-                .map(seaShellDto -> seaShellDto.getCostumes().parallelStream().map(seaShellCostumeDto -> {
-                    seaShellCostumeDto.setLowerDto(SeaShellConverter.toLowerDto(shellLowerRepository.findLowerByIdBlock(seaShellCostumeDto.getLowerId())));
-                    return seaShellDto;
-                }).findFirst().orElse(SeaShellDto.builder().build()));
+                });
     }
 
 }
