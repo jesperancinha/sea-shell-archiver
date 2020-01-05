@@ -9,8 +9,12 @@ import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import reactor.core.publisher.Mono;
+import reactor.core.publisher.ParallelFlux;
 
 public interface SeaShellReactiveController {
+
+    @GetMapping
+    ParallelFlux<SeaShellDto> getAllSeaShells();
 
     @GetMapping("/{id}")
     Mono<SeaShellDto> getShell(

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+import reactor.core.publisher.ParallelFlux;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,12 +22,16 @@ public class SeaShellReactiveControllerImpl implements SeaShellReactiveControlle
 
     private final SeaShellReactiveService seaShellReactiveService;
 
-    public Mono<SeaShellDto> getShell(@PathVariable Long id) {
-        return seaShellReactiveService.getShell(id);
-    }
-
     public SeaShellReactiveControllerImpl(SeaShellReactiveService seaShellReactiveService) {
         this.seaShellReactiveService = seaShellReactiveService;
+    }
+
+   public ParallelFlux<SeaShellDto> getAllSeaShells() {
+        return seaShellReactiveService.getAllSeaShells();
+    }
+
+    public Mono<SeaShellDto> getShell(@PathVariable Long id) {
+        return seaShellReactiveService.getShell(id);
     }
 
     public Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> getRootShell(
