@@ -119,13 +119,11 @@
             <artifactId>blockhound-junit-platform</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>5.2.1.RELEASE</version>
+            <groupId>org.jesperancinha.shell</groupId>
+            <artifactId>sea-shell-soap-service</artifactId>
+            <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>

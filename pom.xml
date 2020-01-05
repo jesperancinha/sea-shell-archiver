@@ -98,6 +98,11 @@
                 <artifactId>sea-shell-service-api</artifactId>
                 <version>${sea-shell-service.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-soap-service</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
             <!-- External Dependencies -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

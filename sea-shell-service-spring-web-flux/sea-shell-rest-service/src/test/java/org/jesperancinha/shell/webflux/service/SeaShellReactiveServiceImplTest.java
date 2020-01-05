@@ -10,6 +10,7 @@ import reactor.blockhound.BlockHound;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static reactor.core.publisher.Mono.delay;
 
 @ExtendWith(SpringExtension.class)
@@ -26,8 +27,8 @@ public class SeaShellReactiveServiceImplTest {
 
     @Test
     public void findAllCompleteSeaShells_onCall_thenNonBlocking() {
-        delay(Duration.ofSeconds(1))
+        assertAll(() -> delay(Duration.ofSeconds(1))
                 .doOnNext(it -> seaShellReactiveService.getAllSeaShells())
-                .block();
+                .block());
     }
 }

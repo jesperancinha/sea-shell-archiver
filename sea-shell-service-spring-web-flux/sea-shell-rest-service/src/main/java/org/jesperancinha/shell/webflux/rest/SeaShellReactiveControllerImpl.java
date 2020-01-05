@@ -26,7 +26,7 @@ public class SeaShellReactiveControllerImpl implements SeaShellReactiveControlle
         this.seaShellReactiveService = seaShellReactiveService;
     }
 
-   public ParallelFlux<SeaShellDto> getAllSeaShells() {
+    public ParallelFlux<SeaShellDto> getAllSeaShells() {
         return seaShellReactiveService.getAllSeaShells();
     }
 

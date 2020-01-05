@@ -24,7 +24,7 @@ public class SeaShellOneControllerImpl implements SeaShellOneController {
     }
 
     public Flux<Long> getAllShells() {
-        return seaShellOneService.findAllIds();
+        return seaShellOneService.getAllIds();
     }
 
     public Mono<SeaShellDto> getShellById(@PathVariable Long id) {

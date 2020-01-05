@@ -131,13 +131,13 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
 
     private Mono<SeaShellDto> fetchCostumeTopPublisher(SeaShellDto seaShellDtoReturn) {
         return fromCallable(() ->
-                        seaShellDtoReturn.getCostumes().parallelStream().map(seaShellCostumeDto ->
-                        {
-                            seaShellCostumeDto.setTopDto(
-                                    SeaShellConverter.toTopDto(
-                                            shellTopRepository.findTopByIdBlock(seaShellCostumeDto.getTopId())));
-                            return seaShellDtoReturn;
-                        }).findFirst().orElse(seaShellDtoReturn));
+                seaShellDtoReturn.getCostumes().parallelStream().map(seaShellCostumeDto ->
+                {
+                    seaShellCostumeDto.setTopDto(
+                            SeaShellConverter.toTopDto(
+                                    shellTopRepository.findTopByIdBlock(seaShellCostumeDto.getTopId())));
+                    return seaShellDtoReturn;
+                }).findFirst().orElse(seaShellDtoReturn));
     }
 
     private Mono<SeaShellDto> fetchPersonAccountPublisher(SeaShellDto seaShellDtoReturn) {

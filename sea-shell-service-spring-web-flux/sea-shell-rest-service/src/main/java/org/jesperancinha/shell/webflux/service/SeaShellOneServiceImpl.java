@@ -37,7 +37,7 @@ public class SeaShellOneServiceImpl extends SeaShellOneAdapter implements SeaShe
                 shellLowerRepository);
     }
 
-    public Flux<Long> findAllIds() {
+    public Flux<Long> getAllIds() {
         return this.shellRepository.findAllShellIds();
     }
 

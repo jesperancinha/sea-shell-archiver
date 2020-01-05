@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface SeaShellOneService {
-    Flux<Long> findAllIds();
+    Flux<Long> getAllIds();
 
     Mono<SeaShellDto> getSeaShellById(Long id);
 

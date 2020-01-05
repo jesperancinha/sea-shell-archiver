@@ -11,6 +11,7 @@ import reactor.blockhound.BlockHound;
 import javax.xml.ws.WebServiceException;
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static reactor.core.publisher.Mono.delay;
 
@@ -28,9 +29,9 @@ public class SeaShellServiceImplTest {
 
     @Test
     public void findAllCompleteSeaShells_onCall_thenNonBlocking() {
-        delay(Duration.ofSeconds(1))
+        assertAll(() -> delay(Duration.ofSeconds(1))
                 .doOnNext(it -> seaShellService.getAllSeaShells())
-                .block();
+                .block());
     }
 
     @Test
@@ -42,16 +43,16 @@ public class SeaShellServiceImplTest {
 
     @Test
     public void findAllCompleteSeaShellsReactiveBlock_onCall_thenNonBlocking() {
-        delay(Duration.ofSeconds(1))
+        assertAll(() -> delay(Duration.ofSeconds(1))
                 .doOnNext(it -> seaShellService.getAllSeaShellsReactiveBlock())
-                .block();
+                .block());
     }
 
     @Test
     public void findAllCompleteSeaShellsReactiveWithDelay_onCall_thenNonBlocking() {
-        delay(Duration.ofSeconds(1))
+        assertAll(() -> delay(Duration.ofSeconds(1))
                 .doOnNext(it -> seaShellService.getAllSeaShellsReactiveWithDelay())
-                .block();
+                .block());
     }
 
 }
