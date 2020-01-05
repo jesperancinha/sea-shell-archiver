@@ -19,15 +19,15 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Service
-public class SeaShellOneServiceImpl extends SeaShellOneAdapter implements SeaShellOneService {
+public class SeaShellReactiveOneServiceImpl extends SeaShellOneAdapter implements SeaShellReactiveOneService {
 
 
-    public SeaShellOneServiceImpl(ShellRepository shellRepository,
-                                  ShellPersonRepository shellPersonRepository,
-                                  ShellCostumeRepository shellCostumeRepository,
-                                  ShellAccountRepository shellAccountRepository,
-                                  ShellTopRepository shellTopRepository,
-                                  ShellLowerRepository shellLowerRepository) {
+    public SeaShellReactiveOneServiceImpl(ShellRepository shellRepository,
+                                          ShellPersonRepository shellPersonRepository,
+                                          ShellCostumeRepository shellCostumeRepository,
+                                          ShellAccountRepository shellAccountRepository,
+                                          ShellTopRepository shellTopRepository,
+                                          ShellLowerRepository shellLowerRepository) {
         super(
                 shellRepository,
                 shellPersonRepository,

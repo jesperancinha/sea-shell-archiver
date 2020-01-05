@@ -19,12 +19,12 @@ import static reactor.core.publisher.Mono.delay;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class SeaShellOneServiceImplTest {
+public class SeaShellReactiveOneServiceImplTest {
 
     private static WireMockServer wireMockServer;
 
     @Autowired
-    private SeaShellOneService seaShellOneService;
+    private SeaShellReactiveOneService seaShellReactiveOneService;
 
     @BeforeAll
     public static void setUpAll() throws IOException {
@@ -35,49 +35,49 @@ public class SeaShellOneServiceImplTest {
     @Test
     public void findAllIds_onCall_thenNonBlocking() {
         assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellOneService.getAllIds())
+                .doOnNext(it -> seaShellReactiveOneService.getAllIds())
                 .block());
     }
 
     @Test
     public void findSeaShellById_onCall_thenNonBlocking() {
         assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellOneService.getSeaShellById(1L))
+                .doOnNext(it -> seaShellReactiveOneService.getSeaShellById(1L))
                 .block());
     }
 
     @Test
     public void findPersonById_onCall_thenNonBlocking() {
         assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellOneService.getPersonById(1L))
+                .doOnNext(it -> seaShellReactiveOneService.getPersonById(1L))
                 .block());
     }
 
     @Test
     public void findCostumeById_onCall_thenNonBlocking() {
         assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellOneService.getCostumeById(1L))
+                .doOnNext(it -> seaShellReactiveOneService.getCostumeById(1L))
                 .block());
     }
 
     @Test
     public void findAccountById_onCall_thenNonBlocking() {
         assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellOneService.getAccountById("ACCOUNTID"))
+                .doOnNext(it -> seaShellReactiveOneService.getAccountById("ACCOUNTID"))
                 .block());
     }
 
     @Test
     public void findTopById_onCall_thenNonBlocking() {
         assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellOneService.getTopById(1L))
+                .doOnNext(it -> seaShellReactiveOneService.getTopById(1L))
                 .block());
     }
 
     @Test
     public void findLowerById_onCall_thenNonBlocking() {
         assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellOneService.getLowerById(1L))
+                .doOnNext(it -> seaShellReactiveOneService.getLowerById(1L))
                 .block());
     }
 

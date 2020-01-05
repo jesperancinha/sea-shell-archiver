@@ -75,4 +75,14 @@ public class SeaShellControllerImpl implements SeaShellController {
     public Flux<SeaShellDto> getAllShellsReactiveWithDelay() {
         return seaShellService.getAllSeaShellsReactiveWithDelay();
     }
+
+    /**
+     * Reactive with delay
+     *
+     * @return
+     */
+    @Override
+    public Flux<SeaShellDto> getAllShellsReactiveWithForkJoins() {
+        return seaShellService.getAllSeaShellsReactiveWithForkJoins();
+    }
 }

@@ -15,15 +15,15 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SeaShellConsumerAdapter {
 
-    private final ShellCostumeRepository costumeRepository;
+    protected final ShellCostumeRepository costumeRepository;
 
-    private final ShellPersonRepository personRepository;
+    protected final ShellPersonRepository personRepository;
 
-    private final ShellAccountRepository accountRepository;
+    protected final ShellAccountRepository accountRepository;
 
-    private final ShellTopRepository topRepository;
+    protected final ShellTopRepository topRepository;
 
-    private final ShellLowerRepository lowerRepository;
+    protected final ShellLowerRepository lowerRepository;
 
     public SeaShellConsumerAdapter(ShellCostumeRepository costumeRepository,
                                    ShellPersonRepository personRepository,

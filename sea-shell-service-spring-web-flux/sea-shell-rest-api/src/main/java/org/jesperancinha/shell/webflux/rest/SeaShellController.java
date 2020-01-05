@@ -32,4 +32,7 @@ public interface SeaShellController {
 
     @GetMapping("/reactiveWithDelay")
     Flux<SeaShellDto> getAllShellsReactiveWithDelay();
+
+    @GetMapping("/reactiveWithForkJoins")
+    Flux<SeaShellDto> getAllShellsReactiveWithForkJoins();
 }

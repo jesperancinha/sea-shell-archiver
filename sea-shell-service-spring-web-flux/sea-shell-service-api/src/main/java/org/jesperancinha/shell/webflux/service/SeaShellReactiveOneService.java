@@ -9,7 +9,7 @@ import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface SeaShellOneService {
+public interface SeaShellReactiveOneService {
     Flux<Long> getAllIds();
 
     Mono<SeaShellDto> getSeaShellById(Long id);

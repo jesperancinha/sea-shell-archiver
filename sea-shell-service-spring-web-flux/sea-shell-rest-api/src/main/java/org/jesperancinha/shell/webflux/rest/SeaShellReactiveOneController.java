@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface SeaShellOneController {
+public interface SeaShellReactiveOneController {
     @GetMapping
     Flux<Long> getAllShells();
 

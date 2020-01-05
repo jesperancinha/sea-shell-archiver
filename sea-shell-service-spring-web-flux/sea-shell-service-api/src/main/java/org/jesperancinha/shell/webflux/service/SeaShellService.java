@@ -19,4 +19,6 @@ public interface SeaShellService {
     ParallelFlux<SeaShellDto> getAllSeaShellsReactiveBlock();
 
     Flux<SeaShellDto> getAllSeaShellsReactiveWithDelay();
+
+    Flux<SeaShellDto> getAllSeaShellsReactiveWithForkJoins();
 }
