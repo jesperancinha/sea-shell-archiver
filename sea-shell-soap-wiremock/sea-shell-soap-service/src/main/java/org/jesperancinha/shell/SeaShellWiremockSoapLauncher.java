@@ -20,6 +20,11 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 public class SeaShellWiremockSoapLauncher {
 
     public static void main(String[] args) throws IOException {
+        createWireMockServer();
+
+    }
+
+    public static WireMockServer createWireMockServer() throws IOException {
         final WireMockServer wireMockServer = new WireMockServer(8090);
         wireMockServer.start();
         configureFor("localhost", 8090);
@@ -40,7 +45,7 @@ public class SeaShellWiremockSoapLauncher {
         stupRequestToWSDL("/seashells/persons?wsdl", "/mock/responses/persons/SeaShellsWSDLPersons.wsdl");
         stupRequestToWSDL("/seashells/shells?wsdl", "/mock/responses/shells/SeaShellsWSDLShells.wsdl");
         stupRequestToWSDL("/seashells/tops?wsdl", "/mock/responses/tops/SeaShellsWSDLTops.wsdl");
-
+        return wireMockServer;
     }
 
     private static void stubShells() throws IOException {

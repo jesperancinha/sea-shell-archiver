@@ -1,5 +1,8 @@
 package org.jesperancinha.shell.webflux.service;
 
+import com.github.tomakehurst.wiremock.WireMockServer;
+import org.jesperancinha.shell.SeaShellWiremockSoapLauncher;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.blockhound.BlockHound;
 
 import javax.xml.ws.WebServiceException;
+import java.io.IOException;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -19,12 +23,15 @@ import static reactor.core.publisher.Mono.delay;
 @SpringBootTest
 public class SeaShellServiceImplTest {
 
+    private static WireMockServer wireMockServer;
+
     @Autowired
     private SeaShellService seaShellService;
 
     @BeforeAll
-    public static void setUpAll() {
+    public static void setUpAll() throws IOException {
         BlockHound.install();
+        wireMockServer = SeaShellWiremockSoapLauncher.createWireMockServer();
     }
 
     @Test
@@ -53,6 +60,11 @@ public class SeaShellServiceImplTest {
         assertAll(() -> delay(Duration.ofSeconds(1))
                 .doOnNext(it -> seaShellService.getAllSeaShellsReactiveWithDelay())
                 .block());
+    }
+
+    @AfterAll
+    public static void afterAll() {
+        wireMockServer.stop();
     }
 
 }
