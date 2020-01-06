@@ -14,23 +14,16 @@ public class SeaShellWebClient {
 
     private final WebClient client;
 
-    public static void main(String[] args) throws InterruptedException, ExecutionException {
-        SeaShellWebClient seaShellWebClient = new SeaShellWebClient("http://localhost:8080");
-        seaShellWebClient.consume();
-        seaShellWebClient.consumeReactively();
-    }
-
-    private void consumeReactively() throws ExecutionException, InterruptedException {
-        final SeaShellWebClientOneHelper seaShellWebClientOneHelper = new SeaShellWebClientOneHelper(this.client);
-        log.info("REACTIVE WAY ONE->" + seaShellWebClientOneHelper.getMultipleRequestClientSideOneShell(1L).toString());
-        log.info("REACTIVE WAY ALL->" + seaShellWebClientOneHelper.getMultipleRequestClientSideOneShell().toString());
-    }
-
     public SeaShellWebClient(final String uri) {
         this.client = WebClient.builder().baseUrl(uri).build();
     }
 
-    public void consume() throws InterruptedException, ExecutionException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        SeaShellWebClient seaShellWebClient = new SeaShellWebClient("http://localhost:8080");
+        seaShellWebClient.consume();
+    }
+
+    public void consume() throws InterruptedException {
         getSeaShellById(1L).subscribe(x -> log.info("REACTIVE ONE->" + x.toString()));
         getAllSeaShells().subscribe(x -> log.info("REACTIVE ALL->" + x.toString()));
         getAllSeaShellsBlock().subscribe(x -> log.info("BLOCK->" + x.toString()));

@@ -1,4 +1,4 @@
-package org.jesperancinha.shell.webflux.client;
+package org.jesperancinha.shell.webflux.client.future;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jesperancinha.shell.webflux.data.SeaShellAccountDto;
@@ -28,43 +28,37 @@ public class SeaShellWebClientOneHelper {
         this.client = client;
     }
 
-    public List<SeaShellDto> getMultipleRequestClientSideOneShell() throws ExecutionException, InterruptedException {
-        final ExecutorService executorService = newCachedThreadPool();
+    public List<SeaShellDto> getMultipleRequestClientSideOneShell(final ExecutorService executorService) throws ExecutionException, InterruptedException {
         final List<SeaShellDto> seaShellDtoList = new ArrayList<>();
         final Future<?> shells = executorService.submit(() -> stream(getSeaShellOneAll()).parallel().forEach(seaShellId -> {
             try {
-                seaShellDtoList.add(getMultipleRequestClientSideOneShell(seaShellId));
+                seaShellDtoList.add(getMultipleRequestClientSideOneShell(seaShellId, executorService));
             } catch (ExecutionException | InterruptedException e) {
                 log.error("Error!", e);
             }
         }));
         shells.get();
-        executorService.shutdown();
         return seaShellDtoList;
     }
 
-    public SeaShellDto getMultipleRequestClientSideOneShell(Long id) throws ExecutionException, InterruptedException {
-        final ExecutorService executorService = newCachedThreadPool();
+    public SeaShellDto getMultipleRequestClientSideOneShell(final Long id, final ExecutorService executorService) throws ExecutionException, InterruptedException {
         final SeaShellDto seaShellOneDtoById = getSeaShellOneDtoById(id);
-        final Future<?> costumes = executorService.submit(costumesRunnable(seaShellOneDtoById));
-        final Future<?> persons = executorService.submit(personsRunnable(seaShellOneDtoById));
+        final Future<?> costumes = executorService.submit(costumesRunnable(seaShellOneDtoById, executorService));
+        final Future<?> persons = executorService.submit(personsRunnable(seaShellOneDtoById, executorService));
         costumes.get();
         persons.get();
-        executorService.shutdown();
         return seaShellOneDtoById;
     }
 
-    private Runnable personsRunnable(SeaShellDto seaShellOneDtoById) {
+    private Runnable personsRunnable(SeaShellDto seaShellOneDtoById, ExecutorService executorService) {
         return () -> seaShellOneDtoById.setPersons(seaShellOneDtoById.getPersonIds().parallelStream().map(id ->
         {
             try {
                 SeaShellPersonDto seaShellOnePersonDtoById = getSeaShellOnePersonDtoById(id);
-                final ExecutorService executorService = newCachedThreadPool();
-                Future<?> costume = executorService.submit(() -> seaShellOnePersonDtoById.setCostumeDto(getCostumeDto(seaShellOnePersonDtoById.getCostumeId())));
-                Future<?> account = executorService.submit(() -> seaShellOnePersonDtoById.setAccountDto(getSeaShellOneAccountDtoById(seaShellOnePersonDtoById.getAccountId())));
+                Future<?> costume = executorService.submit(() -> seaShellOnePersonDtoById.setCostumeDto(getCostumeDto(seaShellOnePersonDtoById.getCostumeId(), executorService)));
+                Future<?> account = executorService.submit(() -> seaShellOnePersonDtoById.setAccountDto(getSeaShellOneAccountDtoById(seaShellOnePersonDtoById.getAccountId(), executorService)));
                 account.get();
                 costume.get();
-                executorService.shutdown();
                 return seaShellOnePersonDtoById;
             } catch (InterruptedException | ExecutionException e) {
                 log.error("Error!", e);
@@ -73,11 +67,11 @@ public class SeaShellWebClientOneHelper {
         }).collect(Collectors.toList()));
     }
 
-    private Runnable costumesRunnable(SeaShellDto seaShellOneDtoById) {
+    private Runnable costumesRunnable(SeaShellDto seaShellOneDtoById, ExecutorService executorService) {
         return () -> seaShellOneDtoById.setCostumes(
                 seaShellOneDtoById.getCostumeIds()
                         .parallelStream()
-                        .map(this::getCostumeDto)
+                        .map(id->this.getCostumeDto(id, executorService))
                         .collect(Collectors.toList()));
     }
 
@@ -90,15 +84,13 @@ public class SeaShellWebClientOneHelper {
                 .block();
     }
 
-    private SeaShellCostumeDto getCostumeDto(Long id) {
+    private SeaShellCostumeDto getCostumeDto(Long id, ExecutorService executorService) {
         try {
             final SeaShellCostumeDto seaShellOneCostumeDtoById = getSeaShellOneCostumeDtoById(id);
-            final ExecutorService executorService = newCachedThreadPool();
             Future<?> tops = executorService.submit(() -> seaShellOneCostumeDtoById.setTopDto(getSeaShellOneTopDtoById(seaShellOneCostumeDtoById.getTopId())));
             Future<?> lowers = executorService.submit(() -> seaShellOneCostumeDtoById.setLowerDto(getSeaShellOneLowerDtoById(seaShellOneCostumeDtoById.getLowerId())));
             tops.get();
             lowers.get();
-            executorService.shutdown();
             return seaShellOneCostumeDtoById;
         } catch (InterruptedException | ExecutionException e) {
             log.error("Error!", e);
@@ -146,7 +138,7 @@ public class SeaShellWebClientOneHelper {
                 .block();
     }
 
-    public SeaShellAccountDto getSeaShellOneAccountDtoById(String id) {
+    public SeaShellAccountDto getSeaShellOneAccountDtoById(String id, ExecutorService executorService) {
         return client.get()
                 .uri("/seashells/one/account/{id}", id)
                 .retrieve()
