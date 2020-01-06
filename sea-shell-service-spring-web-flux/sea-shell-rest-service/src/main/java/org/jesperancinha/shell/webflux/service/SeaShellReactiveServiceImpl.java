@@ -76,7 +76,6 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
                 fetchPersonsPublisher(seaShell, seaShellDtoReturn).subscribeOn(Schedulers.parallel()),
                 fetchCostumesPublisher(seaShell, seaShellDtoReturn).subscribeOn(Schedulers.parallel()),
                 (persons, costumes) -> seaShellDtoReturn);
-
     }
 
     private Mono<?> fetchPersonsPublisher(Shell seaShell, SeaShellDto seaShellDtoReturn) {
