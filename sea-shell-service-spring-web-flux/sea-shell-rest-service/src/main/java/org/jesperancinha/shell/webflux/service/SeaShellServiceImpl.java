@@ -104,10 +104,10 @@ public class SeaShellServiceImpl extends SeaShellConsumerAdapter implements SeaS
     public Flux<SeaShellDto> getAllSeaShellsReactiveWithForkJoins() {
         return Flux.fromStream(shellRepository.findAllSeaShellsBlock().parallelStream()
                 .map(shell -> {
-                    ForkJoinPool commonPool = new ForkJoinPool(100);
-                    SeaShellDto seaShellDto = SeaShellConverter.toShellDto(shell);
-                    Stream<ForkJoinTask<SeaShellPersonDto>> personDtos = commonPool.invoke(getSeaShellPersonsForkJoinTask(commonPool, seaShellDto));
-                    Stream<ForkJoinTask<SeaShellCostumeDto>> costumeDtos = commonPool.invoke(getSeaShellCostumesForkJoinTask(commonPool, seaShellDto));
+                    final ForkJoinPool commonPool = new ForkJoinPool(100);
+                    final SeaShellDto seaShellDto = SeaShellConverter.toShellDto(shell);
+                    final Stream<ForkJoinTask<SeaShellPersonDto>> personDtos = commonPool.invoke(getSeaShellPersonsForkJoinTask(commonPool, seaShellDto));
+                    final Stream<ForkJoinTask<SeaShellCostumeDto>> costumeDtos = commonPool.invoke(getSeaShellCostumesForkJoinTask(commonPool, seaShellDto));
                     seaShellDto.setPersons(personDtos.map(ForkJoinTask::join).collect(toList()));
                     seaShellDto.setCostumes(costumeDtos.map(ForkJoinTask::join).collect(toList()));
                     return seaShellDto;
