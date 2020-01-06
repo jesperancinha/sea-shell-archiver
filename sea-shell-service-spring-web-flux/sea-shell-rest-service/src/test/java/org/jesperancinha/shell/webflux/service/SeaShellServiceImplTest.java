@@ -62,6 +62,13 @@ public class SeaShellServiceImplTest {
                 .block());
     }
 
+    @Test
+    public void findAllCompleteSeaShellsReactiveWithForkJoins_onCall_thenBlocking() {
+        assertThrows(WebServiceException.class, () -> delay(Duration.ofSeconds(1))
+                .doOnNext(it -> seaShellService.getAllSeaShellsReactiveWithForkJoins())
+                .block());
+    }
+
     @AfterAll
     public static void afterAll() {
         wireMockServer.stop();
