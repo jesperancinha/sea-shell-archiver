@@ -80,15 +80,15 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
     }
 
     private Mono<?> fetchPersonsPublisher(Shell seaShell, SeaShellDto seaShellDtoReturn) {
-        return
-                from(from(from(just(seaShell.getPersons()).subscribeOn(parallel()).map(shellPersonRepository::findPersonsBlock).subscribeOn(parallel())
-                        .map(persons -> {
-                            persons.forEach(person -> seaShellDtoReturn.getPersons().add(SeaShellConverter.toShellPersonDto(person)));
-                            return seaShellDtoReturn.getPersons();
-                        }))
-                        .thenMany(zip(
-                                fetchPersonAccountPublisher(seaShellDtoReturn).subscribeOn(Schedulers.parallel()),
-                                fetchPersonFullCostumePublisher(seaShellDtoReturn).subscribeOn(Schedulers.parallel())))));
+        return from(from(just(
+                seaShell.getPersons()).subscribeOn(parallel()).map(shellPersonRepository::findPersonsBlock).subscribeOn(parallel())
+                .map(persons -> {
+                    persons.forEach(person -> seaShellDtoReturn.getPersons().add(SeaShellConverter.toShellPersonDto(person)));
+                    return seaShellDtoReturn.getPersons();
+                }))
+                .thenMany(zip(
+                        fetchPersonAccountPublisher(seaShellDtoReturn).subscribeOn(parallel()),
+                        fetchPersonFullCostumePublisher(seaShellDtoReturn).subscribeOn(parallel()))));
 
     }
 
