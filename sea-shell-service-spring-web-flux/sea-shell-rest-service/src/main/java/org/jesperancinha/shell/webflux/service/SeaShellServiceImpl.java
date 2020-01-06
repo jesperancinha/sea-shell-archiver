@@ -106,10 +106,12 @@ public class SeaShellServiceImpl extends SeaShellConsumerAdapter implements SeaS
                 .map(shell -> {
                     final ForkJoinPool commonPool = new ForkJoinPool(100);
                     final SeaShellDto seaShellDto = SeaShellConverter.toShellDto(shell);
-                    final Stream<ForkJoinTask<SeaShellPersonDto>> personDtos = commonPool.invoke(getSeaShellPersonsForkJoinTask(commonPool, seaShellDto));
-                    final Stream<ForkJoinTask<SeaShellCostumeDto>> costumeDtos = commonPool.invoke(getSeaShellCostumesForkJoinTask(commonPool, seaShellDto));
-                    seaShellDto.setPersons(personDtos.map(ForkJoinTask::join).collect(toList()));
-                    seaShellDto.setCostumes(costumeDtos.map(ForkJoinTask::join).collect(toList()));
+                    final Stream<ForkJoinTask<SeaShellPersonDto>> personDtoStream =
+                            commonPool.invoke(getSeaShellPersonsForkJoinTask(commonPool, seaShellDto));
+                    final Stream<ForkJoinTask<SeaShellCostumeDto>>
+                            costumeDtoStream = commonPool.invoke(getSeaShellCostumesForkJoinTask(commonPool, seaShellDto));
+                    seaShellDto.setPersons(personDtoStream.map(ForkJoinTask::join).collect(toList()));
+                    seaShellDto.setCostumes(costumeDtoStream.map(ForkJoinTask::join).collect(toList()));
                     return seaShellDto;
                 }));
     }
