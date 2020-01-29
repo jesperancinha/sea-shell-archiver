@@ -26,7 +26,7 @@
         <netty-all.version>4.1.44.Final</netty-all.version>
         <blockhound.version>1.0.1.RELEASE</blockhound.version>
         <!-- Plugins -->
-        <maven-compiler-plugin.source>12</maven-compiler-plugin.source>
+        <maven-compiler-plugin.source>12</maven-compiler-plugin.source >
         <maven-compiler-plugin.target>12</maven-compiler-plugin.target>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <!-- Test -->
