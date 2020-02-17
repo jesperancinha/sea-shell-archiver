@@ -47,6 +47,10 @@ Topics discussed:
     -   [Flux](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html)
     -   [Mono](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html)
 
+This project is also the official support project of my article on medium:
+
+[Reactive Programming applied to Legacy Services — A WebFlux example](https://medium.com/swlh/reactive-programming-applied-to-legacy-services-a-webflux-example-4d1c2ad40bd4)
+
 ## References
 
 ### Technical
