@@ -13,8 +13,6 @@
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/npm-50.png "NPM")](https://www.npmjs.com/)
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/yarn-50.png "Yarn")](https://yarnpkg.com/)
 ---
-
-
 [![Generic badge](https://img.shields.io/static/v1.svg?label=GitHub&message=Sea%20Shell%20Archiver&color=informational)](https://github.com/jesperancinha/sea-shell-archiver) 
 [![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/sea-shell-archiver.svg)](#)
 
@@ -91,7 +89,6 @@ This project is also the official support project of my article on medium:
 -   [Reactive Streams](http://www.reactive-streams.org/)
 -   [Reactive Manifesto](https://www.reactivemanifesto.org/)
 -   [NLJUG Reactive Programming](https://nljug.org/java-magazine/reactive-programming/)
--   [Baeldung Spring WebFlux](https://www.baeldung.com/spring-webflux)
 -   [Hands on Reactive Programming in Spring](https://www.bol.com/nl/p/hands-on-reactive-programming-in-spring-5/9200000084600333/?bltgh=pCsqVROC1Zv4I9xR0JRJfw.1.4.ProductTitle)
 -   [QPI Architecture](https://en.wikipedia.org/wiki/Intel_QuickPath_Interconnect)
 -   [ITNext How to make legacy code reactive](https://itnext.io/how-to-make-legacy-code-reactive-2debcb3d0a40)
