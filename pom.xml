@@ -23,7 +23,7 @@
         <spring-boot-maven-plugin.version>2.2.2.RELEASE</spring-boot-maven-plugin.version>
         <lombok-maven-plugin.version>1.18.8.1</lombok-maven-plugin.version>
         <lombok.version>1.18.10</lombok.version>
-        <netty-all.version>4.1.44.Final</netty-all.version>
+        <netty-all.version>4.1.59.Final</netty-all.version>
         <blockhound.version>1.0.3.RELEASE</blockhound.version>
         <!-- Plugins -->
         <maven-compiler-plugin.source>14</maven-compiler-plugin.source>
