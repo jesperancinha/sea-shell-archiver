@@ -3,7 +3,7 @@
 Note that this repo is only here strictly to see what could we do to apply Reactive streams to legacy code.
 The only purpose if is really to provide a mock SOAP service. For the purpose of this exercise, a full implementation of the SOAP service isn't really not that necessary.
 
-## About me 👨🏽‍💻🚀
+## About me 👨🏽‍💻🚀🏳️‍🌈
 
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/JEOrgLogo-20.png "João Esperancinha Homepage")](http://joaofilipesabinoesperancinha.nl)
 [![Twitter Follow](https://img.shields.io/twitter/follow/joaofse?label=João%20Esperancinha&style=social "Twitter")](https://twitter.com/joaofse)
