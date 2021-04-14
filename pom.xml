@@ -17,14 +17,14 @@
         <sea-shell-model.version>0.0.0-SNAPSHOT</sea-shell-model.version>
         <sea-shell-service.version>0.0.0-SNAPSHOT</sea-shell-service.version>
         <!-- External -->
-        <spring-core.version>5.2.2.RELEASE</spring-core.version>
-        <spring-boot-starter-webflux.version>2.3.0.RELEASE</spring-boot-starter-webflux.version>
-        <spring-data-commons.version>2.2.3.RELEASE</spring-data-commons.version>
-        <spring-boot-maven-plugin.version>2.2.2.RELEASE</spring-boot-maven-plugin.version>
+        <spring-core.version>5.3.6</spring-core.version>
+        <spring-boot-starter-webflux.version>2.4.4</spring-boot-starter-webflux.version>
+        <spring-data-commons.version>2.4.7</spring-data-commons.version>
+        <spring-boot-maven-plugin.version>2.4.4</spring-boot-maven-plugin.version>
         <lombok-maven-plugin.version>1.18.8.1</lombok-maven-plugin.version>
         <lombok.version>1.18.10</lombok.version>
         <netty-all.version>4.1.59.Final</netty-all.version>
-        <blockhound.version>1.0.3.RELEASE</blockhound.version>
+        <blockhound.version>1.0.6.RELEASE</blockhound.version>
         <!-- Plugins -->
         <maven-compiler-plugin.source>14</maven-compiler-plugin.source>
         <maven-compiler-plugin.target>14</maven-compiler-plugin.target>
