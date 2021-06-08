@@ -11,6 +11,9 @@
     <packaging>pom</packaging>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <java.version>14</java.version>
         <!-- Internal -->
         <sea-shell-client.version>0.0.0-SNAPSHOT</sea-shell-client.version>
@@ -26,8 +29,8 @@
         <netty-all.version>4.1.59.Final</netty-all.version>
         <blockhound.version>1.0.6.RELEASE</blockhound.version>
         <!-- Plugins -->
-        <maven-compiler-plugin.source>14</maven-compiler-plugin.source>
-        <maven-compiler-plugin.target>14</maven-compiler-plugin.target>
+        <maven-compiler-plugin.source>${java.version}</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>${java.version}</maven-compiler-plugin.target>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <!-- Test -->
         <junit-jupiter.version>5.5.1</junit-jupiter.version>
