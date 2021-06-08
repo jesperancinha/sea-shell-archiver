@@ -13,6 +13,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/jesperancinha/sea-shell-archiver?branch=master)](https://bettercodehub.com/)
 [![Known Vulnerabilities](https://snyk.io/test/github/jesperancinha/sea-shell-archiver/badge.svg)](https://snyk.io/test/github/jesperancinha/sea-shell-archiver)
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/89cc4b270cda4a448ce4fa895b30ec55)](https://www.codacy.com/gh/jesperancinha/sea-shell-archiver/dashboard?utm_source=github.com&utm_medium=referral&utm_content=jesperancinha/sea-shell-archiver&utm_campaign=Badge_Coverage)
 [![Coverage Status](https://coveralls.io/repos/github/jesperancinha/sea-shell-archiver/badge.svg?branch=master)](https://coveralls.io/github/jesperancinha/sea-shell-archiver?branch=master)
 [![codecov](https://codecov.io/gh/jesperancinha/sea-shell-archiver/branch/master/graph/badge.svg?token=G8jNMRYmyp)](https://codecov.io/gh/jesperancinha/sea-shell-archiver)
 
@@ -25,6 +26,7 @@
 ## Technologies Used
 
 ---
+
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/docker-50.png "Docker")](https://www.docker.com/)
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/docker-compose-50.png "Docker Compose")](https://docs.docker.com/compose/)
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/java-50.png "Java")](https://www.oracle.com/nl/java/ )
