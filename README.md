@@ -5,7 +5,6 @@
 [![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/sea-shell-archiver.svg)](#)
 
 [![CircleCI](https://circleci.com/gh/jesperancinha/sea-shell-archiver.svg?style=svg)](https://circleci.com/gh/jesperancinha/sea-shell-archiver)
-[![Build Status](https://travis-ci.com/jesperancinha/sea-shell-archiver.svg?branch=master)](https://travis-ci.com/jesperancinha/sea-shell-archiver)
 [![Build status](https://ci.appveyor.com/api/projects/status/eka55ffpbjkxq55p?svg=true)](https://ci.appveyor.com/project/jesperancinha/sea-shell-archiver)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/89cc4b270cda4a448ce4fa895b30ec55)](https://www.codacy.com/manual/jofisaes/sea-shell-archiver?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jesperancinha/sea-shell-archiver&amp;utm_campaign=Badge_Grade)
