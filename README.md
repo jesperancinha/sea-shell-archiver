@@ -138,6 +138,16 @@ sdk use java 16.0.1.hs-adpt
 
 Please check my documentation on [Hints&Tricks](https://github.com/jesperancinha/project-signer/blob/master/project-signer-templates/Hints%26Tricks.md) for more details
 
+If for any reason, the import of this project fails or the upgrade fails, please close your IDE.
+Via a shell run the following command:
+
+```bash
+git clean -xdf
+```
+
+This will remove all non-versioned files from your repo. It will allow your IDE to re-import fresh from start. Make sure that the caches are invalidated and removed in this case.
+
+
 ## About me 👨🏽‍💻🚀🏳️‍🌈
 
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/JEOrgLogo-20.png "João Esperancinha Homepage")](http://joaofilipesabinoesperancinha.nl)
