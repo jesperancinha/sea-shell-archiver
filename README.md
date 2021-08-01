@@ -78,6 +78,13 @@ This project is also the official support project of my article on medium:
 - Lombok upgraded to 1.18.20
 - Version check
 
+## Java version
+
+```bash
+sdk install java 16.0.1.hs-adpt
+sdk use java 16.0.1.hs-adpt
+```
+
 ## References
 
 ### Technical
