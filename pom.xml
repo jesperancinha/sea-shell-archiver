@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <java.version>14</java.version>
+        <java.version>16</java.version>
         <!-- Internal -->
         <sea-shell-client.version>0.0.0-SNAPSHOT</sea-shell-client.version>
         <sea-shell-model.version>0.0.0-SNAPSHOT</sea-shell-model.version>
@@ -24,8 +24,8 @@
         <spring-boot-starter-webflux.version>2.4.6</spring-boot-starter-webflux.version>
         <spring-data-commons.version>2.4.7</spring-data-commons.version>
         <spring-boot-maven-plugin.version>2.4.4</spring-boot-maven-plugin.version>
-        <lombok-maven-plugin.version>1.18.8.1</lombok-maven-plugin.version>
-        <lombok.version>1.18.10</lombok.version>
+        <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
+        <lombok.version>1.18.20</lombok.version>
         <netty-all.version>4.1.59.Final</netty-all.version>
         <blockhound.version>1.0.6.RELEASE</blockhound.version>
         <!-- Plugins -->
