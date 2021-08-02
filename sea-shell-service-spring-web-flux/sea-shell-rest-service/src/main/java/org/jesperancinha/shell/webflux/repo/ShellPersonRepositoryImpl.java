@@ -1,7 +1,7 @@
 package org.jesperancinha.shell.webflux.repo;
 
 import org.jesperancinha.shell.client.persons.Person;
-import org.jesperancinha.shell.client.persons.SeaShellsWSDLPersonsAbstract;
+import org.jesperancinha.shell.client.persons.PersonsClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
@@ -19,31 +19,31 @@ import static reactor.core.scheduler.Schedulers.elastic;
 @Repository
 public class ShellPersonRepositoryImpl implements ShellPersonRepository {
 
-    private final SeaShellsWSDLPersonsAbstract seaShellsWSDLPersonsClient;
+    private final PersonsClient personsClient;
 
     @Value("${sea.shell.parallelism:20}")
     private Integer parallelism;
 
-    public ShellPersonRepositoryImpl(SeaShellsWSDLPersonsAbstract seaShellsWSDLPersonsClient) {
-        this.seaShellsWSDLPersonsClient = seaShellsWSDLPersonsClient;
+    public ShellPersonRepositoryImpl(PersonsClient personsClient) {
+        this.personsClient = personsClient;
     }
 
     public Mono<Person> findPersonById(final Long id) {
-        return fromCallable(() -> seaShellsWSDLPersonsClient.getItem(id)).subscribeOn(elastic());
+        return fromCallable(() -> personsClient.getPerson(id)).subscribeOn(elastic());
     }
 
     public ParallelFlux<Person> findPersons(List<Long> personIds) {
         return Flux.fromIterable(personIds)
                 .parallel(parallelism)
                 .runOn(Schedulers.parallel())
-                .map(personId -> fromCallable(() -> seaShellsWSDLPersonsClient.getItem(personId)))
+                .map(personId -> fromCallable(() -> personsClient.getPerson(personId)))
                 .flatMap(ParallelFlux::from);
 
     }
 
     public List<Person> findPersonsBlock(List<Long> personIds) {
         return personIds.parallelStream()
-                .map(seaShellsWSDLPersonsClient::getItem)
+                .map(personsClient::getPerson)
                 .collect(Collectors.toList());
     }
 }

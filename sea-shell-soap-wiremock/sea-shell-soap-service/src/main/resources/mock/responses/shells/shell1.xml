@@ -1,19 +1,17 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:shellsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
-            <Shell>
-                <Name>Blunt gaper</Name>
-                <ScientificName>Mya truncata</ScientificName>
-                <Slogan>Not too long ago, I was dancing for dollars (eeoow)</Slogan>
-                <Persons>
-                    <PersonId>1</PersonId>
-                    <PersonId>2</PersonId>
-                </Persons>
-                <Costumes>
-                    <CostumeId>1</CostumeId>
-                </Costumes>
-            </Shell>
-        </ns2:shellsResponse>
+        <ns2:Shell xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
+            <Name>Blunt gaper</Name>
+            <ScientificName>Mya truncata</ScientificName>
+            <Slogan>Not too long ago, I was dancing for dollars (eeoow)</Slogan>
+            <Persons>
+                <PersonId>1</PersonId>
+                <PersonId>2</PersonId>
+            </Persons>
+            <Costumes>
+                <CostumeId>1</CostumeId>
+            </Costumes>
+        </ns2:Shell>
     </S:Body>
 </S:Envelope>

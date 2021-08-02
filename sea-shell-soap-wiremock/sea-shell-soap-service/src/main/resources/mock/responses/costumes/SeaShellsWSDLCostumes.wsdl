@@ -5,27 +5,28 @@
                   name="SeaShellsWSDLCostumes" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/">
     <wsdl:types>
         <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLCostumes/">
-            <xsd:element name="costumes">
+            <xsd:element name="costumesRequest">
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="costumeId" type="xsd:long"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            <xsd:element name="costumesResponse">
+            <xsd:element name="costume">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="out" type="xsd:string"/>
+                        <xsd:element name="topId" type="xsd:long"/>
+                        <xsd:element name="lowerId" type="xsd:long"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
         </xsd:schema>
     </wsdl:types>
     <wsdl:message name="costumesRequest">
-        <wsdl:part element="tns:costumes" name="parameters"/>
+        <wsdl:part element="tns:costumesRequest" name="parameters"/>
     </wsdl:message>
     <wsdl:message name="costumesResponse">
-        <wsdl:part element="tns:costumesResponse" name="parameters"/>
+        <wsdl:part element="tns:costume" name="parameters"/>
     </wsdl:message>
     <wsdl:portType name="SeaShellsWSDLCostumes">
         <wsdl:operation name="costumes">

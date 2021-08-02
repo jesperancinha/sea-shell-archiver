@@ -1,42 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
                   xmlns:tns="http://org.jesperancinha.shells/SeaShellsWSDLShells/"
+                  xmlns:shell="http://org.jesperancinha.shells/SeaShellsWSDLShells/shells"
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                   name="SeaShellsWSDLShells" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
     <wsdl:types>
+        <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLShells/shells">
+            <xsd:complexType name="Shell">
+                <xsd:sequence>
+                    <xsd:element name="Name" type="xsd:string"/>
+                    <xsd:element name="ScientificName" type="xsd:string"/>
+                    <xsd:element name="Slogan" type="xsd:string"/>
+                    <xsd:element name="Persons">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="PersonId" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="Costumes">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="CostumeId" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
         <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
-            <xsd:element name="shells">
+            <xsd:element name="shellRequest">
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="shellId" type="xsd:long"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            <xsd:element name="shellsResponse">
+            <xsd:element name="Shell" type="shell:Shell"/>
+            <xsd:element name="allShellRequest">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="shell" type="xsd:string"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            <xsd:element name="allShellsResponse">
+            <xsd:element name="allShellResponse">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="shellIds" type="xsd:string"/>
+                        <xsd:element name="Shell" type="shell:Shell" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="allShellIdsResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="ShellId" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
         </xsd:schema>
     </wsdl:types>
     <wsdl:message name="shellsRequest">
-        <wsdl:part element="tns:shells" name="parameters"/>
+        <wsdl:part element="tns:shellRequest" name="parameters"/>
     </wsdl:message>
     <wsdl:message name="shellsResponse">
-        <wsdl:part element="tns:shellsResponse" name="parameters"/>
+        <wsdl:part element="tns:Shell" name="Shell"/>
     </wsdl:message>
-    <wsdl:message name="allShellsRequest"/>
+    <wsdl:message name="allShellsRequest">
+        <wsdl:part element="tns:allShellRequest" name="AllShellsRequest"/>
+    </wsdl:message>
     <wsdl:message name="allShellsResponse">
-        <wsdl:part element="tns:shellsResponse" name="parameters"/>
+        <wsdl:part element="tns:allShellResponse" name="AllShellResponse"/>
+    </wsdl:message>
+    <wsdl:message name="allShellIdsResponse">
+        <wsdl:part element="tns:allShellIdsResponse" name="AllShellResponse"/>
     </wsdl:message>
     <wsdl:portType name="SeaShellsWSDLShells">
         <wsdl:operation name="shells">
@@ -46,6 +82,10 @@
         <wsdl:operation name="allShells">
             <wsdl:input message="tns:allShellsRequest"/>
             <wsdl:output message="tns:allShellsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="allShellIds">
+            <wsdl:input message="tns:allShellsRequest"/>
+            <wsdl:output message="tns:allShellIdsResponse"/>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="SeaShellsWSDLShellsSOAP" type="tns:SeaShellsWSDLShells">
@@ -60,7 +100,16 @@
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="allShells">
-            <soap:operation soapAction="http://org.jesperancinha.shells/SeaShellsWSDLShells/shells"/>
+            <soap:operation soapAction="http://org.jesperancinha.shells/SeaShellsWSDLShells/allshells"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="allShellIds">
+            <soap:operation soapAction="http://org.jesperancinha.shells/SeaShellsWSDLShells/allshellIds"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

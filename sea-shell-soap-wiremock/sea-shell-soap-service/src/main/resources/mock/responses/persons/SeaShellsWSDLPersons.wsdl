@@ -5,27 +5,31 @@
                   name="SeaShellsWSDLPersons" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLPersons/">
     <wsdl:types>
         <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLPersons/">
-            <xsd:element name="persons">
+            <xsd:element name="personsRequest">
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="personId" type="xsd:long"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            <xsd:element name="personsResponse">
+            <xsd:element name="Person">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="out" type="xsd:string"/>
+                        <xsd:element name="Name" type="xsd:string"/>
+                        <xsd:element name="Activity" type="xsd:string"/>
+                        <xsd:element name="CostumeId" type="xsd:long"/>
+                        <xsd:element name="AccountId" type="xsd:string"/>
+                        <xsd:element name="ShellId" type="xsd:long"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
         </xsd:schema>
     </wsdl:types>
     <wsdl:message name="personsRequest">
-        <wsdl:part element="tns:persons" name="parameters"/>
+        <wsdl:part element="tns:personsRequest" name="parameters"/>
     </wsdl:message>
     <wsdl:message name="personsResponse">
-        <wsdl:part element="tns:personsResponse" name="parameters"/>
+        <wsdl:part element="tns:Person" name="parameters"/>
     </wsdl:message>
     <wsdl:portType name="SeaShellsWSDLPersons">
         <wsdl:operation name="persons">

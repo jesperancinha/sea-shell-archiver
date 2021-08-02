@@ -1,6 +1,9 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns3:allShells xmlns:ns3="http://org.jesperancinha.shells/SeaShellsWSDLShells/"/>
+        <ns3:allShells xmlns:ns3="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
+            <shellId>1</shellId>
+            <shellId>2</shellId>
+        </ns3:allShells>
     </S:Body>
 </S:Envelope>

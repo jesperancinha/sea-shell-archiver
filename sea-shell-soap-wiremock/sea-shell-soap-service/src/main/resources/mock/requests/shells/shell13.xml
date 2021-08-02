@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:shells xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
+        <ns2:shellRequest xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
             <shellId>13</shellId>
-        </ns2:shells>
+        </ns2:shellRequest>
     </S:Body>
 </S:Envelope>

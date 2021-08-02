@@ -1,20 +1,18 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:shellsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
-            <Shell>
-                <Name>Baltic tellin</Name>
-                <ScientificName>Macoma balthica</ScientificName>
-                <Slogan>I'm coming to you now doin' 20 over the limit</Slogan>
-                <Persons>
-                    <PersonId>2</PersonId>
-                    <PersonId>15</PersonId>
-                </Persons>
-                <Costumes>
-                    <CostumeId>2</CostumeId>
-                    <CostumeId>3</CostumeId>
-                </Costumes>
-            </Shell>
-        </ns2:shellsResponse>
+        <ns2:Shell xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
+            <Name>Baltic tellin</Name>
+            <ScientificName>Macoma balthica</ScientificName>
+            <Slogan>I'm coming to you now doin' 20 over the limit</Slogan>
+            <Persons>
+                <PersonId>2</PersonId>
+                <PersonId>15</PersonId>
+            </Persons>
+            <Costumes>
+                <CostumeId>2</CostumeId>
+                <CostumeId>3</CostumeId>
+            </Costumes>
+        </ns2:Shell>
     </S:Body>
 </S:Envelope>

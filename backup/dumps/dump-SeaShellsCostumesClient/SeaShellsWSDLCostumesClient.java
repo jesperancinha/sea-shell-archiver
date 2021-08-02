@@ -5,7 +5,8 @@ package org.jesperancinha.shell.client.costumes;
  * This class is not complete
  */
 
-import lombok.extern.slf4j.Slf4j;
+import wiremock.org.apache.commons.logging.Log;
+import wiremock.org.apache.commons.logging.LogFactory;
 
 import javax.xml.namespace.QName;
 import java.net.MalformedURLException;
@@ -17,8 +18,9 @@ import java.net.URL;
  * 2019-12-20T11:26:09.141+01:00
  * Generated source version: 3.3.4
  */
-@Slf4j
 public final class SeaShellsWSDLCostumesClient extends SeaShellsWSDLCostumesAbstract {
+
+    private final static Log log = LogFactory.getLog(SeaShellsWSDLCostumesClient.class);
 
     private static final QName SERVICE_NAME = new QName("http://org.jesperancinha.shells/SeaShellsWSDLCostumes/", "SeaShellsWSDLCostumes");
 

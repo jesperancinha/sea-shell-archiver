@@ -1,0 +1,21 @@
+<xsd:complexType name="shell"  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:sequence>
+        <xsd:element name="Name" type="xsd:string"/>
+        <xsd:element name="ScientificName" type="xsd:string"/>
+        <xsd:element name="Slogan" type="xsd:string"/>
+        <xsd:element name="Persons">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="PersonId" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Costumes">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="CostumeId" type="xsd:long" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:sequence>
+</xsd:complexType>
