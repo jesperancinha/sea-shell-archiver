@@ -71,12 +71,15 @@ This project is also the official support project of my article on medium:
 
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/medium-20.png "Medium")](https://medium.com/swlh/reactive-programming-applied-to-legacy-services-a-webflux-example-4d1c2ad40bd4) [Reactive Programming applied to Legacy Services — A WebFlux example](https://medium.com/swlh/reactive-programming-applied-to-legacy-services-a-webflux-example-4d1c2ad40bd4)
 
-## Review notes
+## Review notes - Roadmap to 2.0.0 - Expected release date - Coming soon
 
-2021/08/01 - Review started
-- Java update to JDK 16 
-- Lombok upgraded to 1.18.20
-- Version check
+This project is currently under review.
+Problems to fix include:
+
+- Maintainability - JAXB current configuration as it stands is incompatible with JDK updates
+- Windows Compatibility - Though not originally a point of focus, it will be a issue to sort out for the next version
+
+Please check review logs on [Review Logs](./ReviewLogs.md).
 
 ## Java version
 
