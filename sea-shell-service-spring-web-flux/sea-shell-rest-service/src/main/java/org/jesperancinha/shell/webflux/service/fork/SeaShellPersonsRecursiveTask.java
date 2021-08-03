@@ -33,7 +33,7 @@ public class SeaShellPersonsRecursiveTask extends RecursiveTask<Stream<ForkJoinT
 
     @Override
     protected Stream<ForkJoinTask<SeaShellPersonDto>> compute() {
-        List<Person> personsBlock = personRepository.findPersonsBlock(seaShellDto.getPersonIds());
+        List<Person> personsBlock = personRepository.findPersonsBlock(seaShellDto.personIds());
         return personsBlock.parallelStream().map(SeaShellConverter::toShellPersonDto)
                 .flatMap(seaShellPersonDto -> getSeaShellPersonForkJoinTaskStream(seaShellPersonDto, commonPool));
     }

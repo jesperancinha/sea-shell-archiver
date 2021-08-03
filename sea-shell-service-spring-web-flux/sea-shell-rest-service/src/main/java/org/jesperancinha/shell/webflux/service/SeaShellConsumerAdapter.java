@@ -39,10 +39,10 @@ public class SeaShellConsumerAdapter {
 
     protected Consumer<SeaShellDto> consumerPersons() {
         return seaShellDto -> personRepository
-                .findPersons(seaShellDto.getPersonIds())
+                .findPersons(seaShellDto.personIds())
                 .map(SeaShellConverter::toShellPersonDto)
                 .doOnNext(personDto -> seaShellDto
-                        .getPersons()
+                        .persons()
                         .add(personDto))
                 .subscribe(seaShellPersonDto -> {
                     costumeRepository.findCostumeById(seaShellPersonDto.getCostumeId())
@@ -63,10 +63,10 @@ public class SeaShellConsumerAdapter {
 
     protected Consumer<SeaShellDto> consumerCostumes() {
         return seaShellDto -> costumeRepository
-                .findCostumes(seaShellDto.getCostumeIds())
+                .findCostumes(seaShellDto.costumeIds())
                 .map(SeaShellConverter::toShellCostumeDto)
                 .doOnNext(seaShellCostumeDto -> seaShellDto
-                        .getCostumes()
+                        .costumes()
                         .add(seaShellCostumeDto))
                 .subscribe(consumerCostume());
 
@@ -88,14 +88,14 @@ public class SeaShellConsumerAdapter {
     }
 
     protected void setMainRootElements(SeaShellDto seaShellDto) {
-        seaShellDto.setCostumes(costumeRepository
-                .findCostumesBlock(seaShellDto.getCostumeIds())
+        seaShellDto.addCostumes(costumeRepository
+                .findCostumesBlock(seaShellDto.costumeIds())
                 .parallelStream()
                 .map(SeaShellConverter::toShellCostumeDto)
                 .peek(this::setCostumeRootElements)
                 .collect(Collectors.toList()));
-        seaShellDto.setPersons(personRepository
-                .findPersonsBlock(seaShellDto.getPersonIds())
+        seaShellDto.addPersons(personRepository
+                .findPersonsBlock(seaShellDto.personIds())
                 .parallelStream()
                 .map(SeaShellConverter::toShellPersonDto)
                 .peek(seaShellPersonDto -> seaShellPersonDto

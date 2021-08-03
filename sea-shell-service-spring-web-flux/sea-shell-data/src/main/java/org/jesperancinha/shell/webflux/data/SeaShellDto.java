@@ -1,39 +1,30 @@
 package org.jesperancinha.shell.webflux.data;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Builder.Default;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Builder
-@Setter
-@Getter
-@EqualsAndHashCode
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-public class SeaShellDto {
-    @Default
-    private String name = null;
-    @Default
-    private String scientificName = null;
-    @Default
-    private String slogan = null;
-    @Default
-    private List<SeaShellPersonDto> persons = new ArrayList<>();
-    @Default
-    private List<SeaShellCostumeDto> costumes = new ArrayList<>();
-    @Default
-    private List<Long> personIds = new ArrayList<>();
-    @Default
-    private List<Long> costumeIds = new ArrayList<>();
-}
+public record SeaShellDto(
+        String name,
+        String scientificName,
+        String slogan,
+        List<SeaShellPersonDto> persons,
+        List<SeaShellCostumeDto> costumes,
+        List<Long> personIds,
+        List<Long> costumeIds) {
 
+    @Builder
+    public SeaShellDto {
+    }
+
+    public List<SeaShellPersonDto> addPersons(final List<SeaShellPersonDto> persons) {
+        this.persons.addAll(persons);
+        return this.persons;
+    }
+
+    public List<SeaShellCostumeDto> addCostumes(final List<SeaShellCostumeDto> costumes) {
+        this.costumes.addAll(costumes);
+        return this.costumes;
+    }
+}

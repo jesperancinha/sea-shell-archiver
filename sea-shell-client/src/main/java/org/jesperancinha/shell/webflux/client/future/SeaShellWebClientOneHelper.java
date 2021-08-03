@@ -51,7 +51,7 @@ public class SeaShellWebClientOneHelper {
     }
 
     private Runnable personsRunnable(SeaShellDto seaShellOneDtoById, ExecutorService executorService) {
-        return () -> seaShellOneDtoById.setPersons(seaShellOneDtoById.getPersonIds().parallelStream().map(id ->
+        return () -> seaShellOneDtoById.addPersons(seaShellOneDtoById.personIds().parallelStream().map(id ->
         {
             try {
                 SeaShellPersonDto seaShellOnePersonDtoById = getSeaShellOnePersonDtoById(id);
@@ -68,8 +68,8 @@ public class SeaShellWebClientOneHelper {
     }
 
     private Runnable costumesRunnable(SeaShellDto seaShellOneDtoById, ExecutorService executorService) {
-        return () -> seaShellOneDtoById.setCostumes(
-                seaShellOneDtoById.getCostumeIds()
+        return () -> seaShellOneDtoById.addCostumes(
+                seaShellOneDtoById.costumeIds()
                         .parallelStream()
                         .map(id->this.getCostumeDto(id, executorService))
                         .collect(Collectors.toList()));

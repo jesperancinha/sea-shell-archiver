@@ -82,8 +82,8 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
         return from(from(just(
                 seaShell.getPersons().getPersonId()).subscribeOn(parallel()).map(shellPersonRepository::findPersonsBlock).subscribeOn(parallel())
                 .map(persons -> {
-                    persons.forEach(person -> seaShellDtoReturn.getPersons().add(SeaShellConverter.toShellPersonDto(person)));
-                    return seaShellDtoReturn.getPersons();
+                    persons.forEach(person -> seaShellDtoReturn.persons().add(SeaShellConverter.toShellPersonDto(person)));
+                    return seaShellDtoReturn.persons();
                 }))
                 .thenMany(zip(
                         fetchPersonAccountPublisher(seaShellDtoReturn).subscribeOn(parallel()),
@@ -106,7 +106,7 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
     private Mono<?> fetchCostumesPublisher(Shell seaShell, SeaShellDto seaShellDtoReturn) {
         return from(just(seaShell.getCostumes().getCostumeId()).subscribeOn(parallel()).map(shellCostumeRepository::findCostumesBlock).subscribeOn(parallel())
                 .map(costumes -> {
-                    costumes.forEach(costume -> seaShellDtoReturn.getCostumes().add(SeaShellConverter.toShellCostumeDto(costume)));
+                    costumes.forEach(costume -> seaShellDtoReturn.costumes().add(SeaShellConverter.toShellCostumeDto(costume)));
                     return costumes;
                 })
                 .thenMany(zip(
@@ -119,7 +119,7 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
 
     private Mono<SeaShellDto> fetchCostumeLowerPublisher(SeaShellDto seaShellDtoReturn) {
         return fromCallable(() ->
-                seaShellDtoReturn.getCostumes().parallelStream().map(seaShellCostumeDto ->
+                seaShellDtoReturn.costumes().parallelStream().map(seaShellCostumeDto ->
                 {
                     seaShellCostumeDto.setLowerDto(
                             SeaShellConverter.toLowerDto(
@@ -130,7 +130,7 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
 
     private Mono<SeaShellDto> fetchCostumeTopPublisher(SeaShellDto seaShellDtoReturn) {
         return fromCallable(() ->
-                seaShellDtoReturn.getCostumes().parallelStream().map(seaShellCostumeDto ->
+                seaShellDtoReturn.costumes().parallelStream().map(seaShellCostumeDto ->
                 {
                     seaShellCostumeDto.setTopDto(
                             SeaShellConverter.toTopDto(
@@ -142,7 +142,7 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
     private Mono<SeaShellDto> fetchPersonAccountPublisher(SeaShellDto seaShellDtoReturn) {
         return fromCallable(() ->
         {
-            seaShellDtoReturn.getPersons()
+            seaShellDtoReturn.persons()
                     .forEach(seaShellPersonDto -> seaShellPersonDto
                             .setAccountDto(
                                     SeaShellConverter
@@ -155,7 +155,7 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
     private Mono<SeaShellDto> fetchPersonCostumePublisher(SeaShellDto seaShellDtoReturn) {
         return fromCallable(() ->
         {
-            seaShellDtoReturn.getPersons()
+            seaShellDtoReturn.persons()
                     .forEach(seaShellPersonDto -> seaShellPersonDto
                             .setCostumeDto(
                                     SeaShellConverter
@@ -167,7 +167,7 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
 
     private Mono<SeaShellDto> fetchPersonCostumeLowerPublisher(SeaShellDto seaShellDtoReturn) {
         return fromCallable(() ->
-                seaShellDtoReturn.getPersons().parallelStream().map(seaShellPersonDto -> {
+                seaShellDtoReturn.persons().parallelStream().map(seaShellPersonDto -> {
                     SeaShellCostumeDto costumeDto = seaShellPersonDto.getCostumeDto();
                     costumeDto.setLowerDto(
                             SeaShellConverter.toLowerDto(
@@ -178,7 +178,7 @@ public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements S
 
     private Mono<SeaShellDto> fetchPersonCostumeTopPublisher(SeaShellDto seaShellDtoReturn) {
         return fromCallable(() ->
-                seaShellDtoReturn.getPersons().parallelStream().map(seaShellPersonDto -> {
+                seaShellDtoReturn.persons().parallelStream().map(seaShellPersonDto -> {
                     SeaShellCostumeDto costumeDto = seaShellPersonDto.getCostumeDto();
                     costumeDto.setTopDto(
                             SeaShellConverter.toTopDto(

@@ -29,7 +29,7 @@ public class SeaShellCostumesRecursiveTask extends SeaShelTopLowerAdapter<Stream
 
     @Override
     protected Stream<ForkJoinTask<SeaShellCostumeDto>> compute() {
-        List<Costume> costumesBlock = costumeRepository.findCostumesBlock(seaShellDto.getCostumeIds());
+        List<Costume> costumesBlock = costumeRepository.findCostumesBlock(seaShellDto.costumeIds());
 
         return costumesBlock.parallelStream().map(SeaShellConverter::toShellCostumeDto)
                 .flatMap(seaShellCostumeDto -> of(

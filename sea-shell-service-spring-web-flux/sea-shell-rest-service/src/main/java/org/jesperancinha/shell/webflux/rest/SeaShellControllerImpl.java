@@ -25,7 +25,7 @@ public class SeaShellControllerImpl implements SeaShellController {
 
     public Mono<SeaShellDto> getShellById(Long id) {
         return seaShellService.getSeaShellById(id).mapNotNull(
-                    seaShellDto -> ResponseEntity.ok(seaShellDto).getBody());
+                seaShellDto -> ResponseEntity.ok(seaShellDto).getBody());
     }
 
     public ParallelFlux<SeaShellDto> getAllShells() {
@@ -38,7 +38,7 @@ public class SeaShellControllerImpl implements SeaShellController {
      * @return
      */
     public ParallelFlux<Pair<String, String>> getShellSlogans() {
-        return seaShellService.getAllSeaShells().map(seaShellDto -> Pair.of(seaShellDto.getName(), seaShellDto.getSlogan()));
+        return seaShellService.getAllSeaShells().map(seaShellDto -> Pair.of(seaShellDto.name(), seaShellDto.slogan()));
     }
 
     /**
