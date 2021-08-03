@@ -10,7 +10,6 @@ import javax.xml.bind.JAXBElement;
 /**
  * Created by jofisaes on 02/08/2021
  */
-@Component
 public class CostumesClient extends WebServiceGatewaySupport {
 
     @Value("${sea.shell.cli.soap.costumes}")

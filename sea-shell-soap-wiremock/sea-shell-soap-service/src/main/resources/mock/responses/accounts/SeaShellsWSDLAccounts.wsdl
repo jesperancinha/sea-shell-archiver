@@ -5,27 +5,28 @@
                   name="SeaShellsWSDLAccounts" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLAccounts/">
     <wsdl:types>
         <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLAccounts/">
-            <xsd:element name="accounts">
+            <xsd:element name="AccountRequest">
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="accountId" type="xsd:string"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            <xsd:element name="accountsResponse">
+            <xsd:element name="Account">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="out" type="xsd:string"/>
+                        <xsd:element name="Value" type="xsd:decimal"/>
+                        <xsd:element name="Currency" type="xsd:string"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
         </xsd:schema>
     </wsdl:types>
     <wsdl:message name="accountsRequest">
-        <wsdl:part element="tns:accounts" name="parameters"/>
+        <wsdl:part element="tns:AccountRequest" name="parameters"/>
     </wsdl:message>
     <wsdl:message name="accountsResponse">
-        <wsdl:part element="tns:accountsResponse" name="parameters"/>
+        <wsdl:part element="tns:Account" name="parameters"/>
     </wsdl:message>
     <wsdl:portType name="SeaShellsWSDLAccounts">
         <wsdl:operation name="accounts">

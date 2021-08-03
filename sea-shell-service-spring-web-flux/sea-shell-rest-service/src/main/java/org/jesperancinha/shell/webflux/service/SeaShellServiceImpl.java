@@ -14,6 +14,7 @@ import org.jesperancinha.shell.webflux.repo.ShellTopRepositoryImpl;
 import org.jesperancinha.shell.webflux.service.fork.SeaShellCostumesRecursiveTask;
 import org.jesperancinha.shell.webflux.service.fork.SeaShellPersonsRecursiveTask;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -32,6 +33,21 @@ import static reactor.core.scheduler.Schedulers.elastic;
 
 @Slf4j
 @Service
+@ConditionalOnBean(value = {
+        ShellRepositoryImpl.class,
+        ShellCostumeRepositoryImpl.class,
+        ShellPersonRepositoryImpl.class,
+        ShellAccountRepositoryImpl.class,
+        ShellTopRepositoryImpl.class,
+        ShellLowerRepositoryImpl.class
+}, name = {
+        "shellRepositoryImpl",
+        "shellCostumeRepositoryImpl",
+        "shellPersonRepositoryImpl",
+        "shellAccountRepositoryImpl",
+        "shellTopRepositoryImpl",
+        "shellLowerRepositoryImpl"
+})
 public class SeaShellServiceImpl extends SeaShellConsumerAdapter implements SeaShellService {
 
     @Value("${sea.shell.parallelism:20}")

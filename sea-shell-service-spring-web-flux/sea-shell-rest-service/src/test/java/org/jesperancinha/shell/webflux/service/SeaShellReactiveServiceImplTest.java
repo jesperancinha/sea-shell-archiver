@@ -2,24 +2,23 @@ package org.jesperancinha.shell.webflux.service;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.jesperancinha.shell.SeaShellWiremockSoapLauncher;
+import org.jesperancinha.shell.webflux.service.SeaShellReactiveServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.blockhound.BlockHound;
 
 import java.io.IOException;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static reactor.core.publisher.Mono.delay;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 @Disabled
 public class SeaShellReactiveServiceImplTest {
 

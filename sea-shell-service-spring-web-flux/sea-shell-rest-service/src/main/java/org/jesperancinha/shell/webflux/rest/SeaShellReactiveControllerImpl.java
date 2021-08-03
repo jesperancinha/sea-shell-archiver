@@ -30,30 +30,44 @@ public class SeaShellReactiveControllerImpl implements SeaShellReactiveControlle
         return seaShellReactiveService.getAllSeaShells();
     }
 
-    public Mono<SeaShellDto> getShell(@PathVariable Long id) {
+    public Mono<SeaShellDto> getShell(
+            @PathVariable
+                    Long id) {
         return seaShellReactiveService.getShell(id);
     }
 
     public Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> getRootShell(
-            @PathVariable Long idPerson, @PathVariable Long idCostume) {
+            @PathVariable
+                    Long idPerson,
+            @PathVariable
+                    Long idCostume) {
         return seaShellReactiveService.getRootShell(idPerson, idCostume);
     }
 
     public Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> getRootCostume(
-            @PathVariable Long idTop, @PathVariable Long idLower) {
+            @PathVariable
+                    Long idTop,
+            @PathVariable
+                    Long idLower) {
         return seaShellReactiveService.getRootCostume(idTop, idLower);
     }
 
     @Override
     public Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> getRootCostumeSlowTop(
-            @PathVariable Long idTop, @PathVariable Long idLower) {
+            @PathVariable
+                    Long idTop,
+            @PathVariable
+                    Long idLower) {
         final AtomicInteger atomicInteger = new AtomicInteger(0);
         return getPairMono(atomicInteger, 4000, 3000);
     }
 
     @Override
     public Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> getRootCostumeSlowLower(
-            @PathVariable Long idTop, @PathVariable Long idLower) {
+            @PathVariable
+                    Long idTop,
+            @PathVariable
+                    Long idLower) {
         final AtomicInteger atomicInteger = new AtomicInteger(0);
         return getPairMono(atomicInteger, 3000, 4000);
     }

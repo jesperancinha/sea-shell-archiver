@@ -16,9 +16,10 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static reactor.core.publisher.Mono.delay;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 @Disabled
 public class SeaShellServiceImplTest {
 

@@ -10,7 +10,6 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 @Configuration
 public class CostumesConfiguration {
 
-
     @Bean
     public CostumesClient costumesClient() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
