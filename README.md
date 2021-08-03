@@ -100,6 +100,8 @@ sdk use java 16.0.1.hs-adpt
 
 ## References
 
+Please check the [docs](https://jesperancinha.github.io/sea-shell-archiver/) for more info.
+
 ### Technical
 
 -   [Why does ForkJoinPool::invoke() block the main thread?](https://stackoverflow.com/questions/52591776/why-does-forkjoinpoolinvoke-block-the-main-thread)
