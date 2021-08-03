@@ -3,6 +3,7 @@
 ---
 [![Generic badge](https://img.shields.io/static/v1.svg?label=GitHub&message=Sea%20Shell%20Archiver&color=informational)](https://github.com/jesperancinha/sea-shell-archiver)
 [![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/sea-shell-archiver.svg)](#)
+[![GitHub contributors](https://img.shields.io/github/contributors/jesperancinha/sea-shell-archiver.svg)](https://github.com/jesperancinha/sea-shell-archiver)
 
 [![CircleCI](https://circleci.com/gh/jesperancinha/sea-shell-archiver.svg?style=svg)](https://circleci.com/gh/jesperancinha/sea-shell-archiver)
 [![Build status](https://ci.appveyor.com/api/projects/status/eka55ffpbjkxq55p?svg=true)](https://ci.appveyor.com/project/jesperancinha/sea-shell-archiver)
