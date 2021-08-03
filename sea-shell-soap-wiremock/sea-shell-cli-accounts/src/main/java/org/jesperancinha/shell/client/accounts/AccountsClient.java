@@ -30,10 +30,10 @@ public class AccountsClient extends WebServiceGatewaySupport {
         final AccountRequest request = new AccountRequest();
         request.setAccountId(accountId);
 
-        return ((JAXBElement<Account>) (getWebServiceTemplate()
+        return (Account) (getWebServiceTemplate()
                 .marshalSendAndReceive(seaShellsWSDLAccountsClientLocation, request,
                         new SoapActionCallback(
-                                "http://org.jesperancinha.shells/SeaShellsWSDLShells/accounts")))).getValue();
+                                "http://org.jesperancinha.shells/SeaShellsWSDLAccounts/accounts")));
     }
 
 }

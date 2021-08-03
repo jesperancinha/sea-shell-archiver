@@ -22,9 +22,7 @@ public class SeaShellControllerImpl implements SeaShellController {
         this.seaShellService = seaShellService;
     }
 
-    public Mono<SeaShellDto> getShellById(
-            @PathVariable
-                    Long id) {
+    public Mono<SeaShellDto> getShellById(Long id) {
         return seaShellService.getSeaShellById(id);
     }
 

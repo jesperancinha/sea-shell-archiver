@@ -37,12 +37,9 @@ public class SeaShellWiremockSoapLauncher {
         stubPersons();
         stubShells();
         stubCostumes();
-
-        stubRequestToResponse("/seashells/lowers", "/mock/requests/lowers/lower1.xml", "/mock/responses/lowers/lower1.xml");
-        stubRequestToResponse("/seashells/lowers", "/mock/requests/lowers/lower2.xml", "/mock/responses/lowers/lower2.xml");
-        stubRequestToResponse("/seashells/tops", "/mock/requests/tops/top1.xml", "/mock/responses/tops/top1.xml");
-        stubRequestToResponse("/seashells/tops", "/mock/requests/tops/top2.xml", "/mock/responses/tops/top2.xml");
-        stubRequestToResponse("/seashells/accounts", "/mock/requests/accounts/account1.xml", "/mock/responses/accounts/account1.xml");
+        stubLowers();
+        stubTops();
+        stubAccounts();
         stupRequestToWSDL("/seashells/accounts?wsdl", "/mock/responses/accounts/SeaShellsWSDLAccounts.wsdl");
         stupRequestToWSDL("/seashells/costumes?wsdl", "/mock/responses/costumes/SeaShellsWSDLCostumes.wsdl");
         stupRequestToWSDL("/seashells/lowers?wsdl", "/mock/responses/lowers/SeaShellsWSDLLowers.wsdl");
@@ -75,6 +72,24 @@ public class SeaShellWiremockSoapLauncher {
         }
     }
 
+    private static void stubLowers() throws IOException {
+        for (int i = 1; i <= 2; i++) {
+            stubRequestToLower("/mock/responses/lowers/lower" + i + ".xml", i);
+        }
+    }
+
+    private static void stubTops() throws IOException {
+        for (int i = 1; i <= 2; i++) {
+            stubRequestToTop("/mock/responses/tops/top" + i + ".xml", i);
+        }
+    }
+
+    private static void stubAccounts() throws IOException {
+        for (int i = 1; i <= 1; i++) {
+            stubRequestToAccount("/mock/responses/accounts/account" + i + ".xml", i);
+        }
+    }
+
     private static void stupRequestToWSDL(String urlString, String fileLocation) throws IOException {
         stubFor(get(urlEqualTo(urlString))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(fileLocation)))));
@@ -93,15 +108,38 @@ public class SeaShellWiremockSoapLauncher {
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
                         .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
     }
+
     private static void stubRequestToPerson(String responseResource, Integer i) throws IOException {
         stubFor(post(urlEqualTo("/seashells/persons"))
                 .withRequestBody(matchingXPath("/Envelope/Body/personsRequest/personId/text()", equalTo(i.toString())))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
                         .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
     }
+
     private static void stubRequestToCostume(String responseResource, Integer i) throws IOException {
         stubFor(post(urlEqualTo("/seashells/costumes"))
                 .withRequestBody(matchingXPath("/Envelope/Body/costumesRequest/costumeId/text()", equalTo(i.toString())))
+                .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
+                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+    }
+
+    private static void stubRequestToTop(String responseResource, Integer i) throws IOException {
+        stubFor(post(urlEqualTo("/seashells/tops"))
+                .withRequestBody(matchingXPath("/Envelope/Body/TopRequest/TopId/text()", equalTo(i.toString())))
+                .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
+                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+    }
+
+    private static void stubRequestToLower(String responseResource, Integer i) throws IOException {
+        stubFor(post(urlEqualTo("/seashells/lowers"))
+                .withRequestBody(matchingXPath("/Envelope/Body/LowersRequest/LowerId/text()", equalTo(i.toString())))
+                .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
+                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+    }
+
+    private static void stubRequestToAccount(String responseResource, Integer i) throws IOException {
+        stubFor(post(urlEqualTo("/seashells/accounts"))
+                .withRequestBody(matchingXPath("/Envelope/Body/AccountRequest/accountId/text()"))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
                         .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
     }

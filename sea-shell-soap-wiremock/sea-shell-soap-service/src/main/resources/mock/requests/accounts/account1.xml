@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:accounts xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLAccounts/">
+        <ns2:AccountRequest xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLAccounts/">
             <accountId>AKDMOJOEJHMDF</accountId>
-        </ns2:accounts>
+        </ns2:AccountRequest>
     </S:Body>
 </S:Envelope>

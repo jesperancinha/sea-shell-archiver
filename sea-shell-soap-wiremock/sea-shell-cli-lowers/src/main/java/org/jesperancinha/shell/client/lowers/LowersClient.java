@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
-import javax.xml.bind.JAXBElement;
-
 /**
  * Created by jofisaes on 02/08/2021
  */
@@ -26,12 +24,12 @@ public class LowersClient extends WebServiceGatewaySupport {
 
     public Lower getLower(Long id) {
 
-        LowersRequest request = new LowersRequest();
+        final LowersRequest request = new LowersRequest();
         request.setLowerId(id);
 
-        return ((JAXBElement<Lower>) (getWebServiceTemplate()
+        return (Lower) (getWebServiceTemplate()
                 .marshalSendAndReceive(seaShellsWSDLLowersClientLocation, request,
                         new SoapActionCallback(
-                                "http://org.jesperancinha.shells/SeaShellsWSDLShells/tops")))).getValue();
+                                "http://org.jesperancinha.shells/SeaShellsWSDLShells/lowers")));
     }
 }

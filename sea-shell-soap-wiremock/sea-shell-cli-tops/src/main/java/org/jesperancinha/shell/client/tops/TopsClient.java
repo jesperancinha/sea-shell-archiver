@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
-import javax.xml.bind.JAXBElement;
-
 /**
  * Created by jofisaes on 02/08/2021
  */
@@ -27,12 +25,12 @@ public class TopsClient extends WebServiceGatewaySupport {
 
     public Top getTop(Long id) {
 
-        TopRequest request = new TopRequest();
+        final TopRequest request = new TopRequest();
         request.setTopId(id);
 
-        return ((JAXBElement<Top>) (getWebServiceTemplate()
+        return (Top) (getWebServiceTemplate()
                 .marshalSendAndReceive(seaShellsWSDLTopsClientLocation, request,
                         new SoapActionCallback(
-                                "http://org.jesperancinha.shells/SeaShellsWSDLShells/tops")))).getValue();
+                                "http://org.jesperancinha.shells/SeaShellsWSDLShells/tops")));
     }
 }
