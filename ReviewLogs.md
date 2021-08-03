@@ -6,6 +6,9 @@
 - JDK16 Record usage
 - Check Windows Compatibility - [Error on windows #14](https://github.com/jesperancinha/sea-shell-archiver/issues/14)
 - Create JEnv windows instructions and installation script
+- Create instructions to run `SeaShellWiremockSoapLauncher`
+- Create instructions to run `SeaShellApplication`
+- Create instructions to run `SeaShellClient` different runs
 
 2021/08/03 - Migration to Java 16 and Spring style JAXB
 - New generated clients on build
