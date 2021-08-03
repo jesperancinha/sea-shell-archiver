@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.ws.WebServiceException;
 import reactor.blockhound.BlockHound;
 
 import java.io.IOException;
@@ -20,7 +19,6 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static reactor.core.publisher.Mono.delay;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@Disabled
 public class SeaShellServiceImplTest {
 
     private static WireMockServer wireMockServer;
@@ -42,8 +40,9 @@ public class SeaShellServiceImplTest {
     }
 
     @Test
+    @Disabled
     public void findAllCompleteSeaShellsBlock_onCall_thenBlocking() {
-        assertThrows(WebServiceException.class, () -> delay(Duration.ofSeconds(1))
+        assertThrows(Exception.class, () -> delay(Duration.ofSeconds(1))
                 .doOnNext(it -> seaShellService.getAllSeaShellsNaifBlock())
                 .block());
     }
@@ -64,7 +63,7 @@ public class SeaShellServiceImplTest {
 
     @Test
     public void findAllCompleteSeaShellsReactiveWithForkJoins_onCall_thenBlocking() {
-        assertThrows(WebServiceException.class, () -> delay(Duration.ofSeconds(1))
+        assertThrows(Exception.class, () -> delay(Duration.ofSeconds(1))
                 .doOnNext(it -> seaShellService.getAllSeaShellsReactiveWithForkJoins())
                 .block());
     }

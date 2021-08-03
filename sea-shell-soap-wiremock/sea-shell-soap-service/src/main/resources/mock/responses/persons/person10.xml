@@ -1,14 +1,12 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:personsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLPersons/">
-            <Person>
-                <Name>Khal Drogo</Name>
-                <Activity>KHAL</Activity>
-                <CostumeId>1</CostumeId>
-                <AccountId>AKDMOJOEJHMDF</AccountId>
-                <ShellId>1</ShellId>
-            </Person>
-        </ns2:personsResponse>
+        <ns2:Person xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLPersons/">
+            <Name>Khal Drogo</Name>
+            <Activity>KHAL</Activity>
+            <CostumeId>1</CostumeId>
+            <AccountId>AKDMOJOEJHMDF</AccountId>
+            <ShellId>1</ShellId>
+        </ns2:Person>
     </S:Body>
 </S:Envelope>

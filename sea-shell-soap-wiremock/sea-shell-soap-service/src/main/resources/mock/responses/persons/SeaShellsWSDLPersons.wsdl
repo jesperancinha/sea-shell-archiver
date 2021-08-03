@@ -28,13 +28,13 @@
     <wsdl:message name="personsRequest">
         <wsdl:part element="tns:personsRequest" name="parameters"/>
     </wsdl:message>
-    <wsdl:message name="personsResponse">
+    <wsdl:message name="Person">
         <wsdl:part element="tns:Person" name="parameters"/>
     </wsdl:message>
     <wsdl:portType name="SeaShellsWSDLPersons">
         <wsdl:operation name="persons">
             <wsdl:input message="tns:personsRequest"/>
-            <wsdl:output message="tns:personsResponse"/>
+            <wsdl:output message="tns:Person"/>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="SeaShellsWSDLPersonsSOAP" type="tns:SeaShellsWSDLPersons">

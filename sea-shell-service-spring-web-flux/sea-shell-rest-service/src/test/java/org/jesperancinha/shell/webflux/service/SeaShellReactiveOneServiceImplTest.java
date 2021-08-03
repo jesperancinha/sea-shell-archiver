@@ -18,7 +18,6 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static reactor.core.publisher.Mono.delay;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@Disabled
 public class SeaShellReactiveOneServiceImplTest {
 
     private static WireMockServer wireMockServer;

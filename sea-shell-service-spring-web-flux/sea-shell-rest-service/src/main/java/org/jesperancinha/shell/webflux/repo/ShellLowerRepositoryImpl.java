@@ -18,11 +18,11 @@ public class ShellLowerRepositoryImpl implements ShellLowerRepository {
     }
 
     public Mono<Lower> findLowerById(final Long id) {
-        return Mono.fromCallable(() -> lowersClient.getlLower(id))
+        return Mono.fromCallable(() -> lowersClient.getLower(id))
                 .subscribeOn(single());
     }
 
     public Lower findLowerByIdBlock(Long lowerId) {
-        return lowersClient.getlLower(lowerId);
+        return lowersClient.getLower(lowerId);
     }
 }

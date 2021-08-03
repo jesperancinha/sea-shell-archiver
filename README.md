@@ -88,6 +88,10 @@ sdk install java 16.0.1.hs-adpt
 sdk use java 16.0.1.hs-adpt
 ```
 
+## Testing endpoints
+
+1. http://localhost:8080/seashells/reactive/1
+2. http://localhost:8080/seashells/reactive/rootShell/1/1
 ## References
 
 ### Technical

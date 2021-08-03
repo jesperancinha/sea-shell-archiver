@@ -36,10 +36,8 @@ public class SeaShellWiremockSoapLauncher {
         configureFor("localhost", 8090);
         stubPersons();
         stubShells();
-        stubRequestToResponse("/seashells/shells", "/mock/requests/shells/allShells.xml", "/mock/responses/shells/allShells.xml");
-        stubRequestToResponse("/seashells/costumes", "/mock/requests/costumes/costume1.xml", "/mock/responses/costumes/costume1.xml");
-        stubRequestToResponse("/seashells/costumes", "/mock/requests/costumes/costume2.xml", "/mock/responses/costumes/costume2.xml");
-        stubRequestToResponse("/seashells/costumes", "/mock/requests/costumes/costume3.xml", "/mock/responses/costumes/costume3.xml");
+        stubCostumes();
+
         stubRequestToResponse("/seashells/lowers", "/mock/requests/lowers/lower1.xml", "/mock/responses/lowers/lower1.xml");
         stubRequestToResponse("/seashells/lowers", "/mock/requests/lowers/lower2.xml", "/mock/responses/lowers/lower2.xml");
         stubRequestToResponse("/seashells/tops", "/mock/requests/tops/top1.xml", "/mock/responses/tops/top1.xml");
@@ -56,28 +54,25 @@ public class SeaShellWiremockSoapLauncher {
 
     private static void stubShells() throws IOException {
         for (int i = 1; i <= 16; i++) {
-            stubRequestToShell("/mock/requests/shells/shell" + i + ".xml", "/mock/responses/shells/shell" + i + ".xml", i);
-
+            stubRequestToShell("/mock/responses/shells/shell" + i + ".xml", i);
         }
+        stubFor(post(urlEqualTo("/seashells/shells"))
+                .withRequestBody(matchingXPath("/Envelope/Body/allShells"))
+                .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource("/mock/responses/shells/allShells.xml")))
+                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+
     }
 
     private static void stubPersons() throws IOException {
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person1.xml", "/mock/responses/persons/person1.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person2.xml", "/mock/responses/persons/person2.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person3.xml", "/mock/responses/persons/person3.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person4.xml", "/mock/responses/persons/person4.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person5.xml", "/mock/responses/persons/person5.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person6.xml", "/mock/responses/persons/person6.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person7.xml", "/mock/responses/persons/person7.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person8.xml", "/mock/responses/persons/person8.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person9.xml", "/mock/responses/persons/person9.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person10.xml", "/mock/responses/persons/person10.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person11.xml", "/mock/responses/persons/person11.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person12.xml", "/mock/responses/persons/person12.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person13.xml", "/mock/responses/persons/person13.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person14.xml", "/mock/responses/persons/person14.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person15.xml", "/mock/responses/persons/person15.xml");
-        stubRequestToResponse("/seashells/persons", "/mock/requests/persons/person16.xml", "/mock/responses/persons/person16.xml");
+        for (int i = 1; i <= 16; i++) {
+            stubRequestToPerson("/mock/responses/persons/person" + i + ".xml", i);
+        }
+    }
+
+    private static void stubCostumes() throws IOException {
+        for (int i = 1; i <= 3; i++) {
+            stubRequestToCostume("/mock/responses/costumes/costume" + i + ".xml", i);
+        }
     }
 
     private static void stupRequestToWSDL(String urlString, String fileLocation) throws IOException {
@@ -92,9 +87,21 @@ public class SeaShellWiremockSoapLauncher {
                         .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
     }
 
-    private static void stubRequestToShell(String requestResource, String responseResource, Integer i) throws IOException {
+    private static void stubRequestToShell(String responseResource, Integer i) throws IOException {
         stubFor(post(urlEqualTo("/seashells/shells"))
                 .withRequestBody(matchingXPath("/Envelope/Body/shellRequest/shellId/text()", equalTo(i.toString())))
+                .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
+                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+    }
+    private static void stubRequestToPerson(String responseResource, Integer i) throws IOException {
+        stubFor(post(urlEqualTo("/seashells/persons"))
+                .withRequestBody(matchingXPath("/Envelope/Body/personsRequest/personId/text()", equalTo(i.toString())))
+                .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
+                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+    }
+    private static void stubRequestToCostume(String responseResource, Integer i) throws IOException {
+        stubFor(post(urlEqualTo("/seashells/costumes"))
+                .withRequestBody(matchingXPath("/Envelope/Body/costumesRequest/costumeId/text()", equalTo(i.toString())))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
                         .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
     }
