@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:tops xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
-            <topId>2</topId>
-        </ns2:tops>
+        <ns2:Tops xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
+            <TopId>2</TopId>
+        </ns2:Tops>
     </S:Body>
 </S:Envelope>

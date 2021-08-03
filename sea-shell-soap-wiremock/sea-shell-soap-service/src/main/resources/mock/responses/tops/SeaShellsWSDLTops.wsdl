@@ -5,27 +5,29 @@
                   name="SeaShellsWSDLTops" targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
     <wsdl:types>
         <xsd:schema targetNamespace="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
-            <xsd:element name="tops">
+            <xsd:element name="TopRequest">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="topId" type="xsd:long"/>
+                        <xsd:element name="TopId" type="xsd:long"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            <xsd:element name="topsResponse">
+            <xsd:element name="Top">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="out" type="xsd:string"/>
+                        <xsd:element name="Type" type="xsd:string"/>
+                        <xsd:element name="Color" type="xsd:string"/>
+                        <xsd:element name="Size" type="xsd:string"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
         </xsd:schema>
     </wsdl:types>
     <wsdl:message name="topsRequest">
-        <wsdl:part element="tns:tops" name="parameters"/>
+        <wsdl:part element="tns:TopRequest" name="parameters"/>
     </wsdl:message>
     <wsdl:message name="topsResponse">
-        <wsdl:part element="tns:topsResponse" name="parameters"/>
+        <wsdl:part element="tns:Top" name="parameters"/>
     </wsdl:message>
     <wsdl:portType name="SeaShellsWSDLTops">
         <wsdl:operation name="tops">

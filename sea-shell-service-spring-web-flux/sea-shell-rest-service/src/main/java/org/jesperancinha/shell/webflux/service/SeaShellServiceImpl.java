@@ -40,14 +40,15 @@ import static reactor.core.scheduler.Schedulers.elastic;
         ShellAccountRepositoryImpl.class,
         ShellTopRepositoryImpl.class,
         ShellLowerRepositoryImpl.class
-}, name = {
-        "shellRepositoryImpl",
-        "shellCostumeRepositoryImpl",
-        "shellPersonRepositoryImpl",
-        "shellAccountRepositoryImpl",
-        "shellTopRepositoryImpl",
-        "shellLowerRepositoryImpl"
-})
+},
+        name = {
+                "shellRepositoryImpl",
+                "shellCostumeRepositoryImpl",
+                "shellPersonRepositoryImpl",
+                "shellAccountRepositoryImpl",
+                "shellTopRepositoryImpl",
+                "shellLowerRepositoryImpl"
+        })
 public class SeaShellServiceImpl extends SeaShellConsumerAdapter implements SeaShellService {
 
     @Value("${sea.shell.parallelism:20}")

@@ -123,6 +123,11 @@
             <artifactId>sea-shell-soap-service</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

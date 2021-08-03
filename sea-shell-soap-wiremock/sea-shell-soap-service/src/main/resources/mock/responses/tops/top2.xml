@@ -1,12 +1,10 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:topsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
-            <Top>
-                <Type>SHIRT</Type>
-                <Color>FCA6A6</Color>
-                <Size>M</Size>
-            </Top>
-        </ns2:topsResponse>
+        <ns2:Top xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLTops/">
+            <Type>SHIRT</Type>
+            <Color>FCA6A6</Color>
+            <Size>M</Size>
+        </ns2:Top>
     </S:Body>
 </S:Envelope>

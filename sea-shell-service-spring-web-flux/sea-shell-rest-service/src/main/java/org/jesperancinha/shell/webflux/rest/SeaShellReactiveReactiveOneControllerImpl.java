@@ -27,27 +27,39 @@ public class SeaShellReactiveReactiveOneControllerImpl implements SeaShellReacti
         return seaShellReactiveOneService.getAllIds();
     }
 
-    public Mono<SeaShellDto> getShellById(@PathVariable Long id) {
+    public Mono<SeaShellDto> getShellById(
+            @PathVariable
+                    Long id) {
         return seaShellReactiveOneService.getSeaShellById(id);
     }
 
-    public Mono<SeaShellPersonDto> getPersonById(@PathVariable Long id) {
+    public Mono<SeaShellPersonDto> getPersonById(
+            @PathVariable
+                    Long id) {
         return seaShellReactiveOneService.getPersonById(id);
     }
 
-    public Mono<SeaShellCostumeDto> getCostumeById(@PathVariable Long id) {
+    public Mono<SeaShellCostumeDto> getCostumeById(
+            @PathVariable
+                    Long id) {
         return seaShellReactiveOneService.getCostumeById(id);
     }
 
-    public Mono<SeaShellAccountDto> getAccountById(@PathVariable String id) {
+    public Mono<SeaShellAccountDto> getAccountById(
+            @PathVariable
+                    String id) {
         return seaShellReactiveOneService.getAccountById(id);
     }
 
-    public Mono<SeaShellTopDto> getTopById(@PathVariable Long id) {
+    public Mono<SeaShellTopDto> getTopById(
+            @PathVariable
+                    Long id) {
         return seaShellReactiveOneService.getTopById(id);
     }
 
-    public Mono<SeaShellLowerDto> getLowerById(@PathVariable Long id) {
+    public Mono<SeaShellLowerDto> getLowerById(
+            @PathVariable
+                    Long id) {
         return seaShellReactiveOneService.getLowerById(id);
     }
 }

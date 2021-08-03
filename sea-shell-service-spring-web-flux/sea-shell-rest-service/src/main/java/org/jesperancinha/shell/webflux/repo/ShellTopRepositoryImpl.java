@@ -1,7 +1,7 @@
 package org.jesperancinha.shell.webflux.repo;
 
-import org.jesperancinha.shell.client.tops.SeaShellsWSDLTopAbstract;
 import org.jesperancinha.shell.client.tops.Top;
+import org.jesperancinha.shell.client.tops.TopsClient;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
@@ -11,18 +11,18 @@ import static reactor.core.scheduler.Schedulers.single;
 @Repository
 public class ShellTopRepositoryImpl implements ShellTopRepository {
 
-    private final SeaShellsWSDLTopAbstract seaShellsWSDLTopClient;
+    private final TopsClient topsClient;
 
-    public ShellTopRepositoryImpl(SeaShellsWSDLTopAbstract seaShellsWSDLTopClient) {
-        this.seaShellsWSDLTopClient = seaShellsWSDLTopClient;
+    public ShellTopRepositoryImpl(TopsClient topsClient) {
+        this.topsClient = topsClient;
     }
 
     public Mono<Top> findTopById(final Long id) {
-        return Mono.fromCallable(() -> seaShellsWSDLTopClient.getItem(id))
+        return Mono.fromCallable(() -> topsClient.getTop(id))
                 .subscribeOn(single());
     }
 
     public Top findTopByIdBlock(final Long id) {
-        return seaShellsWSDLTopClient.getItem(id);
+        return topsClient.getTop(id);
     }
 }

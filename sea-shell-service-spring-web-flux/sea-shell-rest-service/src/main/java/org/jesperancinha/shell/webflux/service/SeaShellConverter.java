@@ -64,7 +64,7 @@ public class SeaShellConverter {
                 .scientificName(shell.getScientificName())
                 .slogan(shell.getSlogan())
                 .personIds(shell.getPersons().getPersonId())
-                .costumeIds(shell.getCostumes   ().getCostumeId())
+                .costumeIds(shell.getCostumes().getCostumeId())
                 .costumes(new ArrayList<>())
                 .persons(new ArrayList<>())
                 .build();

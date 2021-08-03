@@ -16,13 +16,15 @@ import java.util.List;
 @RequestMapping("/seashells")
 public class SeaShellControllerImpl implements SeaShellController {
 
-    private SeaShellService seaShellService;
+    private final SeaShellService seaShellService;
 
     public SeaShellControllerImpl(SeaShellService seaShellService) {
         this.seaShellService = seaShellService;
     }
 
-    public Mono<SeaShellDto> getShellById(@PathVariable Long id) {
+    public Mono<SeaShellDto> getShellById(
+            @PathVariable
+                    Long id) {
         return seaShellService.getSeaShellById(id);
     }
 
@@ -54,7 +56,9 @@ public class SeaShellControllerImpl implements SeaShellController {
      * @param id
      * @return
      */
-    public SeaShellDto getShellBlockById(@PathVariable Long id) {
+    public SeaShellDto getShellBlockById(
+            @PathVariable
+                    Long id) {
         return seaShellService.getSeaShellNaifBlock(id);
     }
 

@@ -1,7 +1,7 @@
 package org.jesperancinha.shell.webflux.repo;
 
 import org.jesperancinha.shell.client.lowers.Lower;
-import org.jesperancinha.shell.client.lowers.SeaShellsWSDLLowersAbstract;
+import org.jesperancinha.shell.client.lowers.LowersClient;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
@@ -11,18 +11,18 @@ import static reactor.core.scheduler.Schedulers.single;
 @Repository
 public class ShellLowerRepositoryImpl implements ShellLowerRepository {
 
-    private final SeaShellsWSDLLowersAbstract seaShellsWSDLLowersClient;
+    private final LowersClient lowersClient;
 
-    public ShellLowerRepositoryImpl(SeaShellsWSDLLowersAbstract seaShellsWSDLLowersClient) {
-        this.seaShellsWSDLLowersClient = seaShellsWSDLLowersClient;
+    public ShellLowerRepositoryImpl(LowersClient lowersClient) {
+        this.lowersClient = lowersClient;
     }
 
     public Mono<Lower> findLowerById(final Long id) {
-        return Mono.fromCallable(() -> seaShellsWSDLLowersClient.getItem(id))
+        return Mono.fromCallable(() -> lowersClient.getlLower(id))
                 .subscribeOn(single());
     }
 
     public Lower findLowerByIdBlock(Long lowerId) {
-        return seaShellsWSDLLowersClient.getItem(lowerId);
+        return lowersClient.getlLower(lowerId);
     }
 }
