@@ -1,25 +1,23 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns2:allShellsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
-            <AllShells>
-                <ShellId>1</ShellId>
-                <ShellId>2</ShellId>
-                <ShellId>3</ShellId>
-                <ShellId>4</ShellId>
-                <ShellId>5</ShellId>
-                <ShellId>6</ShellId>
-                <ShellId>7</ShellId>
-                <ShellId>8</ShellId>
-                <ShellId>9</ShellId>
-                <ShellId>10</ShellId>
-                <ShellId>11</ShellId>
-                <ShellId>12</ShellId>
-                <ShellId>13</ShellId>
-                <ShellId>14</ShellId>
-                <ShellId>15</ShellId>
-                <ShellId>16</ShellId>
-            </AllShells>
-        </ns2:allShellsResponse>
+        <ns2:allShellIdsResponse xmlns:ns2="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
+            <ShellId>1</ShellId>
+            <ShellId>2</ShellId>
+            <ShellId>3</ShellId>
+            <ShellId>4</ShellId>
+            <ShellId>5</ShellId>
+            <ShellId>6</ShellId>
+            <ShellId>7</ShellId>
+            <ShellId>8</ShellId>
+            <ShellId>9</ShellId>
+            <ShellId>10</ShellId>
+            <ShellId>11</ShellId>
+            <ShellId>12</ShellId>
+            <ShellId>13</ShellId>
+            <ShellId>14</ShellId>
+            <ShellId>15</ShellId>
+            <ShellId>16</ShellId>
+        </ns2:allShellIdsResponse>
     </S:Body>
 </S:Envelope>

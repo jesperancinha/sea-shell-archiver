@@ -12,8 +12,10 @@ import java.util.List;
 
 public interface SeaShellController {
 
-    @GetMapping("/{id}")
-    Mono<SeaShellDto> getShellById(@PathVariable Long id);
+    @GetMapping(path = "/{id}")
+    Mono<SeaShellDto> getShellById(
+            @PathVariable
+                    Long id);
 
     @GetMapping
     ParallelFlux<SeaShellDto> getAllShells();
@@ -25,7 +27,9 @@ public interface SeaShellController {
     List<SeaShellDto> getAllShellsBlock();
 
     @GetMapping("/block/{id}")
-    SeaShellDto getShellBlockById(@PathVariable Long id);
+    SeaShellDto getShellBlockById(
+            @PathVariable
+                    Long id);
 
     @GetMapping("/reactiveblock")
     ParallelFlux<SeaShellDto> getAllShellsReactiveBlock();

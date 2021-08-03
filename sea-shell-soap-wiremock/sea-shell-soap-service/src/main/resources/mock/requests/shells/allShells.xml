@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Body>
-        <ns3:allShells xmlns:ns3="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
-        </ns3:allShells>
+        <ns3:allShellRequest xmlns:ns3="http://org.jesperancinha.shells/SeaShellsWSDLShells/">
+        </ns3:allShellRequest>
     </S:Body>
 </S:Envelope>

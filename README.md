@@ -92,6 +92,9 @@ sdk use java 16.0.1.hs-adpt
 
 1. http://localhost:8080/seashells/reactive/1
 2. http://localhost:8080/seashells/reactive/rootShell/1/1
+3. http://localhost:8080/seashells/1
+4. http://localhost:8080/seashells
+
 ## References
 
 ### Technical

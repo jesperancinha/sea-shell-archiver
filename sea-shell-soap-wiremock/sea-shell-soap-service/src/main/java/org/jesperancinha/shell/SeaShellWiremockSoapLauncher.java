@@ -54,7 +54,7 @@ public class SeaShellWiremockSoapLauncher {
             stubRequestToShell("/mock/responses/shells/shell" + i + ".xml", i);
         }
         stubFor(post(urlEqualTo("/seashells/shells"))
-                .withRequestBody(matchingXPath("/Envelope/Body/allShells"))
+                .withRequestBody(matchingXPath("/Envelope/Body/allShellRequest"))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource("/mock/responses/shells/allShells.xml")))
                         .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
 

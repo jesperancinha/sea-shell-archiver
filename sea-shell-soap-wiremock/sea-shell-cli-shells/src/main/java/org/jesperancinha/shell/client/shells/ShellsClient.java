@@ -45,10 +45,10 @@ public class ShellsClient extends WebServiceGatewaySupport {
     }
 
     public List<Long> getAllShellIds() {
-        return ((JAXBElement<List<Long>>) (getWebServiceTemplate()
+        return ((AllShellIdsResponse) (getWebServiceTemplate()
                 .marshalSendAndReceive(seaShellsWSDLShellsClientLocation, new AllShellRequest(),
                         new SoapActionCallback(
-                                "http://org.jesperancinha.shells/SeaShellsWSDLShells/allshellIds")))).getValue();
+                                "http://org.jesperancinha.shells/SeaShellsWSDLShells/allshellIds")))).shellId;
     }
 
 }

@@ -3,6 +3,7 @@ package org.jesperancinha.shell.webflux.rest;
 import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.service.SeaShellService;
 import org.springframework.data.util.Pair;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,8 @@ public class SeaShellControllerImpl implements SeaShellController {
     }
 
     public Mono<SeaShellDto> getShellById(Long id) {
-        return seaShellService.getSeaShellById(id);
+        return seaShellService.getSeaShellById(id).mapNotNull(
+                    seaShellDto -> ResponseEntity.ok(seaShellDto).getBody());
     }
 
     public ParallelFlux<SeaShellDto> getAllShells() {
