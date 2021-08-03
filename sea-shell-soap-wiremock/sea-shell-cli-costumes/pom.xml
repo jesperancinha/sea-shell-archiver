@@ -7,6 +7,7 @@
         <groupId>org.jesperancinha.shell</groupId>
         <version>0.0.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sea-shell-cli-costumes</artifactId>
@@ -102,12 +103,13 @@
                 <configuration>
                     <schemaLanguage>WSDL</schemaLanguage>
                     <generatePackage>org.jesperancinha.shell.client.costumes</generatePackage>
-<!--                    <schemas>-->
-<!--                        <schema>-->
-<!--                            <url>http://localhost:8090/seashells/costumes?wsdl</url>-->
-<!--                        </schema>-->
-<!--                    </schemas>-->
-                    <schemaDirectory>${basedir}/../sea-shell-soap-service/src/main/resources/mock/responses/costumes</schemaDirectory>
+                    <!--                    <schemas>-->
+                    <!--                        <schema>-->
+                    <!--                            <url>http://localhost:8090/seashells/costumes?wsdl</url>-->
+                    <!--                        </schema>-->
+                    <!--                    </schemas>-->
+                    <schemaDirectory>${basedir}/../sea-shell-soap-service/src/main/resources/mock/responses/costumes
+                    </schemaDirectory>
                     <schemaIncludes>
                         <include>SeaShellsWSDLCostumes.wsdl</include>
                     </schemaIncludes>

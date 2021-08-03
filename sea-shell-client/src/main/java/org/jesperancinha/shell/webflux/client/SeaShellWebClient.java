@@ -18,7 +18,7 @@ public class SeaShellWebClient {
         this.client = WebClient.builder().baseUrl(uri).build();
     }
 
-    public static void main(String[] args) throws InterruptedException, ExecutionException {
+    public static void main(String[] args) throws InterruptedException {
         SeaShellWebClient seaShellWebClient = new SeaShellWebClient("http://localhost:8080");
         seaShellWebClient.consume();
     }
