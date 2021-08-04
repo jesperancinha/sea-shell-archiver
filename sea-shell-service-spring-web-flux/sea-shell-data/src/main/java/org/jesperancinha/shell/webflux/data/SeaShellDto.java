@@ -18,13 +18,11 @@ public record SeaShellDto(
     public SeaShellDto {
     }
 
-    public List<SeaShellPersonDto> addPersons(final List<SeaShellPersonDto> persons) {
+    public void addPersons(final List<SeaShellPersonDto> persons) {
         this.persons.addAll(persons);
-        return this.persons;
     }
 
-    public List<SeaShellCostumeDto> addCostumes(final List<SeaShellCostumeDto> costumes) {
+    public void addCostumes(final List<SeaShellCostumeDto> costumes) {
         this.costumes.addAll(costumes);
-        return this.costumes;
     }
 }
