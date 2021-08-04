@@ -132,7 +132,7 @@ sdk use java 16.0.1.hs-adpt
 ### Reactive endpoints
 1. http://localhost:8080/seashells/one
 2. http://localhost:8080/seashells/one/1
-3. http://localhost:8080/seashells/one/persson/1
+3. http://localhost:8080/seashells/one/person/1
 4. http://localhost:8080/seashells/one/costume/1
 5. http://localhost:8080/seashells/one/account/1
 6. http://localhost:8080/seashells/one/top/1
