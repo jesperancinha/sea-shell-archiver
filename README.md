@@ -56,11 +56,7 @@ This is the description of that world:
 
 This is what this application is about.
 
-Essentially this is a fun exercise to help understand all the mechanisms behind the concepts described in the [Reactive Manifesto](https://www.reactivemanifesto.org/).
-
-NOTES:
-
--   To run circleCI I had to use an external [Docker image](https://hub.docker.com/r/codeaches/openjdk) from [codecaches](https://hub.docker.com/u/codeaches).
+Essentially this is a fun exercise to help understand some of the mechanisms behind the concepts described in the [Reactive Manifesto](https://www.reactivemanifesto.org/).
 
 Topics discussed:
 
