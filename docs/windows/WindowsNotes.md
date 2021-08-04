@@ -19,7 +19,7 @@ The [chocolatey](https://chocolatey.org/install) installation needs to force a s
 1. https://chocolatey.org/install
 2. Installing with the script
    - Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-   - run [setup.ps1](./setup.ps1)
+   - run [setup.ps1](https://github.com/jesperancinha/sea-shell-archiver/blob/master/docs/windows/setup.ps1)
    - Set-ExecutionPolicy -Scope Process -ExecutionPolicy Default
 3. https://plugins.jetbrains.com/plugin/10249-powershell/features
 4. https://github.com/shyiko/jabba
