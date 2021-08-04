@@ -38,6 +38,9 @@ choco install maven -y
 choco uninstall maven -y
 choco install maven -y
 choco install git -y
+choco install docker -y
+choco install docker-machine -y
+choco install docker-desktop -y
 
 curl https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_windows_hotspot_16.0.2_7.msi -o jdk16.msi
 jdk16.msi
@@ -48,5 +51,24 @@ This script may not completely run on the first run and this is why there is a m
 The first script line is taken literally from [chocolatey](https://chocolatey.org/install).
 
 The final script lines download the JDK16 from [Adoptium](https://adoptium.net/) and finally run the freshly downloaded msi file.
+
+If you experience issues starting Docker in regard to the WSL 2 Linux Kernel, please find more help on the [computerhope website](https://www.computerhope.com/issues/ch001879.htm) and the [omgubuntu website](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10).
+I followed their steps which are shortly these:
+
+```powershell
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+
+wsl --set-default-version 2
+```
+
+According to the [microsoft website](https://docs.microsoft.com/nl-nl/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package), you may have to download a special WSL 2 package:
+
+```
+curl https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi -o wsl_update_x64.msi
+```
 
 ---
