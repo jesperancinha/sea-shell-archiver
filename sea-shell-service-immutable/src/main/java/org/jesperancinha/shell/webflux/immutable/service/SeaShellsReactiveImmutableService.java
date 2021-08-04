@@ -8,6 +8,7 @@ import org.jesperancinha.shell.webflux.immutable.data.SeaShellPersonDto;
 import org.jesperancinha.shell.webflux.immutable.data.SeaShellTopDto;
 import org.jesperancinha.shell.webflux.immutable.repository.ShellAccountImmutableRepository;
 import org.jesperancinha.shell.webflux.immutable.repository.ShellCostumeImmutableRepository;
+import org.jesperancinha.shell.webflux.immutable.repository.ShellImmutableRepository;
 import org.jesperancinha.shell.webflux.immutable.repository.ShellLowerImmutableRepository;
 import org.jesperancinha.shell.webflux.immutable.repository.ShellPersonImmutableRepository;
 import org.jesperancinha.shell.webflux.immutable.repository.ShellTopImmutableRepository;
@@ -29,18 +30,21 @@ public class SeaShellsReactiveImmutableService {
     private final ShellAccountImmutableRepository shellAccountImmutableRepository;
     private final ShellCostumeImmutableRepository shellCostumeImmutableRepository;
     private final ShellPersonImmutableRepository shellPersonImmutableRepository;
+    private final ShellImmutableRepository shellImmutableRepository;
 
     public SeaShellsReactiveImmutableService(
             ShellTopImmutableRepository shellTopRepository,
             ShellLowerImmutableRepository shellLowerRepository,
             ShellAccountImmutableRepository shellAccountImmutableRepository,
             ShellCostumeImmutableRepository shellCostumeImmutableRepository,
-            ShellPersonImmutableRepository shellPersonImmutableRepository) {
+            ShellPersonImmutableRepository shellPersonImmutableRepository,
+            ShellImmutableRepository shellImmutableRepository) {
         this.shellTopRepository = shellTopRepository;
         this.shellLowerRepository = shellLowerRepository;
         this.shellAccountImmutableRepository = shellAccountImmutableRepository;
         this.shellCostumeImmutableRepository = shellCostumeImmutableRepository;
         this.shellPersonImmutableRepository = shellPersonImmutableRepository;
+        this.shellImmutableRepository = shellImmutableRepository;
     }
 
     public Flux<Long> getAllIds() {
@@ -48,7 +52,44 @@ public class SeaShellsReactiveImmutableService {
     }
 
     public Mono<SeaShellDto> getSeaShellById(Long id) {
-        return Mono.empty();
+        return shellImmutableRepository.findSeaShellById(id)
+                .flatMap(shell ->
+                        zip(
+                                shellPersonImmutableRepository
+                                        .findPersons(shell.getPersons().getPersonId())
+                                        .flatMap(person -> zip(
+                                                getAccountById(person.getAccountId()).subscribeOn(parallel()),
+                                                getCostumeById(person.getCostumeId()).subscribeOn(parallel()),
+                                                (account, costume) -> SeaShellPersonDto.builder()
+                                                        .name(person.getName())
+                                                        .accountId(person.getAccountId())
+                                                        .costumeId(person.getCostumeId())
+                                                        .accountDto(account)
+                                                        .costumeDto(costume)
+                                                        .build()).subscribeOn(parallel()))
+                                        .sequential().collectList().subscribeOn(parallel()),
+                                shellCostumeImmutableRepository
+                                        .findCostumes(shell.getCostumes().getCostumeId())
+                                        .flatMap(costume -> zip(
+                                                getTopById(costume.getTopId()).subscribeOn(parallel()),
+                                                getLowerById(costume.getLowerId()).subscribeOn(parallel()),
+                                                (top, lower) -> SeaShellCostumeDto.builder()
+                                                        .topId(costume.getTopId())
+                                                        .lowerId(costume.getLowerId())
+                                                        .topDto(top)
+                                                        .lowerDto(lower)
+                                                        .build()).subscribeOn(parallel()))
+                                        .sequential().collectList().subscribeOn(parallel()),
+                                (persons, costumes) ->
+                                        SeaShellDto.builder()
+                                                .name(shell.getName())
+                                                .scientificName(shell.getScientificName())
+                                                .personIds(shell.getPersons().getPersonId())
+                                                .costumeIds(shell.getCostumes().getCostumeId())
+                                                .persons(persons)
+                                                .costumes(costumes)
+                                                .build()).subscribeOn(parallel())
+                );
     }
 
     public Mono<SeaShellPersonDto> getPersonById(Long id) {
@@ -57,12 +98,12 @@ public class SeaShellsReactiveImmutableService {
                         getAccountById(person.getAccountId()).subscribeOn(parallel()),
                         getCostumeById(person.getCostumeId()).subscribeOn(parallel()),
                         (account, costume) -> SeaShellPersonDto.builder()
-                                 .name(person.getName())
-                                 .accountId(person.getAccountId())
-                                 .costumeId(person.getCostumeId())
-                                 .accountDto(account)
-                                 .costumeDto(costume)
-                                 .build()).subscribeOn(parallel()));
+                                .name(person.getName())
+                                .accountId(person.getAccountId())
+                                .costumeId(person.getCostumeId())
+                                .accountDto(account)
+                                .costumeDto(costume)
+                                .build()).subscribeOn(parallel()));
 
     }
 
