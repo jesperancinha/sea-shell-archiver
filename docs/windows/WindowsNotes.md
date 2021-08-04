@@ -41,6 +41,7 @@ choco install git -y
 choco install docker -y
 choco install docker-machine -y
 choco install docker-desktop -y
+choco install make -y
 
 curl https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_windows_hotspot_16.0.2_7.msi -o jdk16.msi
 jdk16.msi
