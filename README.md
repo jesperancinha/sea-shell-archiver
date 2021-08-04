@@ -89,6 +89,18 @@ java -jar sea-shell-rest-service.jar
 java -jar sea-shell-service-immutable.jar
 ```
 
+You can, alternatively, with your docker machine/desktop running, run a docker container:
+
+```shell
+docker compose up
+```
+
+To terminate your tests, you can just run 
+
+```shell
+docker compose down
+```
+
 ## Review notes - Roadmap to 2.0.0 - Expected release date - Coming soon
 
 This project is currently under review.	Problems to fix include:
