@@ -136,16 +136,16 @@ sdk use java 16.0.1.hs-adpt
 4. http://localhost:8080/seashells/one/costume/1
 5. http://localhost:8080/seashells/one/account/1
 6. http://localhost:8080/seashells/one/top/1
-7. http://localhost:8080/seashells/onelower/1
+7. http://localhost:8080/seashells/one/lower/1
 
 ### Immutable Reactive endpoints (the real deal!)
 1. http://localhost:8081/seashells/immutable
 2. http://localhost:8081/seashells/immutable/1
-3. http://localhost:8081/seashells/immutable/persson/1
+3. http://localhost:8081/seashells/immutable/person/1
 4. http://localhost:8081/seashells/immutable/costume/1
 5. http://localhost:8081/seashells/immutable/account/1
 6. http://localhost:8081/seashells/immutable/top/1
-7. http://localhost:8081/seashells/immutable/1
+7. http://localhost:8081/seashells/immutable/lower/1
 
 ## References
 
