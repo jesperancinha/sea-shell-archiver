@@ -26,8 +26,8 @@ public class SeaShellReactiveImmutableController {
     }
 
     @GetMapping
-    public Flux<Long> getAllShells() {
-        return seaShellsReactiveImmutableService.getAllIds();
+    public Flux<SeaShellDto> getAllShells() {
+        return seaShellsReactiveImmutableService.getAllShells();
     }
 
     @GetMapping("/{id}")

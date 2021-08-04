@@ -43,14 +43,14 @@ This project is a Sea Shell archiver for an imaginary world.
 This is the description of that world:
 
 >Imagine a world were beings live in gigantic sea shells. Sea shells are their home. Inside you can find one or more people. You can also find one or more costumes with different configuration. The value of the shell is evaluated by the sum of the values of all the individual costumes.
->Every shell has a slogan. 
+>Every shell has a slogan.
 >
 >For the purposes of this example I decided to use [Cardi B](https://www.cardibofficial.com/)'s [rap solo](https://songteksten.net/lyric/2881/100824/maroon-5/girls-like-you-ft-cardi-b.html) in "Girls like you" by [Maroon 5](https://www.maroon5.com/) to establish slogans.
 >As persons living inside shells I chose [Game of Thrones](https://www.hbo.com/game-of-thrones) charachters.
 >For the rest, just my vivid imagination :).
 >
 >This application is very old. Its design still is base on the paradigms of the time. It's implemented in SOAP. Furthermore, every single entity has a dedicated read service associated with it. As a result, every time you need to get the data from a particular sea shell, you have to make multiple requests.
->This situation warrants a solution. 
+>This situation warrants a solution.
 >Times have changed and applications need to move faster and be scalable, but due to business restrictions I cannot change my SOAP services.
 >A solution could be using Reactive Streams in the context of a Reactive architecture.
 
@@ -65,23 +65,37 @@ NOTES:
 Topics discussed:
 
 -   [WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html)
-    -   [Flux](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html)
-    -   [Mono](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html)
+	-   [Flux](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html)
+	-   [Mono](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html)
 
 This project is also the official support project of my article on medium:
 
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/medium-20.png "Medium")](https://medium.com/swlh/reactive-programming-applied-to-legacy-services-a-webflux-example-4d1c2ad40bd4) [Reactive Programming applied to Legacy Services — A WebFlux example](https://medium.com/swlh/reactive-programming-applied-to-legacy-services-a-webflux-example-4d1c2ad40bd4)
 
-
 In order to start interacting with you you need to start runnable modules:
 
-1. [sea-shell-soap-service](./sea-shell-soap-wiremock/sea-shell-soap-service) - [SeaShellWiremockSoapLauncher](sea-shell-soap-wiremock/sea-shell-soap-service/src/main/java/org/jesperancinha/shell/SeaShellWiremockSoapLauncher.java) - Soap mock service (The blocking source)
-2. [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) - [SeaShellApplication](sea-shell-service-spring-web-flux/sea-shell-rest-service/src/main/java/org/jesperancinha/shell/webflux/SeaShellApplication.java) - Rest Service data provider (Uses the SOAP blocking, legacy, outdated SOAP service)
+1. [sea-shell-soap-service](./sea-shell-soap-wiremock/sea-shell-soap-service) - [SeaShellWiremockSoapLauncher](sea-shell-soap-wiremock/sea-shell-soap-service/src/main/java/org/jesperancinha/shell/SeaShellWiremockSoapLauncher.java) - Soap mock service (The blocking source) - Runs on port 8090
+2. [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) - [SeaShellApplication](sea-shell-service-spring-web-flux/sea-shell-rest-service/src/main/java/org/jesperancinha/shell/webflux/SeaShellApplication.java) - Rest Service data provider (Uses the SOAP blocking, legacy, outdated SOAP service) - Runs on port 8080
 3. [sea-shell-client](./sea-shell-client) - A module with three executables to run the same test on the three different implementations
+4. [sea-shell-sea-shell-service-immutable](./sea-shell-service-immutable) - Standalone compact service running in an immutable fashion using [Java records](https://openjdk.java.net/jeps/359) - Runs on port 8081
+
+In order to run the full example, please create your local bin folder
+
+```bash
+make build local
+```
+
+This will create the bin folder. The jars are self-explanatory. To run each one of them please use the corresponding command in different terminal windows:
+
+```shell
+java -jar sea-shell-soap-service.jar
+java -jar sea-shell-rest-service.jar
+java -jar sea-shell-service-immutable.jar
+```
+
 ## Review notes - Roadmap to 2.0.0 - Expected release date - Coming soon
 
-This project is currently under review.
-Problems to fix include:
+This project is currently under review.	Problems to fix include:
 
 - Maintainability - JAXB current configuration as it stands is incompatible with JDK updates
 - Windows Compatibility - Though not originally a point of focus, it will be a issue to sort out for the next version
@@ -97,12 +111,41 @@ sdk use java 16.0.1.hs-adpt
 
 ## Testing endpoints
 
+
+### Traditional Methods
+1. http://localhost:8080/seashells
+2. http://localhost:8080/seashells/1
+3. http://localhost:8080/seashells/slogans
+4. http://localhost:8080/seashells/block
+5. http://localhost:8080/seashells/block/1
+6. http://localhost:8080/seashells/reactiveblock
+7. http://localhost:8080/seashells/reactiveWithDelay
+8. http://localhost:8080/seashells/reactiveWithForkJoins
+
+### Loose Reactive endpoints
 1. http://localhost:8080/seashells/reactive/1
-2. http://localhost:8080/seashells/reactive/rootShell/1/1
-3. http://localhost:8080/seashells/1
-4. http://localhost:8080/seashells
-5. http://localhost:8080/seashells/one/1
-6. http://localhost:8080/seashells/one
+2. http://localhost:8080/seashells/reactive/rootCostume/1/1
+3. http://localhost:8080/seashells/reactive/rootShell/1/1
+4. http://localhost:8080/seashells/reactive/rootCostumeSlowTop/1/1
+5. http://localhost:8080/seashells/reactive/rootCostumeSlowLower/1/1
+
+### Reactive endpoints
+1. http://localhost:8080/seashells/one
+2. http://localhost:8080/seashells/one/1
+3. http://localhost:8080/seashells/one/persson/1
+4. http://localhost:8080/seashells/one/costume/1
+5. http://localhost:8080/seashells/one/account/1
+6. http://localhost:8080/seashells/one/top/1
+7. http://localhost:8080/seashells/onelower/1
+
+### Immutable Reactive endpoints (the real deal!)
+1. http://localhost:8081/seashells/one
+2. http://localhost:8081/seashells/one/1
+3. http://localhost:8081/seashells/one/persson/1
+4. http://localhost:8081/seashells/one/costume/1
+5. http://localhost:8081/seashells/one/account/1
+6. http://localhost:8081/seashells/one/top/1
+7. http://localhost:8081/seashells/onelower/1
 
 ## References
 
@@ -160,15 +203,13 @@ Please check the [docs](https://jesperancinha.github.io/sea-shell-archiver/) for
 
 Please check my documentation on [Hints&Tricks](https://github.com/jesperancinha/project-signer/blob/master/project-signer-templates/Hints%26Tricks.md) for more details
 
-If for any reason, the import of this project fails or the upgrade fails, please close your IDE.
-Via a shell run the following command:
+If for any reason, the import of this project fails or the upgrade fails, please close your IDE.	Via a shell run the following command:
 
 ```bash
 git clean -xdf
 ```
 
 This will remove all non-versioned files from your repo. It will allow your IDE to re-import fresh from start. Make sure that the caches are invalidated and removed in this case.
-
 
 ## About me 👨🏽‍💻🚀🏳️‍🌈
 
