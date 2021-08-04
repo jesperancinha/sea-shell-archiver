@@ -13,7 +13,7 @@ public record SeaShellLowerDto(
 
     }
 
-    public static  SeaShellLowerDto create(Lower lower) {
+    public static SeaShellLowerDto create(Lower lower) {
         return SeaShellLowerDto.builder()
                 .type(lower.getType())
                 .color(lower.getColor())

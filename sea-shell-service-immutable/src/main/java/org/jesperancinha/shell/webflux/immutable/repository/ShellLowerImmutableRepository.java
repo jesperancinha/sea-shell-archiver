@@ -9,20 +9,16 @@ import static reactor.core.scheduler.Schedulers.single;
 
 
 @Repository
-public class ShellLowerRepositoryImpl {
+public class ShellLowerImmutableRepository {
 
     private final LowersClient lowersClient;
 
-    public ShellLowerRepositoryImpl(LowersClient lowersClient) {
+    public ShellLowerImmutableRepository(LowersClient lowersClient) {
         this.lowersClient = lowersClient;
     }
 
     public Mono<Lower> findLowerById(final Long id) {
         return Mono.fromCallable(() -> lowersClient.getLower(id))
                 .subscribeOn(single());
-    }
-
-    public Lower findLowerByIdBlock(Long lowerId) {
-        return lowersClient.getLower(lowerId);
     }
 }

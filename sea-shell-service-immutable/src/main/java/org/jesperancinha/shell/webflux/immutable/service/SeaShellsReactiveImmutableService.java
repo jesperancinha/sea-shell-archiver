@@ -6,8 +6,9 @@ import org.jesperancinha.shell.webflux.immutable.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.immutable.data.SeaShellLowerDto;
 import org.jesperancinha.shell.webflux.immutable.data.SeaShellPersonDto;
 import org.jesperancinha.shell.webflux.immutable.data.SeaShellTopDto;
-import org.jesperancinha.shell.webflux.immutable.repository.ShellLowerRepositoryImpl;
-import org.jesperancinha.shell.webflux.immutable.repository.ShellTopRepositoryImpl;
+import org.jesperancinha.shell.webflux.immutable.repository.ShellAccountImmutableRepository;
+import org.jesperancinha.shell.webflux.immutable.repository.ShellLowerImmutableRepository;
+import org.jesperancinha.shell.webflux.immutable.repository.ShellTopImmutableRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,15 +19,17 @@ import reactor.core.publisher.Mono;
 @Service
 public class SeaShellsReactiveImmutableService {
 
-    private final ShellTopRepositoryImpl shellTopRepository;
-    private final ShellLowerRepositoryImpl shellLowerRepository;
+    private final ShellTopImmutableRepository shellTopRepository;
+    private final ShellLowerImmutableRepository shellLowerRepository;
+    private final ShellAccountImmutableRepository shellAccountImmutableRepository;
 
     public SeaShellsReactiveImmutableService(
-            ShellTopRepositoryImpl shellTopRepository,
-            ShellLowerRepositoryImpl shellLowerRepository
-    ) {
+            ShellTopImmutableRepository shellTopRepository,
+            ShellLowerImmutableRepository shellLowerRepository,
+            ShellAccountImmutableRepository shellAccountImmutableRepository) {
         this.shellTopRepository = shellTopRepository;
         this.shellLowerRepository = shellLowerRepository;
+        this.shellAccountImmutableRepository = shellAccountImmutableRepository;
     }
 
     public Flux<Long> getAllIds() {
@@ -46,7 +49,8 @@ public class SeaShellsReactiveImmutableService {
     }
 
     public Mono<SeaShellAccountDto> getAccountById(String id) {
-        return Mono.empty();
+        return shellAccountImmutableRepository.findAccountById(id)
+                .map(SeaShellAccountDto::create);
     }
 
     public Mono<SeaShellTopDto> getTopById(Long id) {

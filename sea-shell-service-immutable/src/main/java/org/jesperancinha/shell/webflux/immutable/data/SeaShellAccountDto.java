@@ -1,21 +1,23 @@
 package org.jesperancinha.shell.webflux.immutable.data;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import org.jesperancinha.shell.client.accounts.Account;
 
 import java.math.BigDecimal;
 
 
-public record SeaShellAccountDto (
-    BigDecimal value,
-    String currency
-){
+public record SeaShellAccountDto(
+        BigDecimal value,
+        String currency
+) {
     @Builder
-    public SeaShellAccountDto{
+    public SeaShellAccountDto {
+    }
+
+    public static SeaShellAccountDto create(Account account) {
+        return SeaShellAccountDto.builder()
+                .value(account.getValue())
+                .currency(account.getCurrency())
+                .build();
     }
 }
