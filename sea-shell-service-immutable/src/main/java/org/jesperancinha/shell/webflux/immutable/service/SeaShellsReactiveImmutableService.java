@@ -9,6 +9,7 @@ import org.jesperancinha.shell.webflux.immutable.data.SeaShellTopDto;
 import org.jesperancinha.shell.webflux.immutable.repository.ShellAccountImmutableRepository;
 import org.jesperancinha.shell.webflux.immutable.repository.ShellCostumeImmutableRepository;
 import org.jesperancinha.shell.webflux.immutable.repository.ShellLowerImmutableRepository;
+import org.jesperancinha.shell.webflux.immutable.repository.ShellPersonImmutableRepository;
 import org.jesperancinha.shell.webflux.immutable.repository.ShellTopImmutableRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -27,16 +28,19 @@ public class SeaShellsReactiveImmutableService {
     private final ShellLowerImmutableRepository shellLowerRepository;
     private final ShellAccountImmutableRepository shellAccountImmutableRepository;
     private final ShellCostumeImmutableRepository shellCostumeImmutableRepository;
+    private final ShellPersonImmutableRepository shellPersonImmutableRepository;
 
     public SeaShellsReactiveImmutableService(
             ShellTopImmutableRepository shellTopRepository,
             ShellLowerImmutableRepository shellLowerRepository,
             ShellAccountImmutableRepository shellAccountImmutableRepository,
-            ShellCostumeImmutableRepository shellCostumeImmutableRepository) {
+            ShellCostumeImmutableRepository shellCostumeImmutableRepository,
+            ShellPersonImmutableRepository shellPersonImmutableRepository) {
         this.shellTopRepository = shellTopRepository;
         this.shellLowerRepository = shellLowerRepository;
         this.shellAccountImmutableRepository = shellAccountImmutableRepository;
         this.shellCostumeImmutableRepository = shellCostumeImmutableRepository;
+        this.shellPersonImmutableRepository = shellPersonImmutableRepository;
     }
 
     public Flux<Long> getAllIds() {
@@ -48,7 +52,18 @@ public class SeaShellsReactiveImmutableService {
     }
 
     public Mono<SeaShellPersonDto> getPersonById(Long id) {
-        return Mono.empty();
+        return shellPersonImmutableRepository.findPersonById(id)
+                .flatMap(person -> zip(
+                        getAccountById(person.getAccountId()).subscribeOn(parallel()),
+                        getCostumeById(person.getCostumeId()).subscribeOn(parallel()),
+                        (account, costume) -> SeaShellPersonDto.builder()
+                                 .name(person.getName())
+                                 .accountId(person.getAccountId())
+                                 .costumeId(person.getCostumeId())
+                                 .accountDto(account)
+                                 .costumeDto(costume)
+                                 .build()).subscribeOn(parallel()));
+
     }
 
     public Mono<SeaShellCostumeDto> getCostumeById(Long id) {
