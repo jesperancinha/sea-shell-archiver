@@ -4,9 +4,9 @@ This module exemplifies three techniques to retrieve the data using mutable obje
 
 The three techniques used are:
 
-1. Using Futures
-2. Using Reactive MVC decoupled
-3. Using Reactive MVC coupled
+1. Using Loose subscribers
+2. Using Loose publishers
+3. Using coordinated publishers
 
 NOTE: In version [2.0.0](../../ReviewLogs.md) of this project, there is a [new module](../../sea-shell-service-immutable), where the immutable implementation is presented in one go.
 Please have a look at it to see an example of a better implementation.

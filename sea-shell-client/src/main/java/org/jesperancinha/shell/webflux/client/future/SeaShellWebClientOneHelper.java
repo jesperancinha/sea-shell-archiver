@@ -17,7 +17,6 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
-import static java.util.concurrent.Executors.newCachedThreadPool;
 
 @Slf4j
 public class SeaShellWebClientOneHelper {
@@ -71,7 +70,7 @@ public class SeaShellWebClientOneHelper {
         return () -> seaShellOneDtoById.addCostumes(
                 seaShellOneDtoById.costumeIds()
                         .parallelStream()
-                        .map(id->this.getCostumeDto(id, executorService))
+                        .map(id -> this.getCostumeDto(id, executorService))
                         .collect(Collectors.toList()));
     }
 
