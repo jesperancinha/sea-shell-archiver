@@ -1,11 +1,19 @@
 # Sea Shell Archiver Review Logs
 
+##  Roadmap to v3.0.0
+
+() - Kotest
+() - Mockk
+
 ##  Roadmap to v2.0.0
 
-() - Usage of Records
+() - Article upgrade
+
+2021/08/04 - Records
+- Usage of Records
 - JDK16 Record usage
 - Check Windows Compatibility - [Error on windows #14](https://github.com/jesperancinha/sea-shell-archiver/issues/14)
-- Create JEnv windows instructions and installation script
+- Create Java Environment windows instructions and installation script
 - Create instructions to run `SeaShellWiremockSoapLauncher`
 - Create instructions to run `SeaShellApplication`
 - Create instructions to run `SeaShellClient` different runs
