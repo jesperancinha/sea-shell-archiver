@@ -1,17 +1,6 @@
-# sea-shell-soap-spring
+# sea-shell-service-immutable
 
-Test project generated to explore SOAP with Spring as presented by the tutorials provided:
-
-- [Producing Web Services in Spring](https://spring.io/guides/gs/producing-web-service)
-- [Consuming a SOAP web service](https://spring.io/guides/gs/consuming-web-service/)
-
-
-## References
-
-### Online
-
-- [Producing Web Services in Spring](https://spring.io/guides/gs/producing-web-service)
-- [Consuming a SOAP web service](https://spring.io/guides/gs/consuming-web-service/)
+SeaShells service the immutable way
 
 ## About me 👨🏽‍💻🚀🏳️‍🌈
 

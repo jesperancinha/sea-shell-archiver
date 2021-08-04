@@ -1,5 +1,16 @@
 # sea-shell-rest-service
 
+This module exemplifies three techniques to retrieve the data using mutable objects.
+
+The three techniques used are:
+
+1. Using Futures
+2. Using Reactive MVC decoupled
+3. Using Reactive MVC coupled
+
+NOTE: In version [2.0.0](../../ReviewLogs.md) of this project, there is a [new module](../../sea-shell-service-immutable), where the immutable implementation is presented in one go.
+Please have a look at it to see an example of a better implementation.
+
 ## About me 👨🏽‍💻🚀🏳️‍🌈
 
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/JEOrgLogo-20.png "João Esperancinha Homepage")](http://joaofilipesabinoesperancinha.nl)
