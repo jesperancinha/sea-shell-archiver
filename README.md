@@ -101,6 +101,11 @@ To terminate your tests, you can just run
 docker compose down
 ```
 
+This project makes usage of image:
+
+[![dockeri.co](https://dockeri.co/image/adoptopenjdk/openjdk16)](https://hub.docker.com/r/adoptopenjdk/openjdk16)
+
+
 ## Review notes - Roadmap to 2.0.0 - Expected release date - Coming soon
 
 This project is currently under review.	Problems to fix include:
