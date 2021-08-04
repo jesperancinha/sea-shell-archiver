@@ -1,6 +1,4 @@
-# sea-shell-service-immutable
-
-SeaShells service the immutable way.
+# sea-shell-model
 
 ## About me 👨🏽‍💻🚀🏳️‍🌈
 
