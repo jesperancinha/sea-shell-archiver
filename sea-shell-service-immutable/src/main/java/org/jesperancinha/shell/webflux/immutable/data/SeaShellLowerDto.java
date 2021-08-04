@@ -20,4 +20,8 @@ public record SeaShellLowerDto(
                 .size(lower.getSize())
                 .build();
     }
+
+    public static SeaShellLowerDto create(SeaShellLowerDto lower) {
+        return null;
+    }
 }

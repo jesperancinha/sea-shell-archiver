@@ -16,7 +16,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/seashells/one")
+@RequestMapping("/seashells/immutable")
 public class SeaShellReactiveImmutableController {
 
     private final SeaShellsReactiveImmutableService seaShellsReactiveImmutableService;
