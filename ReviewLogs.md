@@ -4,6 +4,8 @@
 
 () - Kotest
 () - Mockk
+() - Java Docs
+() - Use var wherever possible
 
 ##  Roadmap to v2.0.0
 
