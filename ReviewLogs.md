@@ -7,7 +7,18 @@
 
 ##  Roadmap to v2.0.0
 
-() - Article upgrade
+### Review notes - Roadmap to 2.0.0 - Expected release date - Coming soon
+
+This project is currently under review.	Problems to fix include:
+
+- Maintainability - JAXB current configuration as it stands is incompatible with JDK updates
+- Windows Compatibility - Though not originally a point of focus, it will be a issue to sort out for the next version
+
+Please check review logs on [Review Logs](./ReviewLogs.md).
+
+### Change Logs
+
+2021/08/05 - Article upgrade
 
 2021/08/04 - Records
 - Usage of Records

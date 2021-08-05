@@ -107,16 +107,6 @@ This project makes usage of image:
 
 [![dockeri.co](https://dockeri.co/image/adoptopenjdk/openjdk16)](https://hub.docker.com/r/adoptopenjdk/openjdk16)
 
-
-## Review notes - Roadmap to 2.0.0 - Expected release date - Coming soon
-
-This project is currently under review.	Problems to fix include:
-
-- Maintainability - JAXB current configuration as it stands is incompatible with JDK updates
-- Windows Compatibility - Though not originally a point of focus, it will be a issue to sort out for the next version
-
-Please check review logs on [Review Logs](./ReviewLogs.md).
-
 ## Java version
 
 ```bash
