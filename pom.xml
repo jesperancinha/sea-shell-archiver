@@ -11,8 +11,7 @@
     <version>0.0.0-SNAPSHOT</version>
 
     <modules>
-        <module>sea-shell-model</module>
-        <module>sea-shell-client</module>
+        <module>sea-shell-runnables</module>
         <module>sea-shell-soap-wiremock</module>
         <module>sea-shell-service-spring-web-flux</module>
         <module>sea-shell-soap-spring</module>

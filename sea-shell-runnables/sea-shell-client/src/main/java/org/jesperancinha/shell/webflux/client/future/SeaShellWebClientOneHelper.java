@@ -27,9 +27,17 @@ public class SeaShellWebClientOneHelper {
         this.client = client;
     }
 
+    /**
+     * Fetches a list of {@link SeaShellDto} ids and uses that to retrieve the full data using Futures.
+     *
+     * @param executorService An executor service of our choice of type {@link ExecutorService}
+     * @return A list of all {@link SeaShellDto}
+     * @throws ExecutionException   Exception thrown by the future on an execution failure
+     * @throws InterruptedException Thrown in case of Future interruption
+     */
     public List<SeaShellDto> getMultipleRequestClientSideOneShell(final ExecutorService executorService) throws ExecutionException, InterruptedException {
-        final List<SeaShellDto> seaShellDtoList = new ArrayList<>();
-        final Future<?> shells = executorService.submit(() -> stream(getSeaShellOneAll()).parallel().forEach(seaShellId -> {
+        final var seaShellDtoList = new ArrayList<SeaShellDto>();
+        final var shells = executorService.submit(() -> stream(getSeaShellOneAll()).parallel().forEach(seaShellId -> {
             try {
                 seaShellDtoList.add(getMultipleRequestClientSideOneShell(seaShellId, executorService));
             } catch (ExecutionException | InterruptedException e) {
