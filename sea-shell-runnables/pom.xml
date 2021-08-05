@@ -8,6 +8,7 @@
     <modules>
         <module>sea-shell-client</module>
         <module>sea-shell-model</module>
+        <module>sea-shell-soap-spring</module>
     </modules>
 
     <parent>

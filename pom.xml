@@ -14,7 +14,6 @@
         <module>sea-shell-runnables</module>
         <module>sea-shell-soap-wiremock</module>
         <module>sea-shell-service-spring-web-flux</module>
-        <module>sea-shell-soap-spring</module>
         <module>sea-shell-service-immutable</module>
     </modules>
     <packaging>pom</packaging>
