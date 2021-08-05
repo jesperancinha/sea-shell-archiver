@@ -73,8 +73,8 @@ Revision dates: 2020/01/29,
 In order to start interacting with it you need to start runnable modules:
 
 1. [sea-shell-soap-service](./sea-shell-soap-wiremock/sea-shell-soap-service) - [SeaShellWiremockSoapLauncher](sea-shell-soap-wiremock/sea-shell-soap-service/src/main/java/org/jesperancinha/shell/SeaShellWiremockSoapLauncher.java) - Soap mock service (The blocking source) - Runs on port 8090
-2. [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) - [SeaShellApplication](sea-shell-service-spring-web-flux/sea-shell-rest-service/src/main/java/org/jesperancinha/shell/webflux/SeaShellApplication.java) - Rest Service data provider (Uses the SOAP blocking, legacy, outdated SOAP service) - Runs on port 8080
-3. [sea-shell-client](./sea-shell-client) - A module with three executables to run the same test on the three different implementations using futuress and fork joins
+2. [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) - [SeaShellApplication](sea-shell-service-spring-web-flux/sea-shell-rest-service/src/main/java/org/jesperancinha/shell/webflux/SeaShellApplication.java) - WireMock Rest Service data provider (Uses the SOAP blocking, legacy, outdated SOAP service) - Runs on port 8080
+3. [sea-shell-client](./sea-shell-client) - Three executables to be used in running against [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) using futures and fork joins. Be sure to run the REST service and the WireMock SOAP service
 4. [sea-shell-sea-shell-service-immutable](./sea-shell-service-immutable) - Standalone compact service running in an immutable fashion using [Java records](https://openjdk.java.net/jeps/359) - Runs on port 8081
 
 In order to run the full example, please create your local bin folder
@@ -127,7 +127,7 @@ sdk use java 16.0.1.hs-adpt
 ## Testing endpoints
 
 
-### Traditional Methods
+### Blocking and Almost Reactive Methods
 1. http://localhost:8080/seashells
 2. http://localhost:8080/seashells/1
 3. http://localhost:8080/seashells/slogans
@@ -137,14 +137,14 @@ sdk use java 16.0.1.hs-adpt
 7. http://localhost:8080/seashells/reactiveWithDelay
 8. http://localhost:8080/seashells/reactiveWithForkJoins
 
-### Loose Reactive endpoints
+### Reactive endpoints
 1. http://localhost:8080/seashells/reactive/1
 2. http://localhost:8080/seashells/reactive/rootCostume/1/1
 3. http://localhost:8080/seashells/reactive/rootShell/1/1
 4. http://localhost:8080/seashells/reactive/rootCostumeSlowTop/1/1
 5. http://localhost:8080/seashells/reactive/rootCostumeSlowLower/1/1
 
-### Reactive endpoints
+### Reactive One endpoints
 1. http://localhost:8080/seashells/one
 2. http://localhost:8080/seashells/one/1
 3. http://localhost:8080/seashells/one/person/1

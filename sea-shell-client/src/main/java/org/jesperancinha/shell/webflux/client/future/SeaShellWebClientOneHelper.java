@@ -49,13 +49,24 @@ public class SeaShellWebClientOneHelper {
         return seaShellOneDtoById;
     }
 
-    private Runnable personsRunnable(SeaShellDto seaShellOneDtoById, ExecutorService executorService) {
-        return () -> seaShellOneDtoById.addPersons(seaShellOneDtoById.personIds().parallelStream().map(id ->
+    /**
+     * Gathers information about the id of a {@link SeaShellAccountDto} of a {@link SeaShellCostumeDto} from a {@link SeaShellDto} and fetches them from the repository.
+     * <p>
+     * This is all using {@link Future}.
+     *
+     * @param seaShellDto
+     * @param executorService
+     * @return
+     */
+    private Runnable personsRunnable(SeaShellDto seaShellDto, ExecutorService executorService) {
+        return () -> seaShellDto.addPersons(seaShellDto.personIds().parallelStream().map(id ->
         {
             try {
                 SeaShellPersonDto seaShellOnePersonDtoById = getSeaShellOnePersonDtoById(id);
-                Future<?> costume = executorService.submit(() -> seaShellOnePersonDtoById.setCostumeDto(getCostumeDto(seaShellOnePersonDtoById.getCostumeId(), executorService)));
-                Future<?> account = executorService.submit(() -> seaShellOnePersonDtoById.setAccountDto(getSeaShellOneAccountDtoById(seaShellOnePersonDtoById.getAccountId(), executorService)));
+                Future<?> costume = executorService.submit(() -> seaShellOnePersonDtoById.setCostumeDto(
+                        getCostumeDto(seaShellOnePersonDtoById.getCostumeId(), executorService)));
+                Future<?> account = executorService.submit(() -> seaShellOnePersonDtoById.setAccountDto(
+                        getSeaShellOneAccountDtoById(seaShellOnePersonDtoById.getAccountId(), executorService)));
                 account.get();
                 costume.get();
                 return seaShellOnePersonDtoById;

@@ -7,7 +7,6 @@ import org.jesperancinha.shell.webflux.data.SeaShellLowerDto;
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
 import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
 import org.jesperancinha.shell.webflux.service.SeaShellReactiveOneService;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
@@ -28,38 +27,32 @@ public class SeaShellReactiveReactiveOneControllerImpl implements SeaShellReacti
     }
 
     public Mono<SeaShellDto> getShellById(
-            @PathVariable
-                    Long id) {
+            Long id) {
         return seaShellReactiveOneService.getSeaShellById(id);
     }
 
     public Mono<SeaShellPersonDto> getPersonById(
-            @PathVariable
-                    Long id) {
+            Long id) {
         return seaShellReactiveOneService.getPersonById(id);
     }
 
     public Mono<SeaShellCostumeDto> getCostumeById(
-            @PathVariable
-                    Long id) {
+            Long id) {
         return seaShellReactiveOneService.getCostumeById(id);
     }
 
     public Mono<SeaShellAccountDto> getAccountById(
-            @PathVariable
-                    String id) {
+            String id) {
         return seaShellReactiveOneService.getAccountById(id);
     }
 
     public Mono<SeaShellTopDto> getTopById(
-            @PathVariable
-                    Long id) {
+            Long id) {
         return seaShellReactiveOneService.getTopById(id);
     }
 
     public Mono<SeaShellLowerDto> getLowerById(
-            @PathVariable
-                    Long id) {
+            Long id) {
         return seaShellReactiveOneService.getLowerById(id);
     }
 }
