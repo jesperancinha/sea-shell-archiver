@@ -72,10 +72,10 @@ Revision dates: 2020/01/29,
 
 In order to start interacting with it you need to start runnable modules:
 
-1. [sea-shell-soap-service](./sea-shell-soap-wiremock/sea-shell-soap-service) - [SeaShellWiremockSoapLauncher](sea-shell-soap-wiremock/sea-shell-soap-service/src/main/java/org/jesperancinha/shell/SeaShellWiremockSoapLauncher.java) - Soap mock service (The blocking source) - Runs on port 8090
-2. [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) - [SeaShellApplication](sea-shell-service-spring-web-flux/sea-shell-rest-service/src/main/java/org/jesperancinha/shell/webflux/SeaShellApplication.java) - WireMock Rest Service data provider (Uses the SOAP blocking, legacy, outdated SOAP service) - Runs on port 8080
-3. [sea-shell-client](./sea-shell-client) - Three executables to be used in running against [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) using futures and fork joins. Be sure to run the REST service and the WireMock SOAP service
-4. [sea-shell-sea-shell-service-immutable](./sea-shell-service-immutable) - Standalone compact service running in an immutable fashion using [Java records](https://openjdk.java.net/jeps/359) - Runs on port 8081
+1.  [sea-shell-soap-service](./sea-shell-soap-wiremock/sea-shell-soap-service) - [SeaShellWiremockSoapLauncher](sea-shell-soap-wiremock/sea-shell-soap-service/src/main/java/org/jesperancinha/shell/SeaShellWiremockSoapLauncher.java) - Soap mock service (The blocking source) - Runs on port 8090
+2.  [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) - [SeaShellApplication](sea-shell-service-spring-web-flux/sea-shell-rest-service/src/main/java/org/jesperancinha/shell/webflux/SeaShellApplication.java) - WireMock Rest Service data provider (Uses the SOAP blocking, legacy, outdated SOAP service) - Runs on port 8080
+3.  [sea-shell-client](./sea-shell-client) - Three executables to be used in running against [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) using futures and fork joins. Be sure to run the REST service and the WireMock SOAP service
+4.  [sea-shell-sea-shell-service-immutable](./sea-shell-service-immutable) - Standalone compact service running in an immutable fashion using [Java records](https://openjdk.java.net/jeps/359) - Runs on port 8081
 
 In order to run the full example, please create your local bin folder
 
@@ -118,39 +118,39 @@ sdk use java 16.0.1.hs-adpt
 
 
 ### Blocking and Almost Reactive Methods
-1. http://localhost:8080/seashells
-2. http://localhost:8080/seashells/1
-3. http://localhost:8080/seashells/slogans
-4. http://localhost:8080/seashells/block
-5. http://localhost:8080/seashells/block/1
-6. http://localhost:8080/seashells/reactiveblock
-7. http://localhost:8080/seashells/reactiveWithDelay
-8. http://localhost:8080/seashells/reactiveWithForkJoins
+1.  http://localhost:8080/seashells
+2.  http://localhost:8080/seashells/1
+3.  http://localhost:8080/seashells/slogans
+4.  http://localhost:8080/seashells/block
+5.  http://localhost:8080/seashells/block/1
+6.  http://localhost:8080/seashells/reactiveblock
+7.  http://localhost:8080/seashells/reactiveWithDelay
+8.  http://localhost:8080/seashells/reactiveWithForkJoins
 
 ### Reactive endpoints
-1. http://localhost:8080/seashells/reactive/1
-2. http://localhost:8080/seashells/reactive/rootCostume/1/1
-3. http://localhost:8080/seashells/reactive/rootShell/1/1
-4. http://localhost:8080/seashells/reactive/rootCostumeSlowTop/1/1
-5. http://localhost:8080/seashells/reactive/rootCostumeSlowLower/1/1
+1.  http://localhost:8080/seashells/reactive/1
+2.  http://localhost:8080/seashells/reactive/rootCostume/1/1
+3.  http://localhost:8080/seashells/reactive/rootShell/1/1
+4.  http://localhost:8080/seashells/reactive/rootCostumeSlowTop/1/1
+5.  http://localhost:8080/seashells/reactive/rootCostumeSlowLower/1/1
 
 ### Reactive One endpoints
-1. http://localhost:8080/seashells/one
-2. http://localhost:8080/seashells/one/1
-3. http://localhost:8080/seashells/one/person/1
-4. http://localhost:8080/seashells/one/costume/1
-5. http://localhost:8080/seashells/one/account/1
-6. http://localhost:8080/seashells/one/top/1
-7. http://localhost:8080/seashells/one/lower/1
+1.  http://localhost:8080/seashells/one
+2.  http://localhost:8080/seashells/one/1
+3.  http://localhost:8080/seashells/one/person/1
+4.  http://localhost:8080/seashells/one/costume/1
+5.  http://localhost:8080/seashells/one/account/1
+6.  http://localhost:8080/seashells/one/top/1
+7.  http://localhost:8080/seashells/one/lower/1
 
 ### Immutable Reactive endpoints (the real deal!)
-1. http://localhost:8081/seashells/immutable
-2. http://localhost:8081/seashells/immutable/1
-3. http://localhost:8081/seashells/immutable/person/1
-4. http://localhost:8081/seashells/immutable/costume/1
-5. http://localhost:8081/seashells/immutable/account/1
-6. http://localhost:8081/seashells/immutable/top/1
-7. http://localhost:8081/seashells/immutable/lower/1
+1.  http://localhost:8081/seashells/immutable
+2.  http://localhost:8081/seashells/immutable/1
+3.  http://localhost:8081/seashells/immutable/person/1
+4.  http://localhost:8081/seashells/immutable/costume/1
+5.  http://localhost:8081/seashells/immutable/account/1
+6.  http://localhost:8081/seashells/immutable/top/1
+7.  http://localhost:8081/seashells/immutable/lower/1
 
 ## References
 
@@ -158,37 +158,37 @@ Please check the [docs](https://jesperancinha.github.io/sea-shell-archiver/) for
 
 ### Technical
 
-- [Java Records tortured with Lombok yet again (builder edition)](https://softwaregarden.dev/en/posts/new-java/records/vs-lombok-yet-again-with-builder-pattern/)
-- [Why does ForkJoinPool::invoke() block the main thread?](https://stackoverflow.com/questions/52591776/why-does-forkjoinpoolinvoke-block-the-main-thread)
-- [Flight of the Flux 1 - Assembly vs Subscription](https://spring.io/blog/2019/03/06/flight-of-the-flux-1-assembly-vs-subscription)
-- [Hanselminutes Podcast 198 - Reactive Extensions for .NET (Rx) with Erik Meijer](https://www.hanselman.com/blog/HanselminutesPodcast198ReactiveExtensionsForNETRxWithErikMeijer.aspx)
-- [Reactive Extensions](https://docs.microsoft.com/en-us/previous-versions/dotnet/reactive-extensions/hh242985(v=vs.103)?redirectedfrom=MSDN)
-- [Reactive Programming by Venkat Subramaniam](https://www.youtube.com/watch?v=weWSYIUdX6c)
-- [The Essence of Reactive Programming - TU Delft Repositories](https://repository.tudelft.nl/islandora/object/uuid:bd900036-40f4-432d-bfab-425cdebc466e/datastream/OBJ/download)
-- [Notes on Reactive Programming Part I: The Reactive Landscape by Dave Syer](https://dzone.com/articles/notes-on-reactive-programming-part-i-the-reactive)
-- [The essence of reactive programming in Java by Uladzimir Sinkevich](https://www.scnsoft.com/blog/java-reactive-programming)
-- [Don't be Homer Simpson with your reactor by Sergei Egorov](https://www.slideshare.net/Pivotal/dont-be-homer-simpson-with-your-reactor)
-- [Avoid Reactor Meltdown by Phil Clay on YouTube](https://www.youtube.com/watch?v=xCu73WVg8Ps)
-- [Avoiding Reactor Meltdown by Phil Clay](https://github.com/philsttr/avoiding-reactor-meltdown)
-- [JsonView Chrome Plugin](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc)
-- [Spring WebFlux Tutorial](https://howtodoinjava.com/spring-webflux/spring-webflux-tutorial/)
-- [Wiremock Running as a Standalone Process](http://wiremock.org/docs/running-standalone/)
-- [Move your apps to the cloud in weeks](https://pivotal.io/application-modernization)
-- [The Twelve Factors](https://12factor.net/)
-- [DDD and Microservices: Like Peanut Butter and Jelly - Matt Stine](https://content.pivotal.io/slides/ddd-and-microservices-like-peanut-butter-and-jelly-matt-stine)
-- [Reactive Streams](http://www.reactive-streams.org/)
-- [Reactive Manifesto](https://www.reactivemanifesto.org/)
-- [NLJUG Reactive Programming](https://nljug.org/java-magazine/reactive-programming/)
-- [Hands on Reactive Programming in Spring](https://www.bol.com/nl/p/hands-on-reactive-programming-in-spring-5/9200000084600333/?bltgh=pCsqVROC1Zv4I9xR0JRJfw.1.4.ProductTitle)
-- [QPI Architecture](https://en.wikipedia.org/wiki/Intel_QuickPath_Interconnect)
-- [ITNext How to make legacy code reactive](https://itnext.io/how-to-make-legacy-code-reactive-2debcb3d0a40)
-- [Spring 5 Reactive Security Example](https://github.com/eugenp/tutorials/tree/master/spring-5-reactive-security)
-- [Block Hound](https://github.com/reactor/BlockHound)
-- [Lombok Tips And Tricks](https://github.com/piczmar/lombok-tips-and-tricks)
-- [In spring boot webflux based microservice, who is the subscriber?](https://stackoverflow.com/questions/48181801/in-spring-boot-webflux-based-microservice-who-is-the-subscriber)
-- [How REST endpoints are auto subscribed while calling from Browser/REST Client?](https://stackoverflow.com/questions/50795071/how-rest-endpoints-are-auto-subscribed-while-calling-from-browser-rest-client)
-- [Reactive Programming with Node.js](https://www.amazon.com/Reactive-Programming-Node-js-Fernando-Doglio/dp/1484221516)
-- [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
+-   [Java Records tortured with Lombok yet again (builder edition)](https://softwaregarden.dev/en/posts/new-java/records/vs-lombok-yet-again-with-builder-pattern/)
+-   [Why does ForkJoinPool::invoke() block the main thread?](https://stackoverflow.com/questions/52591776/why-does-forkjoinpoolinvoke-block-the-main-thread)
+-   [Flight of the Flux 1 - Assembly vs Subscription](https://spring.io/blog/2019/03/06/flight-of-the-flux-1-assembly-vs-subscription)
+-   [Hanselminutes Podcast 198 - Reactive Extensions for .NET (Rx) with Erik Meijer](https://www.hanselman.com/blog/HanselminutesPodcast198ReactiveExtensionsForNETRxWithErikMeijer.aspx)
+-   [Reactive Extensions](https://docs.microsoft.com/en-us/previous-versions/dotnet/reactive-extensions/hh242985(v=vs.103)?redirectedfrom=MSDN)
+-   [Reactive Programming by Venkat Subramaniam](https://www.youtube.com/watch?v=weWSYIUdX6c)
+-   [The Essence of Reactive Programming - TU Delft Repositories](https://repository.tudelft.nl/islandora/object/uuid:bd900036-40f4-432d-bfab-425cdebc466e/datastream/OBJ/download)
+-   [Notes on Reactive Programming Part I: The Reactive Landscape by Dave Syer](https://dzone.com/articles/notes-on-reactive-programming-part-i-the-reactive)
+-   [The essence of reactive programming in Java by Uladzimir Sinkevich](https://www.scnsoft.com/blog/java-reactive-programming)
+-   [Don't be Homer Simpson with your reactor by Sergei Egorov](https://www.slideshare.net/Pivotal/dont-be-homer-simpson-with-your-reactor)
+-   [Avoid Reactor Meltdown by Phil Clay on YouTube](https://www.youtube.com/watch?v=xCu73WVg8Ps)
+-   [Avoiding Reactor Meltdown by Phil Clay](https://github.com/philsttr/avoiding-reactor-meltdown)
+-   [JsonView Chrome Plugin](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc)
+-   [Spring WebFlux Tutorial](https://howtodoinjava.com/spring-webflux/spring-webflux-tutorial/)
+-   [Wiremock Running as a Standalone Process](http://wiremock.org/docs/running-standalone/)
+-   [Move your apps to the cloud in weeks](https://pivotal.io/application-modernization)
+-   [The Twelve Factors](https://12factor.net/)
+-   [DDD and Microservices: Like Peanut Butter and Jelly - Matt Stine](https://content.pivotal.io/slides/ddd-and-microservices-like-peanut-butter-and-jelly-matt-stine)
+-   [Reactive Streams](http://www.reactive-streams.org/)
+-   [Reactive Manifesto](https://www.reactivemanifesto.org/)
+-   [NLJUG Reactive Programming](https://nljug.org/java-magazine/reactive-programming/)
+-   [Hands on Reactive Programming in Spring](https://www.bol.com/nl/p/hands-on-reactive-programming-in-spring-5/9200000084600333/?bltgh=pCsqVROC1Zv4I9xR0JRJfw.1.4.ProductTitle)
+-   [QPI Architecture](https://en.wikipedia.org/wiki/Intel_QuickPath_Interconnect)
+-   [ITNext How to make legacy code reactive](https://itnext.io/how-to-make-legacy-code-reactive-2debcb3d0a40)
+-   [Spring 5 Reactive Security Example](https://github.com/eugenp/tutorials/tree/master/spring-5-reactive-security)
+-   [Block Hound](https://github.com/reactor/BlockHound)
+-   [Lombok Tips And Tricks](https://github.com/piczmar/lombok-tips-and-tricks)
+-   [In spring boot webflux based microservice, who is the subscriber?](https://stackoverflow.com/questions/48181801/in-spring-boot-webflux-based-microservice-who-is-the-subscriber)
+-   [How REST endpoints are auto subscribed while calling from Browser/REST Client?](https://stackoverflow.com/questions/50795071/how-rest-endpoints-are-auto-subscribed-while-calling-from-browser-rest-client)
+-   [Reactive Programming with Node.js](https://www.amazon.com/Reactive-Programming-Node-js-Fernando-Doglio/dp/1484221516)
+-   [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
 
 ### Domain knowledge
 
