@@ -152,6 +152,12 @@ sdk use java 16.0.1.hs-adpt
 6.  http://localhost:8081/seashells/immutable/top/1
 7.  http://localhost:8081/seashells/immutable/lower/1
 
+## Buy me a coffee
+
+I hope you enjoyed this repository. If you did please buy me a coffee which enables me to constantly improve and make new free content regularly for everyone. Thank you so much!
+
+<a href="https://www.buymeacoffee.com/jesperancinha" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 ## References
 
 Please check the [docs](https://jesperancinha.github.io/sea-shell-archiver/) for more info.
