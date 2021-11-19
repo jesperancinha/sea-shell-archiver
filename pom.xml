@@ -33,7 +33,7 @@
         <spring-core.version>5.3.6</spring-core.version>
         <spring-data-commons.version>2.4.7</spring-data-commons.version>
         <spring-boot-maven-plugin.version>2.5.3</spring-boot-maven-plugin.version>
-        <spring-boot-starter.version>2.5.5</spring-boot-starter.version>
+        <spring-boot-starter.version>2.5.7</spring-boot-starter.version>
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <lombok.version>1.18.20</lombok.version>
         <netty-all.version>4.1.66.Final</netty-all.version>
