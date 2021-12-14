@@ -19,11 +19,14 @@
     <packaging>pom</packaging>
 
     <properties>
+        <!-- Build -->
         <project.seashells.version>0.0.0-SNAPSHOT</project.seashells.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>17</java.version>
+        <maven-compiler-plugin.source>${java.version}</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>${java.version}</maven-compiler-plugin.target>
 
-        <java.version>16</java.version>
         <!-- Internal -->
         <sea-shell-client.version>${project.seashells.version}</sea-shell-client.version>
         <sea-shell-data.version>${project.seashells.version}</sea-shell-data.version>
@@ -39,8 +42,6 @@
         <netty-all.version>4.1.66.Final</netty-all.version>
         <blockhound.version>1.0.6.RELEASE</blockhound.version>
         <!-- Plugins -->
-        <maven-compiler-plugin.source>${java.version}</maven-compiler-plugin.source>
-        <maven-compiler-plugin.target>${java.version}</maven-compiler-plugin.target>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-jaxb2-plugin.version>0.14.0</maven-jaxb2-plugin.version>
 
@@ -60,6 +61,7 @@
         <jakarta.version>3.0.0</jakarta.version>
         <javax.jws-api.version>1.1</javax.jws-api.version>
         <commons-logging.version>1.2</commons-logging.version>
+        <wiremock-standalone.version>2.27.2</wiremock-standalone.version>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
@@ -296,7 +298,7 @@
             <dependency>
                 <groupId>com.github.tomakehurst</groupId>
                 <artifactId>wiremock-standalone</artifactId>
-                <version>${wiremock.version}</version>
+                <version>${wiremock-standalone.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.tomakehurst</groupId>
