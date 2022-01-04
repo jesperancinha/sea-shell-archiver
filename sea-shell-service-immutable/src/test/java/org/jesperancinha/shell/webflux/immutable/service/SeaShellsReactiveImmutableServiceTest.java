@@ -13,10 +13,9 @@ import java.io.IOException;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static reactor.core.publisher.Mono.delay;
 
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest
 public class SeaShellsReactiveImmutableServiceTest {
 
     private static WireMockServer wireMockServer;
