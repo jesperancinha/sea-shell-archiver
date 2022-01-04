@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
-import javax.xml.bind.JAXBElement;
-
 /**
  * Created by jofisaes on 02/08/2021
  */

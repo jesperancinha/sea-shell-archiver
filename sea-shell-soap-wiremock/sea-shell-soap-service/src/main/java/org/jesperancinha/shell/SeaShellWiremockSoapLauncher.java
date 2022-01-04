@@ -5,7 +5,7 @@ import com.github.tomakehurst.wiremock.http.ContentTypeHeader;
 import com.google.common.io.CharStreams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.entity.ContentType;
+import org.apache.hc.core5.http.ContentType;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
