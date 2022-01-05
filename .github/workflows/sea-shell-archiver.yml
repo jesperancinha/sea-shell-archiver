@@ -20,8 +20,11 @@ jobs:
             java-version: '17'
             distribution: 'adopt'
 
-        - name: Build and Test
-          run: mvn clean install jacoco:prepare-agent package jacoco:report
+        - name: Build and Test all Including Blocks
+          run: mvn clean install
+
+        - name: Build and Test all but only reportable tests
+          run: mvn clean install -Preports jacoco:prepare-agent package jacoco:report
 
         - name: Coverage with Coveralls
           run: mvn omni-coveragereporter:report

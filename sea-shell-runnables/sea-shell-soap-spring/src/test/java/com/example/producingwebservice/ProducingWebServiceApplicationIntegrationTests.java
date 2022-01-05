@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ProducingWebServiceApplicationIntegrationTests {
 
-	private Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+	private final Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 
 	@LocalServerPort
 	private int port = 0;
@@ -49,6 +49,6 @@ public class ProducingWebServiceApplicationIntegrationTests {
 		request.setName("Spain");
 
 		assertThat(ws.marshalSendAndReceive("http://localhost:"
-				+ port + "/ws", request) != null);
+				+ port + "/ws", request) != null).isNotNull();
     }
 }
