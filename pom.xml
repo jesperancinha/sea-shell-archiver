@@ -55,7 +55,7 @@
         <javax.jws-api.version>1.1</javax.jws-api.version>
         <commons-logging.version>1.2</commons-logging.version>
         <wiremock-standalone.version>2.27.2</wiremock-standalone.version>
-        <omni-coveragereporter-maven-plugin.version>0.0.5</omni-coveragereporter-maven-plugin.version>
+        <omni-coveragereporter-maven-plugin.version>0.0.6</omni-coveragereporter-maven-plugin.version>
         <spring-boot-starter-parent.version>2.6.2</spring-boot-starter-parent.version>
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
 
