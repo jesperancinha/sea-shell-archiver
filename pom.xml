@@ -22,6 +22,7 @@
         <maven-compiler-plugin.target>${java.version}</maven-compiler-plugin.target>
         <maven-failsafe-plugin.version>3.0.0-M6</maven-failsafe-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
+        <jaxb2-maven-plugin.version>3.1.0</jaxb2-maven-plugin.version>
 
         <!-- Internal -->
         <sea-shell-client.version>${project.seashells.version}</sea-shell-client.version>
@@ -61,6 +62,7 @@
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
 
         <mockk.version>1.12.3</mockk.version>
+        <jakarta.xml.bind-api.version>4.0.0</jakarta.xml.bind-api.version>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
@@ -306,6 +308,11 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.databind.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+                <version>${jakarta.xml.bind-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.projectreactor.tools</groupId>
