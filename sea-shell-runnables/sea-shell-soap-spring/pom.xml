@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <properties>
-        <jaxb2-maven-plugin.version>2.5.0</jaxb2-maven-plugin.version>
+        <jaxb2-maven-plugin.version>3.1.0</jaxb2-maven-plugin.version>
     </properties>
 
     <parent>
