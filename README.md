@@ -119,21 +119,21 @@ sdk use java 16.0.1.hs-adpt
 
 
 ### Blocking and Almost Reactive Methods
-1.  http://localhost:8080/seashells
+1.  [http://localhost:8080/seashells](http://localhost:8080/seashells)
 2.  http://localhost:8080/seashells/1
-3.  http://localhost:8080/seashells/slogans
+3.  [http://localhost:8080/seashells/slogans](http://localhost:8080/seashells/slogans)
 4.  http://localhost:8080/seashells/block
 5.  http://localhost:8080/seashells/block/1
 6.  http://localhost:8080/seashells/reactiveblock
 7.  http://localhost:8080/seashells/reactiveWithDelay
-8.  http://localhost:8080/seashells/reactiveWithForkJoins
+8.  [http://localhost:8080/seashells/reactiveWithForkJoins](http://localhost:8080/seashells/reactiveWithForkJoins)
 
 ### Reactive endpoints
 1.  http://localhost:8080/seashells/reactive/1
 2.  http://localhost:8080/seashells/reactive/rootCostume/1/1
 3.  http://localhost:8080/seashells/reactive/rootShell/1/1
 4.  http://localhost:8080/seashells/reactive/rootCostumeSlowTop/1/1
-5.  http://localhost:8080/seashells/reactive/rootCostumeSlowLower/1/1
+5.  [http://localhost:8080/seashells/reactive/rootCostumeSlowLower/1/1](http://localhost:8080/seashells/reactive/rootCostumeSlowLower/1/1)
 
 ### Reactive One endpoints
 1.  http://localhost:8080/seashells/one
@@ -146,9 +146,9 @@ sdk use java 16.0.1.hs-adpt
 
 ### Immutable Reactive endpoints (the real deal!)
 1.  http://localhost:8081/seashells/immutable
-2.  http://localhost:8081/seashells/immutable/1
-3.  http://localhost:8081/seashells/immutable/person/1
-4.  http://localhost:8081/seashells/immutable/costume/1
+2.  [http://localhost:8081/seashells/immutable/1](http://localhost:8081/seashells/immutable/1)
+3.  [http://localhost:8081/seashells/immutable/person/1](http://localhost:8081/seashells/immutable/person/1)
+4.  [http://localhost:8081/seashells/immutable/costume/1](http://localhost:8081/seashells/immutable/costume/1)
 5.  http://localhost:8081/seashells/immutable/account/1
 6.  http://localhost:8081/seashells/immutable/top/1
 7.  http://localhost:8081/seashells/immutable/lower/1
