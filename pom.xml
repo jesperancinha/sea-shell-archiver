@@ -59,7 +59,7 @@
         <wiremock-standalone.version>2.27.2</wiremock-standalone.version>
         <omni-coveragereporter-maven-plugin.version>0.3.0</omni-coveragereporter-maven-plugin.version>
         <spring-boot-starter-parent.version>2.7.1</spring-boot-starter-parent.version>
-        <maven-assembly-plugin.version>3.4.0</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>3.4.1</maven-assembly-plugin.version>
 
         <mockk.version>1.12.4</mockk.version>
     </properties>
