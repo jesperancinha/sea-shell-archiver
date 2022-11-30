@@ -3,26 +3,19 @@ package org.jesperancinha.shell;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.http.ContentTypeHeader;
 import com.google.common.io.CharStreams;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.hc.core5.http.ContentType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Objects;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
-import static com.github.tomakehurst.wiremock.client.WireMock.equalToXml;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.matchingXPath;
-import static com.github.tomakehurst.wiremock.client.WireMock.post;
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 public class SeaShellWiremockSoapLauncher {
-    private final static Log log = LogFactory.getLog(SeaShellWiremockSoapLauncher.class);
+    private final static Logger log = LoggerFactory.getLogger(SeaShellWiremockSoapLauncher.class);
 
     public static void main(String[] args) throws IOException {
         log.info("Wiremock service starting...");
@@ -86,20 +79,13 @@ public class SeaShellWiremockSoapLauncher {
 
     private static void stubAccounts() throws IOException {
         for (int i = 1; i <= 1; i++) {
-            stubRequestToAccount("/mock/responses/accounts/account" + i + ".xml", i);
+            stubRequestToAccount("/mock/responses/accounts/account" + i + ".xml");
         }
     }
 
     private static void stupRequestToWSDL(String urlString, String fileLocation) throws IOException {
         stubFor(get(urlEqualTo(urlString))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(fileLocation)))));
-    }
-
-    private static void stubRequestToResponse(String urlPath, String requestResource, String responseResource) throws IOException {
-        stubFor(post(urlEqualTo(urlPath))
-                .withRequestBody(equalToXml(CharStreams.toString(getStringFromResource(requestResource)), true))
-                .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
-                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
     }
 
     private static void stubRequestToShell(String responseResource, Integer i) throws IOException {
@@ -137,7 +123,7 @@ public class SeaShellWiremockSoapLauncher {
                         .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
     }
 
-    private static void stubRequestToAccount(String responseResource, Integer i) throws IOException {
+    private static void stubRequestToAccount(String responseResource) throws IOException {
         stubFor(post(urlEqualTo("/seashells/accounts"))
                 .withRequestBody(matchingXPath("/Envelope/Body/AccountRequest/accountId/text()"))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
@@ -145,6 +131,6 @@ public class SeaShellWiremockSoapLauncher {
     }
 
     private static InputStreamReader getStringFromResource(String resourceName) {
-        return new InputStreamReader(SeaShellWiremockSoapLauncher.class.getResourceAsStream(resourceName), Charset.defaultCharset());
+        return new InputStreamReader(Objects.requireNonNull(SeaShellWiremockSoapLauncher.class.getResourceAsStream(resourceName)), Charset.defaultCharset());
     }
 }

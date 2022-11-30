@@ -26,7 +26,7 @@ public class ShellCostumeRepositoryImpl implements ShellCostumeRepository {
     }
 
     public Mono<Costume> findCostumeById(final Long id) {
-        return Mono.fromCallable(() -> costumesClient.getCostume(id)).subscribeOn(Schedulers.elastic());
+        return Mono.fromCallable(() -> costumesClient.getCostume(id)).subscribeOn(Schedulers.boundedElastic());
     }
 
     public ParallelFlux<Costume> findCostumes(List<Long> costumeIds) {

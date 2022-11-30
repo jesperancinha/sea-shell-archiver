@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static reactor.core.publisher.Mono.fromCallable;
-import static reactor.core.scheduler.Schedulers.elastic;
+import static reactor.core.scheduler.Schedulers.boundedElastic;
 
 
 @Repository
@@ -29,7 +29,7 @@ public class ShellPersonRepositoryImpl implements ShellPersonRepository {
     }
 
     public Mono<Person> findPersonById(final Long id) {
-        return fromCallable(() -> personsClient.getPerson(id)).subscribeOn(elastic());
+        return fromCallable(() -> personsClient.getPerson(id)).subscribeOn(boundedElastic());
     }
 
     public ParallelFlux<Person> findPersons(List<Long> personIds) {

@@ -12,7 +12,7 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            <xsd:element name="Costume">
+            <xsd:element name="costume">
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="TopId" type="xsd:long"/>
