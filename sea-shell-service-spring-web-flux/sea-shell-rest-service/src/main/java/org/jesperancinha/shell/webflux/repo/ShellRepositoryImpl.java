@@ -12,7 +12,7 @@ import reactor.core.publisher.ParallelFlux;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static reactor.core.scheduler.Schedulers.elastic;
+import static reactor.core.scheduler.Schedulers.boundedElastic;
 import static reactor.core.scheduler.Schedulers.single;
 
 @Repository
@@ -29,13 +29,13 @@ public class ShellRepositoryImpl implements ShellRepository {
     }
 
     public Mono<Shell> findSeaShellById(final Long id) {
-        return Mono.fromCallable(() -> shellsClient.getShell(id)).subscribeOn(elastic());
+        return Mono.fromCallable(() -> shellsClient.getShell(id)).subscribeOn(boundedElastic());
     }
 
     public ParallelFlux<Shell> findAllSeaShells() {
         return findAllShellIds()
                 .parallel(parallelism)
-                .runOn(elastic())
+                .runOn(boundedElastic())
                 .map(shellsClient::getShell)
                 .runOn(single());
     }

@@ -1,12 +1,12 @@
 package org.jesperancinha.shell.client.shells;
 
+import jakarta.xml.bind.JAXBElement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
-import javax.xml.bind.JAXBElement;
 import java.util.List;
 
 /**

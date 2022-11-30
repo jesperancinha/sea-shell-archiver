@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 
 import static java.time.Duration.ofMillis;
 import static java.util.stream.Collectors.toList;
-import static reactor.core.scheduler.Schedulers.elastic;
+import static reactor.core.scheduler.Schedulers.boundedElastic;
 
 
 @Slf4j
@@ -108,14 +108,14 @@ public class SeaShellServiceImpl extends SeaShellConsumerAdapter implements SeaS
         return Mono.fromCallable(this::getAllSeaShellsNaifBlock)
                 .flux().flatMap(Flux::fromIterable)
                 .parallel(parallelism)
-                .runOn(elastic());
+                .runOn(boundedElastic());
     }
 
     public Flux<SeaShellDto> getAllSeaShellsReactiveWithDelay() {
         return getAllSeaShells()
                 .sequential()
                 .delayElements(ofMillis(delay))
-                .subscribeOn(elastic());
+                .subscribeOn(boundedElastic());
     }
 
     public Flux<SeaShellDto> getAllSeaShellsReactiveWithForkJoins() {

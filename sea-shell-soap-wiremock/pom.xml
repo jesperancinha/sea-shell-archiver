@@ -11,9 +11,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sea-shell-soap-wiremock</artifactId>
+    <name>Seashells :: Wiremock</name>
     <packaging>pom</packaging>
     <modules>
-        <module>sea-shell-soap-service</module>
         <module>sea-shell-cli-accounts</module>
         <module>sea-shell-cli-costumes</module>
         <module>sea-shell-cli-lowers</module>
@@ -21,6 +21,7 @@
         <module>sea-shell-cli-shells</module>
         <module>sea-shell-cli-tops</module>
         <module>sea-shell-cli-common</module>
+        <module>sea-shell-soap-service</module>
     </modules>
 
     <dependencies>

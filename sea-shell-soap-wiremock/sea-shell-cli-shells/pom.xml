@@ -67,30 +67,48 @@
                 <version>${omni-coveragereporter-maven-plugin.version}</version>
             </plugin>
             <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>${maven-jaxb2-plugin.version}</version>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>4.0.0</version>
+                <configuration>
+                    <wsdlDirectory>${basedir}/../sea-shell-soap-service/src/main/resources/mock/responses/shells</wsdlDirectory>
+                    <sourceDestDir>${basedir}/target/generated-sources/java</sourceDestDir>
+                    <extension>true</extension>
+                </configuration>
                 <executions>
                     <execution>
+                        <id>wsdl</id>
+                        <phase>generate-sources</phase>
                         <goals>
-                            <goal>generate</goal>
+                            <goal>wsimport</goal>
                         </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>SeaShellsWSDLShells.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <packageName>org.jesperancinha.shell.client.shells</packageName>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <schemaLanguage>WSDL</schemaLanguage>
-                    <generatePackage>org.jesperancinha.shell.client.shells</generatePackage>
-                    <!--                    <schemas>-->
-                    <!--                        <schema>-->
-                    <!--                            <url>http://localhost:8090/seashells/shells?wsdl</url>-->
-                    <!--                        </schema>-->
-                    <!--                    </schemas>-->
-                    <schemaDirectory>${basedir}/../sea-shell-soap-service/src/main/resources/mock/responses/shells
-                    </schemaDirectory>
-                    <schemaIncludes>
-                        <include>SeaShellsWSDLShells.wsdl</include>
-                    </schemaIncludes>
-                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
