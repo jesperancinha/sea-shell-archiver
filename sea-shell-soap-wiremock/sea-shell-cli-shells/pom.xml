@@ -11,6 +11,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sea-shell-cli-shells</artifactId>
+    <name>S_Arch | Legacy CLI Shells</name>
+
     <dependencies>
         <dependency>
             <groupId>org.jesperancinha.shell</groupId>

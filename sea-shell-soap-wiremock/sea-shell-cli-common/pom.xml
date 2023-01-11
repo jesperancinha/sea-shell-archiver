@@ -8,7 +8,7 @@
         <version>0.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <name>S_Arch | Legacy CLI Common</name>
     <artifactId>sea-shell-cli-common</artifactId>
 
     <build>

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sea-shell-runnables</artifactId>
-    <name>Sea Shell Archiver | Runnable Parent POM</name>
+    <name>S_Arch | Runnable Parent POM</name>
 
     <modules>
         <module>sea-shell-client</module>

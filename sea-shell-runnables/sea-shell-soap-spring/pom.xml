@@ -13,7 +13,7 @@
     <artifactId>sea-shell-soap-spring</artifactId>
     <packaging>jar</packaging>
 
-    <name>Sea Shell Archiver | Soap Spring Runners</name>
+    <name>S_Arch | Soap Spring Runners</name>
 
     <build>
         <plugins>

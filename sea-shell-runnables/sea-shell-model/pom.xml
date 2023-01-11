@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sea-shell-model</artifactId>
-    <name>Sea Shell Archiver | Data Model</name>
+    <name>S_Arch | Data Model</name>
 
     <build>
         <plugins>

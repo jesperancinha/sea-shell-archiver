@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sea-shell-cli-accounts</artifactId>
+    <name>S_Arch | Legacy CLI Accounts</name>
 
     <dependencies>
         <dependency>

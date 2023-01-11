@@ -11,7 +11,7 @@
         <module>sea-shell-service-immutable</module>
     </modules>
     <packaging>pom</packaging>
-    <name>Sea Shell Archiver | Parent POM</name>
+    <name>S_Arch | Parent POM</name>
 
     <properties>
         <!-- Build -->
