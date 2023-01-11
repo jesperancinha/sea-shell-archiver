@@ -1,12 +1,6 @@
-package org.jesperancinha.shell.webflux.data;
+package org.jesperancinha.shell.webflux.data
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*
 
 @Builder
 @Getter
@@ -15,8 +9,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeaShellTopDto {
-    private String type;
-    private String color;
-    private String size;
+class SeaShellTopDto {
+    private val type: String? = null
+    private val color: String? = null
+    private val size: String? = null
 }

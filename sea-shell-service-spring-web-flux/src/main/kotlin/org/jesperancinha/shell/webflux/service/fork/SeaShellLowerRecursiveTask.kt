@@ -1,23 +1,19 @@
-package org.jesperancinha.shell.webflux.service.fork;
+package org.jesperancinha.shell.webflux.service.fork
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto;
-import org.jesperancinha.shell.webflux.repo.ShellLowerRepositoryImpl;
-import org.jesperancinha.shell.webflux.service.SeaShellConverter;
-
-import java.util.concurrent.RecursiveTask;
+import lombok.AllArgsConstructor
+import lombok.Builder
+import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto
+import org.jesperancinha.shell.webflux.repo.ShellLowerRepositoryImpl
+import org.jesperancinha.shell.webflux.service.SeaShellConverter
+import java.util.concurrent.RecursiveTask
 
 @Builder
 @AllArgsConstructor
-public class SeaShellLowerRecursiveTask extends RecursiveTask<SeaShellCostumeDto> {
-
-    private final ShellLowerRepositoryImpl lowerRepository;
-    private final SeaShellCostumeDto costumeDto;
-
-    @Override
-    protected SeaShellCostumeDto compute() {
-        costumeDto.setLowerDto(SeaShellConverter.toLowerDto(lowerRepository.findLowerByIdBlock(costumeDto.getLowerId())));
-        return costumeDto;
+class SeaShellLowerRecursiveTask : RecursiveTask<SeaShellCostumeDto?>() {
+    private val lowerRepository: ShellLowerRepositoryImpl? = null
+    private val costumeDto: SeaShellCostumeDto? = null
+    override fun compute(): SeaShellCostumeDto? {
+        costumeDto.setLowerDto(SeaShellConverter.toLowerDto(lowerRepository!!.findLowerByIdBlock(costumeDto.getLowerId())))
+        return costumeDto
     }
 }

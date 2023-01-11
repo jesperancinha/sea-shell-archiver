@@ -1,28 +1,19 @@
-package org.jesperancinha.shell.webflux.repo;
+package org.jesperancinha.shell.webflux.repo
 
-import org.jesperancinha.shell.client.lowers.Lower;
-import org.jesperancinha.shell.client.lowers.LowersClient;
-import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Mono;
-
-import static reactor.core.scheduler.Schedulers.single;
-
+import org.jesperancinha.shell.client.lowers.Lower
+import org.jesperancinha.shell.client.lowers.LowersClient
+import org.springframework.stereotype.Repository
+import reactor.core.publisher.Mono
+import reactor.core.scheduler.Schedulers
 
 @Repository
-public class ShellLowerRepositoryImpl {
-
-    private final LowersClient lowersClient;
-
-    public ShellLowerRepositoryImpl(LowersClient lowersClient) {
-        this.lowersClient = lowersClient;
+class ShellLowerRepositoryImpl(private val lowersClient: LowersClient) {
+    fun findLowerById(id: Long?): Mono<Lower?> {
+        return Mono.fromCallable { lowersClient.getLower(id) }
+            .subscribeOn(Schedulers.single())
     }
 
-    public Mono<Lower> findLowerById(final Long id) {
-        return Mono.fromCallable(() -> lowersClient.getLower(id))
-                .subscribeOn(single());
-    }
-
-    public Lower findLowerByIdBlock(Long lowerId) {
-        return lowersClient.getLower(lowerId);
+    fun findLowerByIdBlock(lowerId: Long?): Lower {
+        return lowersClient.getLower(lowerId)
     }
 }

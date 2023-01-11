@@ -1,33 +1,22 @@
-package org.jesperancinha.shell.webflux.repo;
+package org.jesperancinha.shell.webflux.repo
 
-import org.jesperancinha.shell.client.accounts.Account;
-import org.jesperancinha.shell.client.accounts.AccountsClient;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Mono;
-
-import static reactor.core.scheduler.Schedulers.single;
-
+import org.jesperancinha.shell.client.accounts.Account
+import org.jesperancinha.shell.client.accounts.AccountsClient
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Repository
+import reactor.core.publisher.Mono
+import reactor.core.scheduler.Schedulers
 
 @Repository
-public class ShellAccountRepositoryImpl {
-
-    private final AccountsClient accountsClient;
-
-    @Value("${sea.shell.parallelism:20}")
-    private Integer parallelism;
-
-    public ShellAccountRepositoryImpl(final AccountsClient accountsClient) {
-        this.accountsClient = accountsClient;
+class ShellAccountRepositoryImpl(private val accountsClient: AccountsClient) {
+    @Value("\${sea.shell.parallelism:20}")
+    private val parallelism: Int? = null
+    fun findAccountById(id: String?): Mono<Account?> {
+        return Mono.fromCallable { accountsClient.getAccount(id) }
+            .subscribeOn(Schedulers.single())
     }
 
-    public Mono<Account> findAccountById(String id) {
-        return Mono.fromCallable(() -> accountsClient.getAccount(id))
-                .subscribeOn(single());
+    fun findAccountByIdBlock(id: String?): Account {
+        return accountsClient.getAccount(id)
     }
-
-    public Account findAccountByIdBlock(String id) {
-        return accountsClient.getAccount(id);
-    }
-
 }

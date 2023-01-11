@@ -1,12 +1,6 @@
-package org.jesperancinha.shell.webflux.data;
+package org.jesperancinha.shell.webflux.data
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*
 
 @Builder
 @Getter
@@ -15,9 +9,9 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeaShellCostumeDto {
-    private SeaShellTopDto topDto;
-    private SeaShellLowerDto lowerDto;
-    private Long topId;
-    private Long lowerId;
+class SeaShellCostumeDto {
+    private val topDto: SeaShellTopDto? = null
+    private val lowerDto: SeaShellLowerDto? = null
+    private val topId: Long? = null
+    private val lowerId: Long? = null
 }

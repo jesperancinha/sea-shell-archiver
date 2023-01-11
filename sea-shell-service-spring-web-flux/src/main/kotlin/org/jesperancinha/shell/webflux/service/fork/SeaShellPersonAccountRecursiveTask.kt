@@ -1,24 +1,25 @@
-package org.jesperancinha.shell.webflux.service.fork;
+package org.jesperancinha.shell.webflux.service.fork
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
-import org.jesperancinha.shell.webflux.repo.ShellAccountRepositoryImpl;
-import org.jesperancinha.shell.webflux.service.SeaShellConverter;
-
-import java.util.concurrent.RecursiveTask;
+import lombok.AllArgsConstructor
+import lombok.Builder
+import org.jesperancinha.shell.webflux.data.SeaShellPersonDto
+import org.jesperancinha.shell.webflux.repo.ShellAccountRepositoryImpl
+import org.jesperancinha.shell.webflux.service.SeaShellConverter
+import java.util.concurrent.RecursiveTask
 
 @AllArgsConstructor
 @Builder
-public class SeaShellPersonAccountRecursiveTask extends RecursiveTask<SeaShellPersonDto> {
-
-    private final ShellAccountRepositoryImpl accountRepository;
-    private final SeaShellPersonDto seaShellPersonDto;
-
-    @Override
-    protected SeaShellPersonDto compute() {
-        seaShellPersonDto.setAccountDto(SeaShellConverter
-                .toAccountDto(accountRepository.findAccountByIdBlock(seaShellPersonDto.getAccountId())));
-        return seaShellPersonDto;
+class SeaShellPersonAccountRecursiveTask : RecursiveTask<SeaShellPersonDto?>() {
+    private val accountRepository: ShellAccountRepositoryImpl? = null
+    private val seaShellPersonDto: SeaShellPersonDto? = null
+    override fun compute(): SeaShellPersonDto? {
+        seaShellPersonDto.setAccountDto(
+            SeaShellConverter.toAccountDto(
+                accountRepository!!.findAccountByIdBlock(
+                    seaShellPersonDto.getAccountId()
+                )
+            )
+        )
+        return seaShellPersonDto
     }
 }

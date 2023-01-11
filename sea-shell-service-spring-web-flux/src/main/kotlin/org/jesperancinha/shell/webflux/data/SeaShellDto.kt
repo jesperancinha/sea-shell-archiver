@@ -1,28 +1,22 @@
-package org.jesperancinha.shell.webflux.data;
+package org.jesperancinha.shell.webflux.data
 
+import lombok.Builder
 
-import lombok.Builder;
-
-import java.util.List;
-
-public record SeaShellDto(
-        String name,
-        String scientificName,
-        String slogan,
-        List<SeaShellPersonDto> persons,
-        List<SeaShellCostumeDto> costumes,
-        List<Long> personIds,
-        List<Long> costumeIds) {
-
-    @Builder
-    public SeaShellDto {
+@JvmRecord
+data class SeaShellDto @Builder constructor(
+    val name: String,
+    val scientificName: String,
+    val slogan: String,
+    val persons: MutableList<SeaShellPersonDto?>,
+    val costumes: MutableList<SeaShellCostumeDto?>,
+    val personIds: List<Long>,
+    val costumeIds: List<Long>
+) {
+    fun addPersons(persons: List<SeaShellPersonDto?>?) {
+        this.persons.addAll(persons!!)
     }
 
-    public void addPersons(final List<SeaShellPersonDto> persons) {
-        this.persons.addAll(persons);
-    }
-
-    public void addCostumes(final List<SeaShellCostumeDto> costumes) {
-        this.costumes.addAll(costumes);
+    fun addCostumes(costumes: List<SeaShellCostumeDto?>?) {
+        this.costumes.addAll(costumes!!)
     }
 }

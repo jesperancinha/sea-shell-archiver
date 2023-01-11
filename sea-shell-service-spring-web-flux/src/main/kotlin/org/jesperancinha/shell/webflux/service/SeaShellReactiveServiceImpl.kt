@@ -1,184 +1,221 @@
-package org.jesperancinha.shell.webflux.service;
+package org.jesperancinha.shell.webflux.service
 
-import org.jesperancinha.shell.client.shells.Shell;
-import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto;
-import org.jesperancinha.shell.webflux.data.SeaShellDto;
-import org.jesperancinha.shell.webflux.data.SeaShellLowerDto;
-import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
-import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
-import org.jesperancinha.shell.webflux.repo.*;
-import org.springframework.data.util.Pair;
-import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import reactor.core.publisher.ParallelFlux;
-import reactor.core.scheduler.Schedulers;
-
-import static reactor.core.publisher.Mono.from;
-import static reactor.core.publisher.Mono.fromCallable;
-import static reactor.core.publisher.Mono.just;
-import static reactor.core.publisher.Mono.zip;
-import static reactor.core.scheduler.Schedulers.parallel;
+import org.jesperancinha.shell.client.costumes.Costume
+import org.jesperancinha.shell.client.lowers.Lower
+import org.jesperancinha.shell.client.persons.Person
+import org.jesperancinha.shell.client.shells.Shell
+import org.jesperancinha.shell.client.tops.Top
+import org.jesperancinha.shell.webflux.data.*
+import org.jesperancinha.shell.webflux.repo.*
+import org.springframework.data.util.Pair
+import org.springframework.stereotype.Service
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
+import reactor.core.publisher.ParallelFlux
+import reactor.core.scheduler.Schedulers
+import java.util.function.Consumer
 
 @Service
-public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter {
+class SeaShellReactiveServiceImpl(
+    shellRepository: ShellRepositoryImpl,
+    shellPersonRepository: ShellPersonRepositoryImpl,
+    shellCostumeRepository: ShellCostumeRepositoryImpl,
+    shellAccountRepository: ShellAccountRepositoryImpl,
+    shellTopRepository: ShellTopRepositoryImpl,
+    shellLowerRepository: ShellLowerRepositoryImpl
+) : SeaShellOneAdapter(
+    shellRepository,
+    shellPersonRepository,
+    shellCostumeRepository,
+    shellAccountRepository,
+    shellTopRepository,
+    shellLowerRepository
+) {
+    val allSeaShells: ParallelFlux<SeaShellDto>
+        get() = shellRepository
+            .findAllSeaShells()
+            .map { seaShell: Shell? -> fetchSeaShellPublisher(seaShell) }
+            .flatMap { source: Mono<SeaShellDto?>? -> Flux.from(source) }
 
-
-    public SeaShellReactiveServiceImpl(ShellRepositoryImpl shellRepository,
-                                       ShellPersonRepositoryImpl shellPersonRepository,
-                                       ShellCostumeRepositoryImpl shellCostumeRepository,
-                                       ShellAccountRepositoryImpl shellAccountRepository,
-                                       ShellTopRepositoryImpl shellTopRepository,
-                                       ShellLowerRepositoryImpl shellLowerRepository) {
-        super(
-                shellRepository,
-                shellPersonRepository,
-                shellCostumeRepository,
-                shellAccountRepository,
-                shellTopRepository,
-                shellLowerRepository
-        );
+    fun getShell(id: Long?): Mono<SeaShellDto> {
+        return shellRepository.findSeaShellById(id).map { seaShell: Shell? -> fetchSeaShellPublisher(seaShell) }
+            .flatMap { source: Mono<SeaShellDto?>? -> Mono.from(source) }
     }
 
-    public ParallelFlux<SeaShellDto> getAllSeaShells() {
-        return shellRepository
-                .findAllSeaShells()
-                .map(this::fetchSeaShellPublisher).flatMap(Flux::from);
+    fun getRootShell(idPerson: Long?, idCostume: Long?): Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> {
+        return Mono.zip<SeaShellPersonDto?, SeaShellCostumeDto?, Pair<SeaShellPersonDto, SeaShellCostumeDto>>(
+            shellPersonRepository.findPersonById(idPerson).map { obj: Person? -> SeaShellConverter.toShellPersonDto() }
+                .subscribeOn(Schedulers.parallel()),
+            shellCostumeRepository.findCostumeById(idCostume)
+                .map { obj: Costume? -> SeaShellConverter.toShellCostumeDto() }
+                .subscribeOn(Schedulers.parallel())) { first: SeaShellPersonDto?, second: SeaShellCostumeDto? ->
+            Pair.of(
+                first,
+                second
+            )
+        }
+            .subscribeOn(Schedulers.parallel())
     }
 
-    public Mono<SeaShellDto> getShell(final Long id) {
-        return shellRepository.findSeaShellById(id).map(this::fetchSeaShellPublisher).flatMap(Mono::from);
+    fun getRootCostume(idTop: Long?, idLower: Long?): Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> {
+        return Mono.zip<SeaShellTopDto?, SeaShellLowerDto?, Pair<SeaShellTopDto, SeaShellLowerDto>>(
+            shellTopRepository.findTopById(idTop).map { obj: Top? -> SeaShellConverter.toTopDto() }
+                .subscribeOn(Schedulers.parallel()),
+            shellLowerRepository.findLowerById(idLower).map { obj: Lower? -> SeaShellConverter.toLowerDto() }
+                .subscribeOn(Schedulers.parallel())) { first: SeaShellTopDto?, second: SeaShellLowerDto? ->
+            Pair.of(
+                first,
+                second
+            )
+        }
+            .subscribeOn(Schedulers.parallel())
     }
 
-    public Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> getRootShell(Long idPerson, Long idCostume) {
-        return zip(
-                shellPersonRepository.findPersonById(idPerson).map(SeaShellConverter::toShellPersonDto).subscribeOn(parallel()),
-                shellCostumeRepository.findCostumeById(idCostume).map(SeaShellConverter::toShellCostumeDto).subscribeOn(parallel()),
-                Pair::of).subscribeOn(parallel());
+    private fun fetchSeaShellPublisher(seaShell: Shell?): Mono<SeaShellDto?> {
+        val seaShellDtoReturn = SeaShellConverter.toShellDto(seaShell)
+        return Mono.zip(
+            fetchPersonsPublisher(seaShell, seaShellDtoReturn).subscribeOn(Schedulers.parallel()),
+            fetchCostumesPublisher(seaShell, seaShellDtoReturn).subscribeOn(Schedulers.parallel())
+        ) { persons: Any?, costumes: Any? -> seaShellDtoReturn }
     }
 
-    public Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> getRootCostume(Long idTop, Long idLower) {
-        return zip(
-                shellTopRepository.findTopById(idTop).map(SeaShellConverter::toTopDto).subscribeOn(parallel()),
-                shellLowerRepository.findLowerById(idLower).map(SeaShellConverter::toLowerDto).subscribeOn(parallel()),
-                Pair::of).subscribeOn(parallel());
-    }
-
-    private Mono<SeaShellDto> fetchSeaShellPublisher(Shell seaShell) {
-        final SeaShellDto seaShellDtoReturn = SeaShellConverter.toShellDto(seaShell);
-
-        return zip(
-                fetchPersonsPublisher(seaShell, seaShellDtoReturn).subscribeOn(Schedulers.parallel()),
-                fetchCostumesPublisher(seaShell, seaShellDtoReturn).subscribeOn(Schedulers.parallel()),
-                (persons, costumes) -> seaShellDtoReturn);
-    }
-
-    private Mono<?> fetchPersonsPublisher(Shell seaShell, SeaShellDto seaShellDtoReturn) {
-        return from(from(just(
-                seaShell.getPersons().getPersonId()).subscribeOn(parallel()).map(shellPersonRepository::findPersonsBlock).subscribeOn(parallel())
-                .map(persons -> {
-                    persons.forEach(person -> seaShellDtoReturn.persons().add(SeaShellConverter.toShellPersonDto(person)));
-                    return seaShellDtoReturn.persons();
-                }))
-                .thenMany(zip(
-                        fetchPersonAccountPublisher(seaShellDtoReturn).subscribeOn(parallel()),
-                        fetchPersonFullCostumePublisher(seaShellDtoReturn).subscribeOn(parallel()))));
-
-    }
-
-    private Mono<SeaShellDto> fetchPersonFullCostumePublisher(SeaShellDto seaShellDtoReturn) {
-        return from(fetchPersonCostumePublisher(seaShellDtoReturn)
-                .thenMany(fetchPersonTopLowerPublisher(seaShellDtoReturn)));
-    }
-
-    private Mono<SeaShellDto> fetchPersonTopLowerPublisher(SeaShellDto seaShellDtoReturn) {
-        return zip(
-                fetchPersonCostumeTopPublisher(seaShellDtoReturn).subscribeOn(parallel()),
-                fetchPersonCostumeLowerPublisher(seaShellDtoReturn).subscribeOn(parallel()),
-                (persons, costumes) -> seaShellDtoReturn);
-    }
-
-    private Mono<?> fetchCostumesPublisher(Shell seaShell, SeaShellDto seaShellDtoReturn) {
-        return from(just(seaShell.getCostumes().getCostumeId()).subscribeOn(parallel()).map(shellCostumeRepository::findCostumesBlock).subscribeOn(parallel())
-                .map(costumes -> {
-                    costumes.forEach(costume -> seaShellDtoReturn.costumes().add(SeaShellConverter.toShellCostumeDto(costume)));
-                    return costumes;
+    private fun fetchPersonsPublisher(seaShell: Shell?, seaShellDtoReturn: SeaShellDto?): Mono<*> {
+        return Mono.from(Mono.from(Mono.just(
+            seaShell!!.persons.personId
+        ).subscribeOn(Schedulers.parallel())
+            .map { personIds: List<Long> -> shellPersonRepository.findPersonsBlock(personIds) }
+            .subscribeOn(Schedulers.parallel())
+            .map { persons: List<Person?>? ->
+                persons!!.forEach(Consumer { person: Person? ->
+                    seaShellDtoReturn!!.persons.add(
+                        SeaShellConverter.toShellPersonDto(person)
+                    )
                 })
-                .thenMany(zip(
-                        fetchCostumeTopPublisher(seaShellDtoReturn).subscribeOn(parallel()),
-                        fetchCostumeLowerPublisher(seaShellDtoReturn).subscribeOn(parallel()),
-                        (persons, costumes) -> seaShellDtoReturn)
-                ));
-
+                seaShellDtoReturn!!.persons
+            })
+            .thenMany(
+                Mono.zip(
+                    fetchPersonAccountPublisher(seaShellDtoReturn).subscribeOn(Schedulers.parallel()),
+                    fetchPersonFullCostumePublisher(seaShellDtoReturn).subscribeOn(Schedulers.parallel())
+                )
+            )
+        )
     }
 
-    private Mono<SeaShellDto> fetchCostumeLowerPublisher(SeaShellDto seaShellDtoReturn) {
-        return fromCallable(() ->
-                seaShellDtoReturn.costumes().parallelStream().map(seaShellCostumeDto ->
-                {
-                    seaShellCostumeDto.setLowerDto(
-                            SeaShellConverter.toLowerDto(
-                                    shellLowerRepository.findLowerByIdBlock(seaShellCostumeDto.getLowerId())));
-                    return seaShellDtoReturn;
-                }).findFirst().orElse(seaShellDtoReturn));
+    private fun fetchPersonFullCostumePublisher(seaShellDtoReturn: SeaShellDto?): Mono<SeaShellDto?> {
+        return Mono.from(
+            fetchPersonCostumePublisher(seaShellDtoReturn)
+                .thenMany(fetchPersonTopLowerPublisher(seaShellDtoReturn))
+        )
     }
 
-    private Mono<SeaShellDto> fetchCostumeTopPublisher(SeaShellDto seaShellDtoReturn) {
-        return fromCallable(() ->
-                seaShellDtoReturn.costumes().parallelStream().map(seaShellCostumeDto ->
-                {
-                    seaShellCostumeDto.setTopDto(
-                            SeaShellConverter.toTopDto(
-                                    shellTopRepository.findTopByIdBlock(seaShellCostumeDto.getTopId())));
-                    return seaShellDtoReturn;
-                }).findFirst().orElse(seaShellDtoReturn));
+    private fun fetchPersonTopLowerPublisher(seaShellDtoReturn: SeaShellDto?): Mono<SeaShellDto?> {
+        return Mono.zip(
+            fetchPersonCostumeTopPublisher(seaShellDtoReturn).subscribeOn(Schedulers.parallel()),
+            fetchPersonCostumeLowerPublisher(seaShellDtoReturn).subscribeOn(Schedulers.parallel())
+        ) { persons: SeaShellDto?, costumes: SeaShellDto? -> seaShellDtoReturn }
     }
 
-    private Mono<SeaShellDto> fetchPersonAccountPublisher(SeaShellDto seaShellDtoReturn) {
-        return fromCallable(() ->
-        {
-            seaShellDtoReturn.persons()
-                    .forEach(seaShellPersonDto -> seaShellPersonDto
-                            .setAccountDto(
-                                    SeaShellConverter
-                                            .toAccountDto(shellAccountRepository
-                                                    .findAccountByIdBlock(seaShellPersonDto.getAccountId()))));
-            return seaShellDtoReturn;
-        });
+    private fun fetchCostumesPublisher(seaShell: Shell?, seaShellDtoReturn: SeaShellDto?): Mono<*> {
+        return Mono.from(Mono.just(
+            seaShell!!.costumes.costumeId
+        ).subscribeOn(Schedulers.parallel())
+            .map { costumeIds: List<Long> -> shellCostumeRepository.findCostumesBlock(costumeIds) }
+            .subscribeOn(Schedulers.parallel())
+            .map { costumes: List<Costume?>? ->
+                costumes!!.forEach(Consumer { costume: Costume? ->
+                    seaShellDtoReturn!!.costumes.add(
+                        SeaShellConverter.toShellCostumeDto(costume)
+                    )
+                })
+                costumes
+            }
+            .thenMany(Mono.zip(
+                fetchCostumeTopPublisher(seaShellDtoReturn).subscribeOn(Schedulers.parallel()),
+                fetchCostumeLowerPublisher(seaShellDtoReturn).subscribeOn(Schedulers.parallel())
+            ) { persons: SeaShellDto?, costumes: SeaShellDto? -> seaShellDtoReturn }
+            ))
     }
 
-    private Mono<SeaShellDto> fetchPersonCostumePublisher(SeaShellDto seaShellDtoReturn) {
-        return fromCallable(() ->
-        {
-            seaShellDtoReturn.persons()
-                    .forEach(seaShellPersonDto -> seaShellPersonDto
-                            .setCostumeDto(
-                                    SeaShellConverter
-                                            .toShellCostumeDto(shellCostumeRepository
-                                                    .findCostumeByIdBlock(seaShellPersonDto.getCostumeId()))));
-            return seaShellDtoReturn;
-        });
+    private fun fetchCostumeLowerPublisher(seaShellDtoReturn: SeaShellDto?): Mono<SeaShellDto?> {
+        return Mono.fromCallable {
+            seaShellDtoReturn!!.costumes.parallelStream().map { seaShellCostumeDto: SeaShellCostumeDto? ->
+                seaShellCostumeDto.setLowerDto(
+                    SeaShellConverter.toLowerDto(
+                        shellLowerRepository.findLowerByIdBlock(seaShellCostumeDto.getLowerId())
+                    )
+                )
+                seaShellDtoReturn
+            }.findFirst().orElse(seaShellDtoReturn)
+        }
     }
 
-    private Mono<SeaShellDto> fetchPersonCostumeLowerPublisher(SeaShellDto seaShellDtoReturn) {
-        return fromCallable(() ->
-                seaShellDtoReturn.persons().parallelStream().map(seaShellPersonDto -> {
-                    SeaShellCostumeDto costumeDto = seaShellPersonDto.getCostumeDto();
-                    costumeDto.setLowerDto(
-                            SeaShellConverter.toLowerDto(
-                                    shellLowerRepository.findLowerByIdBlock(costumeDto.getTopId())));
-                    return seaShellDtoReturn;
-                }).findFirst().orElse(seaShellDtoReturn));
+    private fun fetchCostumeTopPublisher(seaShellDtoReturn: SeaShellDto?): Mono<SeaShellDto?> {
+        return Mono.fromCallable {
+            seaShellDtoReturn!!.costumes.parallelStream().map { seaShellCostumeDto: SeaShellCostumeDto? ->
+                seaShellCostumeDto.setTopDto(
+                    SeaShellConverter.toTopDto(
+                        shellTopRepository.findTopByIdBlock(seaShellCostumeDto.getTopId())
+                    )
+                )
+                seaShellDtoReturn
+            }.findFirst().orElse(seaShellDtoReturn)
+        }
     }
 
-    private Mono<SeaShellDto> fetchPersonCostumeTopPublisher(SeaShellDto seaShellDtoReturn) {
-        return fromCallable(() ->
-                seaShellDtoReturn.persons().parallelStream().map(seaShellPersonDto -> {
-                    SeaShellCostumeDto costumeDto = seaShellPersonDto.getCostumeDto();
-                    costumeDto.setTopDto(
-                            SeaShellConverter.toTopDto(
-                                    shellTopRepository.findTopByIdBlock(costumeDto.getTopId())));
-                    return seaShellDtoReturn;
-                }).findFirst().orElse(seaShellDtoReturn));
+    private fun fetchPersonAccountPublisher(seaShellDtoReturn: SeaShellDto?): Mono<SeaShellDto?> {
+        return Mono.fromCallable {
+            seaShellDtoReturn!!.persons
+                .forEach(Consumer { seaShellPersonDto: SeaShellPersonDto? ->
+                    seaShellPersonDto
+                        .setAccountDto(
+                            SeaShellConverter.toAccountDto(
+                                shellAccountRepository
+                                    .findAccountByIdBlock(seaShellPersonDto.getAccountId())
+                            )
+                        )
+                })
+            seaShellDtoReturn
+        }
+    }
+
+    private fun fetchPersonCostumePublisher(seaShellDtoReturn: SeaShellDto?): Mono<SeaShellDto?> {
+        return Mono.fromCallable {
+            seaShellDtoReturn!!.persons
+                .forEach(Consumer { seaShellPersonDto: SeaShellPersonDto? ->
+                    seaShellPersonDto
+                        .setCostumeDto(
+                            SeaShellConverter.toShellCostumeDto(
+                                shellCostumeRepository
+                                    .findCostumeByIdBlock(seaShellPersonDto.getCostumeId())
+                            )
+                        )
+                })
+            seaShellDtoReturn
+        }
+    }
+
+    private fun fetchPersonCostumeLowerPublisher(seaShellDtoReturn: SeaShellDto?): Mono<SeaShellDto?> {
+        return Mono.fromCallable {
+            seaShellDtoReturn!!.persons.parallelStream().map { seaShellPersonDto: SeaShellPersonDto? ->
+                val costumeDto = seaShellPersonDto.getCostumeDto()
+                costumeDto.lowerDto = SeaShellConverter.toLowerDto(
+                    shellLowerRepository.findLowerByIdBlock(costumeDto.topId)
+                )
+                seaShellDtoReturn
+            }.findFirst().orElse(seaShellDtoReturn)
+        }
+    }
+
+    private fun fetchPersonCostumeTopPublisher(seaShellDtoReturn: SeaShellDto?): Mono<SeaShellDto?> {
+        return Mono.fromCallable {
+            seaShellDtoReturn!!.persons.parallelStream().map { seaShellPersonDto: SeaShellPersonDto? ->
+                val costumeDto = seaShellPersonDto.getCostumeDto()
+                costumeDto.topDto = SeaShellConverter.toTopDto(
+                    shellTopRepository.findTopByIdBlock(costumeDto.topId)
+                )
+                seaShellDtoReturn
+            }.findFirst().orElse(seaShellDtoReturn)
+        }
     }
 }

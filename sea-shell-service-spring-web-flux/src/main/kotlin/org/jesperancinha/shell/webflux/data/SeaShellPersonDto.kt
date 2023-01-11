@@ -1,12 +1,6 @@
-package org.jesperancinha.shell.webflux.data;
+package org.jesperancinha.shell.webflux.data
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*
 
 @Builder
 @Getter
@@ -15,11 +9,15 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeaShellPersonDto {
-    private String name;
-    private String activity;
-    private SeaShellCostumeDto costumeDto;
-    private SeaShellAccountDto accountDto;
-    private transient Long costumeId;
-    private transient String accountId;
+class SeaShellPersonDto {
+    private val name: String? = null
+    private val activity: String? = null
+    private val costumeDto: SeaShellCostumeDto? = null
+    private val accountDto: SeaShellAccountDto? = null
+
+    @Transient
+    private val costumeId: Long? = null
+
+    @Transient
+    private val accountId: String? = null
 }

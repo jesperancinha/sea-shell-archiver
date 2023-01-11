@@ -1,85 +1,98 @@
-package org.jesperancinha.shell;
+package org.jesperancinha.shell
 
-import com.github.tomakehurst.wiremock.WireMockServer;
-import org.jesperancinha.shell.webflux.service.SeaShellReactiveOneServiceImpl;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import reactor.blockhound.BlockHound;
-
-import java.io.IOException;
-import java.time.Duration;
-
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static reactor.core.publisher.Mono.delay;
+import com.github.tomakehurst.wiremock.WireMockServer
+import org.jesperancinha.shell.webflux.service.SeaShellReactiveOneServiceImpl
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.function.Executable
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import reactor.blockhound.BlockHound
+import reactor.core.publisher.Mono
+import java.io.IOException
+import java.time.Duration
 
 @SpringBootTest
-public class SeaShellReactiveOneServiceImplTest {
-
-    private static WireMockServer wireMockServer;
-
+class SeaShellReactiveOneServiceImplTest {
     @Autowired
-    private SeaShellReactiveOneServiceImpl seaShellReactiveOneService;
-
-    @BeforeAll
-    public static void setUpAll() throws IOException {
-        BlockHound.install();
-        wireMockServer = SeaShellWiremockSoapLauncher.createWireMockServer();
+    private val seaShellReactiveOneService: SeaShellReactiveOneServiceImpl? = null
+    @Test
+    fun findAllIds_onCall_thenNonBlocking() {
+        Assertions.assertAll(Executable {
+            Mono.delay(Duration.ofSeconds(1))
+                .doOnNext { it: Long? -> seaShellReactiveOneService!!.allIds }
+                .block()
+        })
     }
 
     @Test
-    public void findAllIds_onCall_thenNonBlocking() {
-        assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellReactiveOneService.getAllIds())
-                .block());
+    fun findSeaShellById_onCall_thenNonBlocking() {
+        Assertions.assertAll(Executable {
+            Mono.delay(Duration.ofSeconds(1))
+                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getSeaShellById(1L) }
+                .block()
+        })
     }
 
     @Test
-    public void findSeaShellById_onCall_thenNonBlocking() {
-        assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellReactiveOneService.getSeaShellById(1L))
-                .block());
+    fun findPersonById_onCall_thenNonBlocking() {
+        Assertions.assertAll(Executable {
+            Mono.delay(Duration.ofSeconds(1))
+                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getPersonById(1L) }
+                .block()
+        })
     }
 
     @Test
-    public void findPersonById_onCall_thenNonBlocking() {
-        assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellReactiveOneService.getPersonById(1L))
-                .block());
+    fun findCostumeById_onCall_thenNonBlocking() {
+        Assertions.assertAll(Executable {
+            Mono.delay(Duration.ofSeconds(1))
+                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getCostumeById(1L) }
+                .block()
+        })
     }
 
     @Test
-    public void findCostumeById_onCall_thenNonBlocking() {
-        assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellReactiveOneService.getCostumeById(1L))
-                .block());
+    fun findAccountById_onCall_thenNonBlocking() {
+        Assertions.assertAll(Executable {
+            Mono.delay(Duration.ofSeconds(1))
+                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getAccountById("ACCOUNTID") }
+                .block()
+        })
     }
 
     @Test
-    public void findAccountById_onCall_thenNonBlocking() {
-        assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellReactiveOneService.getAccountById("ACCOUNTID"))
-                .block());
+    fun findTopById_onCall_thenNonBlocking() {
+        Assertions.assertAll(Executable {
+            Mono.delay(Duration.ofSeconds(1))
+                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getTopById(1L) }
+                .block()
+        })
     }
 
     @Test
-    public void findTopById_onCall_thenNonBlocking() {
-        assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellReactiveOneService.getTopById(1L))
-                .block());
+    fun findLowerById_onCall_thenNonBlocking() {
+        Assertions.assertAll(Executable {
+            Mono.delay(Duration.ofSeconds(1))
+                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getLowerById(1L) }
+                .block()
+        })
     }
 
-    @Test
-    public void findLowerById_onCall_thenNonBlocking() {
-        assertAll(() -> delay(Duration.ofSeconds(1))
-                .doOnNext(it -> seaShellReactiveOneService.getLowerById(1L))
-                .block());
-    }
+    companion object {
+        private var wireMockServer: WireMockServer? = null
+        @BeforeAll
+        @Throws(IOException::class)
+        fun setUpAll() {
+            BlockHound.install()
+            wireMockServer = SeaShellWiremockSoapLauncher.createWireMockServer()
+        }
 
-    @AfterAll
-    public static void afterAll() {
-        wireMockServer.stop();
+        @AfterAll
+        fun afterAll() {
+            wireMockServer!!.stop()
+        }
     }
 }

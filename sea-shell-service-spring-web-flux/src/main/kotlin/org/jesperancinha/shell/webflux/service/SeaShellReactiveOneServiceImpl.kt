@@ -1,69 +1,65 @@
-package org.jesperancinha.shell.webflux.service;
+package org.jesperancinha.shell.webflux.service
 
-import lombok.extern.slf4j.Slf4j;
-import org.jesperancinha.shell.webflux.data.SeaShellAccountDto;
-import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto;
-import org.jesperancinha.shell.webflux.data.SeaShellDto;
-import org.jesperancinha.shell.webflux.data.SeaShellLowerDto;
-import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
-import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
-import org.jesperancinha.shell.webflux.repo.*;
-import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import lombok.extern.slf4j.Slf4j
+import org.jesperancinha.shell.client.accounts.Account
+import org.jesperancinha.shell.client.costumes.Costume
+import org.jesperancinha.shell.client.lowers.Lower
+import org.jesperancinha.shell.client.persons.Person
+import org.jesperancinha.shell.client.shells.Shell
+import org.jesperancinha.shell.client.tops.Top
+import org.jesperancinha.shell.webflux.data.*
+import org.jesperancinha.shell.webflux.repo.*
+import org.springframework.stereotype.Service
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 
 @Slf4j
 @Service
-public class SeaShellReactiveOneServiceImpl extends SeaShellOneAdapter {
+class SeaShellReactiveOneServiceImpl(
+    shellRepository: ShellRepositoryImpl,
+    shellPersonRepository: ShellPersonRepositoryImpl,
+    shellCostumeRepository: ShellCostumeRepositoryImpl,
+    shellAccountRepository: ShellAccountRepositoryImpl,
+    shellTopRepository: ShellTopRepositoryImpl,
+    shellLowerRepository: ShellLowerRepositoryImpl
+) : SeaShellOneAdapter(
+    shellRepository,
+    shellPersonRepository,
+    shellCostumeRepository,
+    shellAccountRepository,
+    shellTopRepository,
+    shellLowerRepository
+) {
+    val allIds: Flux<Long?>?
+        get() = shellRepository.findAllShellIds()
 
-
-    public SeaShellReactiveOneServiceImpl(ShellRepositoryImpl shellRepository,
-                                          ShellPersonRepositoryImpl shellPersonRepository,
-                                          ShellCostumeRepositoryImpl shellCostumeRepository,
-                                          ShellAccountRepositoryImpl shellAccountRepository,
-                                          ShellTopRepositoryImpl shellTopRepository,
-                                          ShellLowerRepositoryImpl shellLowerRepository) {
-        super(
-                shellRepository,
-                shellPersonRepository,
-                shellCostumeRepository,
-                shellAccountRepository,
-                shellTopRepository,
-                shellLowerRepository);
+    fun getSeaShellById(id: Long?): Mono<SeaShellDto?> {
+        return shellRepository.findSeaShellById(id)
+            .map { obj: Shell? -> SeaShellConverter.toShellDto() }
     }
 
-    public Flux<Long> getAllIds() {
-        return this.shellRepository.findAllShellIds();
+    fun getPersonById(id: Long?): Mono<SeaShellPersonDto?> {
+        return shellPersonRepository.findPersonById(id)
+            .map { obj: Person? -> SeaShellConverter.toShellPersonDto() }
     }
 
-    public Mono<SeaShellDto> getSeaShellById(Long id) {
-        return this.shellRepository.findSeaShellById(id)
-                .map(SeaShellConverter::toShellDto);
+    fun getCostumeById(id: Long?): Mono<SeaShellCostumeDto?> {
+        return shellCostumeRepository.findCostumeById(id)
+            .map { obj: Costume? -> SeaShellConverter.toShellCostumeDto() }
     }
 
-    public Mono<SeaShellPersonDto> getPersonById(Long id) {
-        return this.shellPersonRepository.findPersonById(id)
-                .map(SeaShellConverter::toShellPersonDto);
+    fun getAccountById(id: String?): Mono<SeaShellAccountDto?> {
+        return shellAccountRepository.findAccountById(id)
+            .map { obj: Account? -> SeaShellConverter.toAccountDto() }
     }
 
-    public Mono<SeaShellCostumeDto> getCostumeById(Long id) {
-        return this.shellCostumeRepository.findCostumeById(id)
-                .map(SeaShellConverter::toShellCostumeDto);
+    fun getTopById(id: Long?): Mono<SeaShellTopDto?> {
+        return shellTopRepository.findTopById(id)
+            .map { obj: Top? -> SeaShellConverter.toTopDto() }
     }
 
-    public Mono<SeaShellAccountDto> getAccountById(String id) {
-        return this.shellAccountRepository.findAccountById(id)
-                .map(SeaShellConverter::toAccountDto);
-    }
-
-    public Mono<SeaShellTopDto> getTopById(Long id) {
-        return this.shellTopRepository.findTopById(id)
-                .map(SeaShellConverter::toTopDto);
-    }
-
-    public Mono<SeaShellLowerDto> getLowerById(Long id) {
-        return this.shellLowerRepository.findLowerById(id)
-                .map(SeaShellConverter::toLowerDto);
-
+    fun getLowerById(id: Long?): Mono<SeaShellLowerDto?> {
+        return shellLowerRepository.findLowerById(id)
+            .map { obj: Lower? -> SeaShellConverter.toLowerDto() }
     }
 }

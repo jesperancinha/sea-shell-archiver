@@ -1,50 +1,38 @@
-package org.jesperancinha.shell.webflux.repo;
+package org.jesperancinha.shell.webflux.repo
 
-import org.jesperancinha.shell.client.costumes.Costume;
-import org.jesperancinha.shell.client.costumes.CostumesClient;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import reactor.core.publisher.ParallelFlux;
-import reactor.core.scheduler.Schedulers;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
+import org.jesperancinha.shell.client.costumes.Costume
+import org.jesperancinha.shell.client.costumes.CostumesClient
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Repository
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
+import reactor.core.publisher.ParallelFlux
+import reactor.core.scheduler.Schedulers
+import java.util.stream.Collectors
 
 @Repository
-public class ShellCostumeRepositoryImpl {
-
-    @Value("${sea.shell.parallelism:20}")
-    private Integer parallelism;
-
-    private final CostumesClient costumesClient;
-
-    public ShellCostumeRepositoryImpl(CostumesClient costumesClient) {
-        this.costumesClient = costumesClient;
+class ShellCostumeRepositoryImpl(private val costumesClient: CostumesClient) {
+    @Value("\${sea.shell.parallelism:20}")
+    private val parallelism: Int? = null
+    fun findCostumeById(id: Long?): Mono<Costume?> {
+        return Mono.fromCallable { costumesClient.getCostume(id) }.subscribeOn(Schedulers.boundedElastic())
     }
 
-    public Mono<Costume> findCostumeById(final Long id) {
-        return Mono.fromCallable(() -> costumesClient.getCostume(id)).subscribeOn(Schedulers.boundedElastic());
-    }
-
-    public ParallelFlux<Costume> findCostumes(List<Long> costumeIds) {
-
+    fun findCostumes(costumeIds: List<Long>?): ParallelFlux<Costume?> {
         return Flux.fromIterable(costumeIds)
-                .parallel(parallelism)
-                .runOn(Schedulers.parallel())
-                .map(costumeId -> Mono.fromCallable(() -> costumesClient.getCostume(costumeId)))
-                .flatMap(ParallelFlux::from);
+            .parallel(parallelism!!)
+            .runOn(Schedulers.parallel())
+            .map { costumeId: Long? -> Mono.fromCallable { costumesClient.getCostume(costumeId) } }
+            .flatMap { source: Mono<Costume>? -> ParallelFlux.from(source) }
     }
 
-    public List<Costume> findCostumesBlock(List<Long> costumeIds) {
+    fun findCostumesBlock(costumeIds: List<Long>): List<Costume?> {
         return costumeIds.parallelStream()
-                .map(costumesClient::getCostume)
-                .collect(Collectors.toList());
+            .map { costumeId: Long? -> costumesClient.getCostume(costumeId) }
+            .collect(Collectors.toList())
     }
 
-    public Costume findCostumeByIdBlock(Long costumeId) {
-        return costumesClient.getCostume(costumeId);
+    fun findCostumeByIdBlock(costumeId: Long?): Costume {
+        return costumesClient.getCostume(costumeId)
     }
 }
