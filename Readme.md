@@ -68,6 +68,14 @@ This project is also the official support project of my article on medium:
 
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/medium-20.png "Medium")](https://medium.com/swlh/reactive-programming-applied-to-legacy-services-a-webflux-example-4d1c2ad40bd4) [Reactive Programming applied to Legacy Services — A WebFlux example](https://medium.com/swlh/reactive-programming-applied-to-legacy-services-a-webflux-example-4d1c2ad40bd4)
 
+#### Stable releases
+
+-   [1.0.0](https://github.com/jesperancinha/sea-shell-archiver/tree/1.0.0) - [34ff2b4b760ef28eab1f8243a60d6739bb0d374a](https://github.com/jesperancinha/sea-shell-archiver/tree/1.0.0)
+-   [2.0.0](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.0) - [8b8b5ea74daa0fe71d04ba858ce57f9b09d1d959](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.0)
+-   [2.0.1](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.1) - [3840b38fd0bd6d89b863a64544d0286f5d4111e3](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.1) - Java / JDK17
+
+## How to Guide
+
 Revision dates: 2020/01/29, 
 
 In order to start interacting with it you need to start runnable modules:
