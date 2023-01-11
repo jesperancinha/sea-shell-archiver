@@ -10,7 +10,7 @@ import static reactor.core.scheduler.Schedulers.single;
 
 
 @Repository
-public class ShellAccountRepositoryImpl implements ShellAccountRepository {
+public class ShellAccountRepositoryImpl {
 
     private final AccountsClient accountsClient;
 

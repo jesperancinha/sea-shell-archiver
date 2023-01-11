@@ -8,7 +8,6 @@ import org.jesperancinha.shell.webflux.repo.ShellAccountRepositoryImpl;
 import org.jesperancinha.shell.webflux.repo.ShellCostumeRepositoryImpl;
 import org.jesperancinha.shell.webflux.repo.ShellLowerRepositoryImpl;
 import org.jesperancinha.shell.webflux.repo.ShellPersonRepositoryImpl;
-import org.jesperancinha.shell.webflux.repo.ShellRepository;
 import org.jesperancinha.shell.webflux.repo.ShellRepositoryImpl;
 import org.jesperancinha.shell.webflux.repo.ShellTopRepositoryImpl;
 import org.jesperancinha.shell.webflux.service.fork.SeaShellCostumesRecursiveTask;
@@ -49,7 +48,7 @@ import static reactor.core.scheduler.Schedulers.boundedElastic;
                 "shellTopRepositoryImpl",
                 "shellLowerRepositoryImpl"
         })
-public class SeaShellServiceImpl extends SeaShellConsumerAdapter implements SeaShellService {
+public class SeaShellServiceImpl extends SeaShellConsumerAdapter {
 
     @Value("${sea.shell.parallelism:20}")
     private Integer parallelism;
@@ -57,7 +56,7 @@ public class SeaShellServiceImpl extends SeaShellConsumerAdapter implements SeaS
     @Value("${sea.shell.delay.ms:100}")
     private Integer delay;
 
-    private final ShellRepository shellRepository;
+    private final ShellRepositoryImpl shellRepository;
 
     public SeaShellServiceImpl(ShellRepositoryImpl shellRepository,
                                ShellCostumeRepositoryImpl costumeRepository,

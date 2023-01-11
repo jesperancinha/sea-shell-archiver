@@ -5,11 +5,7 @@ import lombok.Builder;
 import org.jesperancinha.shell.client.persons.Person;
 import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
-import org.jesperancinha.shell.webflux.repo.ShellAccountRepository;
-import org.jesperancinha.shell.webflux.repo.ShellCostumeRepository;
-import org.jesperancinha.shell.webflux.repo.ShellLowerRepository;
-import org.jesperancinha.shell.webflux.repo.ShellPersonRepository;
-import org.jesperancinha.shell.webflux.repo.ShellTopRepository;
+import org.jesperancinha.shell.webflux.repo.*;
 import org.jesperancinha.shell.webflux.service.SeaShellConverter;
 
 import java.util.List;
@@ -22,11 +18,11 @@ import java.util.stream.Stream;
 @Builder
 public class SeaShellPersonsRecursiveTask extends RecursiveTask<Stream<ForkJoinTask<SeaShellPersonDto>>> {
 
-    private final ShellPersonRepository personRepository;
-    private final ShellAccountRepository accountRepository;
-    private final ShellCostumeRepository costumeRepository;
-    private final ShellTopRepository topRepository;
-    private final ShellLowerRepository lowerRepository;
+    private final ShellPersonRepositoryImpl personRepository;
+    private final ShellAccountRepositoryImpl accountRepository;
+    private final ShellCostumeRepositoryImpl costumeRepository;
+    private final ShellTopRepositoryImpl topRepository;
+    private final ShellLowerRepositoryImpl lowerRepository;
     private final SeaShellDto seaShellDto;
     private final ForkJoinPool commonPool;
 

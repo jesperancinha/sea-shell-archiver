@@ -3,7 +3,7 @@ package org.jesperancinha.shell.webflux.service.fork;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
-import org.jesperancinha.shell.webflux.repo.ShellAccountRepository;
+import org.jesperancinha.shell.webflux.repo.ShellAccountRepositoryImpl;
 import org.jesperancinha.shell.webflux.service.SeaShellConverter;
 
 import java.util.concurrent.RecursiveTask;
@@ -12,7 +12,7 @@ import java.util.concurrent.RecursiveTask;
 @Builder
 public class SeaShellPersonAccountRecursiveTask extends RecursiveTask<SeaShellPersonDto> {
 
-    private final ShellAccountRepository accountRepository;
+    private final ShellAccountRepositoryImpl accountRepository;
     private final SeaShellPersonDto seaShellPersonDto;
 
     @Override

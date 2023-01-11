@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 
 @Repository
-public class ShellCostumeRepositoryImpl implements ShellCostumeRepository {
+public class ShellCostumeRepositoryImpl {
 
     @Value("${sea.shell.parallelism:20}")
     private Integer parallelism;

@@ -9,7 +9,7 @@ import static reactor.core.scheduler.Schedulers.single;
 
 
 @Repository
-public class ShellTopRepositoryImpl implements ShellTopRepository {
+public class ShellTopRepositoryImpl {
 
     private final TopsClient topsClient;
 

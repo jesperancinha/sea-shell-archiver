@@ -17,7 +17,7 @@ import static reactor.core.scheduler.Schedulers.single;
 
 @Repository
 @ConditionalOnBean(ShellsClient.class)
-public class ShellRepositoryImpl implements ShellRepository {
+public class ShellRepositoryImpl {
 
     private final ShellsClient shellsClient;
 

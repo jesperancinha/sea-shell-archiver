@@ -1,7 +1,7 @@
 package org.jesperancinha.shell;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import org.jesperancinha.shell.webflux.service.SeaShellReactiveOneService;
+import org.jesperancinha.shell.webflux.service.SeaShellReactiveOneServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ public class SeaShellReactiveOneServiceImplTest {
     private static WireMockServer wireMockServer;
 
     @Autowired
-    private SeaShellReactiveOneService seaShellReactiveOneService;
+    private SeaShellReactiveOneServiceImpl seaShellReactiveOneService;
 
     @BeforeAll
     public static void setUpAll() throws IOException {

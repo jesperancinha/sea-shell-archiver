@@ -9,7 +9,7 @@ import static reactor.core.scheduler.Schedulers.single;
 
 
 @Repository
-public class ShellLowerRepositoryImpl implements ShellLowerRepository {
+public class ShellLowerRepositoryImpl {
 
     private final LowersClient lowersClient;
 

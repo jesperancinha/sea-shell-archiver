@@ -3,11 +3,7 @@ package org.jesperancinha.shell.webflux.service;
 import lombok.extern.slf4j.Slf4j;
 import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto;
 import org.jesperancinha.shell.webflux.data.SeaShellDto;
-import org.jesperancinha.shell.webflux.repo.ShellAccountRepository;
-import org.jesperancinha.shell.webflux.repo.ShellCostumeRepository;
-import org.jesperancinha.shell.webflux.repo.ShellLowerRepository;
-import org.jesperancinha.shell.webflux.repo.ShellPersonRepository;
-import org.jesperancinha.shell.webflux.repo.ShellTopRepository;
+import org.jesperancinha.shell.webflux.repo.*;
 
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -15,21 +11,21 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SeaShellConsumerAdapter {
 
-    protected final ShellCostumeRepository costumeRepository;
+    protected final ShellCostumeRepositoryImpl costumeRepository;
 
-    protected final ShellPersonRepository personRepository;
+    protected final ShellPersonRepositoryImpl personRepository;
 
-    protected final ShellAccountRepository accountRepository;
+    protected final ShellAccountRepositoryImpl accountRepository;
 
-    protected final ShellTopRepository topRepository;
+    protected final ShellTopRepositoryImpl topRepository;
 
-    protected final ShellLowerRepository lowerRepository;
+    protected final ShellLowerRepositoryImpl lowerRepository;
 
-    public SeaShellConsumerAdapter(ShellCostumeRepository costumeRepository,
-                                   ShellPersonRepository personRepository,
-                                   ShellAccountRepository accountRepository,
-                                   ShellTopRepository topRepository,
-                                   ShellLowerRepository lowerRepository) {
+    public SeaShellConsumerAdapter(ShellCostumeRepositoryImpl costumeRepository,
+                                   ShellPersonRepositoryImpl personRepository,
+                                   ShellAccountRepositoryImpl accountRepository,
+                                   ShellTopRepositoryImpl topRepository,
+                                   ShellLowerRepositoryImpl lowerRepository) {
         this.costumeRepository = costumeRepository;
         this.personRepository = personRepository;
         this.accountRepository = accountRepository;

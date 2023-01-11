@@ -1,33 +1,28 @@
 package org.jesperancinha.shell.webflux.service;
 
-import org.jesperancinha.shell.webflux.repo.ShellAccountRepository;
-import org.jesperancinha.shell.webflux.repo.ShellCostumeRepository;
-import org.jesperancinha.shell.webflux.repo.ShellLowerRepository;
-import org.jesperancinha.shell.webflux.repo.ShellPersonRepository;
-import org.jesperancinha.shell.webflux.repo.ShellRepository;
-import org.jesperancinha.shell.webflux.repo.ShellTopRepository;
+import org.jesperancinha.shell.webflux.repo.*;
 
 public class SeaShellOneAdapter {
 
-    protected final ShellRepository shellRepository;
+    protected final ShellRepositoryImpl shellRepository;
 
-    protected final ShellPersonRepository shellPersonRepository;
+    protected final ShellPersonRepositoryImpl shellPersonRepository;
 
-    protected final ShellCostumeRepository shellCostumeRepository;
+    protected final ShellCostumeRepositoryImpl shellCostumeRepository;
 
-    protected final ShellAccountRepository shellAccountRepository;
+    protected final ShellAccountRepositoryImpl shellAccountRepository;
 
-    protected final ShellTopRepository shellTopRepository;
+    protected final ShellTopRepositoryImpl shellTopRepository;
 
-    protected final ShellLowerRepository shellLowerRepository;
+    protected final ShellLowerRepositoryImpl shellLowerRepository;
 
 
-    public SeaShellOneAdapter(ShellRepository shellRepository,
-                              ShellPersonRepository shellPersonRepository,
-                              ShellCostumeRepository shellCostumeRepository,
-                              ShellAccountRepository shellAccountRepository,
-                              ShellTopRepository shellTopRepository,
-                              ShellLowerRepository shellLowerRepository) {
+    public SeaShellOneAdapter(ShellRepositoryImpl shellRepository,
+                              ShellPersonRepositoryImpl shellPersonRepository,
+                              ShellCostumeRepositoryImpl shellCostumeRepository,
+                              ShellAccountRepositoryImpl shellAccountRepository,
+                              ShellTopRepositoryImpl shellTopRepository,
+                              ShellLowerRepositoryImpl shellLowerRepository) {
         this.shellRepository = shellRepository;
         this.shellPersonRepository = shellPersonRepository;
         this.shellCostumeRepository = shellCostumeRepository;

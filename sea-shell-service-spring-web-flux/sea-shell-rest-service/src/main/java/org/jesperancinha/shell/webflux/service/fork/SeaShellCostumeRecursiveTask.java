@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto;
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
-import org.jesperancinha.shell.webflux.repo.ShellCostumeRepository;
-import org.jesperancinha.shell.webflux.repo.ShellLowerRepository;
-import org.jesperancinha.shell.webflux.repo.ShellTopRepository;
+import org.jesperancinha.shell.webflux.repo.ShellCostumeRepositoryImpl;
+import org.jesperancinha.shell.webflux.repo.ShellLowerRepositoryImpl;
+import org.jesperancinha.shell.webflux.repo.ShellTopRepositoryImpl;
 import org.jesperancinha.shell.webflux.service.SeaShellConverter;
 
 import java.util.concurrent.ForkJoinPool;
@@ -16,9 +16,9 @@ import java.util.concurrent.ForkJoinTask;
 @Builder
 public class SeaShellCostumeRecursiveTask extends SeaShelTopLowerAdapter<SeaShellPersonDto> {
 
-    private final ShellCostumeRepository costumeRepository;
-    private final ShellTopRepository topRepository;
-    private final ShellLowerRepository lowerRepository;
+    private final ShellCostumeRepositoryImpl costumeRepository;
+    private final ShellTopRepositoryImpl topRepository;
+    private final ShellLowerRepositoryImpl lowerRepository;
     private final SeaShellPersonDto seaShellPersonDto;
     private final ForkJoinPool commonPool;
 

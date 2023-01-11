@@ -5,7 +5,7 @@ import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.data.SeaShellLowerDto;
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
 import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
-import org.jesperancinha.shell.webflux.service.SeaShellReactiveService;
+import org.jesperancinha.shell.webflux.service.SeaShellReactiveServiceImpl;
 import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,24 +18,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/seashells/reactive")
-public class SeaShellReactiveControllerImpl implements SeaShellReactiveController {
+public class SeaShellReactiveControllerImpl {
 
-    private final SeaShellReactiveService seaShellReactiveService;
+    private final SeaShellReactiveServiceImpl seaShellReactiveService;
 
-    public SeaShellReactiveControllerImpl(SeaShellReactiveService seaShellReactiveService) {
+    public SeaShellReactiveControllerImpl(SeaShellReactiveServiceImpl seaShellReactiveService) {
         this.seaShellReactiveService = seaShellReactiveService;
     }
 
+    @org.springframework.web.bind.annotation.GetMapping
     public ParallelFlux<SeaShellDto> getAllSeaShells() {
         return seaShellReactiveService.getAllSeaShells();
     }
 
+    @org.springframework.web.bind.annotation.GetMapping("/{id}")
     public Mono<SeaShellDto> getShell(
             @PathVariable
                     Long id) {
         return seaShellReactiveService.getShell(id);
     }
 
+    @org.springframework.web.bind.annotation.GetMapping("/rootShell/{idPerson}/{idCostume}")
     public Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> getRootShell(
             @PathVariable
                     Long idPerson,
@@ -44,6 +47,7 @@ public class SeaShellReactiveControllerImpl implements SeaShellReactiveControlle
         return seaShellReactiveService.getRootShell(idPerson, idCostume);
     }
 
+    @org.springframework.web.bind.annotation.GetMapping("/rootCostume/{idTop}/{idLower}")
     public Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> getRootCostume(
             @PathVariable
                     Long idTop,
@@ -52,7 +56,7 @@ public class SeaShellReactiveControllerImpl implements SeaShellReactiveControlle
         return seaShellReactiveService.getRootCostume(idTop, idLower);
     }
 
-    @Override
+    @org.springframework.web.bind.annotation.GetMapping("/rootCostumeSlowTop/{idTop}/{idLower}")
     public Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> getRootCostumeSlowTop(
             @PathVariable
                     Long idTop,
@@ -62,7 +66,7 @@ public class SeaShellReactiveControllerImpl implements SeaShellReactiveControlle
         return getPairMono(atomicInteger, 4000, 3000);
     }
 
-    @Override
+    @org.springframework.web.bind.annotation.GetMapping("/rootCostumeSlowLower/{idTop}/{idLower}")
     public Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> getRootCostumeSlowLower(
             @PathVariable
                     Long idTop,

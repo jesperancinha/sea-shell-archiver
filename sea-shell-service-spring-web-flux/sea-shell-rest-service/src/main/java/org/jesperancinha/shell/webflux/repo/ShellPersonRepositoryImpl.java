@@ -17,7 +17,7 @@ import static reactor.core.scheduler.Schedulers.boundedElastic;
 
 
 @Repository
-public class ShellPersonRepositoryImpl implements ShellPersonRepository {
+public class ShellPersonRepositoryImpl {
 
     private final PersonsClient personsClient;
 

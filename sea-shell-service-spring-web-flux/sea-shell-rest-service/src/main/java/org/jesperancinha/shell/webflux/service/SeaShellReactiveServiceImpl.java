@@ -6,12 +6,7 @@ import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.data.SeaShellLowerDto;
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
 import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
-import org.jesperancinha.shell.webflux.repo.ShellAccountRepository;
-import org.jesperancinha.shell.webflux.repo.ShellCostumeRepository;
-import org.jesperancinha.shell.webflux.repo.ShellLowerRepository;
-import org.jesperancinha.shell.webflux.repo.ShellPersonRepository;
-import org.jesperancinha.shell.webflux.repo.ShellRepository;
-import org.jesperancinha.shell.webflux.repo.ShellTopRepository;
+import org.jesperancinha.shell.webflux.repo.*;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -26,15 +21,15 @@ import static reactor.core.publisher.Mono.zip;
 import static reactor.core.scheduler.Schedulers.parallel;
 
 @Service
-public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter implements SeaShellReactiveService {
+public class SeaShellReactiveServiceImpl extends SeaShellOneAdapter {
 
 
-    public SeaShellReactiveServiceImpl(ShellRepository shellRepository,
-                                       ShellPersonRepository shellPersonRepository,
-                                       ShellCostumeRepository shellCostumeRepository,
-                                       ShellAccountRepository shellAccountRepository,
-                                       ShellTopRepository shellTopRepository,
-                                       ShellLowerRepository shellLowerRepository) {
+    public SeaShellReactiveServiceImpl(ShellRepositoryImpl shellRepository,
+                                       ShellPersonRepositoryImpl shellPersonRepository,
+                                       ShellCostumeRepositoryImpl shellCostumeRepository,
+                                       ShellAccountRepositoryImpl shellAccountRepository,
+                                       ShellTopRepositoryImpl shellTopRepository,
+                                       ShellLowerRepositoryImpl shellLowerRepository) {
         super(
                 shellRepository,
                 shellPersonRepository,
