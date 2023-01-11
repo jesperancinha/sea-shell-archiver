@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sea-shell-rest-service</artifactId>
-    <name>Seashells :: Rest Service</name>
+    <name>Sea Shell Archiver | Rest Service</name>
 
     <parent>
         <artifactId>sea-shell-service-spring-web-flux</artifactId>

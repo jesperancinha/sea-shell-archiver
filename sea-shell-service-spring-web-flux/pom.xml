@@ -5,10 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sea-shell-service-spring-web-flux</artifactId>
+    <name>Sea Shell Archiver | Spring Web Flux Parent</name>
+
     <modules>
-        <module>sea-shell-data</module>
-        <module>sea-shell-rest-api</module>
-        <module>sea-shell-service-api</module>
         <module>sea-shell-rest-service</module>
     </modules>
 
