@@ -2,7 +2,6 @@ package org.jesperancinha.shell;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.http.ContentTypeHeader;
-import com.google.common.io.CharStreams;
 import org.apache.hc.core5.http.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

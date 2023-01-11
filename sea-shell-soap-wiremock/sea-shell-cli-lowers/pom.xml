@@ -70,7 +70,7 @@
             <plugin>
                 <groupId>com.sun.xml.ws</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
-                <version>4.0.0</version>
+                <version>${jaxws-maven-plugin.version}</version>
                 <configuration>
                     <wsdlDirectory>${basedir}/../sea-shell-soap-service/src/main/resources/mock/responses/lowers</wsdlDirectory>
                     <sourceDestDir>${basedir}/target/generated-sources/java</sourceDestDir>
@@ -95,7 +95,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>${build-helper-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>add-source</id>
