@@ -5,15 +5,15 @@ import java.math.BigDecimal
 
 
 data class SeaShellAccountDto(
-    private val value: BigDecimal? = null,
-    private val currency: String? = null
+    val value: BigDecimal? = null,
+    val currency: String? = null
 )
 
 data class SeaShellCostumeDto(
-    private val topDto: SeaShellTopDto? = null,
-    private val lowerDto: SeaShellLowerDto? = null,
-    private val topId: Long? = null,
-    private val lowerId: Long? = null
+    val topDto: SeaShellTopDto? = null,
+    val lowerDto: SeaShellLowerDto? = null,
+    val topId: Long? = null,
+    val lowerId: Long? = null
 )
 
 data class SeaShellDto @Builder constructor(
@@ -35,26 +35,26 @@ data class SeaShellDto @Builder constructor(
 }
 
 data class SeaShellLowerDto(
-    private val type: String? = null,
-    private val color: String? = null,
-    private val size: String? = null
+    val type: String? = null,
+    val color: String? = null,
+    val size: String? = null
 )
 
 data class SeaShellPersonDto(
-    private val name: String? = null,
-    private val activity: String? = null,
-    private val costumeDto: SeaShellCostumeDto? = null,
-    private val accountDto: SeaShellAccountDto? = null,
+    val name: String? = null,
+    val activity: String? = null,
+    val costumeDto: SeaShellCostumeDto? = null,
+    val accountDto: SeaShellAccountDto? = null,
 
     @Transient
-    private val costumeId: Long? = null,
+    val costumeId: Long? = null,
 
     @Transient
-    private val accountId: String? = null
+    val accountId: String? = null
 )
 
 data class SeaShellTopDto(
-    private val type: String? = null,
-    private val color: String? = null,
-    private val size: String? = null
+    val type: String? = null,
+    val color: String? = null,
+    val size: String? = null
 )

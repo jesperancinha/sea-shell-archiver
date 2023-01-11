@@ -70,16 +70,15 @@ class SeaShellReactiveControllerImpl(private val seaShellReactiveService: SeaShe
             seaShellTopDto.copy(size = atomicInteger.get().toString())
                 .also { atomicInteger.addAndGet(10) }
         }
-        val SeaShellLowerDto = Mono.fromCallable {
+        val seaShellLowerDtoMono = Mono.fromCallable {
             val seaShellDto = SeaShellLowerDto()
             Thread.sleep(sleeLower.toLong())
-            seaShellDto.size = atomicInteger.get().toString()
-            atomicInteger.addAndGet(10)
-            seaShellDto
+            seaShellDto.copy(size = atomicInteger.get().toString())
+                .also { atomicInteger.addAndGet(10) }
         }
         return Mono.zip<SeaShellTopDto, SeaShellLowerDto, Pair<SeaShellTopDto, SeaShellLowerDto>>(
-            seaShellDtoMono.subscribeOn(Schedulers.parallel()), SeaShellLowerDto.subscribeOn(Schedulers.parallel())
-        ) { first: SeaShellTopDto?, second: SeaShellLowerDto? -> Pair.of(first, second) }
+            seaShellDtoMono.subscribeOn(Schedulers.parallel()), seaShellLowerDtoMono.subscribeOn(Schedulers.parallel())
+        ) { top, lower -> Pair.of(top, lower) }
             .subscribeOn(Schedulers.parallel())
     }
 }

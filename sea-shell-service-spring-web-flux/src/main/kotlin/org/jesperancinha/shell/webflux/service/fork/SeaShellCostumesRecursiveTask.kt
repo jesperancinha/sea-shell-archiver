@@ -15,22 +15,24 @@ import java.util.stream.Stream
 
 @Builder
 @AllArgsConstructor
-class SeaShellCostumesRecursiveTask : SeaShelTopLowerAdapter<Stream<ForkJoinTask<SeaShellCostumeDto?>?>?>() {
-    private val costumeRepository: ShellCostumeRepositoryImpl? = null
-    private val topRepository: ShellTopRepositoryImpl? = null
-    private val lowerRepository: ShellLowerRepositoryImpl? = null
-    private val seaShellDto: SeaShellDto? = null
-    private val commonPool: ForkJoinPool? = null
-    override fun compute(): Stream<ForkJoinTask<SeaShellCostumeDto?>?> {
-        val costumesBlock = costumeRepository!!.findCostumesBlock(seaShellDto!!.costumeIds)
-        return costumesBlock!!.parallelStream().map { obj: Costume? -> SeaShellConverter.toShellCostumeDto() }
-            .flatMap { seaShellCostumeDto: SeaShellCostumeDto? ->
+class SeaShellCostumesRecursiveTask(
+    private val costumeRepository: ShellCostumeRepositoryImpl,
+    private val topRepository: ShellTopRepositoryImpl,
+    private val lowerRepository: ShellLowerRepositoryImpl,
+    private val seaShellDto: SeaShellDto,
+    private val commonPool: ForkJoinPool
+) : SeaShelTopLowerAdapter<Stream<ForkJoinTask<SeaShellCostumeDto>>>() {
+
+    override fun compute(): Stream<ForkJoinTask<SeaShellCostumeDto>> {
+        val costumesBlock = costumeRepository.findCostumesBlock(seaShellDto.costumeIds)
+        return costumesBlock.map { costume -> SeaShellConverter.toShellCostumeDto(costume) }
+            .stream().flatMap { seaShellCostumeDto ->
                 Stream.of(
                     getSeaShellCostumeTopForkJoinTask(
-                        topRepository, seaShellCostumeDto, commonPool!!
+                        topRepository = topRepository, costumeDto = seaShellCostumeDto, commonPool = commonPool
                     ),
                     getSeaShellCostumeLowerForkJoinTask(
-                        lowerRepository, seaShellCostumeDto, commonPool
+                        lowerRepository = lowerRepository, costumeDto = seaShellCostumeDto, commonPool = commonPool
                     )
                 )
             }

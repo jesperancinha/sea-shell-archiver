@@ -11,25 +11,25 @@ import java.util.concurrent.ForkJoinPool
 
 @AllArgsConstructor
 @Builder
-class SeaShellCostumeRecursiveTask : SeaShelTopLowerAdapter<SeaShellPersonDto?>() {
-    private val costumeRepository: ShellCostumeRepositoryImpl? = null
-    private val topRepository: ShellTopRepositoryImpl? = null
-    private val lowerRepository: ShellLowerRepositoryImpl? = null
-    private val seaShellPersonDto: SeaShellPersonDto? = null
-    private val commonPool: ForkJoinPool? = null
-    override fun compute(): SeaShellPersonDto {
-        seaShellPersonDto.setCostumeDto(
-            SeaShellConverter.toShellCostumeDto(
-                costumeRepository!!.findCostumeByIdBlock(
-                    seaShellPersonDto.getCostumeId()
-                )
+class SeaShellCostumeRecursiveTask(
+    private val costumeRepository: ShellCostumeRepositoryImpl,
+    private val topRepository: ShellTopRepositoryImpl,
+    private val lowerRepository: ShellLowerRepositoryImpl,
+    private val seaShellPersonDto: SeaShellPersonDto,
+    private val commonPool: ForkJoinPool
+) : SeaShelTopLowerAdapter<SeaShellPersonDto?>() {
+
+    override fun compute(): SeaShellPersonDto = seaShellPersonDto.copy(
+        costumeDto = SeaShellConverter.toShellCostumeDto(
+            costumeRepository.findCostumeByIdBlock(
+                seaShellPersonDto.costumeId
             )
         )
-        val costumeDto = seaShellPersonDto.getCostumeDto()
-        val forkTopJoinTask = getSeaShellCostumeTopForkJoinTask(topRepository, costumeDto, commonPool!!)
+    ).also {
+        val costumeDto = it.costumeDto
+        val forkTopJoinTask = getSeaShellCostumeTopForkJoinTask(topRepository, costumeDto, commonPool)
         val forkLowerJoinTask = getSeaShellCostumeLowerForkJoinTask(lowerRepository, costumeDto, commonPool)
-        forkTopJoinTask!!.join()
-        forkLowerJoinTask!!.join()
-        return seaShellPersonDto!!
+        forkTopJoinTask.join()
+        forkLowerJoinTask.join()
     }
 }

@@ -9,11 +9,11 @@ import java.util.concurrent.RecursiveTask
 
 @Builder
 @AllArgsConstructor
-class SeaShellLowerRecursiveTask : RecursiveTask<SeaShellCostumeDto?>() {
-    private val lowerRepository: ShellLowerRepositoryImpl? = null
-    private val costumeDto: SeaShellCostumeDto? = null
-    override fun compute(): SeaShellCostumeDto? {
-        costumeDto.setLowerDto(SeaShellConverter.toLowerDto(lowerRepository!!.findLowerByIdBlock(costumeDto.getLowerId())))
-        return costumeDto
-    }
+class SeaShellLowerRecursiveTask(
+    private val lowerRepository: ShellLowerRepositoryImpl,
+    private val costumeDto: SeaShellCostumeDto
+) : RecursiveTask<SeaShellCostumeDto?>() {
+
+    override fun compute(): SeaShellCostumeDto =
+        costumeDto.copy(lowerDto = SeaShellConverter.toLowerDto(lowerRepository.findLowerByIdBlock(costumeDto.lowerId)))
 }

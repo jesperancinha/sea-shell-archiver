@@ -9,17 +9,16 @@ import java.util.concurrent.RecursiveTask
 
 @AllArgsConstructor
 @Builder
-class SeaShellPersonAccountRecursiveTask : RecursiveTask<SeaShellPersonDto?>() {
-    private val accountRepository: ShellAccountRepositoryImpl? = null
-    private val seaShellPersonDto: SeaShellPersonDto? = null
-    override fun compute(): SeaShellPersonDto? {
-        seaShellPersonDto.setAccountDto(
-            SeaShellConverter.toAccountDto(
-                accountRepository!!.findAccountByIdBlock(
-                    seaShellPersonDto.getAccountId()
-                )
+class SeaShellPersonAccountRecursiveTask(
+    private val accountRepository: ShellAccountRepositoryImpl,
+    private val seaShellPersonDto: SeaShellPersonDto
+) : RecursiveTask<SeaShellPersonDto?>() {
+
+    override fun compute(): SeaShellPersonDto = seaShellPersonDto.copy(
+        accountDto = SeaShellConverter.toAccountDto(
+            accountRepository.findAccountByIdBlock(
+                seaShellPersonDto.accountId
             )
         )
-        return seaShellPersonDto
-    }
+    )
 }
