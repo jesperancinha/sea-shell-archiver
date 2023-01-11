@@ -73,6 +73,7 @@ This project is also the official support project of my article on medium:
 -   [1.0.0](https://github.com/jesperancinha/sea-shell-archiver/tree/1.0.0) - [34ff2b4b760ef28eab1f8243a60d6739bb0d374a](https://github.com/jesperancinha/sea-shell-archiver/tree/1.0.0)
 -   [2.0.0](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.0) - [8b8b5ea74daa0fe71d04ba858ce57f9b09d1d959](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.0)
 -   [2.0.1](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.1) - [3840b38fd0bd6d89b863a64544d0286f5d4111e3](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.1) - Java / JDK17
+-   [2.0.2](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.2) - [77969471de7e36234c26c1e435744f44e4be0690](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.2) - Major refactoring / Java / JDK 17
 
 ## How to Guide
 
