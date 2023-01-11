@@ -1,12 +1,7 @@
 package org.jesperancinha.shell.webflux.client.future;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jesperancinha.shell.webflux.data.SeaShellAccountDto;
-import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto;
-import org.jesperancinha.shell.webflux.data.SeaShellDto;
-import org.jesperancinha.shell.webflux.data.SeaShellLowerDto;
-import org.jesperancinha.shell.webflux.data.SeaShellPersonDto;
-import org.jesperancinha.shell.webflux.data.SeaShellTopDto;
+import org.jesperancinha.shell.webflux.client.data.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;

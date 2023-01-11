@@ -1,9 +1,9 @@
 package org.jesperancinha.shell.webflux.client;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jesperancinha.shell.webflux.data.SeaShellDto;
 import org.jesperancinha.shell.webflux.model.SeaShell;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.jesperancinha.shell.webflux.client.data.SeaShellDto;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

@@ -31,6 +31,7 @@
         <sea-shell-data.version>${project.seashells.version}</sea-shell-data.version>
         <sea-shell-model.version>${project.seashells.version}</sea-shell-model.version>
         <sea-shell-service.version>${project.seashells.version}</sea-shell-service.version>
+        <sea-shell-service-spring-web-flux.version>${project.seashells.version}</sea-shell-service-spring-web-flux.version>
         <!-- External -->
         <spring-data-commons.version>2.4.7</spring-data-commons.version>
         <spring-boot-maven-plugin.version>3.0.1</spring-boot-maven-plugin.version>
@@ -137,6 +138,11 @@
                 <version>${mockk.version}</version>
             </dependency>
             <!-- Internal Dependencies -->
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-service-spring-web-flux</artifactId>
+                <version>${sea-shell-service-spring-web-flux.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.jesperancinha.shell</groupId>
                 <artifactId>sea-shell-client</artifactId>

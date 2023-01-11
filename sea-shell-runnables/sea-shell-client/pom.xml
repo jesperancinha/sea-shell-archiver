@@ -19,10 +19,6 @@
             <groupId>org.jesperancinha.shell</groupId>
             <artifactId>sea-shell-model</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.jesperancinha.shell</groupId>
-            <artifactId>sea-shell-data</artifactId>
-        </dependency>
 
         <!-- External Dependencies -->
         <dependency>
