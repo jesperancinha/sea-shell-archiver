@@ -1,5 +1,7 @@
 build:
 	mvn clean install
+build-report:
+	mvn clean install -Preports jacoco:prepare-agent package jacoco:report
 test:
 	mvn test
 local:
@@ -11,3 +13,4 @@ docker:
 	docker-compose up
 no-test:
 	mvn clean install -DskipTests
+local-pipeline: build build-report

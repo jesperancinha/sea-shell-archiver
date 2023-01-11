@@ -106,16 +106,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jesperancinha.shell</groupId>
-            <artifactId>sea-shell-soap-service</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.xml.ws</groupId>
-            <artifactId>jakarta.xml.ws-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>io.mockk</groupId>
             <artifactId>mockk-jvm</artifactId>
             <scope>test</scope>

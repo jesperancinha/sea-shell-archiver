@@ -1,4 +1,4 @@
-package com.example.producingwebservice;
+package org.jesperancinha.producingwebservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
