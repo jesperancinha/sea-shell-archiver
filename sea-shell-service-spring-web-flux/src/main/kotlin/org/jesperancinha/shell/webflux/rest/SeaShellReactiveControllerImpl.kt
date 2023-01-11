@@ -15,14 +15,13 @@ import java.util.concurrent.atomic.AtomicInteger
 @RestController
 @RequestMapping("/seashells/reactive")
 class SeaShellReactiveControllerImpl(private val seaShellReactiveService: SeaShellReactiveServiceImpl) {
-    @get:GetMapping
-    val allSeaShells: ParallelFlux<SeaShellDto?>?
-        get() = seaShellReactiveService.allSeaShells
+    @GetMapping
+    fun allSeaShells(): ParallelFlux<SeaShellDto> = seaShellReactiveService.allSeaShells
 
     @GetMapping("/{id}")
     fun getShell(
         @PathVariable id: Long?
-    ): Mono<SeaShellDto?>? {
+    ): Mono<SeaShellDto> {
         return seaShellReactiveService.getShell(id)
     }
 
@@ -30,7 +29,7 @@ class SeaShellReactiveControllerImpl(private val seaShellReactiveService: SeaShe
     fun getRootShell(
         @PathVariable idPerson: Long?,
         @PathVariable idCostume: Long?
-    ): Mono<Pair<SeaShellPersonDto?, SeaShellCostumeDto?>?>? {
+    ): Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> {
         return seaShellReactiveService.getRootShell(idPerson, idCostume)
     }
 
@@ -38,7 +37,7 @@ class SeaShellReactiveControllerImpl(private val seaShellReactiveService: SeaShe
     fun getRootCostume(
         @PathVariable idTop: Long?,
         @PathVariable idLower: Long?
-    ): Mono<Pair<SeaShellTopDto?, SeaShellLowerDto?>?>? {
+    ): Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> {
         return seaShellReactiveService.getRootCostume(idTop, idLower)
     }
 
@@ -68,9 +67,8 @@ class SeaShellReactiveControllerImpl(private val seaShellReactiveService: SeaShe
         val seaShellDtoMono = Mono.fromCallable {
             val seaShellTopDto = SeaShellTopDto()
             Thread.sleep(sleepTop.toLong())
-            seaShellTopDto.size = atomicInteger.get().toString()
-            atomicInteger.addAndGet(10)
-            seaShellTopDto
+            seaShellTopDto.copy(size = atomicInteger.get().toString())
+                .also { atomicInteger.addAndGet(10) }
         }
         val SeaShellLowerDto = Mono.fromCallable {
             val seaShellDto = SeaShellLowerDto()

@@ -60,23 +60,11 @@ class SeaShellControllerImpl(private val seaShellService: SeaShellServiceImpl) {
         return seaShellService.getSeaShellNaifBlock(id)
     }
 
-    @get:GetMapping("/reactiveblock")
-    val allShellsReactiveBlock: ParallelFlux<SeaShellDto?>?
-        /**
-         * Reactive Block solution
-         *
-         * @return
-         */
-        get() = seaShellService.allSeaShellsReactiveBlock
+    @GetMapping("/reactiveblock")
+    fun allShellsReactiveBlock(): ParallelFlux<SeaShellDto> = seaShellService.allSeaShellsReactiveBlock
 
-    @get:GetMapping("/reactiveWithDelay")
-    val allShellsReactiveWithDelay: Flux<SeaShellDto?>?
-        /**
-         * Reactive with delay
-         *
-         * @return
-         */
-        get() = seaShellService.allSeaShellsReactiveWithDelay
+    @GetMapping("/reactiveWithDelay")
+    fun allShellsReactiveWithDelay(): Flux<SeaShellDto?>? = seaShellService.allSeaShellsReactiveWithDelay
 
     @get:GetMapping("/reactiveWithForkJoins")
     val allShellsReactiveWithForkJoins: Flux<SeaShellDto?>?
