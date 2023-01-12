@@ -15,7 +15,7 @@ import java.io.IOException
 import java.time.Duration
 
 @SpringBootTest
-class SeaShellReactiveOneServiceImplTest @Autowired constructor(
+class SeaShellReactiveOneServiceBlockTest @Autowired constructor(
     @Autowired
     private val seaShellReactiveOneService: SeaShellReactiveOneServiceImpl
 ) {

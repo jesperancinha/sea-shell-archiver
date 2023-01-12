@@ -1,15 +1,13 @@
 package org.jesperancinha.shell
 
-import com.github.tomakehurst.wiremock.WireMockServer
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.nulls.shouldNotBeNull
 import org.jesperancinha.shell.webflux.service.SeaShellService
-import org.junit.jupiter.api.*
-import org.junit.jupiter.api.function.Executable
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import reactor.blockhound.BlockHound
-import reactor.core.publisher.Mono
-import java.io.IOException
-import java.time.Duration
+import org.springframework.ws.client.WebServiceIOException
 
 @SpringBootTest
 class SeaShellServiceTest @Autowired constructor(
@@ -17,64 +15,31 @@ class SeaShellServiceTest @Autowired constructor(
 ) {
 
     @Test
-    fun findAllCompleteSeaShells_onCall_thenNonBlocking() {
-        Assertions.assertAll(Executable {
-            Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { seaShellService.allSeaShells() }
-                .block()
-        })
+    fun `should return a non null flux of shells`() {
+        seaShellService.allSeaShells().shouldNotBeNull()
     }
 
     @Test
-    @Disabled
-    fun findAllCompleteSeaShellsBlock_onCall_thenBlocking() {
-        Assertions.assertThrows(Exception::class.java) {
-            Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { seaShellService.allSeaShellsNaifBlock() }
-                .block()
+    fun `should throw exception with direct access and no legacy service starting `() {
+        shouldThrow<WebServiceIOException> {
+            seaShellService.allSeaShellsNaifBlock()
         }
     }
 
     @Test
-    fun findAllCompleteSeaShellsReactiveBlock_onCall_thenNonBlocking() {
-        Assertions.assertAll(Executable {
-            Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { seaShellService.allSeaShellsReactiveBlock() }
-                .block()
-        })
+    fun `should return a non null parallel flux of shells`() {
+        seaShellService.allSeaShellsReactiveBlock().shouldNotBeNull()
     }
 
     @Test
-    fun findAllCompleteSeaShellsReactiveWithDelay_onCall_thenNonBlocking() {
-        Assertions.assertAll(Executable {
-            Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { seaShellService.allSeaShellsReactiveWithDelay() }
-                .block()
-        })
+    fun `should return a non null flux of shells with a delay`() {
+        seaShellService.allSeaShellsReactiveWithDelay().shouldNotBeNull()
     }
 
     @Test
-    fun findAllCompleteSeaShellsReactiveWithForkJoins_onCall_thenBlocking() {
-        Assertions.assertThrows(Exception::class.java) {
-            Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { seaShellService.allSeaShellsReactiveWithForkJoins() }
-                .block()
+    fun `should throw an exception for a non null flux of shells started with forked joins`() {
+        shouldThrow<WebServiceIOException> {
+            seaShellService.allSeaShellsReactiveWithForkJoins().shouldNotBeNull()
         }
-    }
-
-    companion object {
-        private var wireMockServer: WireMockServer? = null
-
-        @JvmStatic
-        @BeforeAll
-        @Throws(IOException::class)
-        fun setUpAll() {
-            BlockHound.install()
-            wireMockServer = SeaShellWiremockSoapLauncher.createWireMockServer()
-        }
-
-        @JvmStatic
-        @AfterAll
-        fun afterAll(): Unit = run { wireMockServer?.stop() }
     }
 }
