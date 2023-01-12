@@ -187,7 +187,7 @@ open class SeaShellOneAdapter(
 )
 
 @Service
-class SeaShellReactiveServiceImpl(
+class SeaShellReactiveService(
     shellRepository: ShellRepository,
     shellPersonRepository: ShellPersonRepository,
     shellCostumeRepository: ShellCostumeRepository,

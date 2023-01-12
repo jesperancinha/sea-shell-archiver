@@ -1,7 +1,7 @@
 package org.jesperancinha.shell
 
 import com.github.tomakehurst.wiremock.WireMockServer
-import org.jesperancinha.shell.webflux.service.SeaShellReactiveServiceImpl
+import org.jesperancinha.shell.webflux.service.SeaShellReactiveService
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
@@ -15,8 +15,8 @@ import java.io.IOException
 import java.time.Duration
 
 @SpringBootTest
-class SeaShellReactiveServiceImplTest @Autowired constructor(
-    private val seaShellReactiveService: SeaShellReactiveServiceImpl
+class SeaShellReactiveServiceTest @Autowired constructor(
+    private val seaShellReactiveService: SeaShellReactiveService
 ) {
 
     @Test

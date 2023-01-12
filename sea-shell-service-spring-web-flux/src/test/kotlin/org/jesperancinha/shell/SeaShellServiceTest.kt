@@ -1,7 +1,7 @@
 package org.jesperancinha.shell
 
 import com.github.tomakehurst.wiremock.WireMockServer
-import org.jesperancinha.shell.webflux.service.SeaShellServiceImpl
+import org.jesperancinha.shell.webflux.service.SeaShellService
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.function.Executable
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,8 +12,8 @@ import java.io.IOException
 import java.time.Duration
 
 @SpringBootTest
-class SeaShellServiceImplTest @Autowired constructor(
-    private val seaShellService: SeaShellServiceImpl
+class SeaShellServiceTest @Autowired constructor(
+    private val seaShellService: SeaShellService
 ) {
 
     @Test

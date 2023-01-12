@@ -1,7 +1,7 @@
 package org.jesperancinha.shell.webflux.rest
 
 import org.jesperancinha.shell.webflux.data.SeaShellDto
-import org.jesperancinha.shell.webflux.service.SeaShellServiceImpl
+import org.jesperancinha.shell.webflux.service.SeaShellService
 import org.springframework.data.util.Pair
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,7 +14,7 @@ import reactor.core.publisher.ParallelFlux
 
 @RestController
 @RequestMapping("/seashells")
-class SeaShellController(private val seaShellService: SeaShellServiceImpl) {
+class SeaShellController(private val seaShellService: SeaShellService) {
     @GetMapping(path = ["/{id}"])
     fun getShellById(@PathVariable id: Long): Mono<SeaShellDto?> {
         return seaShellService.getSeaShellById(id)

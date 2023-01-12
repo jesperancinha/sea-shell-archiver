@@ -26,9 +26,9 @@ import java.util.stream.Stream
 @Service
 @ConditionalOnBean(
     value = [ShellRepository::class, ShellCostumeRepository::class, ShellPersonRepository::class, ShellAccountRepository::class, ShellTopRepository::class, ShellLowerRepository::class],
-    name = ["shellRepositoryImpl", "shellCostumeRepositoryImpl", "shellPersonRepositoryImpl", "shellAccountRepositoryImpl", "shellTopRepositoryImpl", "shellLowerRepositoryImpl"]
+    name = ["shellRepository", "shellCostumeRepository", "shellPersonRepository", "shellAccountRepository", "shellTopRepository", "shellLowerRepository"]
 )
-class SeaShellServiceImpl(
+class SeaShellService(
     private val shellRepository: ShellRepository,
     costumeRepository: ShellCostumeRepository,
     personRepository: ShellPersonRepository,

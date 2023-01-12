@@ -1,7 +1,7 @@
 package org.jesperancinha.shell.webflux.rest
 
 import org.jesperancinha.shell.webflux.data.*
-import org.jesperancinha.shell.webflux.service.SeaShellReactiveServiceImpl
+import org.jesperancinha.shell.webflux.service.SeaShellReactiveService
 import org.springframework.data.util.Pair
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 @RestController
 @RequestMapping("/seashells/reactive")
-class SeaShellReactiveController(private val seaShellReactiveService: SeaShellReactiveServiceImpl) {
+class SeaShellReactiveController(private val seaShellReactiveService: SeaShellReactiveService) {
     @GetMapping
     fun allSeaShells(): ParallelFlux<SeaShellDto> = seaShellReactiveService.allSeaShells()
 
