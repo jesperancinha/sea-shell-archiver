@@ -1,12 +1,13 @@
-FROM adoptopenjdk/openjdk16:ubuntu-jre
+FROM openjdk:17-alpine
 
-COPY bin/sea-shell-rest-service.jar sea-shell-rest-service.jar
-COPY bin/sea-shell-service-immutable.jar sea-shell-service-immutable.jar
-COPY bin/sea-shell-soap-service.jar sea-shell-soap-service.jar
+WORKDIR /usr/local/bin
 
-COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY sea-shell-service-immutable/target/sea-shell-service-immutable.jar sea-shell-service-immutable.jar
+COPY sea-shell-service-spring-web-flux/target/sea-shell-service-spring-web-flux.jar sea-shell-service-spring-web-flux.jar
 
-EXPOSE 8090 8080 8081
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+EXPOSE 8080 8081
 
 ENTRYPOINT ["entrypoint.sh"]
 

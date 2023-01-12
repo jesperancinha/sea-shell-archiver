@@ -8,7 +8,7 @@ import reactor.core.scheduler.Schedulers
 
 @Repository
 class ShellLowerImmutableRepository(private val lowersClient: LowersClient) {
-    fun findLowerById(id: Long?): Mono<Lower?> {
+    fun findLowerById(id: Long): Mono<Lower> {
         return Mono.fromCallable { lowersClient.getLower(id) }
             .subscribeOn(Schedulers.single())
     }

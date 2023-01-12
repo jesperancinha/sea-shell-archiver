@@ -24,13 +24,17 @@ public class TopsClient extends WebServiceGatewaySupport {
     }
 
     public Top getTop(Long id) {
-
         final TopRequest request = new TopRequest();
         request.setTopId(id);
-
-        return (Top) (getWebServiceTemplate()
-                .marshalSendAndReceive(seaShellsWSDLTopsClientLocation, request,
-                        new SoapActionCallback(
-                                "http://org.jesperancinha.shells/SeaShellsWSDLShells/tops")));
+        try {
+            return (Top) (getWebServiceTemplate()
+                    .marshalSendAndReceive(seaShellsWSDLTopsClientLocation, request,
+                            new SoapActionCallback(
+                                    "http://org.jesperancinha.shells/SeaShellsWSDLShells/tops")));
+        } catch (Exception exception) {
+            logger.error("Costume %s retrieval failed!".formatted(id));
+            logger.error("ERROR", exception);
+            return new Top();
+        }
     }
 }

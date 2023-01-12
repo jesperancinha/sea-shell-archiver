@@ -24,10 +24,8 @@ public class PersonsClient extends WebServiceGatewaySupport {
     }
 
     public Person getPerson(Long personId) {
-
         PersonsRequest request = new PersonsRequest();
         request.setPersonId(personId);
-
         return (Person) (getWebServiceTemplate()
                 .marshalSendAndReceive(seaShellsWSDLPersonsClientLocation, request,
                         new SoapActionCallback(

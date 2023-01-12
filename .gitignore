@@ -14,3 +14,9 @@ dist
 
 # OS
 .DS_Store
+
+# Cypress
+node_modules
+
+# logs
+logs

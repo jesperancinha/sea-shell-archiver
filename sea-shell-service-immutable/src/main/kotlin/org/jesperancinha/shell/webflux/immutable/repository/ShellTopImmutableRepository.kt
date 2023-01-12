@@ -8,7 +8,7 @@ import reactor.core.scheduler.Schedulers
 
 @Repository
 class ShellTopImmutableRepository(private val topsClient: TopsClient) {
-    fun findTopById(id: Long?): Mono<Top?> {
+    fun findTopById(id: Long): Mono<Top> {
         return Mono.fromCallable { topsClient.getTop(id) }
             .subscribeOn(Schedulers.single())
     }

@@ -10,18 +10,20 @@ import reactor.core.publisher.ParallelFlux
 import reactor.core.scheduler.Schedulers
 
 @Repository
-class ShellCostumeImmutableRepository(private val costumesClient: CostumesClient) {
+class ShellCostumeImmutableRepository(
+    private val costumesClient: CostumesClient,
     @Value("\${sea.shell.parallelism:20}")
-    private val parallelism: Int? = null
-    fun findCostumeById(id: Long?): Mono<Costume?> {
+    private val parallelism: Int
+) {
+
+    fun findCostumeById(id: Long): Mono<Costume> {
         return Mono.fromCallable { costumesClient.getCostume(id) }.subscribeOn(Schedulers.boundedElastic())
     }
 
-    fun findCostumes(costumeIds: List<Long>?): ParallelFlux<Costume?> {
+    fun findCostumes(costumeIds: List<Long>): ParallelFlux<Costume> {
         return Flux.fromIterable(costumeIds)
-            .parallel(parallelism!!)
+            .parallel(parallelism)
             .runOn(Schedulers.parallel())
-            .map { costumeId: Long? -> Mono.fromCallable { costumesClient.getCostume(costumeId) } }
-            .flatMap { source: Mono<Costume>? -> ParallelFlux.from(source) }
+            .map { costumeId -> costumesClient.getCostume(costumeId) }
     }
 }

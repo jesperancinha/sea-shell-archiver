@@ -23,13 +23,18 @@ public class LowersClient extends WebServiceGatewaySupport {
     }
 
     public Lower getLower(Long id) {
-
         final LowersRequest request = new LowersRequest();
         request.setLowerId(id);
+        try {
+            return (Lower) (getWebServiceTemplate()
+                    .marshalSendAndReceive(seaShellsWSDLLowersClientLocation, request,
+                            new SoapActionCallback(
+                                    "http://org.jesperancinha.shells/SeaShellsWSDLShells/lowers")));
 
-        return (Lower) (getWebServiceTemplate()
-                .marshalSendAndReceive(seaShellsWSDLLowersClientLocation, request,
-                        new SoapActionCallback(
-                                "http://org.jesperancinha.shells/SeaShellsWSDLShells/lowers")));
+        } catch (Exception exception) {
+            logger.error("Costume %s retrieval failed!".formatted(id));
+            logger.error("ERROR", exception);
+            return new Lower();
+        }
     }
 }
