@@ -1,7 +1,5 @@
 package org.jesperancinha.shell.webflux.service
 
-import lombok.AllArgsConstructor
-import lombok.Builder
 import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto
 import org.jesperancinha.shell.webflux.data.SeaShellDto
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto
@@ -11,8 +9,6 @@ import java.util.concurrent.ForkJoinTask
 import java.util.concurrent.RecursiveTask
 import java.util.stream.Stream
 
-@AllArgsConstructor
-@Builder
 class SeaShellCostumeRecursiveTask(
     private val costumeRepository: ShellCostumeRepository,
     private val topRepository: ShellTopRepository,
@@ -34,8 +30,6 @@ class SeaShellCostumeRecursiveTask(
     }
 }
 
-@Builder
-@AllArgsConstructor
 class SeaShellCostumesRecursiveTask(
     private val costumeRepository: ShellCostumeRepository,
     private val topRepository: ShellTopRepository,
@@ -60,8 +54,6 @@ class SeaShellCostumesRecursiveTask(
     }
 }
 
-@Builder
-@AllArgsConstructor
 class SeaShellLowerRecursiveTask(
     private val lowerRepository: ShellLowerRepository,
     private val costumeDto: SeaShellCostumeDto
@@ -74,8 +66,6 @@ class SeaShellLowerRecursiveTask(
         )
 }
 
-@AllArgsConstructor
-@Builder
 class SeaShellPersonAccountRecursiveTask(
     private val accountRepository: ShellAccountRepository,
     private val seaShellPersonDto: SeaShellPersonDto
@@ -88,8 +78,6 @@ class SeaShellPersonAccountRecursiveTask(
     )
 }
 
-@AllArgsConstructor
-@Builder
 class SeaShellPersonsRecursiveTask(
     private val personRepository: ShellPersonRepository,
     private val accountRepository: ShellAccountRepository,
@@ -133,8 +121,6 @@ class SeaShellPersonsRecursiveTask(
     }
 }
 
-@Builder
-@AllArgsConstructor
 class SeaShellTopRecursiveTask(
     val topRepository: ShellTopRepository,
     val costumeDto: SeaShellCostumeDto

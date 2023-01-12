@@ -1,7 +1,6 @@
 package org.jesperancinha.shell
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.nulls.shouldNotBeNull
 import org.jesperancinha.shell.webflux.service.SeaShellService
 import org.junit.jupiter.api.Test
