@@ -75,6 +75,7 @@ This project is also the official support project of my article on medium:
 -   [2.0.1](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.1) - [3840b38fd0bd6d89b863a64544d0286f5d4111e3](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.1) - Java / JDK17
 -   [2.0.2](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.2) - [77969471de7e36234c26c1e435744f44e4be0690](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.2) - Major refactoring / Java / JDK 17
 -   [2.0.3](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.3) - [c04b5c679a7110a1ad898d2670b5e0a9cf7c9cba](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.3) - JDK17 / Kotlin 1.8 / Major services in Kotlin with WebFlux (Flux/Mono)
+-   [2.0.4](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.4) - [91a26aa25970f3e0bbc14716e406e5b0ae99926e](https://github.com/jesperancinha/sea-shell-archiver/tree/2.0.4) - Kotlin 1.8 / REST Fixes / Introducing E2E tests
 
 ## How to Guide
 
