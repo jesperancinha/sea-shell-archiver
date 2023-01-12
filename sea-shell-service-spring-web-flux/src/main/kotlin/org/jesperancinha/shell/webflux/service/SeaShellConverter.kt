@@ -8,48 +8,44 @@ import org.jesperancinha.shell.client.shells.Shell
 import org.jesperancinha.shell.client.tops.Top
 import org.jesperancinha.shell.webflux.data.*
 
-object SeaShellConverter {
-    fun toLowerDto(lower: Lower): SeaShellLowerDto = SeaShellLowerDto(
-        color = lower.color,
-        size = lower.size,
-        type = lower.type
-    )
+fun Lower.toLowerDto(): SeaShellLowerDto = SeaShellLowerDto(
+    color = color,
+    size = size,
+    type = type
+)
 
-    fun toTopDto(top: Top): SeaShellTopDto = SeaShellTopDto(
-        color = top.color,
-        size = top.size,
-        type = top.type
-    )
+fun Top.toTopDto(): SeaShellTopDto = SeaShellTopDto(
+    color = color,
+    size = size,
+    type = type
+)
 
-    fun toAccountDto(accountById: Account): SeaShellAccountDto = SeaShellAccountDto(
-        currency = accountById.currency,
-        value = accountById.value
-    )
+fun Account.toAccountDto() = SeaShellAccountDto(
+    currency = currency,
+    value = value
+)
 
-    fun toShellPersonDto(person: Person) = SeaShellPersonDto(
-        name = person.name,
-        accountDto = SeaShellAccountDto(),
-        activity = person.activity,
-        costumeId = person.costumeId,
-        accountId = person.accountId
-    )
+fun Person.toShellPersonDto() = SeaShellPersonDto(
+    name = name,
+    accountDto = SeaShellAccountDto(),
+    activity = activity,
+    costumeId = costumeId,
+    accountId = accountId
+)
 
-    fun toShellCostumeDto(costume: Costume) = SeaShellCostumeDto(
-        topDto = SeaShellTopDto(),
-        lowerDto = SeaShellLowerDto(),
-        topId = costume.topId,
-        lowerId = costume.lowerId
-    )
+fun Costume.toShellCostumeDto() = SeaShellCostumeDto(
+    topDto = SeaShellTopDto(),
+    lowerDto = SeaShellLowerDto(),
+    topId = topId,
+    lowerId = lowerId
+)
 
-    fun toShellDto(shell: Shell): SeaShellDto {
-        return SeaShellDto(
-            name = shell.name,
-            scientificName = shell.scientificName,
-            slogan = shell.slogan,
-            personIds = shell.persons.personId,
-            costumeIds = shell.costumes.costumeId,
-            costumes = mutableListOf(),
-            persons = mutableListOf()
-        )
-    }
-}
+fun Shell.toShellDto() = SeaShellDto(
+        name = name,
+        scientificName = scientificName,
+        slogan = slogan,
+        personIds = persons.personId,
+        costumeIds = costumes.costumeId,
+        costumes = mutableListOf(),
+        persons = mutableListOf()
+    )

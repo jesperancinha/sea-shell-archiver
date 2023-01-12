@@ -62,7 +62,7 @@ class SeaShellReactiveController(private val seaShellReactiveService: SeaShellRe
     private fun getPairMono(
         atomicInteger: AtomicInteger,
         sleepTop: Int,
-        sleeLower: Int
+        sleepLower: Int
     ): Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> {
         val seaShellDtoMono = Mono.fromCallable {
             val seaShellTopDto = SeaShellTopDto()
@@ -72,7 +72,7 @@ class SeaShellReactiveController(private val seaShellReactiveService: SeaShellRe
         }
         val seaShellLowerDtoMono = Mono.fromCallable {
             val seaShellDto = SeaShellLowerDto()
-            Thread.sleep(sleeLower.toLong())
+            Thread.sleep(sleepLower.toLong())
             seaShellDto.copy(size = atomicInteger.get().toString())
                 .also { atomicInteger.addAndGet(10) }
         }

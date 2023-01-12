@@ -49,20 +49,20 @@ class SeaShellService(
 
     fun getSeaShellById(id: Long): Mono<SeaShellDto> {
         return shellRepository.findSeaShellById(id)
-            .map { SeaShellConverter.toShellDto(it) }
+            .map { it.toShellDto() }
             .doOnNext(consumerPersons())
             .doOnNext(consumerCostumes())
     }
 
     fun allSeaShells(): ParallelFlux<SeaShellDto> = shellRepository
         .findAllSeaShells()
-        .map { SeaShellConverter.toShellDto(it) }
+        .map { it.toShellDto() }
         .doOnNext(consumerPersons())
         .doOnNext(consumerCostumes())
 
     fun allSeaShellsNaifBlock(): List<SeaShellDto> = shellRepository.findAllSeaShellsBlock()
         .parallelStream()
-        .map { SeaShellConverter.toShellDto(it) }
+        .map { it.toShellDto() }
         .peek { seaShellDto: SeaShellDto? ->
             setMainRootElements(
                 seaShellDto!!
@@ -71,10 +71,9 @@ class SeaShellService(
         .collect(Collectors.toList())
 
     fun getSeaShellNaifBlock(id: Long): SeaShellDto? {
-        val seaShellDto = SeaShellConverter.toShellDto(
-            shellRepository
-                .findSeaShellBlockById(id)
-        )
+        val seaShellDto = shellRepository
+            .findSeaShellBlockById(id)
+            .toShellDto()
         setMainRootElements(seaShellDto)
         return seaShellDto
     }
@@ -93,7 +92,7 @@ class SeaShellService(
         shellRepository.findAllSeaShellsBlock().parallelStream()
             .map { shell ->
                 val commonPool = ForkJoinPool(100)
-                val seaShellDto = SeaShellConverter.toShellDto(shell)
+                val seaShellDto = shell.toShellDto()
                 val personDtoStream = commonPool.invoke(getSeaShellPersonsForkJoinTask(commonPool, seaShellDto))
                 val costumeDtoStream = commonPool.invoke(getSeaShellCostumesForkJoinTask(commonPool, seaShellDto))
                 seaShellDto.addPersons(personDtoStream.map { forkJoinTask: ForkJoinTask<SeaShellPersonDto> -> forkJoinTask.join() }
@@ -141,7 +140,7 @@ open class SeaShellConsumerAdapter(
         return Consumer { seaShellDto: SeaShellDto ->
             personRepository
                 .findPersons(seaShellDto.personIds)
-                .map { person -> SeaShellConverter.toShellPersonDto(person) }
+                .map { person -> person.toShellPersonDto() }
                 .doOnNext { personDto: SeaShellPersonDto? ->
                     seaShellDto
                         .persons
@@ -152,7 +151,7 @@ open class SeaShellConsumerAdapter(
                         costumeRepository.findCostumeById(it)
                             .subscribe { costume ->
                                 val newSeaShellPersonDto = seaShellPersonDto.copy(
-                                    costumeDto = SeaShellConverter.toShellCostumeDto(costume)
+                                    costumeDto = costume.toShellCostumeDto()
                                 )
                                 val costumeDto = newSeaShellPersonDto.costumeDto
 
@@ -165,7 +164,7 @@ open class SeaShellConsumerAdapter(
                     seaShellPersonDto.accountId?.let {
                         accountRepository.findAccountById(it)
                             .subscribe { account ->
-                                seaShellPersonDto.copy(accountDto = SeaShellConverter.toAccountDto(account))
+                                seaShellPersonDto.copy(accountDto = account.toAccountDto())
                                     .also {
                                         logger.info("Complete account after calling account thread ->" + seaShellPersonDto.accountDto)
                                     }
@@ -179,7 +178,7 @@ open class SeaShellConsumerAdapter(
         return Consumer { seaShellDto: SeaShellDto ->
             costumeRepository
                 .findCostumes(seaShellDto.costumeIds)
-                .map { costume -> SeaShellConverter.toShellCostumeDto(costume) }
+                .map { costume -> costume.toShellCostumeDto() }
                 .doOnNext { seaShellCostumeDto: SeaShellCostumeDto? ->
                     seaShellDto
                         .costumes
@@ -196,7 +195,7 @@ open class SeaShellConsumerAdapter(
                     topRepository.findTopById(it)
                         .subscribe { top ->
                             seaShellCostumeDto.copy(
-                                topDto = SeaShellConverter.toTopDto(top)
+                                topDto = top.toTopDto()
                             )
                                 .also {
                                     logger.info("Complete costume after calling sub top thread ->$it")
@@ -208,7 +207,7 @@ open class SeaShellConsumerAdapter(
                     lowerRepository.findLowerById(it)
                         .subscribe { lower ->
                             seaShellCostumeDto.copy(
-                                lowerDto = SeaShellConverter.toLowerDto(lower)
+                                lowerDto = lower.toLowerDto()
                             )
                                 .also {
                                     logger.info("Complete costume after calling sub top thread ->$seaShellCostumeDto")
@@ -224,7 +223,7 @@ open class SeaShellConsumerAdapter(
                 .findCostumesBlock(seaShellDto.costumeIds)
                 .parallelStream()
                 .map { costume ->
-                    SeaShellConverter.toShellCostumeDto(costume)
+                    costume.toShellCostumeDto()
                         .setCostumeRootElements()
                 }
                 .collect(Collectors.toList()))
@@ -232,12 +231,13 @@ open class SeaShellConsumerAdapter(
             personRepository
                 .findPersonsBlock(seaShellDto.personIds)
                 .map { person ->
-                    SeaShellConverter.toShellPersonDto(person)
+                    person.toShellPersonDto()
                         .let {
                             it.copy(
                                 accountDto = it.accountId
                                     ?.let { accountId -> accountRepository.findAccountByIdBlock(accountId) }
-                                    ?.let { account -> SeaShellConverter.toAccountDto(account) })
+                                    ?.toAccountDto()
+                            )
                         }
                         .let { seaShellPersonDto ->
                             seaShellPersonDto
@@ -245,9 +245,8 @@ open class SeaShellConsumerAdapter(
                                     costumeDto =
                                     seaShellPersonDto.costumeId
                                         ?.let { costumeRepository.findCostumeByIdBlock(it) }
-                                        ?.let {
-                                            SeaShellConverter.toShellCostumeDto(it)
-                                        })
+                                        ?.toShellCostumeDto()
+                                )
                         }
                         .let { seaShellPersonDto ->
                             seaShellPersonDto.costumeDto.let {
@@ -265,8 +264,8 @@ open class SeaShellConsumerAdapter(
 
     private fun SeaShellCostumeDto.setCostumeRootElements() =
         this.copy(
-            topDto = this.topId?.let { topRepository.findTopByIdBlock(it) }?.let { SeaShellConverter.toTopDto(it) },
-            lowerDto = this.lowerId?.let { SeaShellConverter.toLowerDto(lowerRepository.findLowerByIdBlock(this.lowerId)) }
+            topDto = this.topId?.let { topRepository.findTopByIdBlock(it) }?.toTopDto(),
+            lowerDto = this.lowerId?.let { lowerRepository.findLowerByIdBlock(this.lowerId).toLowerDto() }
         )
 
     companion object {
