@@ -1,4 +1,4 @@
-name: S_ARCH E2E Tests
+name: S_ARCH e2e-sea-shell-archiver
 
 on:
   push:
