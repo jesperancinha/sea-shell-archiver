@@ -26,7 +26,7 @@ function checkServiceByNameAndMessage() {
     echo -e "\e[92m Succeeded starting $name Service after $counter tries!\e[39m"
 }
 
-checkServiceByNameAndMessage postgres 'database system is ready to accept connections'
+#checkServiceByNameAndMessage postgres 'database system is ready to accept connections'
 #checkServiceByNameAndMessage nginx 'test is successful'
 #checkServiceByNameAndMessage staco-app-batch 'Started StampsAndCoinsBatchLauncher'
 #checkServiceByNameAndMessage staco-app-service-reactive 'Started StaCoSearchReactApplicationKt'

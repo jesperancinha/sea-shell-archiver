@@ -155,7 +155,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-maven-plugin.version}</version>
                 <configuration>
-                    <mainClass>org.jesperancinha.shell.webflux.SeaShellApplication</mainClass>
+                    <mainClass>org.jesperancinha.shell.SeaShellApplicationKt</mainClass>
                 </configuration>
                 <executions>
                     <execution>

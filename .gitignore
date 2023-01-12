@@ -17,3 +17,6 @@ dist
 
 # Cypress
 node_modules
+
+# logs
+logs

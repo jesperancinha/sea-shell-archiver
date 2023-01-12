@@ -306,7 +306,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-maven-plugin.version}</version>
                 <configuration>
-                    <mainClass>org.jesperancinha.shell.webflux.immutable.SeaShellImmutableApplication</mainClass>
+                    <mainClass>org.jesperancinha.shell.webflux.immutable.SeaShellImmutableApplicationKt</mainClass>
                 </configuration>
                 <executions>
                     <execution>

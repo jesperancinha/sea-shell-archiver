@@ -14,7 +14,7 @@ local:
 	cp sea-shell-soap-wiremock/sea-shell-soap-service/target/sea-shell-soap-service-*-dependencies.jar bin/sea-shell-soap-service.jar
 	cp sea-shell-service-immutable/target/sea-shell-service-immutable-*.jar bin/sea-shell-service-immutable.jar
 docker:
-	docker-compose up
+	docker-compose -p ${GITHUB_RUN_ID} up --force-recreate
 no-test:
 	mvn clean install -DskipTests
 cypress-open:
@@ -36,8 +36,6 @@ docker-action:
 	docker-compose -p ${GITHUB_RUN_ID} rm -svf
 	docker-compose -p ${GITHUB_RUN_ID} -f docker-compose.yml up -d --build --remove-orphans
 docker-clean-build-start: docker-clean b docker
-dcup-light:
-	docker-compose -p ${GITHUB_RUN_ID} up -d postgres localstack
 dcd:
 	docker-compose -p ${GITHUB_RUN_ID} down
 dcup: dcd docker-clean docker s-arch-wait
