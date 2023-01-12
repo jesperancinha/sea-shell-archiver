@@ -17,7 +17,7 @@ class SeaShellCostumeRecursiveTask(
     private val lowerRepository: ShellLowerRepositoryImpl,
     private val seaShellPersonDto: SeaShellPersonDto,
     private val commonPool: ForkJoinPool
-) : SeaShelTopLowerAdapter<SeaShellPersonDto?>() {
+) : SeaShelTopLowerAdapter<SeaShellPersonDto>() {
 
     override fun compute(): SeaShellPersonDto = seaShellPersonDto.copy(
         costumeDto = SeaShellConverter.toShellCostumeDto(

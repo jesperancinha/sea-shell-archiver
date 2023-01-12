@@ -14,40 +14,43 @@ import java.util.stream.Stream
 
 @AllArgsConstructor
 @Builder
-class SeaShellPersonsRecursiveTask : RecursiveTask<Stream<ForkJoinTask<SeaShellPersonDto?>?>>() {
-    private val personRepository: ShellPersonRepositoryImpl? = null
-    private val accountRepository: ShellAccountRepositoryImpl? = null
-    private val costumeRepository: ShellCostumeRepositoryImpl? = null
-    private val topRepository: ShellTopRepositoryImpl? = null
-    private val lowerRepository: ShellLowerRepositoryImpl? = null
-    private val seaShellDto: SeaShellDto? = null
-    private val commonPool: ForkJoinPool? = null
-    override fun compute(): Stream<ForkJoinTask<SeaShellPersonDto?>?> {
-        val personsBlock = personRepository!!.findPersonsBlock(seaShellDto!!.personIds)
-        return personsBlock!!.parallelStream().map { obj: Person? -> SeaShellConverter.toShellPersonDto() }
-            .flatMap { seaShellPersonDto: SeaShellPersonDto? ->
+class SeaShellPersonsRecursiveTask(
+    private val personRepository: ShellPersonRepositoryImpl,
+    private val accountRepository: ShellAccountRepositoryImpl,
+    private val costumeRepository: ShellCostumeRepositoryImpl,
+    private val topRepository: ShellTopRepositoryImpl,
+    private val lowerRepository: ShellLowerRepositoryImpl,
+    private val seaShellDto: SeaShellDto,
+    private val commonPool: ForkJoinPool
+) : RecursiveTask<Stream<ForkJoinTask<SeaShellPersonDto>>>() {
+
+    override fun compute(): Stream<ForkJoinTask<SeaShellPersonDto>>? = personRepository.findPersonsBlock(seaShellDto.personIds)
+            .map { person -> SeaShellConverter.toShellPersonDto(person) }
+            .stream().flatMap { seaShellPersonDto ->
                 getSeaShellPersonForkJoinTaskStream(
                     seaShellPersonDto,
                     commonPool
                 )
             }
-    }
 
     private fun getSeaShellPersonForkJoinTaskStream(
-        seaShellPersonDto: SeaShellPersonDto?, commonPool: ForkJoinPool?
-    ): Stream<ForkJoinTask<SeaShellPersonDto?>?> {
+        seaShellPersonDto: SeaShellPersonDto, commonPool: ForkJoinPool
+    ): Stream<ForkJoinTask<SeaShellPersonDto>> {
         return Stream.of(
             commonPool.submit(
-                SeaShellPersonAccountRecursiveTask.builder().accountRepository(accountRepository)
-                    .seaShellPersonDto(seaShellPersonDto).build()
+                SeaShellPersonAccountRecursiveTask(
+                    accountRepository=accountRepository,
+                    seaShellPersonDto= seaShellPersonDto
+                )
             ),
             commonPool.submit(
-                SeaShellCostumeRecursiveTask.builder().costumeRepository(costumeRepository)
-                    .topRepository(topRepository)
-                    .lowerRepository(lowerRepository)
-                    .seaShellPersonDto(seaShellPersonDto)
-                    .commonPool(commonPool)
-                    .build()
+                SeaShellCostumeRecursiveTask(
+                    costumeRepository =costumeRepository,
+                    topRepository = topRepository,
+                    lowerRepository = lowerRepository,
+                    seaShellPersonDto =seaShellPersonDto,
+                    commonPool = commonPool
+                )
             )
         )
     }

@@ -12,7 +12,7 @@ import java.util.concurrent.RecursiveTask
 class SeaShellPersonAccountRecursiveTask(
     private val accountRepository: ShellAccountRepositoryImpl,
     private val seaShellPersonDto: SeaShellPersonDto
-) : RecursiveTask<SeaShellPersonDto?>() {
+) : RecursiveTask<SeaShellPersonDto>() {
 
     override fun compute(): SeaShellPersonDto = seaShellPersonDto.copy(
         accountDto = SeaShellConverter.toAccountDto(
