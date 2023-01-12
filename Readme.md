@@ -115,10 +115,6 @@ To terminate your tests, you can just run
 docker compose down
 ```
 
-This project makes usage of image:
-
-[![dockeri.co](https://dockeri.co/image/adoptopenjdk/openjdk16)](https://hub.docker.com/r/adoptopenjdk/openjdk16)
-
 ## Java version
 
 ```bash
