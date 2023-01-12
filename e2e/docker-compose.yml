@@ -3,35 +3,35 @@ services:
   e2e-electron:
     image: "cypress/included:12.3.0"
     working_dir: /e2e
-    command: "--browser electron --env host=nginx"
+    command: "--browser electron --env host=sea-shell-archiver"
     volumes:
       - ./e2e:/e2e
     networks:
-      - staco-net
+      - sea-shells-network
 
   e2e-chrome:
     image: "cypress/included:12.3.0"
     working_dir: /e2e
-    command: "--browser chrome --env host=nginx"
+    command: "--browser chrome --env host=sea-shell-archiver"
     volumes:
       - ./e2e:/e2e
     networks:
-      - staco-net
+      - sea-shells-network
 
   e2e-firefox:
     image: "cypress/included:12.3.0"
     working_dir: /e2e
-    command: "--browser firefox --env host=nginx"
+    command: "--browser firefox --env host=sea-shell-archiver"
     volumes:
       - ./e2e:/e2e
     networks:
-      - staco-net
+      - sea-shells-network
 
   e2e-edge:
     image: "cypress/included:12.3.0"
     working_dir: /e2e
-    command: "--browser edge --env host=nginx"
+    command: "--browser edge --env host=sea-shell-archiver"
     volumes:
       - ./e2e:/e2e
     networks:
-      - staco-net
+      - sea-shells-network
