@@ -10,6 +10,8 @@ import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto
 import org.jesperancinha.shell.webflux.data.SeaShellDto
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto
 import org.jesperancinha.shell.webflux.repo.*
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.util.function.Consumer
 import java.util.stream.Collectors
 
@@ -25,25 +27,36 @@ open class SeaShellConsumerAdapter(
         return Consumer { seaShellDto: SeaShellDto ->
             personRepository
                 .findPersons(seaShellDto.personIds)
-                .map { obj: Person? -> SeaShellConverter.toShellPersonDto() }
+                .map { person -> SeaShellConverter.toShellPersonDto(person) }
                 .doOnNext { personDto: SeaShellPersonDto? ->
                     seaShellDto
                         .persons
                         .add(personDto)
                 }
-                .subscribe { seaShellPersonDto: SeaShellPersonDto? ->
-                    costumeRepository.findCostumeById(seaShellPersonDto.getCostumeId())
-                        .subscribe { costume: Costume? ->
-                            seaShellPersonDto.setCostumeDto(SeaShellConverter.toShellCostumeDto(costume))
-                            val costumeDto = seaShellPersonDto.getCostumeDto()
-                            consumerCostume().accept(costumeDto)
-                            SeaShellConsumerAdapter.log.info("Complete costume before calling sub top/lower threads ->$costumeDto")
-                        }
-                    accountRepository.findAccountById(seaShellPersonDto.getAccountId())
-                        .subscribe { account: Account? ->
-                            seaShellPersonDto.setAccountDto(SeaShellConverter.toAccountDto(account))
-                            SeaShellConsumerAdapter.log.info("Complete account after calling account thread ->" + seaShellPersonDto.getAccountDto())
-                        }
+                .subscribe { seaShellPersonDto ->
+                    seaShellPersonDto.costumeId?.let {
+                        costumeRepository.findCostumeById(it)
+                            .subscribe { costume ->
+                                val newSeaShellPersonDto = seaShellPersonDto.copy(
+                                    costumeDto = SeaShellConverter.toShellCostumeDto(costume)
+                                )
+                                val costumeDto = newSeaShellPersonDto.costumeDto
+
+                                if (costumeDto != null) {
+                                    consumerCostume().accept(costumeDto)
+                                    logger.info("Complete costume before calling sub top/lower threads ->$costumeDto")
+                                }
+                            }
+                    }
+                    seaShellPersonDto.accountId?.let {
+                        accountRepository.findAccountById(it)
+                            .subscribe { account ->
+                                seaShellPersonDto.copy(accountDto = SeaShellConverter.toAccountDto(account))
+                                    .also {
+                                        logger.info("Complete account after calling account thread ->" + seaShellPersonDto.accountDto)
+                                    }
+                            }
+                    }
                 }
         }
     }
@@ -52,7 +65,7 @@ open class SeaShellConsumerAdapter(
         return Consumer { seaShellDto: SeaShellDto ->
             costumeRepository
                 .findCostumes(seaShellDto.costumeIds)
-                .map { obj: Costume? -> SeaShellConverter.toShellCostumeDto() }
+                .map { costume -> SeaShellConverter.toShellCostumeDto(costume) }
                 .doOnNext { seaShellCostumeDto: SeaShellCostumeDto? ->
                     seaShellDto
                         .costumes
@@ -62,17 +75,25 @@ open class SeaShellConsumerAdapter(
         }
     }
 
-    private fun consumerCostume(): Consumer<SeaShellCostumeDto?> {
-        return Consumer { seaShellCostumeDto: SeaShellCostumeDto? ->
-            topRepository.findTopById(seaShellCostumeDto.getTopId())
-                .subscribe { top: Top? ->
-                    seaShellCostumeDto.setTopDto(SeaShellConverter.toTopDto(top))
-                    SeaShellConsumerAdapter.log.info("Complete costume after calling sub top thread ->$seaShellCostumeDto")
+    private fun consumerCostume(): Consumer<SeaShellCostumeDto> {
+        return Consumer { seaShellCostumeDto ->
+            topRepository.findTopById(seaShellCostumeDto.topId)
+                .subscribe { top ->
+                    seaShellCostumeDto.copy(
+                        topDto = SeaShellConverter.toTopDto(top)
+                    )
+                        .also {
+                            logger.info("Complete costume after calling sub top thread ->$it")
+                        }
                 }
-            lowerRepository.findLowerById(seaShellCostumeDto.getLowerId())
-                .subscribe { lower: Lower? ->
-                    seaShellCostumeDto.setLowerDto(SeaShellConverter.toLowerDto(lower))
-                    SeaShellConsumerAdapter.log.info("Complete costume after calling sub top thread ->$seaShellCostumeDto")
+            lowerRepository.findLowerById(seaShellCostumeDto.lowerId)
+                .subscribe { lower ->
+                    seaShellCostumeDto.copy(
+                        lowerDto = SeaShellConverter.toLowerDto(lower)
+                    )
+                        .also {
+                            logger.info("Complete costume after calling sub top thread ->$seaShellCostumeDto")
+                        }
                 }
         }
     }
@@ -82,46 +103,54 @@ open class SeaShellConsumerAdapter(
             costumeRepository
                 .findCostumesBlock(seaShellDto.costumeIds)
                 .parallelStream()
-                .map { obj: Costume? -> SeaShellConverter.toShellCostumeDto() }
-                .peek { seaShellCostumeDto: SeaShellCostumeDto? -> setCostumeRootElements(seaShellCostumeDto) }
+                .map { costume ->
+                    SeaShellConverter
+                        .toShellCostumeDto(costume)
+                        .setCostumeRootElements()
+                }
                 .collect(Collectors.toList()))
         seaShellDto.addPersons(
             personRepository
                 .findPersonsBlock(seaShellDto.personIds)
-                .parallelStream()
-                .map { obj: Person? -> SeaShellConverter.toShellPersonDto() }
-                .peek { seaShellPersonDto: SeaShellPersonDto? ->
-                    seaShellPersonDto
-                        .setAccountDto(
-                            SeaShellConverter.toAccountDto(
-                                accountRepository.findAccountByIdBlock(
-                                    seaShellPersonDto.getAccountId()
-                                )
-                            )
-                        )
-                }
-                .peek { seaShellPersonDto: SeaShellPersonDto? ->
-                    seaShellPersonDto
-                        .setCostumeDto(
-                            SeaShellConverter.toShellCostumeDto(
-                                costumeRepository.findCostumeByIdBlock(
-                                    seaShellPersonDto.getCostumeId()
-                                )
-                            )
-                        )
-                }
-                .peek { seaShellPersonDto: SeaShellPersonDto? -> setCostumeRootElements(seaShellPersonDto.getCostumeDto()) }
-                .collect(Collectors.toList()))
+                .map { person ->
+                    SeaShellConverter.toShellPersonDto(person)
+                        .let {
+                            it.copy(
+                                accountDto = it.accountId
+                                    ?.let { accountId -> accountRepository.findAccountByIdBlock(accountId) }
+                                    ?.let { account -> SeaShellConverter.toAccountDto(account) })
+                        }
+                        .let { seaShellPersonDto ->
+                            seaShellPersonDto
+                                .copy(
+                                    costumeDto =
+                                    seaShellPersonDto.costumeId
+                                        ?.let { costumeRepository.findCostumeByIdBlock(it) }
+                                        ?.let {
+                                            SeaShellConverter.toShellCostumeDto(it)
+                                        })
+                        }
+                        .let { seaShellPersonDto ->
+                            seaShellPersonDto.costumeDto.let {
+                                if (it != null) {
+                                    seaShellPersonDto.setCostumeRootElements(it)
+                                } else null
+                            }
+                        }
+                })
     }
 
-    private fun setCostumeRootElements(seaShellCostumeDto: SeaShellCostumeDto?) {
-        seaShellCostumeDto.setTopDto(SeaShellConverter.toTopDto(topRepository.findTopByIdBlock(seaShellCostumeDto.getTopId())))
-        seaShellCostumeDto.setLowerDto(
-            SeaShellConverter.toLowerDto(
-                lowerRepository.findLowerByIdBlock(
-                    seaShellCostumeDto.getLowerId()
-                )
-            )
+    private fun SeaShellPersonDto.setCostumeRootElements(seaShellCostumeDto: SeaShellCostumeDto) =
+        seaShellCostumeDto.setCostumeRootElements()
+            .let { costumeDto -> this.copy(costumeDto = costumeDto) }
+
+    private fun SeaShellCostumeDto.setCostumeRootElements() =
+        this.copy(
+            topDto = this.topId?.let { topRepository.findTopByIdBlock(it) }?.let { SeaShellConverter.toTopDto(it) },
+            lowerDto = this.lowerId?.let { SeaShellConverter.toLowerDto(lowerRepository.findLowerByIdBlock(this.lowerId)) }
         )
+
+    companion object {
+        val logger: Logger = LoggerFactory.getLogger(SeaShellConsumerAdapter::class.java)
     }
 }

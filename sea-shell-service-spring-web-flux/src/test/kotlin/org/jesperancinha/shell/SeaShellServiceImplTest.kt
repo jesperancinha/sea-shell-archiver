@@ -12,14 +12,15 @@ import java.io.IOException
 import java.time.Duration
 
 @SpringBootTest
-class SeaShellServiceImplTest {
-    @Autowired
-    private val seaShellService: SeaShellServiceImpl? = null
+class SeaShellServiceImplTest @Autowired constructor(
+    private val seaShellService: SeaShellServiceImpl
+) {
+
     @Test
     fun findAllCompleteSeaShells_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellService!!.allSeaShells }
+                .doOnNext { seaShellService.allSeaShells() }
                 .block()
         })
     }
@@ -29,7 +30,7 @@ class SeaShellServiceImplTest {
     fun findAllCompleteSeaShellsBlock_onCall_thenBlocking() {
         Assertions.assertThrows(Exception::class.java) {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellService!!.allSeaShellsNaifBlock }
+                .doOnNext { seaShellService.allSeaShellsNaifBlock() }
                 .block()
         }
     }
@@ -38,7 +39,7 @@ class SeaShellServiceImplTest {
     fun findAllCompleteSeaShellsReactiveBlock_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellService!!.allSeaShellsReactiveBlock }
+                .doOnNext { seaShellService.allSeaShellsReactiveBlock() }
                 .block()
         })
     }
@@ -47,7 +48,7 @@ class SeaShellServiceImplTest {
     fun findAllCompleteSeaShellsReactiveWithDelay_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellService!!.allSeaShellsReactiveWithDelay }
+                .doOnNext { seaShellService.allSeaShellsReactiveWithDelay() }
                 .block()
         })
     }
@@ -56,13 +57,15 @@ class SeaShellServiceImplTest {
     fun findAllCompleteSeaShellsReactiveWithForkJoins_onCall_thenBlocking() {
         Assertions.assertThrows(Exception::class.java) {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellService!!.allSeaShellsReactiveWithForkJoins }
+                .doOnNext { seaShellService.allSeaShellsReactiveWithForkJoins() }
                 .block()
         }
     }
 
     companion object {
         private var wireMockServer: WireMockServer? = null
+
+        @JvmStatic
         @BeforeAll
         @Throws(IOException::class)
         fun setUpAll() {
@@ -70,9 +73,8 @@ class SeaShellServiceImplTest {
             wireMockServer = SeaShellWiremockSoapLauncher.createWireMockServer()
         }
 
+        @JvmStatic
         @AfterAll
-        fun afterAll() {
-            wireMockServer!!.stop()
-        }
+        fun afterAll(): Unit = run { wireMockServer?.stop() }
     }
 }

@@ -21,6 +21,7 @@ import java.util.concurrent.ForkJoinTask
 import java.util.concurrent.RecursiveTask
 import java.util.stream.Collectors
 import java.util.stream.Stream
+import kotlin.math.cos
 
 @Slf4j
 @Service
@@ -34,7 +35,11 @@ class SeaShellServiceImpl(
     personRepository: ShellPersonRepositoryImpl,
     accountRepository: ShellAccountRepositoryImpl,
     topRepository: ShellTopRepositoryImpl,
-    lowerRepository: ShellLowerRepositoryImpl
+    lowerRepository: ShellLowerRepositoryImpl,
+    @Value("\${sea.shell.parallelism:20}")
+    val parallelism: Int,
+    @Value("\${sea.shell.delay.ms:100}")
+    val delay: Int
 ) : SeaShellConsumerAdapter(
     costumeRepository,
     personRepository,
@@ -42,92 +47,85 @@ class SeaShellServiceImpl(
     topRepository,
     lowerRepository
 ) {
-    @Value("\${sea.shell.parallelism:20}")
-    private val parallelism: Int? = null
 
-    @Value("\${sea.shell.delay.ms:100}")
-    private val delay: Int? = null
-    fun getSeaShellById(id: Long?): Mono<SeaShellDto?> {
+    fun getSeaShellById(id: Long): Mono<SeaShellDto> {
         return shellRepository.findSeaShellById(id)
-            .map { obj: Shell? -> SeaShellConverter.toShellDto() }
+            .map { SeaShellConverter.toShellDto(it) }
             .doOnNext(consumerPersons())
             .doOnNext(consumerCostumes())
     }
 
-    val allSeaShells: ParallelFlux<SeaShellDto?>
-        get() = shellRepository
-            .findAllSeaShells()
-            .map { obj: Shell? -> SeaShellConverter.toShellDto() }
-            .doOnNext(consumerPersons())
-            .doOnNext(consumerCostumes())
-    val allSeaShellsNaifBlock: List<SeaShellDto?>
-        get() = shellRepository.findAllSeaShellsBlock()
-            .parallelStream()
-            .map { obj: Shell? -> SeaShellConverter.toShellDto() }
-            .peek { seaShellDto: SeaShellDto? ->
-                setMainRootElements(
-                    seaShellDto!!
-                )
-            }
-            .collect(Collectors.toList())
+    fun allSeaShells(): ParallelFlux<SeaShellDto> = shellRepository
+        .findAllSeaShells()
+        .map { SeaShellConverter.toShellDto(it) }
+        .doOnNext(consumerPersons())
+        .doOnNext(consumerCostumes())
 
-    fun getSeaShellNaifBlock(id: Long?): SeaShellDto? {
+    fun allSeaShellsNaifBlock(): List<SeaShellDto> = shellRepository.findAllSeaShellsBlock()
+        .parallelStream()
+        .map { SeaShellConverter.toShellDto(it) }
+        .peek { seaShellDto: SeaShellDto? ->
+            setMainRootElements(
+                seaShellDto!!
+            )
+        }
+        .collect(Collectors.toList())
+
+    fun getSeaShellNaifBlock(id: Long): SeaShellDto? {
         val seaShellDto = SeaShellConverter.toShellDto(
             shellRepository
                 .findSeaShellBlockById(id)
         )
-        setMainRootElements(seaShellDto!!)
+        setMainRootElements(seaShellDto)
         return seaShellDto
     }
 
-    val allSeaShellsReactiveBlock: ParallelFlux<SeaShellDto>
-        get() = Mono.fromCallable { allSeaShellsNaifBlock }
-            .flux().flatMap { it: List<SeaShellDto?>? -> Flux.fromIterable(it) }
-            .parallel(parallelism!!)
-            .runOn(Schedulers.boundedElastic())
-    val allSeaShellsReactiveWithDelay: Flux<SeaShellDto?>
-        get() = allSeaShells
-            .sequential()
-            .delayElements(Duration.ofMillis(delay!!.toLong()))
-            .subscribeOn(Schedulers.boundedElastic())
-    val allSeaShellsReactiveWithForkJoins: Flux<SeaShellDto?>
-        get() = Flux.fromStream(
+    fun allSeaShellsReactiveBlock(): ParallelFlux<SeaShellDto> = Mono
+        .fromCallable { allSeaShellsNaifBlock() }
+        .flux().flatMap { Flux.fromIterable(it) }
+        .parallel(parallelism)
+        .runOn(Schedulers.boundedElastic())
+
+    fun allSeaShellsReactiveWithDelay(): Flux<SeaShellDto> = allSeaShells()
+        .sequential()
+        .delayElements(Duration.ofMillis(delay.toLong()))
+        .subscribeOn(Schedulers.boundedElastic())
+
+    fun allSeaShellsReactiveWithForkJoins(): Flux<SeaShellDto> = Flux
+        .fromStream(
             shellRepository.findAllSeaShellsBlock().parallelStream()
-                .map { shell: Shell? ->
+                .map { shell ->
                     val commonPool = ForkJoinPool(100)
                     val seaShellDto = SeaShellConverter.toShellDto(shell)
                     val personDtoStream = commonPool.invoke(getSeaShellPersonsForkJoinTask(commonPool, seaShellDto))
                     val costumeDtoStream = commonPool.invoke(getSeaShellCostumesForkJoinTask(commonPool, seaShellDto))
-                    seaShellDto!!.addPersons(personDtoStream.map { obj: ForkJoinTask<SeaShellPersonDto> -> obj.join() }
+                    seaShellDto.addPersons(personDtoStream.map { forkJoinTask: ForkJoinTask<SeaShellPersonDto> -> forkJoinTask.join() }
                         .collect(Collectors.toList()))
-                    seaShellDto.addCostumes(costumeDtoStream.map { obj: ForkJoinTask<SeaShellCostumeDto> -> obj.join() }
+                    seaShellDto.addCostumes(costumeDtoStream.map { forkJoinTask: ForkJoinTask<SeaShellCostumeDto> -> forkJoinTask.join() }
                         .collect(Collectors.toList()))
                     seaShellDto
                 })
 
     private fun getSeaShellCostumesForkJoinTask(
-        commonPool: ForkJoinPool, seaShellDto: SeaShellDto?
-    ): RecursiveTask<Stream<ForkJoinTask<SeaShellCostumeDto>>> {
-        return SeaShellCostumesRecursiveTask.builder()
-            .costumeRepository(costumeRepository)
-            .topRepository(topRepository)
-            .lowerRepository(lowerRepository)
-            .seaShellDto(seaShellDto)
-            .commonPool(commonPool)
-            .build()
-    }
+        commonPool: ForkJoinPool, seaShellDto: SeaShellDto
+    ): RecursiveTask<Stream<ForkJoinTask<SeaShellCostumeDto>>> = SeaShellCostumesRecursiveTask(
+        costumeRepository = costumeRepository,
+        topRepository = topRepository,
+        lowerRepository = lowerRepository,
+        seaShellDto = seaShellDto,
+        commonPool = commonPool
+    )
 
     private fun getSeaShellPersonsForkJoinTask(
         commonPool: ForkJoinPool,
-        seaShellDto: SeaShellDto?
-    ): SeaShellPersonsRecursiveTask {
-        return SeaShellPersonsRecursiveTask.builder()
-            .personRepository(personRepository)
-            .accountRepository(accountRepository)
-            .costumeRepository(costumeRepository)
-            .topRepository(topRepository)
-            .lowerRepository(lowerRepository)
-            .seaShellDto(seaShellDto)
-            .commonPool(commonPool).build()
-    }
+        seaShellDto: SeaShellDto
+    ): SeaShellPersonsRecursiveTask = SeaShellPersonsRecursiveTask(
+        personRepository = personRepository,
+        accountRepository = accountRepository,
+        costumeRepository = costumeRepository,
+        topRepository = topRepository,
+        lowerRepository = lowerRepository,
+        seaShellDto = seaShellDto,
+        commonPool = commonPool
+    )
 }

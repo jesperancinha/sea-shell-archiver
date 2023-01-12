@@ -16,36 +16,24 @@ import reactor.core.publisher.ParallelFlux
 @RequestMapping("/seashells")
 class SeaShellControllerImpl(private val seaShellService: SeaShellServiceImpl) {
     @GetMapping(path = ["/{id}"])
-    fun getShellById(@PathVariable id: Long?): Mono<SeaShellDto?> {
+    fun getShellById(@PathVariable id: Long): Mono<SeaShellDto?> {
         return seaShellService.getSeaShellById(id)
             .mapNotNull { seaShellDto: SeaShellDto? -> ResponseEntity.ok(seaShellDto).body }
     }
 
-    @get:GetMapping
-    val allShells: ParallelFlux<SeaShellDto?>?
-        get() = seaShellService.allSeaShells
+    @GetMapping
+    fun allShells(): ParallelFlux<SeaShellDto> = seaShellService.allSeaShells()
 
-    @get:GetMapping("/slogans")
-    val shellSlogans: ParallelFlux<Pair<String, String>>
-        /**
-         * Just the slogans
-         *
-         * @return
-         */
-        get() = seaShellService.allSeaShells.map { seaShellDto: SeaShellDto? ->
+    @GetMapping("/slogans")
+    fun shellSlogans(): ParallelFlux<Pair<String, String>> =
+        seaShellService.allSeaShells().map { seaShellDto: SeaShellDto? ->
             Pair.of(
                 seaShellDto!!.name, seaShellDto.slogan
             )
         }
 
-    @get:GetMapping("/block")
-    val allShellsBlock: List<SeaShellDto?>?
-        /**
-         * Blocking solution
-         *
-         * @return
-         */
-        get() = seaShellService.allSeaShellsNaifBlock
+    @GetMapping("/block")
+    fun allShellsBlock(): List<SeaShellDto> = seaShellService.allSeaShellsNaifBlock()
 
     /**
      * Blocking solution
@@ -55,23 +43,20 @@ class SeaShellControllerImpl(private val seaShellService: SeaShellServiceImpl) {
      */
     @GetMapping("/block/{id}")
     fun getShellBlockById(
-        @PathVariable id: Long?
+        @PathVariable id: Long
     ): SeaShellDto? {
         return seaShellService.getSeaShellNaifBlock(id)
     }
 
     @GetMapping("/reactiveblock")
-    fun allShellsReactiveBlock(): ParallelFlux<SeaShellDto> = seaShellService.allSeaShellsReactiveBlock
+    fun allShellsReactiveBlock(): ParallelFlux<SeaShellDto> = seaShellService.allSeaShellsReactiveBlock()
 
     @GetMapping("/reactiveWithDelay")
-    fun allShellsReactiveWithDelay(): Flux<SeaShellDto?>? = seaShellService.allSeaShellsReactiveWithDelay
+    fun allShellsReactiveWithDelay(): Flux<SeaShellDto> = seaShellService.allSeaShellsReactiveWithDelay()
 
-    @get:GetMapping("/reactiveWithForkJoins")
-    val allShellsReactiveWithForkJoins: Flux<SeaShellDto?>?
-        /**
-         * Reactive with delay
-         *
-         * @return
-         */
-        get() = seaShellService.allSeaShellsReactiveWithForkJoins
+    /**
+     * Delay solution
+     */
+    @GetMapping("/reactiveWithForkJoins")
+    fun allShellsReactiveWithForkJoins(): Flux<SeaShellDto> = seaShellService.allSeaShellsReactiveWithForkJoins()
 }

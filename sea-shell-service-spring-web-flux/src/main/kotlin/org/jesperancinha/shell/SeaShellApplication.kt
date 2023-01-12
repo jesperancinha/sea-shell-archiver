@@ -8,9 +8,9 @@ import org.springframework.web.reactive.config.EnableWebFlux
 
 @EnableWebFlux
 @SpringBootApplication(exclude = [WebMvcAutoConfiguration::class, ErrorMvcAutoConfiguration::class])
-object SeaShellApplication {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        SpringApplication.run(SeaShellApplication::class.java, *args)
-    }
+class SeaShellApplication {
+
+}
+fun main(args: Array<String>) {
+    SpringApplication.run(SeaShellApplication::class.java, *args)
 }

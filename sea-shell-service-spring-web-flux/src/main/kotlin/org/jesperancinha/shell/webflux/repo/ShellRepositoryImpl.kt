@@ -16,11 +16,11 @@ import java.util.stream.Collectors
 class ShellRepositoryImpl(private val shellsClient: ShellsClient) {
     @Value("\${sea.shell.parallelism:20}")
     private val parallelism: Int? = null
-    fun findSeaShellById(id: Long?): Mono<Shell?> {
+    fun findSeaShellById(id: Long): Mono<Shell> {
         return Mono.fromCallable { shellsClient.getShell(id) }.subscribeOn(Schedulers.boundedElastic())
     }
 
-    fun findAllSeaShells(): ParallelFlux<Shell?> {
+    fun findAllSeaShells(): ParallelFlux<Shell> {
         return findAllShellIds()
             .parallel(parallelism!!)
             .runOn(Schedulers.boundedElastic())
@@ -33,7 +33,7 @@ class ShellRepositoryImpl(private val shellsClient: ShellsClient) {
             .flux().flatMap { it: List<Long>? -> Flux.fromIterable(it) }
     }
 
-    fun findAllSeaShellsBlock(): List<Shell?> {
+    fun findAllSeaShellsBlock(): List<Shell> {
         return shellsClient.allShellIds.parallelStream().map { id: Long? -> shellsClient.getShell(id) }
             .collect(Collectors.toList())
     }

@@ -9,22 +9,20 @@ import java.util.concurrent.RecursiveTask
 
 abstract class SeaShelTopLowerAdapter<T> : RecursiveTask<T>() {
     fun getSeaShellCostumeLowerForkJoinTask(
-        lowerRepository: ShellLowerRepositoryImpl?, costumeDto: SeaShellCostumeDto?, commonPool: ForkJoinPool
-    ): ForkJoinTask<SeaShellCostumeDto> {
-        return commonPool.submit(
-            SeaShellLowerRecursiveTask.builder()
-                .lowerRepository(lowerRepository)
-                .costumeDto(costumeDto).build()
+        lowerRepository: ShellLowerRepositoryImpl, costumeDto: SeaShellCostumeDto, commonPool: ForkJoinPool
+    ): ForkJoinTask<SeaShellCostumeDto> = commonPool.submit(
+        SeaShellLowerRecursiveTask(
+            lowerRepository = lowerRepository,
+            costumeDto = costumeDto
         )
-    }
+    )
 
     fun getSeaShellCostumeTopForkJoinTask(
-        topRepository: ShellTopRepositoryImpl?, costumeDto: SeaShellCostumeDto?, commonPool: ForkJoinPool
-    ): ForkJoinTask<SeaShellCostumeDto> {
-        return commonPool.submit(
-            SeaShellTopRecursiveTask.builder()
-                .topRepository(topRepository)
-                .costumeDto(costumeDto).build()
+        topRepository: ShellTopRepositoryImpl, costumeDto: SeaShellCostumeDto, commonPool: ForkJoinPool
+    ): ForkJoinTask<SeaShellCostumeDto> = commonPool.submit(
+        SeaShellTopRecursiveTask(
+            topRepository = topRepository,
+            costumeDto = costumeDto
         )
-    }
+    )
 }

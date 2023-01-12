@@ -2,7 +2,6 @@ package org.jesperancinha.shell.webflux.service.fork
 
 import lombok.AllArgsConstructor
 import lombok.Builder
-import org.jesperancinha.shell.client.persons.Person
 import org.jesperancinha.shell.webflux.data.SeaShellDto
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto
 import org.jesperancinha.shell.webflux.repo.*
@@ -24,7 +23,8 @@ class SeaShellPersonsRecursiveTask(
     private val commonPool: ForkJoinPool
 ) : RecursiveTask<Stream<ForkJoinTask<SeaShellPersonDto>>>() {
 
-    override fun compute(): Stream<ForkJoinTask<SeaShellPersonDto>>? = personRepository.findPersonsBlock(seaShellDto.personIds)
+    override fun compute(): Stream<ForkJoinTask<SeaShellPersonDto>>? =
+        personRepository.findPersonsBlock(seaShellDto.personIds)
             .map { person -> SeaShellConverter.toShellPersonDto(person) }
             .stream().flatMap { seaShellPersonDto ->
                 getSeaShellPersonForkJoinTaskStream(
@@ -39,16 +39,16 @@ class SeaShellPersonsRecursiveTask(
         return Stream.of(
             commonPool.submit(
                 SeaShellPersonAccountRecursiveTask(
-                    accountRepository=accountRepository,
-                    seaShellPersonDto= seaShellPersonDto
+                    accountRepository = accountRepository,
+                    seaShellPersonDto = seaShellPersonDto
                 )
             ),
             commonPool.submit(
                 SeaShellCostumeRecursiveTask(
-                    costumeRepository =costumeRepository,
+                    costumeRepository = costumeRepository,
                     topRepository = topRepository,
                     lowerRepository = lowerRepository,
-                    seaShellPersonDto =seaShellPersonDto,
+                    seaShellPersonDto = seaShellPersonDto,
                     commonPool = commonPool
                 )
             )

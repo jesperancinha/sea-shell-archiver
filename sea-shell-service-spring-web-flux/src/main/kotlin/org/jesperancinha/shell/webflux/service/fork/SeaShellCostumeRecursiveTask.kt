@@ -20,16 +20,18 @@ class SeaShellCostumeRecursiveTask(
 ) : SeaShelTopLowerAdapter<SeaShellPersonDto>() {
 
     override fun compute(): SeaShellPersonDto = seaShellPersonDto.copy(
-        costumeDto = SeaShellConverter.toShellCostumeDto(
-            costumeRepository.findCostumeByIdBlock(
-                seaShellPersonDto.costumeId
-            )
-        )
-    ).also {
-        val costumeDto = it.costumeDto
-        val forkTopJoinTask = getSeaShellCostumeTopForkJoinTask(topRepository, costumeDto, commonPool)
-        val forkLowerJoinTask = getSeaShellCostumeLowerForkJoinTask(lowerRepository, costumeDto, commonPool)
-        forkTopJoinTask.join()
-        forkLowerJoinTask.join()
+        costumeDto = seaShellPersonDto.costumeId
+            ?.let { costumeRepository.findCostumeByIdBlock(it) }
+            ?.let {
+                SeaShellConverter.toShellCostumeDto(
+                    it
+                )
+            }
+    ).also { personDto ->
+        val costumeDto = personDto.costumeDto
+        val forkTopJoinTask = costumeDto?.let { getSeaShellCostumeTopForkJoinTask(topRepository, it, commonPool) }
+        val forkLowerJoinTask = costumeDto?.let { getSeaShellCostumeLowerForkJoinTask(lowerRepository, it, commonPool) }
+        forkTopJoinTask?.join()
+        forkLowerJoinTask?.join()
     }
 }

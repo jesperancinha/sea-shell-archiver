@@ -15,14 +15,16 @@ import java.io.IOException
 import java.time.Duration
 
 @SpringBootTest
-class SeaShellReactiveOneServiceImplTest {
+class SeaShellReactiveOneServiceImplTest @Autowired constructor(
     @Autowired
-    private val seaShellReactiveOneService: SeaShellReactiveOneServiceImpl? = null
+    private val seaShellReactiveOneService: SeaShellReactiveOneServiceImpl
+) {
+
     @Test
     fun findAllIds_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellReactiveOneService!!.allIds }
+                .doOnNext { seaShellReactiveOneService.allIds() }
                 .block()
         })
     }
@@ -31,7 +33,7 @@ class SeaShellReactiveOneServiceImplTest {
     fun findSeaShellById_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getSeaShellById(1L) }
+                .doOnNext { seaShellReactiveOneService.getSeaShellById(1L) }
                 .block()
         })
     }
@@ -40,7 +42,7 @@ class SeaShellReactiveOneServiceImplTest {
     fun findPersonById_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getPersonById(1L) }
+                .doOnNext { seaShellReactiveOneService.getPersonById(1L) }
                 .block()
         })
     }
@@ -49,7 +51,7 @@ class SeaShellReactiveOneServiceImplTest {
     fun findCostumeById_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getCostumeById(1L) }
+                .doOnNext { seaShellReactiveOneService.getCostumeById(1L) }
                 .block()
         })
     }
@@ -58,7 +60,7 @@ class SeaShellReactiveOneServiceImplTest {
     fun findAccountById_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getAccountById("ACCOUNTID") }
+                .doOnNext { seaShellReactiveOneService.getAccountById("ACCOUNTID") }
                 .block()
         })
     }
@@ -67,7 +69,7 @@ class SeaShellReactiveOneServiceImplTest {
     fun findTopById_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getTopById(1L) }
+                .doOnNext { seaShellReactiveOneService.getTopById(1L) }
                 .block()
         })
     }
@@ -76,13 +78,15 @@ class SeaShellReactiveOneServiceImplTest {
     fun findLowerById_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellReactiveOneService!!.getLowerById(1L) }
+                .doOnNext { seaShellReactiveOneService.getLowerById(1L) }
                 .block()
         })
     }
 
     companion object {
         private var wireMockServer: WireMockServer? = null
+
+        @JvmStatic
         @BeforeAll
         @Throws(IOException::class)
         fun setUpAll() {
@@ -90,9 +94,8 @@ class SeaShellReactiveOneServiceImplTest {
             wireMockServer = SeaShellWiremockSoapLauncher.createWireMockServer()
         }
 
+        @JvmStatic
         @AfterAll
-        fun afterAll() {
-            wireMockServer!!.stop()
-        }
+        fun afterAll(): Unit = run { wireMockServer?.stop() }
     }
 }

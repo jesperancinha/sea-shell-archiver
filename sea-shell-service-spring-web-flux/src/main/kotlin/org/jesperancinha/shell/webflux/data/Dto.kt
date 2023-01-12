@@ -43,7 +43,7 @@ data class SeaShellLowerDto(
 data class SeaShellPersonDto(
     val name: String? = null,
     val activity: String? = null,
-    val costumeDto: SeaShellCostumeDto? = null,
+    val costumeDto: SeaShellCostumeDto? =null,
     val accountDto: SeaShellAccountDto? = null,
 
     @Transient

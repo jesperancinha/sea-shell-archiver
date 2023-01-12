@@ -14,19 +14,19 @@ import java.util.stream.Collectors
 class ShellPersonRepositoryImpl(private val personsClient: PersonsClient) {
     @Value("\${sea.shell.parallelism:20}")
     private val parallelism: Int? = null
-    fun findPersonById(id: Long?): Mono<Person?> {
+    fun findPersonById(id: Long?): Mono<Person> {
         return Mono.fromCallable { personsClient.getPerson(id) }.subscribeOn(Schedulers.boundedElastic())
     }
 
-    fun findPersons(personIds: List<Long>?): ParallelFlux<Person?> {
+    fun findPersons(personIds: List<Long>): ParallelFlux<Person> {
         return Flux.fromIterable(personIds)
             .parallel(parallelism!!)
             .runOn(Schedulers.parallel())
             .map { personId: Long? -> Mono.fromCallable { personsClient.getPerson(personId) } }
-            .flatMap { source: Mono<Person>? -> ParallelFlux.from(source) }
+            .flatMap { source -> ParallelFlux.from(source) }
     }
 
-    fun findPersonsBlock(personIds: List<Long>): List<Person?> {
+    fun findPersonsBlock(personIds: List<Long>): List<Person> {
         return personIds.parallelStream()
             .map { personId: Long? -> personsClient.getPerson(personId) }
             .collect(Collectors.toList())

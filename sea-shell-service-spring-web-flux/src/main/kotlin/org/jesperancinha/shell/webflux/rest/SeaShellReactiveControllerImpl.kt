@@ -16,27 +16,27 @@ import java.util.concurrent.atomic.AtomicInteger
 @RequestMapping("/seashells/reactive")
 class SeaShellReactiveControllerImpl(private val seaShellReactiveService: SeaShellReactiveServiceImpl) {
     @GetMapping
-    fun allSeaShells(): ParallelFlux<SeaShellDto> = seaShellReactiveService.allSeaShells
+    fun allSeaShells(): ParallelFlux<SeaShellDto> = seaShellReactiveService.allSeaShells()
 
     @GetMapping("/{id}")
     fun getShell(
-        @PathVariable id: Long?
+        @PathVariable id: Long
     ): Mono<SeaShellDto> {
         return seaShellReactiveService.getShell(id)
     }
 
     @GetMapping("/rootShell/{idPerson}/{idCostume}")
     fun getRootShell(
-        @PathVariable idPerson: Long?,
-        @PathVariable idCostume: Long?
+        @PathVariable idPerson: Long,
+        @PathVariable idCostume: Long
     ): Mono<Pair<SeaShellPersonDto, SeaShellCostumeDto>> {
         return seaShellReactiveService.getRootShell(idPerson, idCostume)
     }
 
     @GetMapping("/rootCostume/{idTop}/{idLower}")
     fun getRootCostume(
-        @PathVariable idTop: Long?,
-        @PathVariable idLower: Long?
+        @PathVariable idTop: Long,
+        @PathVariable idLower: Long
     ): Mono<Pair<SeaShellTopDto, SeaShellLowerDto>> {
         return seaShellReactiveService.getRootCostume(idTop, idLower)
     }

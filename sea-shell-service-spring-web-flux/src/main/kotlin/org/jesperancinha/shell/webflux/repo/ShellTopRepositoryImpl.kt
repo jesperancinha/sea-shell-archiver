@@ -8,12 +8,12 @@ import reactor.core.scheduler.Schedulers
 
 @Repository
 class ShellTopRepositoryImpl(private val topsClient: TopsClient) {
-    fun findTopById(id: Long?): Mono<Top?> {
+    fun findTopById(id: Long?): Mono<Top> {
         return Mono.fromCallable { topsClient.getTop(id) }
             .subscribeOn(Schedulers.single())
     }
 
-    fun findTopByIdBlock(id: Long?): Top {
+    fun findTopByIdBlock(id: Long): Top {
         return topsClient.getTop(id)
     }
 }

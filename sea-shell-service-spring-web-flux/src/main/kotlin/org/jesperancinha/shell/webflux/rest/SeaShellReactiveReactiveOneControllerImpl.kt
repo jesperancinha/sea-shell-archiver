@@ -12,49 +12,48 @@ import reactor.core.publisher.Mono
 @RestController
 @RequestMapping("/seashells/one")
 class SeaShellReactiveReactiveOneControllerImpl(private val seaShellReactiveOneService: SeaShellReactiveOneServiceImpl) {
-    @get:GetMapping
-    val allShells: Flux<Long?>?
-        get() = seaShellReactiveOneService.allIds
+    @GetMapping
+    fun allShells(): Flux<Long> = seaShellReactiveOneService.allIds()
 
     @GetMapping("/{id}")
     fun getShellById(
-        @PathVariable id: Long?
-    ): Mono<SeaShellDto?>? {
+        @PathVariable id: Long
+    ): Mono<SeaShellDto> {
         return seaShellReactiveOneService.getSeaShellById(id)
     }
 
     @GetMapping("/person/{id}")
     fun getPersonById(
-        @PathVariable id: Long?
-    ): Mono<SeaShellPersonDto?>? {
+        @PathVariable id: Long
+    ): Mono<SeaShellPersonDto>{
         return seaShellReactiveOneService.getPersonById(id)
     }
 
     @GetMapping("/costume/{id}")
     fun getCostumeById(
-        @PathVariable id: Long?
-    ): Mono<SeaShellCostumeDto?>? {
+        @PathVariable id: Long
+    ): Mono<SeaShellCostumeDto> {
         return seaShellReactiveOneService.getCostumeById(id)
     }
 
     @GetMapping("/account/{id}")
     fun getAccountById(
-        @PathVariable id: String?
-    ): Mono<SeaShellAccountDto?>? {
+        @PathVariable id: String
+    ): Mono<SeaShellAccountDto> {
         return seaShellReactiveOneService.getAccountById(id)
     }
 
     @GetMapping("/top/{id}")
     fun getTopById(
-        @PathVariable id: Long?
-    ): Mono<SeaShellTopDto?>? {
+        @PathVariable id: Long
+    ): Mono<SeaShellTopDto> {
         return seaShellReactiveOneService.getTopById(id)
     }
 
     @GetMapping("/lower/{id}")
     fun getLowerById(
-        @PathVariable id: Long?
-    ): Mono<SeaShellLowerDto?>? {
+        @PathVariable id: Long
+    ): Mono<SeaShellLowerDto> {
         return seaShellReactiveOneService.getLowerById(id)
     }
 }

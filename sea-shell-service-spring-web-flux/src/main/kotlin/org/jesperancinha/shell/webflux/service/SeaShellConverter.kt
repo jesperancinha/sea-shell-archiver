@@ -9,57 +9,47 @@ import org.jesperancinha.shell.client.tops.Top
 import org.jesperancinha.shell.webflux.data.*
 
 object SeaShellConverter {
-    fun toLowerDto(lower: Lower?): SeaShellLowerDto {
-        return SeaShellLowerDto.builder()
-            .color(lower!!.color)
-            .size(lower.size)
-            .type(lower.type)
-            .build()
-    }
+    fun toLowerDto(lower: Lower): SeaShellLowerDto = SeaShellLowerDto(
+        color = lower.color,
+        size = lower.size,
+        type = lower.type
+    )
 
-    fun toTopDto(top: Top?): SeaShellTopDto {
-        return SeaShellTopDto.builder()
-            .color(top!!.color)
-            .size(top.size)
-            .type(top.type)
-            .build()
-    }
+    fun toTopDto(top: Top): SeaShellTopDto = SeaShellTopDto(
+        color = top.color,
+        size = top.size,
+        type = top.type
+    )
 
-    fun toAccountDto(accountById: Account?): SeaShellAccountDto {
-        return SeaShellAccountDto.builder()
-            .currency(accountById!!.currency)
-            .value(accountById.value)
-            .build()
-    }
+    fun toAccountDto(accountById: Account): SeaShellAccountDto = SeaShellAccountDto(
+        currency = accountById.currency,
+        value = accountById.value
+    )
 
-    fun toShellPersonDto(person: Person?): SeaShellPersonDto {
-        return SeaShellPersonDto.builder()
-            .name(person!!.name)
-            .accountDto(SeaShellAccountDto())
-            .activity(person.activity)
-            .costumeId(person.costumeId)
-            .accountId(person.accountId)
-            .build()
-    }
+    fun toShellPersonDto(person: Person) = SeaShellPersonDto(
+        name = person.name,
+        accountDto = SeaShellAccountDto(),
+        activity = person.activity,
+        costumeId = person.costumeId,
+        accountId = person.accountId
+    )
 
-    fun toShellCostumeDto(costume: Costume?): SeaShellCostumeDto {
-        return SeaShellCostumeDto.builder()
-            .topDto(SeaShellTopDto())
-            .lowerDto(SeaShellLowerDto())
-            .topId(costume!!.topId)
-            .lowerId(costume.lowerId)
-            .build()
-    }
+    fun toShellCostumeDto(costume: Costume) = SeaShellCostumeDto(
+        topDto = SeaShellTopDto(),
+        lowerDto = SeaShellLowerDto(),
+        topId = costume.topId,
+        lowerId = costume.lowerId
+    )
 
-    fun toShellDto(shell: Shell?): SeaShellDto {
-        return SeaShellDto.builder()
-            .name(shell!!.name)
-            .scientificName(shell.scientificName)
-            .slogan(shell.slogan)
-            .personIds(shell.persons.personId)
-            .costumeIds(shell.costumes.costumeId)
-            .costumes(ArrayList())
-            .persons(ArrayList())
-            .build()
+    fun toShellDto(shell: Shell): SeaShellDto {
+        return SeaShellDto(
+            name = shell.name,
+            scientificName = shell.scientificName,
+            slogan = shell.slogan,
+            personIds = shell.persons.personId,
+            costumeIds = shell.costumes.costumeId,
+            costumes = mutableListOf(),
+            persons = mutableListOf()
+        )
     }
 }

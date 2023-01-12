@@ -15,10 +15,10 @@ class SeaShellPersonAccountRecursiveTask(
 ) : RecursiveTask<SeaShellPersonDto>() {
 
     override fun compute(): SeaShellPersonDto = seaShellPersonDto.copy(
-        accountDto = SeaShellConverter.toAccountDto(
-            accountRepository.findAccountByIdBlock(
-                seaShellPersonDto.accountId
-            )
-        )
+        accountDto = seaShellPersonDto.accountId
+            ?.let { accountRepository.findAccountByIdBlock(it) }
+            ?.let {
+                SeaShellConverter.toAccountDto(it)
+            }
     )
 }

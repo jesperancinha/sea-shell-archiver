@@ -30,36 +30,35 @@ class SeaShellReactiveOneServiceImpl(
     shellTopRepository,
     shellLowerRepository
 ) {
-    val allIds: Flux<Long?>?
-        get() = shellRepository.findAllShellIds()
+    fun allIds(): Flux<Long> = shellRepository.findAllShellIds()
 
-    fun getSeaShellById(id: Long?): Mono<SeaShellDto?> {
+    fun getSeaShellById(id: Long): Mono<SeaShellDto> {
         return shellRepository.findSeaShellById(id)
-            .map { obj: Shell? -> SeaShellConverter.toShellDto() }
+            .map { SeaShellConverter.toShellDto(it) }
     }
 
-    fun getPersonById(id: Long?): Mono<SeaShellPersonDto?> {
+    fun getPersonById(id: Long): Mono<SeaShellPersonDto> {
         return shellPersonRepository.findPersonById(id)
-            .map { obj: Person? -> SeaShellConverter.toShellPersonDto() }
+            .map { SeaShellConverter.toShellPersonDto(it) }
     }
 
-    fun getCostumeById(id: Long?): Mono<SeaShellCostumeDto?> {
+    fun getCostumeById(id: Long): Mono<SeaShellCostumeDto> {
         return shellCostumeRepository.findCostumeById(id)
-            .map { obj: Costume? -> SeaShellConverter.toShellCostumeDto() }
+            .map { SeaShellConverter.toShellCostumeDto(it) }
     }
 
-    fun getAccountById(id: String?): Mono<SeaShellAccountDto?> {
+    fun getAccountById(id: String): Mono<SeaShellAccountDto> {
         return shellAccountRepository.findAccountById(id)
-            .map { obj: Account? -> SeaShellConverter.toAccountDto() }
+            .map { SeaShellConverter.toAccountDto(it) }
     }
 
-    fun getTopById(id: Long?): Mono<SeaShellTopDto?> {
+    fun getTopById(id: Long): Mono<SeaShellTopDto> {
         return shellTopRepository.findTopById(id)
-            .map { obj: Top? -> SeaShellConverter.toTopDto() }
+            .map { SeaShellConverter.toTopDto(it) }
     }
 
-    fun getLowerById(id: Long?): Mono<SeaShellLowerDto?> {
+    fun getLowerById(id: Long): Mono<SeaShellLowerDto> {
         return shellLowerRepository.findLowerById(id)
-            .map { obj: Lower? -> SeaShellConverter.toLowerDto() }
+            .map { SeaShellConverter.toLowerDto(it) }
     }
 }

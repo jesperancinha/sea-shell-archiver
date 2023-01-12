@@ -11,12 +11,12 @@ import reactor.core.scheduler.Schedulers
 class ShellAccountRepositoryImpl(private val accountsClient: AccountsClient) {
     @Value("\${sea.shell.parallelism:20}")
     private val parallelism: Int? = null
-    fun findAccountById(id: String?): Mono<Account?> {
+    fun findAccountById(id: String): Mono<Account> {
         return Mono.fromCallable { accountsClient.getAccount(id) }
             .subscribeOn(Schedulers.single())
     }
 
-    fun findAccountByIdBlock(id: String?): Account {
+    fun findAccountByIdBlock(id: String): Account {
         return accountsClient.getAccount(id)
     }
 }

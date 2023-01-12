@@ -11,28 +11,31 @@ import reactor.core.scheduler.Schedulers
 import java.util.stream.Collectors
 
 @Repository
-class ShellCostumeRepositoryImpl(private val costumesClient: CostumesClient) {
+class ShellCostumeRepositoryImpl(
+    private val costumesClient: CostumesClient,
     @Value("\${sea.shell.parallelism:20}")
-    private val parallelism: Int? = null
-    fun findCostumeById(id: Long?): Mono<Costume?> {
+    val parallelism: Int
+) {
+
+    fun findCostumeById(id: Long): Mono<Costume> {
         return Mono.fromCallable { costumesClient.getCostume(id) }.subscribeOn(Schedulers.boundedElastic())
     }
 
-    fun findCostumes(costumeIds: List<Long>?): ParallelFlux<Costume?> {
+    fun findCostumes(costumeIds: List<Long>): ParallelFlux<Costume> {
         return Flux.fromIterable(costumeIds)
-            .parallel(parallelism!!)
+            .parallel(parallelism)
             .runOn(Schedulers.parallel())
-            .map { costumeId: Long? -> Mono.fromCallable { costumesClient.getCostume(costumeId) } }
-            .flatMap { source: Mono<Costume>? -> ParallelFlux.from(source) }
+            .map { costumeId-> Mono.fromCallable { costumesClient.getCostume(costumeId) } }
+            .flatMap { source -> ParallelFlux.from(source) }
     }
 
-    fun findCostumesBlock(costumeIds: List<Long>): List<Costume?> {
+    fun findCostumesBlock(costumeIds: List<Long>): List<Costume> {
         return costumeIds.parallelStream()
-            .map { costumeId: Long? -> costumesClient.getCostume(costumeId) }
+            .map { costumeId-> costumesClient.getCostume(costumeId) }
             .collect(Collectors.toList())
     }
 
-    fun findCostumeByIdBlock(costumeId: Long?): Costume {
+    fun findCostumeByIdBlock(costumeId: Long): Costume {
         return costumesClient.getCostume(costumeId)
     }
 }
