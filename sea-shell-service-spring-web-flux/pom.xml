@@ -7,11 +7,6 @@
     <artifactId>sea-shell-service-spring-web-flux</artifactId>
     <name>S_Arch | Spring Reactive REST Service</name>
 
-    <properties>
-        <kotlin.version>1.8.0</kotlin.version>
-        <kotest-assertions-core-jvm.version>5.5.4</kotest-assertions-core-jvm.version>
-    </properties>
-
     <parent>
         <artifactId>sea-shell-archiver-root</artifactId>
         <groupId>org.jesperancinha.shell</groupId>
@@ -141,18 +136,16 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
-            <version>${kotlin.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test</artifactId>
-            <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.kotest</groupId>
             <artifactId>kotest-assertions-core-jvm</artifactId>
-            <version>${kotest-assertions-core-jvm.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
