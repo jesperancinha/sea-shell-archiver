@@ -8,6 +8,7 @@
 [![CircleCI](https://circleci.com/gh/jesperancinha/sea-shell-archiver.svg?style=svg)](https://circleci.com/gh/jesperancinha/sea-shell-archiver)
 [![Build status](https://ci.appveyor.com/api/projects/status/eka55ffpbjkxq55p?svg=true)](https://ci.appveyor.com/project/jesperancinha/sea-shell-archiver)
 [![sea-shell-archiver](https://github.com/jesperancinha/sea-shell-archiver/actions/workflows/sea-shell-archiver.yml/badge.svg)](https://github.com/jesperancinha/sea-shell-archiver/actions/workflows/sea-shell-archiver.yml)
+[![S_ARCH e2e-sea-shell-archiver](https://github.com/jesperancinha/sea-shell-archiver/actions/workflows/sea-shell-archiver-e2e.yml/badge.svg)](https://github.com/jesperancinha/sea-shell-archiver/actions/workflows/sea-shell-archiver-e2e.yml)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/89cc4b270cda4a448ce4fa895b30ec55)](https://www.codacy.com/manual/jofisaes/sea-shell-archiver?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jesperancinha/sea-shell-archiver&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/c71192de-5569-4741-aaa9-503217514483)](https://codebeat.co/projects/github-com-jesperancinha-sea-shell-archiver-master)
