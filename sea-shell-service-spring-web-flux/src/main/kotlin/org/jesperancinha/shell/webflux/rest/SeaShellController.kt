@@ -14,7 +14,7 @@ import reactor.core.publisher.ParallelFlux
 
 @RestController
 @RequestMapping("/seashells")
-class SeaShellControllerImpl(private val seaShellService: SeaShellServiceImpl) {
+class SeaShellController(private val seaShellService: SeaShellServiceImpl) {
     @GetMapping(path = ["/{id}"])
     fun getShellById(@PathVariable id: Long): Mono<SeaShellDto?> {
         return seaShellService.getSeaShellById(id)

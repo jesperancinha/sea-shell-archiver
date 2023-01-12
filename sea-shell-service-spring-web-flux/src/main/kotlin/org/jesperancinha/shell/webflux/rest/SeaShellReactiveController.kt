@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 @RestController
 @RequestMapping("/seashells/reactive")
-class SeaShellReactiveControllerImpl(private val seaShellReactiveService: SeaShellReactiveServiceImpl) {
+class SeaShellReactiveController(private val seaShellReactiveService: SeaShellReactiveServiceImpl) {
     @GetMapping
     fun allSeaShells(): ParallelFlux<SeaShellDto> = seaShellReactiveService.allSeaShells()
 

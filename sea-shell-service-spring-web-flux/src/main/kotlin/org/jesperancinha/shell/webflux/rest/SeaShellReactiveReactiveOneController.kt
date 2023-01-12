@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("/seashells/one")
-class SeaShellReactiveReactiveOneControllerImpl(private val seaShellReactiveOneService: SeaShellReactiveOneServiceImpl) {
+class SeaShellReactiveReactiveOneController(private val seaShellReactiveOneService: SeaShellReactiveOneServiceImpl) {
     @GetMapping
     fun allShells(): Flux<Long> = seaShellReactiveOneService.allIds()
 
