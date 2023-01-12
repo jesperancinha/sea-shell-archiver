@@ -1,11 +1,10 @@
 package org.jesperancinha.shell.webflux.immutable.service
 
-import io.mockk.MockKMatcherScope
+import io.kotest.matchers.nulls.shouldBeNull
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
-import org.assertj.core.api.AssertionsForClassTypes
 import org.jesperancinha.shell.webflux.immutable.repository.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -37,13 +36,9 @@ internal class SeaShellsReactiveImmutableServiceUnitTest {
 
     @Test
     fun testGetAllShells() {
-        every { mockKMatcherScope: MockKMatcherScope? -> shellImmutableRepository!!.findAllShellIds() }.returns(
-            Flux.from(
-                Mono.empty()
-            )
-        )
-        val seaShellDto = seaShellsReactiveImmutableService.allShells.blockFirst()!!
-        AssertionsForClassTypes.assertThat(seaShellDto).isNull()
+        every { shellImmutableRepository.findAllShellIds() } returns Flux.from(Mono.empty())
+        val seaShellDto = seaShellsReactiveImmutableService.allShells().blockFirst()
+        seaShellDto.shouldBeNull()
     }
 
     @Test

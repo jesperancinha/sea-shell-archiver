@@ -1,6 +1,5 @@
 package org.jesperancinha.shell.webflux.immutable.service
 
-import org.jesperancinha.shell.client.accounts.Account
 import org.jesperancinha.shell.client.costumes.Costume
 import org.jesperancinha.shell.client.lowers.Lower
 import org.jesperancinha.shell.client.persons.Person
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.core.scheduler.Schedulers
-import java.util.function.Function
 
 /**
  * Created by jofisaes on 04/08/2021
@@ -26,9 +24,8 @@ class SeaShellsReactiveImmutableService(
     private val shellPersonImmutableRepository: ShellPersonImmutableRepository,
     private val shellImmutableRepository: ShellImmutableRepository
 ) {
-    val allShells: Flux<SeaShellDto?>
-        get() = shellImmutableRepository.findAllShellIds()
-            .flatMap { id: Long? -> getSeaShellById(id) }
+    fun allShells(): Flux<SeaShellDto> = shellImmutableRepository.findAllShellIds()
+        .flatMap { id: Long? -> getSeaShellById(id) }
 
     fun getSeaShellById(id: Long?): Mono<SeaShellDto?> {
         return shellImmutableRepository.findSeaShellById(id)
@@ -42,15 +39,15 @@ class SeaShellsReactiveImmutableService(
                         .findCostumes(shell.costumes.costumeId)
                         .flatMap { costume: Costume? -> costumePublisher(costume).subscribeOn(Schedulers.parallel()) }
                         .sequential().collectList().subscribeOn(Schedulers.parallel())
-                ) { persons: List<SeaShellPersonDto>?, costumes: List<SeaShellCostumeDto>? ->
-                    SeaShellDto.builder()
-                        .name(shell.name)
-                        .scientificName(shell.scientificName)
-                        .personIds(shell.persons.personId)
-                        .costumeIds(shell.costumes.costumeId)
-                        .persons(persons)
-                        .costumes(costumes)
-                        .build()
+                ) { persons, costumes ->
+                    SeaShellDto(
+                        name = shell.name,
+                        scientificName = shell.scientificName,
+                        personIds = shell.persons.personId,
+                        costumeIds = shell.costumes.costumeId,
+                        persons = persons,
+                        costumes = costumes,
+                    )
                 }.subscribeOn(Schedulers.parallel())
             }
     }
@@ -62,36 +59,40 @@ class SeaShellsReactiveImmutableService(
 
     fun getCostumeById(id: Long?): Mono<SeaShellCostumeDto> {
         return shellCostumeImmutableRepository.findCostumeById(id)
-            .flatMap { costume: Costume? -> costumePublisher(costume).subscribeOn(Schedulers.parallel()) }
+            .flatMap { costume -> costumePublisher(costume).subscribeOn(Schedulers.parallel()) }
     }
 
-    fun getAccountById(id: String?): Mono<SeaShellAccountDto> {
+    fun getAccountById(id: String): Mono<SeaShellAccountDto> {
         return shellAccountImmutableRepository.findAccountById(id)
-            .map(Function { account: Account? -> SeaShellAccountDto.Companion.create(account) })
+            .mapNotNull { account ->
+                if (account != null) {
+                    SeaShellAccountDto.create(account)
+                } else null
+            }
     }
 
     fun getTopById(id: Long?): Mono<SeaShellTopDto> {
         return shellTopRepository.findTopById(id)
-            .map(Function { top: Top? -> SeaShellTopDto.Companion.create(top) })
+            .map { top: Top? -> SeaShellTopDto.create(top) }
     }
 
     fun getLowerById(id: Long?): Mono<SeaShellLowerDto> {
         return shellLowerRepository.findLowerById(id)
-            .map(Function { lower: Lower? -> SeaShellLowerDto.Companion.create(lower) })
+            .map { lower: Lower? -> SeaShellLowerDto.create(lower) }
     }
 
     private fun personPublisher(person: Person?): Mono<SeaShellPersonDto> {
         return Mono.zip(
             getAccountById(person!!.accountId).subscribeOn(Schedulers.parallel()),
             getCostumeById(person.costumeId).subscribeOn(Schedulers.parallel())
-        ) { account: SeaShellAccountDto?, costume: SeaShellCostumeDto? ->
-            SeaShellPersonDto.builder()
-                .name(person.name)
-                .accountId(person.accountId)
-                .costumeId(person.costumeId)
-                .accountDto(account)
-                .costumeDto(costume)
-                .build()
+        ) { account, costume ->
+            SeaShellPersonDto(
+                name = person.name,
+                accountId = person.accountId,
+                costumeId = person.costumeId,
+                accountDto = account,
+                costumeDto = costume
+            )
         }
     }
 
@@ -99,13 +100,13 @@ class SeaShellsReactiveImmutableService(
         return Mono.zip(
             getTopById(costume!!.topId).subscribeOn(Schedulers.parallel()),
             getLowerById(costume.lowerId).subscribeOn(Schedulers.parallel())
-        ) { top: SeaShellTopDto?, lower: SeaShellLowerDto? ->
-            SeaShellCostumeDto.builder()
-                .topId(costume.topId)
-                .lowerId(costume.lowerId)
-                .topDto(top)
-                .lowerDto(lower)
-                .build()
+        ) { top, lower ->
+            SeaShellCostumeDto(
+                topId = costume.topId,
+                lowerId = costume.lowerId,
+                topDto = top,
+                lowerDto = lower
+            )
         }
     }
 }

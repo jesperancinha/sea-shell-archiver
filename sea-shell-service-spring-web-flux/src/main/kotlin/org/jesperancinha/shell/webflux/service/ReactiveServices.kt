@@ -1,6 +1,5 @@
 package org.jesperancinha.shell.webflux.service
 
-import lombok.extern.slf4j.Slf4j
 import org.jesperancinha.shell.client.shells.Shell
 import org.jesperancinha.shell.webflux.data.*
 import org.jesperancinha.shell.webflux.repo.*
@@ -219,7 +218,6 @@ class SeaShellReactiveService(
     }
 }
 
-@Slf4j
 @Service
 class SeaShellReactiveOneServiceImpl(
     shellRepository: ShellRepository,

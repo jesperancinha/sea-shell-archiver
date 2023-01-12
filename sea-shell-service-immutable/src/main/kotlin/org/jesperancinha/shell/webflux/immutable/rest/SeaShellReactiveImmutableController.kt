@@ -12,49 +12,43 @@ import reactor.core.publisher.Mono
 @RestController
 @RequestMapping("/seashells/immutable")
 class SeaShellReactiveImmutableController(private val seaShellsReactiveImmutableService: SeaShellsReactiveImmutableService) {
-    @get:GetMapping
-    val allShells: Flux<SeaShellDto?>?
-        get() = seaShellsReactiveImmutableService.allShells
+    @GetMapping
+    fun allShells(): Flux<SeaShellDto> = seaShellsReactiveImmutableService.allShells()
 
     @GetMapping("/{id}")
     fun getShellById(
-        @PathVariable id: Long?
+        @PathVariable id: Long
     ): Mono<SeaShellDto?>? {
         return seaShellsReactiveImmutableService.getSeaShellById(id)
     }
 
     @GetMapping("/person/{id}")
     fun getPersonById(
-        @PathVariable id: Long?
-    ): Mono<SeaShellPersonDto?>? {
-        return seaShellsReactiveImmutableService.getPersonById(id)
-    }
+        @PathVariable id: Long
+    ): Mono<SeaShellPersonDto> = seaShellsReactiveImmutableService.getPersonById(id)
 
     @GetMapping("/costume/{id}")
     fun getCostumeById(
-        @PathVariable id: Long?
-    ): Mono<SeaShellCostumeDto?>? {
-        return seaShellsReactiveImmutableService.getCostumeById(id)
-    }
+        @PathVariable id: Long
+    ): Mono<SeaShellCostumeDto> = seaShellsReactiveImmutableService.getCostumeById(id)
 
     @GetMapping("/account/{id}")
     fun getAccountById(
-        @PathVariable id: String?
-    ): Mono<SeaShellAccountDto?>? {
-        return seaShellsReactiveImmutableService.getAccountById(id)
-    }
+        @PathVariable id: String
+    ): Mono<SeaShellAccountDto> = seaShellsReactiveImmutableService.getAccountById(id)
+
 
     @GetMapping("/top/{id}")
     fun getTopById(
-        @PathVariable id: Long?
-    ): Mono<SeaShellTopDto?>? {
+        @PathVariable id: Long
+    ): Mono<SeaShellTopDto> {
         return seaShellsReactiveImmutableService.getTopById(id)
     }
 
     @GetMapping("/lower/{id}")
     fun getLowerById(
-        @PathVariable id: Long?
-    ): Mono<SeaShellLowerDto?>? {
+        @PathVariable id: Long
+    ): Mono<SeaShellLowerDto> {
         return seaShellsReactiveImmutableService.getLowerById(id)
     }
 }

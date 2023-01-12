@@ -1,12 +1,9 @@
 package org.jesperancinha.shell.webflux.immutable.data
 
-import lombok.Builder
-
-@JvmRecord
-data class SeaShellDto @Builder constructor(
+data class SeaShellDto(
     val name: String,
     val scientificName: String,
-    val slogan: String,
+    val slogan: String? = null,
     val persons: List<SeaShellPersonDto>,
     val costumes: List<SeaShellCostumeDto>,
     val personIds: List<Long>,

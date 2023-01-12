@@ -15,14 +15,15 @@ import java.io.IOException
 import java.time.Duration
 
 @SpringBootTest
-class SeaShellsReactiveImmutableServiceTest {
-    @Autowired
-    private val seaShellService: SeaShellsReactiveImmutableService? = null
+class SeaShellsReactiveImmutableServiceTest @Autowired constructor(
+    private val seaShellService: SeaShellsReactiveImmutableService
+) {
+
     @Test
     fun findAllCompleteSeaShells_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellService!!.allShells }
+                .doOnNext { seaShellService.allShells() }
                 .block()
         })
     }
@@ -31,13 +32,15 @@ class SeaShellsReactiveImmutableServiceTest {
     fun findAllCompleteSeaShellById1s_onCall_thenNonBlocking() {
         Assertions.assertAll(Executable {
             Mono.delay(Duration.ofSeconds(1))
-                .doOnNext { it: Long? -> seaShellService!!.getSeaShellById(1L) }
+                .doOnNext { seaShellService.getSeaShellById(1L) }
                 .block()
         })
     }
 
     companion object {
         private var wireMockServer: WireMockServer? = null
+
+        @JvmStatic
         @BeforeAll
         @Throws(IOException::class)
         fun setUpAll() {
@@ -45,9 +48,8 @@ class SeaShellsReactiveImmutableServiceTest {
             wireMockServer = SeaShellWiremockSoapLauncher.createWireMockServer()
         }
 
+        @JvmStatic
         @AfterAll
-        fun afterAll() {
-            wireMockServer!!.stop()
-        }
+        fun afterAll(): Unit = run { wireMockServer?.stop() }
     }
 }

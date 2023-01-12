@@ -15,7 +15,7 @@ import reactor.core.scheduler.Schedulers
 class ShellImmutableRepository(private val shellsClient: ShellsClient) {
     @Value("\${sea.shell.parallelism:20}")
     private val parallelism: Int? = null
-    fun findSeaShellById(id: Long?): Mono<Shell?> {
+    fun findSeaShellById(id: Long?): Mono<Shell> {
         return Mono.fromCallable { shellsClient.getShell(id) }.subscribeOn(Schedulers.boundedElastic())
     }
 
@@ -27,8 +27,6 @@ class ShellImmutableRepository(private val shellsClient: ShellsClient) {
             .runOn(Schedulers.single())
     }
 
-    fun findAllShellIds(): Flux<Long?> {
-        return Mono.fromCallable { shellsClient.allShellIds }
-            .flux().flatMap { it: List<Long>? -> Flux.fromIterable(it) }
-    }
+    fun findAllShellIds(): Flux<Long> = Mono.fromCallable { shellsClient.allShellIds }
+        .flux().flatMap { Flux.fromIterable(it) }
 }

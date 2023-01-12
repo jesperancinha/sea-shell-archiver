@@ -1,6 +1,5 @@
 package org.jesperancinha.shell.webflux.data
 
-import lombok.Builder
 import java.math.BigDecimal
 
 
@@ -16,7 +15,7 @@ data class SeaShellCostumeDto(
     val lowerId: Long? = null
 )
 
-data class SeaShellDto @Builder constructor(
+data class SeaShellDto(
     val name: String,
     val scientificName: String,
     val slogan: String,
@@ -25,13 +24,9 @@ data class SeaShellDto @Builder constructor(
     val personIds: List<Long>,
     val costumeIds: List<Long>
 ) {
-    fun addPersons(persons: List<SeaShellPersonDto?>?) {
-        this.persons.addAll(persons!!)
-    }
+    fun addPersons(persons: List<SeaShellPersonDto>) = this.persons.addAll(persons)
 
-    fun addCostumes(costumes: List<SeaShellCostumeDto?>?) {
-        this.costumes.addAll(costumes!!)
-    }
+    fun addCostumes(costumes: List<SeaShellCostumeDto>) = this.costumes.addAll(costumes)
 }
 
 data class SeaShellLowerDto(
@@ -43,7 +38,7 @@ data class SeaShellLowerDto(
 data class SeaShellPersonDto(
     val name: String? = null,
     val activity: String? = null,
-    val costumeDto: SeaShellCostumeDto? =null,
+    val costumeDto: SeaShellCostumeDto? = null,
     val accountDto: SeaShellAccountDto? = null,
 
     @Transient

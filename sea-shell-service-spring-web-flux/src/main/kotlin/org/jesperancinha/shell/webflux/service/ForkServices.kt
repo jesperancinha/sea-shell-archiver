@@ -1,6 +1,5 @@
 package org.jesperancinha.shell.webflux.service
 
-import lombok.extern.slf4j.Slf4j
 import org.jesperancinha.shell.webflux.data.SeaShellCostumeDto
 import org.jesperancinha.shell.webflux.data.SeaShellDto
 import org.jesperancinha.shell.webflux.data.SeaShellPersonDto
@@ -22,7 +21,6 @@ import java.util.function.Consumer
 import java.util.stream.Collectors
 import java.util.stream.Stream
 
-@Slf4j
 @Service
 @ConditionalOnBean(
     value = [ShellRepository::class, ShellCostumeRepository::class, ShellPersonRepository::class, ShellAccountRepository::class, ShellTopRepository::class, ShellLowerRepository::class],
@@ -128,7 +126,6 @@ class SeaShellService(
         )
 }
 
-@Slf4j
 open class SeaShellConsumerAdapter(
     protected val costumeRepository: ShellCostumeRepository,
     protected val personRepository: ShellPersonRepository,
@@ -227,35 +224,36 @@ open class SeaShellConsumerAdapter(
                         .setCostumeRootElements()
                 }
                 .collect(Collectors.toList()))
-        seaShellDto.addPersons(
-            personRepository
-                .findPersonsBlock(seaShellDto.personIds)
-                .map { person ->
-                    person.toShellPersonDto()
-                        .let {
-                            it.copy(
-                                accountDto = it.accountId
-                                    ?.let { accountId -> accountRepository.findAccountByIdBlock(accountId) }
-                                    ?.toAccountDto()
+        personRepository
+            .findPersonsBlock(seaShellDto.personIds)
+            .map { person ->
+                person.toShellPersonDto()
+                    .let {
+                        it.copy(
+                            accountDto = it.accountId
+                                ?.let { accountId -> accountRepository.findAccountByIdBlock(accountId) }
+                                ?.toAccountDto()
+                        )
+                    }
+                    .let { seaShellPersonDto ->
+                        seaShellPersonDto
+                            .copy(
+                                costumeDto =
+                                seaShellPersonDto.costumeId
+                                    ?.let { costumeRepository.findCostumeByIdBlock(it) }
+                                    ?.toShellCostumeDto()
                             )
+                    }
+                    .let { seaShellPersonDto ->
+                        seaShellPersonDto.costumeDto.let {
+                            if (it != null) {
+                                seaShellPersonDto.setCostumeRootElements(it)
+                            } else null
                         }
-                        .let { seaShellPersonDto ->
-                            seaShellPersonDto
-                                .copy(
-                                    costumeDto =
-                                    seaShellPersonDto.costumeId
-                                        ?.let { costumeRepository.findCostumeByIdBlock(it) }
-                                        ?.toShellCostumeDto()
-                                )
-                        }
-                        .let { seaShellPersonDto ->
-                            seaShellPersonDto.costumeDto.let {
-                                if (it != null) {
-                                    seaShellPersonDto.setCostumeRootElements(it)
-                                } else null
-                            }
-                        }
-                })
+                    }
+            }
+            .filterNotNull()
+            .let { seaShellDto.addPersons(it) }
     }
 
     private fun SeaShellPersonDto.setCostumeRootElements(seaShellCostumeDto: SeaShellCostumeDto) =
