@@ -1,5 +1,7 @@
 FROM openjdk:17-alpine
 
+WORKDIR /usr/local/bin
+
 COPY sea-shell-service-immutable/target/sea-shell-service-immutable.jar sea-shell-service-immutable.jar
 COPY sea-shell-service-spring-web-flux/target/sea-shell-service-spring-web-flux.jar sea-shell-service-spring-web-flux.jar
 
