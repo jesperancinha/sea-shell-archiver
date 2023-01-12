@@ -1,5 +1,7 @@
 package org.jesperancinha.shell.client.costumes;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Component;
@@ -11,7 +13,6 @@ import org.springframework.ws.soap.client.core.SoapActionCallback;
  */
 @Component
 public class CostumesClient extends WebServiceGatewaySupport {
-
     @Value("${sea.shell.cli.soap.costumes}")
     private String seaShellsWSDLCostumesClientLocation;
 
@@ -24,13 +25,18 @@ public class CostumesClient extends WebServiceGatewaySupport {
     }
 
     public Costume getCostume(Long costumeId) {
-        final CostumesRequest request = new CostumesRequest();
-        request.setCostumeId(costumeId);
-
-        return (Costume) (getWebServiceTemplate()
-                .marshalSendAndReceive(seaShellsWSDLCostumesClientLocation, request,
-                        new SoapActionCallback(
-                                "http://org.jesperancinha.shells/SeaShellsWSDLShells/costumes")));
+        try {
+            final CostumesRequest request = new CostumesRequest();
+            request.setCostumeId(costumeId);
+            return (Costume) (getWebServiceTemplate()
+                    .marshalSendAndReceive(seaShellsWSDLCostumesClientLocation, request,
+                            new SoapActionCallback(
+                                    "http://org.jesperancinha.shells/SeaShellsWSDLShells/costumes")));
+        } catch (Exception exception){
+            logger.error("Costume %s retrieval failed!".formatted(costumeId));
+            logger.error("ERROR",exception);
+           return new Costume();
+        }
     }
 
 }

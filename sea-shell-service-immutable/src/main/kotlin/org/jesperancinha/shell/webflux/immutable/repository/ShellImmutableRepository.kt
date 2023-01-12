@@ -12,21 +12,23 @@ import reactor.core.scheduler.Schedulers
 
 @Repository
 @ConditionalOnBean(ShellsClient::class)
-class ShellImmutableRepository(private val shellsClient: ShellsClient) {
+class ShellImmutableRepository(
+    private val shellsClient: ShellsClient,
     @Value("\${sea.shell.parallelism:20}")
-    private val parallelism: Int? = null
+    private val parallelism: Int
+) {
+
     fun findSeaShellById(id: Long?): Mono<Shell> {
         return Mono.fromCallable { shellsClient.getShell(id) }.subscribeOn(Schedulers.boundedElastic())
     }
 
     fun findAllSeaShells(): ParallelFlux<Shell> {
         return findAllShellIds()
-            .parallel(parallelism!!)
+            .parallel(parallelism)
             .runOn(Schedulers.boundedElastic())
-            .map { id: Long? -> shellsClient.getShell(id) }
+            .map { id -> shellsClient.getShell(id) }
             .runOn(Schedulers.single())
     }
 
-    fun findAllShellIds(): Flux<Long> = Mono.fromCallable { shellsClient.allShellIds }
-        .flux().flatMap { Flux.fromIterable(it) }
+    fun findAllShellIds(): Flux<Long> = Flux.fromIterable(shellsClient.allShellIds)
 }

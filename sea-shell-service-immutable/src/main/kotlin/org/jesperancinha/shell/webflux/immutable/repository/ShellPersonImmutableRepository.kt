@@ -10,18 +10,19 @@ import reactor.core.publisher.ParallelFlux
 import reactor.core.scheduler.Schedulers
 
 @Repository
-class ShellPersonImmutableRepository(private val personsClient: PersonsClient) {
+class ShellPersonImmutableRepository(
+    private val personsClient: PersonsClient,
     @Value("\${sea.shell.parallelism:20}")
-    private val parallelism: Int? = null
-    fun findPersonById(id: Long?): Mono<Person?> {
+    private val parallelism: Int
+) {
+    fun findPersonById(id: Long): Mono<Person> {
         return Mono.fromCallable { personsClient.getPerson(id) }.subscribeOn(Schedulers.boundedElastic())
     }
 
-    fun findPersons(personIds: List<Long>?): ParallelFlux<Person?> {
+    fun findPersons(personIds: List<Long>): ParallelFlux<Person> {
         return Flux.fromIterable(personIds)
-            .parallel(parallelism!!)
+            .parallel(parallelism)
             .runOn(Schedulers.parallel())
-            .map { personId: Long? -> Mono.fromCallable { personsClient.getPerson(personId) } }
-            .flatMap { source: Mono<Person>? -> ParallelFlux.from(source) }
+            .map { personId -> personsClient.getPerson(personId) }
     }
 }

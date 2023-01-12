@@ -25,19 +25,19 @@ class SeaShellsReactiveImmutableService(
     private val shellImmutableRepository: ShellImmutableRepository
 ) {
     fun allShells(): Flux<SeaShellDto> = shellImmutableRepository.findAllShellIds()
-        .flatMap { id: Long? -> getSeaShellById(id) }
+        .flatMap { id: Long -> getSeaShellById(id) }
 
-    fun getSeaShellById(id: Long?): Mono<SeaShellDto?> {
+    fun getSeaShellById(id: Long): Mono<SeaShellDto?> {
         return shellImmutableRepository.findSeaShellById(id)
-            .flatMap { shell: Shell? ->
+            .flatMap { shell ->
                 Mono.zip(
                     shellPersonImmutableRepository
-                        .findPersons(shell!!.persons.personId)
-                        .flatMap { person: Person? -> personPublisher(person).subscribeOn(Schedulers.parallel()) }
+                        .findPersons(shell.persons.personId)
+                        .flatMap { person -> personPublisher(person).subscribeOn(Schedulers.parallel()) }
                         .sequential().collectList().subscribeOn(Schedulers.parallel()),
                     shellCostumeImmutableRepository
                         .findCostumes(shell.costumes.costumeId)
-                        .flatMap { costume: Costume? -> costumePublisher(costume).subscribeOn(Schedulers.parallel()) }
+                        .flatMap { costume -> costumePublisher(costume).subscribeOn(Schedulers.parallel()) }
                         .sequential().collectList().subscribeOn(Schedulers.parallel())
                 ) { persons, costumes ->
                     SeaShellDto(
@@ -52,61 +52,47 @@ class SeaShellsReactiveImmutableService(
             }
     }
 
-    fun getPersonById(id: Long?): Mono<SeaShellPersonDto> {
-        return shellPersonImmutableRepository.findPersonById(id)
-            .flatMap { person: Person? -> personPublisher(person).subscribeOn(Schedulers.parallel()) }
-    }
+    fun getPersonById(id: Long): Mono<SeaShellPersonDto> = shellPersonImmutableRepository.findPersonById(id)
+        .flatMap { person -> personPublisher(person).subscribeOn(Schedulers.parallel()) }
 
-    fun getCostumeById(id: Long?): Mono<SeaShellCostumeDto> {
-        return shellCostumeImmutableRepository.findCostumeById(id)
-            .flatMap { costume -> costumePublisher(costume).subscribeOn(Schedulers.parallel()) }
-    }
+    fun getCostumeById(id: Long): Mono<SeaShellCostumeDto> = shellCostumeImmutableRepository.findCostumeById(id)
+        .flatMap { costume -> costumePublisher(costume).subscribeOn(Schedulers.parallel()) }
 
-    fun getAccountById(id: String): Mono<SeaShellAccountDto> {
-        return shellAccountImmutableRepository.findAccountById(id)
-            .mapNotNull { account ->
-                if (account != null) {
-                    SeaShellAccountDto.create(account)
-                } else null
-            }
-    }
-
-    fun getTopById(id: Long?): Mono<SeaShellTopDto> {
-        return shellTopRepository.findTopById(id)
-            .map { top: Top? -> SeaShellTopDto.create(top) }
-    }
-
-    fun getLowerById(id: Long?): Mono<SeaShellLowerDto> {
-        return shellLowerRepository.findLowerById(id)
-            .map { lower: Lower? -> SeaShellLowerDto.create(lower) }
-    }
-
-    private fun personPublisher(person: Person?): Mono<SeaShellPersonDto> {
-        return Mono.zip(
-            getAccountById(person!!.accountId).subscribeOn(Schedulers.parallel()),
-            getCostumeById(person.costumeId).subscribeOn(Schedulers.parallel())
-        ) { account, costume ->
-            SeaShellPersonDto(
-                name = person.name,
-                accountId = person.accountId,
-                costumeId = person.costumeId,
-                accountDto = account,
-                costumeDto = costume
-            )
+    fun getAccountById(id: String): Mono<SeaShellAccountDto> = shellAccountImmutableRepository.findAccountById(id)
+        .mapNotNull { account ->
+            if (account != null) {
+                SeaShellAccountDto.create(account)
+            } else null
         }
+
+    fun getTopById(id: Long): Mono<SeaShellTopDto> = shellTopRepository.findTopById(id)
+        .map { top -> SeaShellTopDto.create(top) }
+
+    fun getLowerById(id: Long): Mono<SeaShellLowerDto> = shellLowerRepository.findLowerById(id)
+        .map { lower -> SeaShellLowerDto.create(lower) }
+
+    private fun personPublisher(person: Person): Mono<SeaShellPersonDto> = Mono.zip(
+        getAccountById(person.accountId).subscribeOn(Schedulers.parallel()),
+        getCostumeById(person.costumeId).subscribeOn(Schedulers.parallel())
+    ) { account, costume ->
+        SeaShellPersonDto(
+            name = person.name,
+            accountId = person.accountId,
+            costumeId = person.costumeId,
+            accountDto = account,
+            costumeDto = costume
+        )
     }
 
-    private fun costumePublisher(costume: Costume?): Mono<SeaShellCostumeDto> {
-        return Mono.zip(
-            getTopById(costume!!.topId).subscribeOn(Schedulers.parallel()),
-            getLowerById(costume.lowerId).subscribeOn(Schedulers.parallel())
-        ) { top, lower ->
-            SeaShellCostumeDto(
-                topId = costume.topId,
-                lowerId = costume.lowerId,
-                topDto = top,
-                lowerDto = lower
-            )
-        }
+    private fun costumePublisher(costume: Costume): Mono<SeaShellCostumeDto> = Mono.zip(
+        getTopById(costume.topId).subscribeOn(Schedulers.parallel()),
+        getLowerById(costume.lowerId).subscribeOn(Schedulers.parallel())
+    ) { top, lower ->
+        SeaShellCostumeDto(
+            topId = costume.topId,
+            lowerId = costume.lowerId,
+            topDto = top,
+            lowerDto = lower
+        )
     }
 }

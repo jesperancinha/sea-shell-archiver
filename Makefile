@@ -38,6 +38,8 @@ docker-action:
 docker-clean-build-start: docker-clean b docker
 dcd:
 	docker-compose -p ${GITHUB_RUN_ID} down
+dcup-light: dcd
+	docker-compose -p ${GITHUB_RUN_ID} up -d sea-shell-soap-legacy
 dcup: dcd docker-clean docker s-arch-wait
 dcup-full: docker-clean-build-start s-arch-wait
 dcup-full-action: docker-clean b docker-action s-arch-wait

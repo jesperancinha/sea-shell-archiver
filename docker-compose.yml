@@ -5,3 +5,8 @@ services:
     build:
       context: .
 
+  sea-shell-soap-legacy:
+    hostname: sea-shell-soap-legacy
+    build:
+      context: sea-shell-soap-wiremock/.
+
