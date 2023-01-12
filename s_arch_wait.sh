@@ -26,9 +26,6 @@ function checkServiceByNameAndMessage() {
     echo -e "\e[92m Succeeded starting $name Service after $counter tries!\e[39m"
 }
 
-#checkServiceByNameAndMessage postgres 'database system is ready to accept connections'
-#checkServiceByNameAndMessage nginx 'test is successful'
-#checkServiceByNameAndMessage staco-app-batch 'Started StampsAndCoinsBatchLauncher'
-#checkServiceByNameAndMessage staco-app-service-reactive 'Started StaCoSearchReactApplicationKt'
-#checkServiceByNameAndMessage staco-app-service-localstack 'Bucket(Name=stacos'
-#checkServiceByNameAndMessage localstack 'Initializing DynamoDB'
+checkServiceByNameAndMessage sea-shell-soap-legacy 'Wiremock service started'
+checkServiceByNameAndMessage sea-shell-archiver 'Started SeaShellApplicationKt'
+checkServiceByNameAndMessage sea-shell-archiver 'Started SeaShellImmutableApplicationKt'

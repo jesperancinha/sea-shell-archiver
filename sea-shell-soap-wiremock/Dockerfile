@@ -4,7 +4,7 @@ COPY sea-shell-soap-service/target/sea-shell-soap-service-jar-with-dependencies.
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-EXPOSE 8090 8080 8081
+EXPOSE 8090
 
 ENTRYPOINT ["entrypoint.sh"]
 
