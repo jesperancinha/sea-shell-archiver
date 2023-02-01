@@ -3,6 +3,9 @@ name: S_ARCH sea-shell-archiver
 on:
   push:
     branches: [ master ]
+  pull_request_target:
+    types:
+      - closed
 
 jobs:
   build:
