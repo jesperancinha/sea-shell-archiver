@@ -25,7 +25,7 @@
         <maven-surefire-plugin.version>3.0.0-M8</maven-surefire-plugin.version>
         <jaxb2-maven-plugin.version>3.1.0</jaxb2-maven-plugin.version>
         <jaxws-maven-plugin.version>4.0.0</jaxws-maven-plugin.version>
-        <kotlin.version>1.8.0</kotlin.version>
+        <kotlin.version>1.8.10</kotlin.version>
         <kotest-assertions-core-jvm.version>5.5.4</kotest-assertions-core-jvm.version>
 
         <!-- Internal -->
