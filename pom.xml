@@ -39,7 +39,7 @@
         <spring-data-commons.version>2.4.7</spring-data-commons.version>
         <spring-boot-maven-plugin.version>3.0.2</spring-boot-maven-plugin.version>
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.26</lombok.version>
         <netty-all.version>4.1.87.Final</netty-all.version>
         <blockhound.version>1.0.7.RELEASE</blockhound.version>
         <!-- Plugins -->
