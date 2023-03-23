@@ -37,7 +37,7 @@
         </sea-shell-service-spring-web-flux.version>
         <!-- External -->
         <spring-data-commons.version>2.4.7</spring-data-commons.version>
-        <spring-boot-maven-plugin.version>3.0.4</spring-boot-maven-plugin.version>
+        <spring-boot-maven-plugin.version>3.0.5</spring-boot-maven-plugin.version>
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <lombok.version>1.18.26</lombok.version>
         <netty-all.version>4.1.90.Final</netty-all.version>
