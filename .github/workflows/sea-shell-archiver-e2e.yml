@@ -21,7 +21,7 @@ jobs:
       - name: Start Docker
         uses: nick-fields/retry@v2
         with:
-          max_attempts: 2
+          max_attempts: 3
           retry_on: error
           timeout_seconds: 2400
           command: |
@@ -44,7 +44,7 @@ jobs:
       - name: Start Docker
         uses: nick-fields/retry@v2
         with:
-          max_attempts: 2
+          max_attempts: 3
           retry_on: error
           timeout_seconds: 2400
           command: |
@@ -67,7 +67,7 @@ jobs:
       - name: Start Docker
         uses: nick-fields/retry@v2
         with:
-          max_attempts: 2
+          max_attempts: 3
           retry_on: error
           timeout_seconds: 2400
           command: |
@@ -90,7 +90,7 @@ jobs:
       - name: Start Docker
         uses: nick-fields/retry@v2
         with:
-          max_attempts: 2
+          max_attempts: 3
           retry_on: error
           timeout_seconds: 2400
           command: |
