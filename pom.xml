@@ -25,7 +25,7 @@
         <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
         <jaxb2-maven-plugin.version>3.1.0</jaxb2-maven-plugin.version>
         <jaxws-maven-plugin.version>4.0.1</jaxws-maven-plugin.version>
-        <kotlin.version>1.8.20</kotlin.version>
+        <kotlin.version>1.8.21</kotlin.version>
         <kotest-assertions-core-jvm.version>5.6.1</kotest-assertions-core-jvm.version>
 
         <!-- Internal -->
@@ -40,7 +40,7 @@
         <spring-boot-maven-plugin.version>3.0.6</spring-boot-maven-plugin.version>
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <lombok.version>1.18.26</lombok.version>
-        <netty-all.version>4.1.91.Final</netty-all.version>
+        <netty-all.version>4.1.92.Final</netty-all.version>
         <blockhound.version>1.0.8.RELEASE</blockhound.version>
         <!-- Plugins -->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
