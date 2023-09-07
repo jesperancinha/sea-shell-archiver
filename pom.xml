@@ -45,7 +45,7 @@
         <maven-jaxb2-plugin.version>0.15.1</maven-jaxb2-plugin.version>
 
         <!-- Test -->
-        <wiremock.version>2.35.0</wiremock.version>
+        <wiremock.version>2.35.1</wiremock.version>
         <wiremock-junit5.version>1.3.1</wiremock-junit5.version>
         <jackson.version>2.15.2</jackson.version>
         <jackson.databind.version>2.15.2</jackson.databind.version>
