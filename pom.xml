@@ -26,7 +26,7 @@
         <jaxb2-maven-plugin.version>3.1.0</jaxb2-maven-plugin.version>
         <jaxws-maven-plugin.version>4.0.1</jaxws-maven-plugin.version>
         <kotlin.version>1.9.10</kotlin.version>
-        <kotest-assertions-core-jvm.version>5.6.2</kotest-assertions-core-jvm.version>
+        <kotest-assertions-core-jvm.version>5.7.2</kotest-assertions-core-jvm.version>
 
         <!-- Internal -->
         <sea-shell-client.version>${project.seashells.version}</sea-shell-client.version>
@@ -45,7 +45,7 @@
         <maven-jaxb2-plugin.version>0.15.1</maven-jaxb2-plugin.version>
 
         <!-- Test -->
-        <wiremock.version>2.35.0</wiremock.version>
+        <wiremock.version>2.35.1</wiremock.version>
         <wiremock-junit5.version>1.3.1</wiremock-junit5.version>
         <jackson.version>2.15.2</jackson.version>
         <jackson.databind.version>2.15.2</jackson.databind.version>
