@@ -24,7 +24,7 @@
         <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <jaxb2-maven-plugin.version>3.1.0</jaxb2-maven-plugin.version>
-        <jaxws-maven-plugin.version>4.0.1</jaxws-maven-plugin.version>
+        <jaxws-maven-plugin.version>4.0.2</jaxws-maven-plugin.version>
         <kotlin.version>1.9.10</kotlin.version>
         <kotest-assertions-core-jvm.version>5.7.2</kotest-assertions-core-jvm.version>
 
