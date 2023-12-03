@@ -18,7 +18,7 @@ docker:
 no-test:
 	mvn clean install -DskipTests
 cypress-open:
-	cd e2e && yarn && npm run cypress
+	cd e2e && yarn && npm run cypress:open:electron
 cypress-electron:
 	cd e2e && make cypress-electron
 cypress-chrome:
@@ -39,12 +39,22 @@ docker-stop-all:
 	docker ps -a --format '{{.ID}}' | xargs -I {}  docker stop {}
 docker-remove-all:
 	docker ps -a --format '{{.ID}}' | xargs -I {}  docker rm {}
-docker-clean-build-start: docker-clean b docker
+docker-clean-build-start: docker-clean docker-remove-all b docker
 dcd:
 	docker-compose -p ${GITHUB_RUN_ID} down
 dcup-light: dcd
 	docker-compose -p ${GITHUB_RUN_ID} up -d sea-shell-soap-legacy
 dcup: dcd docker-clean docker s-arch-wait
-dcup-full: docker-clean-build-start docker-remove-all s-arch-wait
+dcup-full: docker-clean-build-start s-arch-wait
 dcup-full-action: docker-clean b docker-action s-arch-wait
 local-pipeline: build build-report
+upgrade-local:
+	sudo apt update
+	sudo apt-get -y install python3-pip
+	sudo apt-get -y install npm
+	sudo npm install --global yarn
+	sudo npm install -g n
+	sudo npm install -g npm@10.2.3
+	sudo n 18
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+	nvm install --lts

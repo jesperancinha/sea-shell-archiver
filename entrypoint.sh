@@ -1,4 +1,4 @@
 #!/bin/sh
-java -jar sea-shell-service-spring-web-flux.jar &
-java -jar sea-shell-service-immutable.jar &
+java -jar -Dspring.profiles.active=docker sea-shell-service-spring-web-flux.jar &
+java -jar -Dspring.profiles.active=docker sea-shell-service-immutable.jar &
 tail -f /dev/null
