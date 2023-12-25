@@ -41,7 +41,7 @@
         <netty-all.version>4.1.104.Final</netty-all.version>
         <blockhound.version>1.0.8.RELEASE</blockhound.version>
         <!-- Plugins -->
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <maven-jaxb2-plugin.version>0.15.1</maven-jaxb2-plugin.version>
 
         <!-- Test -->
