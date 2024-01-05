@@ -17,7 +17,7 @@
         <java.version>17</java.version>
         <maven-compiler-plugin.source>${java.version}</maven-compiler-plugin.source>
         <maven-compiler-plugin.target>${java.version}</maven-compiler-plugin.target>
-        <spring-boot-starter-parent.version>3.1.6</spring-boot-starter-parent.version>
+        <spring-boot-starter-parent.version>3.2.1</spring-boot-starter-parent.version>
         <lombok.version>1.18.30</lombok.version>
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
         <guava.version>33.0.0-jre</guava.version>
