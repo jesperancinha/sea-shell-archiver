@@ -2,16 +2,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>sea-shell-archiver-root</artifactId>
-        <groupId>org.jesperancinha.shell</groupId>
-        <version>0.0.0-SNAPSHOT</version>
-    </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sea-shell-soap-wiremock</artifactId>
+    <groupId>org.jesperancinha.shell</groupId>
+    <version>0.0.0-SNAPSHOT</version>
+
     <name>S_Arch | Legacy Parent POM</name>
+    <properties>
+        <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+        <omni-coveragereporter-maven-plugin.version>0.4.3</omni-coveragereporter-maven-plugin.version>
+        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+        <java.version>17</java.version>
+        <maven-compiler-plugin.source>${java.version}</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>${java.version}</maven-compiler-plugin.target>
+        <spring-boot-starter-parent.version>3.1.6</spring-boot-starter-parent.version>
+        <lombok.version>1.18.30</lombok.version>
+        <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
+        <guava.version>33.0.0-jre</guava.version>
+        <sea-shell-service.version>0.0.0-SNAPSHOT</sea-shell-service.version>
+        <jaxws-maven-plugin.version>4.0.2</jaxws-maven-plugin.version>
+        <maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
+        <build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
+    </properties>
     <packaging>pom</packaging>
     <modules>
         <module>sea-shell-cli-accounts</module>
@@ -67,6 +81,57 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
 
+    </build>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot-starter-parent.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-accounts</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-costumes</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-lowers</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-tops</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-persons</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-shells</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jesperancinha.shell</groupId>
+                <artifactId>sea-shell-cli-common</artifactId>
+                <version>${sea-shell-service.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
