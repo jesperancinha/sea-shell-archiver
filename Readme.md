@@ -86,7 +86,7 @@ Revision dates: 2020/01/29,
 
 To start interacting with it, you need to start runnable modules:
 
-1.  [sea-shell-soap-service](./sea-shell-soap-wiremock/sea-shell-soap-service) - [SeaShellWiremockSoapLauncher](sea-shell-soap-wiremock/sea-shell-soap-service/src/main/java/org/jesperancinha/shell/SeaShellWiremockSoapLauncher.java) - Soap mock service (The blocking source) - Runs on port 8090
+1.  [sea-shell-soap-service](./sea-shell-soap-wiremock/sea-shell-soap-service) - [SeaShellWiremockSoapLauncher](sea-shell-soap-wiremock/sea-shell-soap-service/src/main/java/org/jesperancinha/shell/SeaShellWiremockSoapLauncher.java) - Soap mock service (The blocking source) - Runs on port 8090 - (DEPRECATED) - There will be a major mock update on a coming version sometime.
 2.  [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) - [SeaShellApplication](sea-shell-service-spring-web-flux/sea-shell-rest-service/src/main/java/org/jesperancinha/shell/webflux/SeaShellApplication.java) - WireMock Rest Service data provider (Uses the SOAP blocking, legacy, outdated SOAP service) - Runs on port 8080
 3.  [sea-shell-client](./sea-shell-client) - Three executables to be used in running against [sea-shell-rest-service](./sea-shell-service-spring-web-flux/sea-shell-rest-service) using futures and fork joins. Be sure to run the REST service and the WireMock SOAP service
 4.  [sea-shell-sea-shell-service-immutable](./sea-shell-service-immutable) - Standalone compact service running in an immutable fashion using [Java records](https://openjdk.java.net/jeps/359) - Runs on port 8081
