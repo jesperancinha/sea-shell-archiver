@@ -9,7 +9,7 @@
     </parent>
     <properties>
         <logback-core.version>1.4.14</logback-core.version>
-        <slf4j-api.version>2.0.10</slf4j-api.version>
+        <slf4j-api.version>2.0.11</slf4j-api.version>
     </properties>
     <modelVersion>4.0.0</modelVersion>
 
