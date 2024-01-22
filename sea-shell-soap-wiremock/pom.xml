@@ -5,27 +5,15 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <artifactId>sea-shell-archiver-root</artifactId>
+        <groupId>org.jesperancinha.shell</groupId>
+        <version>0.0.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>sea-shell-soap-wiremock</artifactId>
-    <groupId>org.jesperancinha.shell</groupId>
-    <version>0.0.0-SNAPSHOT</version>
 
     <name>S_Arch | Legacy Parent POM</name>
-    <properties>
-        <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
-        <omni-coveragereporter-maven-plugin.version>0.4.3</omni-coveragereporter-maven-plugin.version>
-        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
-        <java.version>17</java.version>
-        <maven-compiler-plugin.source>${java.version}</maven-compiler-plugin.source>
-        <maven-compiler-plugin.target>${java.version}</maven-compiler-plugin.target>
-        <spring-boot-starter-parent.version>3.1.6</spring-boot-starter-parent.version>
-        <lombok.version>1.18.30</lombok.version>
-        <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
-        <guava.version>33.0.0-jre</guava.version>
-        <sea-shell-service.version>0.0.0-SNAPSHOT</sea-shell-service.version>
-        <jaxws-maven-plugin.version>4.0.2</jaxws-maven-plugin.version>
-        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
-        <build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
-    </properties>
     <packaging>pom</packaging>
     <modules>
         <module>sea-shell-cli-accounts</module>
