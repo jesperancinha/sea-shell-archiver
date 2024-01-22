@@ -1,8 +1,6 @@
 package org.jesperancinha.shell;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.http.ContentTypeHeader;
-import org.apache.hc.core5.http.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +10,9 @@ import java.nio.charset.Charset;
 import java.util.Objects;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.http.ContentTypeHeader.KEY;
+import static wiremock.org.apache.hc.core5.http.ContentType.TEXT_XML;
+
 
 public class SeaShellWiremockSoapLauncher {
     private final static Logger log = LoggerFactory.getLogger(SeaShellWiremockSoapLauncher.class);
@@ -45,10 +46,10 @@ public class SeaShellWiremockSoapLauncher {
         for (int i = 1; i <= 16; i++) {
             stubRequestToShell("/mock/responses/shells/shell" + i + ".xml", i);
         }
-        stubFor(post(urlEqualTo("/seashells/shells"))
+        stubFor(post(urlPathEqualTo("/seashells/shells"))
                 .withRequestBody(matchingXPath("/Envelope/Body/allShellRequest"))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource("/mock/responses/shells/allShells.xml")))
-                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+                        .withHeader(KEY, TEXT_XML.getMimeType())));
 
     }
 
@@ -91,42 +92,42 @@ public class SeaShellWiremockSoapLauncher {
         stubFor(post(urlEqualTo("/seashells/shells"))
                 .withRequestBody(matchingXPath("/Envelope/Body/shellRequest/shellId/text()", equalTo(i.toString())))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
-                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+                        .withHeader(KEY, TEXT_XML.getMimeType())));
     }
 
     private static void stubRequestToPerson(String responseResource, Integer i) throws IOException {
         stubFor(post(urlEqualTo("/seashells/persons"))
                 .withRequestBody(matchingXPath("/Envelope/Body/personsRequest/personId/text()", equalTo(i.toString())))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
-                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+                        .withHeader(KEY, TEXT_XML.getMimeType())));
     }
 
     private static void stubRequestToCostume(String responseResource, Integer i) throws IOException {
         stubFor(post(urlEqualTo("/seashells/costumes"))
                 .withRequestBody(matchingXPath("/Envelope/Body/costumesRequest/costumeId/text()", equalTo(i.toString())))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
-                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+                        .withHeader(KEY, TEXT_XML.getMimeType())));
     }
 
     private static void stubRequestToTop(String responseResource, Integer i) throws IOException {
         stubFor(post(urlEqualTo("/seashells/tops"))
                 .withRequestBody(matchingXPath("/Envelope/Body/TopRequest/TopId/text()", equalTo(i.toString())))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
-                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+                        .withHeader(KEY, TEXT_XML.getMimeType())));
     }
 
     private static void stubRequestToLower(String responseResource, Integer i) throws IOException {
         stubFor(post(urlEqualTo("/seashells/lowers"))
                 .withRequestBody(matchingXPath("/Envelope/Body/LowersRequest/LowerId/text()", equalTo(i.toString())))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
-                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+                        .withHeader(KEY, TEXT_XML.getMimeType())));
     }
 
     private static void stubRequestToAccount(String responseResource) throws IOException {
         stubFor(post(urlEqualTo("/seashells/accounts"))
                 .withRequestBody(matchingXPath("/Envelope/Body/AccountRequest/accountId/text()"))
                 .willReturn(aResponse().withBody(CharStreams.toString(getStringFromResource(responseResource)))
-                        .withHeader(ContentTypeHeader.KEY, ContentType.TEXT_XML.getMimeType())));
+                        .withHeader(KEY, TEXT_XML.getMimeType())));
     }
 
     private static InputStreamReader getStringFromResource(String resourceName) {

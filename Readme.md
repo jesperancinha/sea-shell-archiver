@@ -108,20 +108,20 @@ java -jar sea-shell-service-immutable.jar
 You can, alternatively, with your docker machine/desktop running, run a docker container:
 
 ```shell
-docker compose up
+docker-compose up
 ```
 
 To terminate your tests, you can just run 
 
 ```shell
-docker compose down
+docker-compose down
 ```
 
 ## Java version
 
 ```bash
-sdk install java 16.0.1.hs-adpt
-sdk use java 16.0.1.hs-adpt
+sdk install java 19-open
+sdk use java $(sdk list java | grep installed | grep "| 19" |  cut -d'|' -f6- | cut -d' ' -f2-)
 ```
 
 ## Testing endpoints

@@ -1,7 +1,7 @@
 package org.jesperancinha.shell;
 
 
-import org.apache.commons.io.IOUtils;
+import wiremock.org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

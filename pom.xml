@@ -45,8 +45,7 @@
         <maven-jaxb2-plugin.version>0.15.1</maven-jaxb2-plugin.version>
 
         <!-- Test -->
-        <wiremock.version>2.35.1</wiremock.version>
-        <wiremock-junit5.version>1.3.1</wiremock-junit5.version>
+        <wiremock-standalone.version>3.3.1</wiremock-standalone.version>
         <jackson.version>2.16.1</jackson.version>
         <jackson.databind.version>2.16.1</jackson.databind.version>
         <jaxws-api.version>2.3.1</jaxws-api.version>
@@ -59,7 +58,6 @@
         <jakarta.version>3.0.0</jakarta.version>
         <javax.jws-api.version>1.1</javax.jws-api.version>
         <commons-logging.version>1.3.0</commons-logging.version>
-        <wiremock-standalone.version>2.27.2</wiremock-standalone.version>
         <omni-coveragereporter-maven-plugin.version>0.4.3</omni-coveragereporter-maven-plugin.version>
         <spring-boot-starter-parent.version>3.2.2</spring-boot-starter-parent.version>
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
@@ -280,11 +278,10 @@
                 <artifactId>kotest-assertions-core-jvm</artifactId>
                 <version>${kotest-assertions-core-jvm.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.wiremock/wiremock-standalone -->
             <dependency>
                 <groupId>org.wiremock</groupId>
                 <artifactId>wiremock-standalone</artifactId>
-                <version>3.3.1</version>
+                <version>${wiremock-standalone.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
