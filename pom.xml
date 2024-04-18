@@ -39,7 +39,7 @@
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <lombok.version>1.18.32</lombok.version>
         <netty-all.version>4.1.109.Final</netty-all.version>
-        <blockhound.version>1.0.8.RELEASE</blockhound.version>
+        <blockhound.version>1.0.9.RELEASE</blockhound.version>
         <!-- Plugins -->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-jaxb2-plugin.version>0.15.1</maven-jaxb2-plugin.version>
