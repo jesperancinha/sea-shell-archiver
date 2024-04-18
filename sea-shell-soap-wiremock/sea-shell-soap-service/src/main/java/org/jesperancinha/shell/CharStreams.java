@@ -1,13 +1,10 @@
 package org.jesperancinha.shell;
 
 
-import wiremock.org.apache.commons.io.IOUtils;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class CharStreams {
-    public static String toString(InputStreamReader stringFromResource) throws IOException {
-        return String.join("\n", IOUtils.readLines(stringFromResource));
+    public static String toString(byte[] bytesFromSource) {
+        return new String(bytesFromSource, StandardCharsets.UTF_8);
     }
 }
