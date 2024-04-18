@@ -5,8 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.Objects;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
@@ -130,7 +128,9 @@ public class SeaShellWiremockSoapLauncher {
                         .withHeader(KEY, TEXT_XML.getMimeType())));
     }
 
-    private static InputStreamReader getStringFromResource(String resourceName) {
-        return new InputStreamReader(Objects.requireNonNull(SeaShellWiremockSoapLauncher.class.getResourceAsStream(resourceName)), Charset.defaultCharset());
+    private static byte[] getStringFromResource(String resourceName) throws IOException {
+        try (var inputStream = SeaShellWiremockSoapLauncher.class.getResourceAsStream(resourceName)) {
+            return Objects.requireNonNull(inputStream).readAllBytes();
+        }
     }
 }
