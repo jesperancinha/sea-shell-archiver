@@ -26,7 +26,7 @@
         <jaxb2-maven-plugin.version>3.2.0</jaxb2-maven-plugin.version>
         <jaxws-maven-plugin.version>4.0.2</jaxws-maven-plugin.version>
         <kotlin.version>1.9.24</kotlin.version>
-        <kotest-assertions-core-jvm.version>5.8.1</kotest-assertions-core-jvm.version>
+        <kotest-assertions-core-jvm.version>5.9.0</kotest-assertions-core-jvm.version>
 
         <!-- Internal -->
         <sea-shell-client.version>${project.seashells.version}</sea-shell-client.version>
