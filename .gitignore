@@ -15,8 +15,16 @@ dist
 # OS
 .DS_Store
 
-# Cypress
-node_modules
-
 # logs
 logs
+
+# NPM
+package-lock.json
+yarn.lock
+node_modules
+
+## Automation
+cypressUpdateOne.sh
+docker-composetmp.yml
+packagetmp.json
+pluginUpdatesOne.sh
