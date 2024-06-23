@@ -2,7 +2,12 @@ name: S_ARCH sea-shell-archiver-pull-request
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: 
+      - '**'
+  push:
+    branches:
+      - '**'
+      - '!master'
 
 jobs:
   build:
