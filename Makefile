@@ -63,8 +63,17 @@ revert-deps-cypress-update:
 	if [ -f  e2e/packagetmp.json ]; then rm e2e/packagetmp.json; fi
 	git checkout e2e/docker-compose.yml
 	git checkout e2e/package.json
+revert-deps-cypress-update:
+	if [ -f  e2e/docker-composetmp.yml ]; then rm e2e/docker-composetmp.yml; fi
+	if [ -f  e2e/packagetmp.json ]; then rm e2e/packagetmp.json; fi
+	git checkout e2e/docker-compose.yml
+	git checkout e2e/package.json
 deps-cypress-update:
 	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/cypressUpdateOne.sh | bash
 deps-plugins-update:
 	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/pluginUpdatesOne.sh | bash
-deps-quick-update: deps-cypress-update deps-plugins-update
+deps-java-update:
+	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/javaUpdatesOne.sh | bash
+deps-node-update:
+	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/nodeUpdatesOne.sh | bash
+deps-quick-update: deps-cypress-update deps-plugins-update deps-java-update deps-node-update

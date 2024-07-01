@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine
+FROM eclipse-temurin:21-alpine
 
 WORKDIR /usr/local/bin
 
