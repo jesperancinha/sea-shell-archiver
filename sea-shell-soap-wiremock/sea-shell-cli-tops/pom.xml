@@ -72,7 +72,7 @@
             <plugin>
                 <groupId>com.sun.xml.ws</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
-                <version>4.0.2</version>
+                <version>4.0.3</version>
                 <configuration>
                     <wsdlDirectory>${basedir}/../sea-shell-soap-service/src/main/resources/mock/responses/tops</wsdlDirectory>
                     <sourceDestDir>${basedir}/target/generated-sources/java</sourceDestDir>
