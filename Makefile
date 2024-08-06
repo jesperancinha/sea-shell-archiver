@@ -40,13 +40,13 @@ docker-stop-all:
 docker-remove-all:
 	docker ps -a --format '{{.ID}}' | xargs -I {}  docker rm {}
 docker-clean-build-start: docker-clean docker-remove-all b docker
-dcd:
+dcd: dc-migration
 	docker-compose -p ${GITHUB_RUN_ID} down
 dcup-light: dcd
 	docker-compose -p ${GITHUB_RUN_ID} up -d sea-shell-soap-legacy
 dcup: dcd docker-clean docker s-arch-wait
-dcup-full: docker-clean-build-start s-arch-wait
-dcup-full-action: docker-clean b docker-action s-arch-wait
+dcup-full: dcd docker-clean-build-start s-arch-wait
+dcup-full-action:dcd docker-clean b docker-action s-arch-wait
 local-pipeline: build build-report
 upgrade-local:
 	sudo apt update
@@ -79,3 +79,5 @@ deps-node-update:
 deps-quick-update: deps-cypress-update deps-plugins-update deps-java-update deps-node-update
 accept-prs:
 	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/acceptPR.sh | bash
+dc-migration:
+	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/setupDockerCompose.sh | bash
