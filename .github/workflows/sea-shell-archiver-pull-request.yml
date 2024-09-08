@@ -1,9 +1,6 @@
 name: S_ARCH sea-shell-archiver-pull-request
 
 on:
-  pull_request_target:
-    branches:
-      - '**'
   create:
     branches:
       - '**'
