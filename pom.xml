@@ -46,7 +46,7 @@
 
         <!-- Test -->
         <wiremock-standalone.version>3.9.2</wiremock-standalone.version>
-        <jackson.version>2.18.0</jackson.version>
+        <jackson.version>2.18.1</jackson.version>
         <jackson.databind.version>2.18.0</jackson.databind.version>
         <jaxws-api.version>2.3.1</jaxws-api.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
