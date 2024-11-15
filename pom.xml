@@ -37,7 +37,7 @@
         </sea-shell-service-spring-web-flux.version>
         <!-- External -->
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
-        <lombok.version>1.18.34</lombok.version>
+        <lombok.version>1.18.36</lombok.version>
         <netty-all.version>4.1.115.Final</netty-all.version>
         <blockhound.version>1.0.10.RELEASE</blockhound.version>
         <!-- Plugins -->
