@@ -13,7 +13,7 @@ public class SeaShellWebClient {
     private final WebClient client;
 
     public SeaShellWebClient(final String uri) {
-        this.client = WebClient.builder().baseUrl(uri).build();
+        this.client = WebClient.create(uri);
     }
 
     public static void main(String[] args) throws InterruptedException {
