@@ -47,7 +47,7 @@
         <!-- Test -->
         <wiremock-standalone.version>3.12.0</wiremock-standalone.version>
         <jackson.version>2.18.2</jackson.version>
-        <jackson.databind.version>2.18.2</jackson.databind.version>
+        <jackson.databind.version>2.18.3</jackson.databind.version>
         <jaxws-api.version>2.3.1</jaxws-api.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
