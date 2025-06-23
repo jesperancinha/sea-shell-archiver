@@ -62,7 +62,7 @@
         <spring-boot-starter-parent.version>3.5.3</spring-boot-starter-parent.version>
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
 
-        <mockk.version>1.14.2</mockk.version>
+        <mockk.version>1.14.4</mockk.version>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
