@@ -26,7 +26,7 @@
         <jaxb2-maven-plugin.version>3.3.0</jaxb2-maven-plugin.version>
         <jaxws-maven-plugin.version>4.0.3</jaxws-maven-plugin.version>
         <kotlin.version>2.2.20</kotlin.version>
-        <kotest-assertions-core-jvm.version>6.0.3</kotest-assertions-core-jvm.version>
+        <kotest-assertions-core-jvm.version>6.0.4</kotest-assertions-core-jvm.version>
 
         <!-- Internal -->
         <sea-shell-client.version>${project.seashells.version}</sea-shell-client.version>
@@ -38,8 +38,8 @@
         <!-- External -->
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <lombok.version>1.18.42</lombok.version>
-        <netty-all.version>4.2.6.Final</netty-all.version>
-        <blockhound.version>1.0.14.RELEASE</blockhound.version>
+        <netty-all.version>4.2.7.Final</netty-all.version>
+        <blockhound.version>1.0.15.RELEASE</blockhound.version>
         <!-- Plugins -->
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven-jaxb2-plugin.version>0.15.1</maven-jaxb2-plugin.version>
