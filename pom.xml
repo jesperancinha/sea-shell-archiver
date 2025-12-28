@@ -38,7 +38,7 @@
         <!-- External -->
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <lombok.version>1.18.42</lombok.version>
-        <netty-all.version>4.2.8.Final</netty-all.version>
+        <netty-all.version>4.2.9.Final</netty-all.version>
         <blockhound.version>1.0.15.RELEASE</blockhound.version>
         <!-- Plugins -->
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
