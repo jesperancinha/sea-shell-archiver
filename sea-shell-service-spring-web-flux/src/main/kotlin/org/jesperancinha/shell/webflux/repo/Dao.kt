@@ -39,7 +39,7 @@ class ShellAccountRepository(
 @Repository
 class ShellCostumeRepository(
     private val costumesClient: CostumesClient,
-    @Value("\${sea.shell.parallelism:20}")
+    @param:Value($$"${sea.shell.parallelism:20}")
     val parallelism: Int
 ) {
 
@@ -81,7 +81,7 @@ class ShellLowerRepository(private val lowersClient: LowersClient) {
 @Repository
 class ShellPersonRepository(
     private val personsClient: PersonsClient,
-    @Value("\${sea.shell.parallelism:20}")
+    @param:Value($$"${sea.shell.parallelism:20}")
     private val parallelism: Int
 ) {
 
@@ -108,7 +108,7 @@ class ShellPersonRepository(
 @ConditionalOnBean(ShellsClient::class)
 class ShellRepository(
     private val shellsClient: ShellsClient,
-    @Value("\${sea.shell.parallelism:20}")
+    @param:Value($$"${sea.shell.parallelism:20}")
     private val parallelism: Int
 ) {
 

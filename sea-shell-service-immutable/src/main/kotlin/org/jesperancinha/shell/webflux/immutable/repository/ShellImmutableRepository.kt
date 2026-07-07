@@ -14,7 +14,7 @@ import reactor.core.scheduler.Schedulers
 @ConditionalOnBean(ShellsClient::class)
 class ShellImmutableRepository(
     private val shellsClient: ShellsClient,
-    @Value("\${sea.shell.parallelism:20}")
+    @param:Value($$"${sea.shell.parallelism:20}")
     private val parallelism: Int
 ) {
 

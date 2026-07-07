@@ -173,7 +173,6 @@
                 </executions>
                 <configuration>
                     <jvmTarget>${java.version}</jvmTarget>
-                    <languageVersion>1.8</languageVersion>
                     <compilerPlugins>
                         <plugin>spring</plugin>
                         <plugin>jpa</plugin>
