@@ -202,14 +202,18 @@ git clean -xdf
 
 This will remove all non-versioned files from your repo. It will allow your IDE to re-import fresh from start. Make sure that the caches are invalidated and removed in this case.
 
+---
+
 ## Claude
 
 Prompt claude with the following:
 
 ### Run all skills
 ```text
-please run skills annotations, kotlin, parallel, and spring-integration-test-wiring on this project
+please run skills annotations, kotlin, parallel, docker, and spring-integration-test-wiring on this project
 ```
+
+---
 
 ## About me
 
