@@ -26,9 +26,9 @@ class SeaShellController(private val seaShellService: SeaShellService) {
 
     @GetMapping("/slogans")
     fun shellSlogans(): ParallelFlux<Pair<String, String>> =
-        seaShellService.allSeaShells().map { seaShellDto: SeaShellDto? ->
+        seaShellService.allSeaShells().map { seaShellDto: SeaShellDto ->
             Pair.of(
-                seaShellDto!!.name, seaShellDto.slogan
+                seaShellDto.name, seaShellDto.slogan
             )
         }
 

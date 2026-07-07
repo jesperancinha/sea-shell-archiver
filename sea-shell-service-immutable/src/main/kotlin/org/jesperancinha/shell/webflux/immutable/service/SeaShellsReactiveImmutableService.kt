@@ -1,10 +1,7 @@
 package org.jesperancinha.shell.webflux.immutable.service
 
 import org.jesperancinha.shell.client.costumes.Costume
-import org.jesperancinha.shell.client.lowers.Lower
 import org.jesperancinha.shell.client.persons.Person
-import org.jesperancinha.shell.client.shells.Shell
-import org.jesperancinha.shell.client.tops.Top
 import org.jesperancinha.shell.webflux.immutable.data.*
 import org.jesperancinha.shell.webflux.immutable.repository.*
 import org.springframework.stereotype.Service

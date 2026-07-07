@@ -61,9 +61,9 @@ class SeaShellService(
     fun allSeaShellsNaifBlock(): List<SeaShellDto> = shellRepository.findAllSeaShellsBlock()
         .parallelStream()
         .map { it.toShellDto() }
-        .peek { seaShellDto: SeaShellDto? ->
+        .peek { seaShellDto: SeaShellDto ->
             setMainRootElements(
-                seaShellDto!!
+                seaShellDto
             )
         }
         .collect(Collectors.toList())
@@ -114,8 +114,8 @@ class SeaShellService(
     private fun getSeaShellPersonsForkJoinTask(
         commonPool: ForkJoinPool,
         seaShellDto: SeaShellDto
-    ): org.jesperancinha.shell.webflux.service.SeaShellPersonsRecursiveTask =
-        org.jesperancinha.shell.webflux.service.SeaShellPersonsRecursiveTask(
+    ): SeaShellPersonsRecursiveTask =
+        SeaShellPersonsRecursiveTask(
             personRepository = personRepository,
             accountRepository = accountRepository,
             costumeRepository = costumeRepository,
