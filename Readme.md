@@ -206,9 +206,11 @@ This will remove all non-versioned files from your repo. It will allow your IDE 
 
 Prompt claude with the following:
 
+### Run all skills
 ```text
 please run skills annotations, kotlin, parallel, and spring-integration-test-wiring on this project
 ```
+
 ## About me
 
 [![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=Jesperancinha&style=for-the-badge&logo=github&color=grey "GitHub")](https://github.com/jesperancinha)
