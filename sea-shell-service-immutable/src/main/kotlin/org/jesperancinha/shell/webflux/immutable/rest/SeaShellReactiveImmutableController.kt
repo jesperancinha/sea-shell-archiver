@@ -18,7 +18,7 @@ class SeaShellReactiveImmutableController(private val seaShellsReactiveImmutable
     @GetMapping("/{id}")
     fun getShellById(
         @PathVariable id: Long
-    ): Mono<SeaShellDto?>? {
+    ): Mono<SeaShellDto> {
         return seaShellsReactiveImmutableService.getSeaShellById(id)
     }
 

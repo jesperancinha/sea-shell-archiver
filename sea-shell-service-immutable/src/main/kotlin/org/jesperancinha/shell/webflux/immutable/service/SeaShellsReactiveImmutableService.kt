@@ -1,10 +1,7 @@
 package org.jesperancinha.shell.webflux.immutable.service
 
 import org.jesperancinha.shell.client.costumes.Costume
-import org.jesperancinha.shell.client.lowers.Lower
 import org.jesperancinha.shell.client.persons.Person
-import org.jesperancinha.shell.client.shells.Shell
-import org.jesperancinha.shell.client.tops.Top
 import org.jesperancinha.shell.webflux.immutable.data.*
 import org.jesperancinha.shell.webflux.immutable.repository.*
 import org.springframework.stereotype.Service
@@ -12,9 +9,6 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.core.scheduler.Schedulers
 
-/**
- * Created by jofisaes on 04/08/2021
- */
 @Service
 class SeaShellsReactiveImmutableService(
     private val shellTopRepository: ShellTopImmutableRepository,
@@ -27,7 +21,7 @@ class SeaShellsReactiveImmutableService(
     fun allShells(): Flux<SeaShellDto> = shellImmutableRepository.findAllShellIds()
         .flatMap { id: Long -> getSeaShellById(id) }
 
-    fun getSeaShellById(id: Long): Mono<SeaShellDto?> {
+    fun getSeaShellById(id: Long): Mono<SeaShellDto> {
         return shellImmutableRepository.findSeaShellById(id)
             .flatMap { shell ->
                 Mono.zip(

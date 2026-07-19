@@ -14,7 +14,7 @@ local:
 	cp sea-shell-soap-wiremock/sea-shell-soap-service/target/sea-shell-soap-service-*-dependencies.jar bin/sea-shell-soap-service.jar
 	cp sea-shell-service-immutable/target/sea-shell-service-immutable-*.jar bin/sea-shell-service-immutable.jar
 docker:
-	docker-compose -p ${GITHUB_RUN_ID} up --force-recreate -d
+	docker compose -p ${GITHUB_RUN_ID} up --force-recreate -d
 no-test:
 	mvn clean install -DskipTests
 cypress-open:
@@ -30,20 +30,20 @@ cypress-edge:
 s-arch-wait:
 	bash s_arch_wait.sh
 docker-clean:
-	docker-compose -p ${GITHUB_RUN_ID} rm -svf -a
+	docker compose -p ${GITHUB_RUN_ID} rm -svf -a
 	docker network prune -f
 docker-action:
-	docker-compose -p ${GITHUB_RUN_ID} rm -svf
-	docker-compose -p ${GITHUB_RUN_ID} -f docker-compose.yml up -d --build --remove-orphans
+	docker compose -p ${GITHUB_RUN_ID} rm -svf
+	docker compose -p ${GITHUB_RUN_ID} -f docker-compose.yml up -d --build --remove-orphans
 docker-stop-all:
 	docker ps -a --format '{{.ID}}' | xargs -I {}  docker stop {}
 docker-remove-all:
 	docker ps -a --format '{{.ID}}' | xargs -I {}  docker rm {}
 docker-clean-build-start: docker-clean docker-remove-all b docker
 dcd: dc-migration
-	docker-compose -p ${GITHUB_RUN_ID} down
+	docker compose -p ${GITHUB_RUN_ID} down
 dcup-light: dcd
-	docker-compose -p ${GITHUB_RUN_ID} up -d sea-shell-soap-legacy
+	docker compose -p ${GITHUB_RUN_ID} up -d sea-shell-soap-legacy
 dcup: dcd docker-clean docker s-arch-wait
 dcup-full: dcd docker-clean-build-start s-arch-wait
 dcup-full-action:dcd docker-clean b docker-action s-arch-wait
