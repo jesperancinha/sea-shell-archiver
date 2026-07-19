@@ -38,7 +38,6 @@
         <!-- External -->
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <lombok.version>1.18.42</lombok.version>
-        <netty-all.version>4.2.9.Final</netty-all.version>
         <blockhound.version>1.0.15.RELEASE</blockhound.version>
         <!-- Plugins -->
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
@@ -239,11 +238,6 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-common</artifactId>
-                <version>${netty-all.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
