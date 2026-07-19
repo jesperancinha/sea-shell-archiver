@@ -16,7 +16,7 @@ import reactor.core.publisher.ParallelFlux
 @RequestMapping("/seashells")
 class SeaShellController(private val seaShellService: SeaShellService) {
     @GetMapping(path = ["/{id}"])
-    fun getShellById(@PathVariable id: Long): Mono<SeaShellDto?> {
+    fun getShellById(@PathVariable id: Long): Mono<SeaShellDto> {
         return seaShellService.getSeaShellById(id)
             .mapNotNull { seaShellDto: SeaShellDto? -> ResponseEntity.ok(seaShellDto).body }
     }
@@ -26,9 +26,9 @@ class SeaShellController(private val seaShellService: SeaShellService) {
 
     @GetMapping("/slogans")
     fun shellSlogans(): ParallelFlux<Pair<String, String>> =
-        seaShellService.allSeaShells().map { seaShellDto: SeaShellDto? ->
+        seaShellService.allSeaShells().map { seaShellDto: SeaShellDto ->
             Pair.of(
-                seaShellDto!!.name, seaShellDto.slogan
+                seaShellDto.name, seaShellDto.slogan
             )
         }
 

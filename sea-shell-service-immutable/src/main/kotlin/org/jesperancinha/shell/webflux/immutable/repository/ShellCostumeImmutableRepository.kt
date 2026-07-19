@@ -12,7 +12,7 @@ import reactor.core.scheduler.Schedulers
 @Repository
 class ShellCostumeImmutableRepository(
     private val costumesClient: CostumesClient,
-    @Value("\${sea.shell.parallelism:20}")
+    @param:Value($$"${sea.shell.parallelism:20}")
     private val parallelism: Int
 ) {
 

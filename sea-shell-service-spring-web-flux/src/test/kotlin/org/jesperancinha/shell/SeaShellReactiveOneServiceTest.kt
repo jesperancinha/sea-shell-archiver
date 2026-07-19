@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
 class SeaShellReactiveOneServiceTest @Autowired constructor(
-    @Autowired
     private val seaShellReactiveOneService: SeaShellReactiveOneServiceImpl
 ) {
 
