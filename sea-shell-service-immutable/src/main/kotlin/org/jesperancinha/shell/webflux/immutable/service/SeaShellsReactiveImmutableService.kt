@@ -9,9 +9,6 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.core.scheduler.Schedulers
 
-/**
- * Created by jofisaes on 04/08/2021
- */
 @Service
 class SeaShellsReactiveImmutableService(
     private val shellTopRepository: ShellTopImmutableRepository,
@@ -24,7 +21,7 @@ class SeaShellsReactiveImmutableService(
     fun allShells(): Flux<SeaShellDto> = shellImmutableRepository.findAllShellIds()
         .flatMap { id: Long -> getSeaShellById(id) }
 
-    fun getSeaShellById(id: Long): Mono<SeaShellDto?> {
+    fun getSeaShellById(id: Long): Mono<SeaShellDto> {
         return shellImmutableRepository.findSeaShellById(id)
             .flatMap { shell ->
                 Mono.zip(
