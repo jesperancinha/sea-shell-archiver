@@ -2,7 +2,7 @@
 
 ---
 [![Generic badge](https://img.shields.io/static/v1.svg?label=GitHub&message=Sea%20Shell%20Archiver&color=informational)](https://github.com/jesperancinha/sea-shell-archiver)
-[![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/sea-shell-archiver.svg)](#)
+![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/sea-shell-archiver.svg)
 [![GitHub contributors](https://img.shields.io/github/contributors/jesperancinha/sea-shell-archiver.svg)](https://github.com/jesperancinha/sea-shell-archiver)
 
 [![CircleCI](https://circleci.com/gh/jesperancinha/sea-shell-archiver.svg?style=svg)](https://circleci.com/gh/jesperancinha/sea-shell-archiver)
@@ -11,16 +11,13 @@
 [![S_ARCH e2e-sea-shell-archiver](https://github.com/jesperancinha/sea-shell-archiver/actions/workflows/sea-shell-archiver-e2e.yml/badge.svg)](https://github.com/jesperancinha/sea-shell-archiver/actions/workflows/sea-shell-archiver-e2e.yml)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/89cc4b270cda4a448ce4fa895b30ec55)](https://www.codacy.com/manual/jofisaes/sea-shell-archiver?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jesperancinha/sea-shell-archiver&amp;utm_campaign=Badge_Grade)
-[![codebeat badge](https://codebeat.co/badges/c71192de-5569-4741-aaa9-503217514483)](https://codebeat.co/projects/github-com-jesperancinha-sea-shell-archiver-master)
 [![Known Vulnerabilities](https://snyk.io/test/github/jesperancinha/sea-shell-archiver/badge.svg)](https://snyk.io/test/github/jesperancinha/sea-shell-archiver)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/89cc4b270cda4a448ce4fa895b30ec55)](https://www.codacy.com/gh/jesperancinha/sea-shell-archiver/dashboard?utm_source=github.com&utm_medium=referral&utm_content=jesperancinha/sea-shell-archiver&utm_campaign=Badge_Coverage)
-[![Coverage Status](https://coveralls.io/repos/github/jesperancinha/sea-shell-archiver/badge.svg?branch=master)](https://coveralls.io/github/jesperancinha/sea-shell-archiver?branch=master)
-[![codecov](https://codecov.io/gh/jesperancinha/sea-shell-archiver/branch/master/graph/badge.svg?token=G8jNMRYmyp)](https://codecov.io/gh/jesperancinha/sea-shell-archiver)
 
-[![GitHub language count](https://img.shields.io/github/languages/count/jesperancinha/sea-shell-archiver.svg)](#)
-[![GitHub top language](https://img.shields.io/github/languages/top/jesperancinha/sea-shell-archiver.svg)](#)
-[![GitHub top language](https://img.shields.io/github/languages/code-size/jesperancinha/sea-shell-archiver.svg)](#)
+![GitHub language count](https://img.shields.io/github/languages/count/jesperancinha/sea-shell-archiver.svg)
+![GitHub top language](https://img.shields.io/github/languages/top/jesperancinha/sea-shell-archiver.svg)
+![GitHub top language](https://img.shields.io/github/languages/code-size/jesperancinha/sea-shell-archiver.svg)
 
 ---
 
@@ -94,20 +91,19 @@ java -jar sea-shell-service-immutable.jar
 You can, alternatively, with your docker machine/desktop running, run a docker container:
 
 ```shell
-docker-compose up
+docker compose up
 ```
 
 To terminate your tests, you can just run 
 
 ```shell
-docker-compose down
+docker compose down
 ```
 
 ## Java version
 
 ```bash
-sdk install java 19-open
-sdk use java $(sdk list java | grep installed | grep "| 19" |  cut -d'|' -f6- | cut -d' ' -f2-)
+. ./sdk.sh
 ```
 
 ## Testing endpoints
@@ -201,6 +197,19 @@ git clean -xdf
 ```
 
 This will remove all non-versioned files from your repo. It will allow your IDE to re-import fresh from start. Make sure that the caches are invalidated and removed in this case.
+
+---
+
+## Claude
+
+Prompt claude with the following:
+
+### Run all skills
+```text
+please run skills angular, annotations, docker, java, jee, jvm, kotlin, maven, parallel, readme, scripts, spring, spring-test on this project
+```
+
+---
 
 ## About me
 

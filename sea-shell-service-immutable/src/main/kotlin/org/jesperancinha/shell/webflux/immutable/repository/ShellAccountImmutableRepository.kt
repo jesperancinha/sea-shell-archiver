@@ -8,7 +8,7 @@ import reactor.core.scheduler.Schedulers
 
 @Repository
 class ShellAccountImmutableRepository(private val accountsClient: AccountsClient) {
-    fun findAccountById(id: String?): Mono<Account?> {
+    fun findAccountById(id: String?): Mono<Account> {
         return Mono.fromCallable { accountsClient.getAccount(id) }
             .subscribeOn(Schedulers.single())
     }
